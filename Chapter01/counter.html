@@ -5,34 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-
 <div id="app">
     <h2>当前计数: {{counter}}</h2>
     <button v-on:click="increment">+</button>
-    <button v-on:click="decrement">-</button>
-    
+    <button v-on:click="decrement">-</button>    
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-   
-    var app = new Vue({
+<script> 
+    const app = new Vue({
         el: '#app',
         data: {
             counter : 0 
         },
         methods: {
-            increment: function () {
-                console.log('add被执行');
+            increment: function () {                
                 this.counter++
             },
-            decrement: function () {
-                console.log('sub被执行');
+            decrement: function () {  
                 this.counter--
             }
         }
     })
-
 </script>
 
 </body>
