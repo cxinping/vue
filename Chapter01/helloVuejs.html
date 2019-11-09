@@ -8,15 +8,15 @@
 </head>
 <body>
     <div id="app">
-        <h2>{{name}}</h2>
+        <h2>{{message}}</h2>
     </div>   
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-        var app = new Vue({
-            el: "#app" ,
-            data:{
-                name : 'hello VueJS'
+        var app = new Vue({     
+            el: "#app" ,     //用于挂在要管理的元素
+            data:{     //定义数据
+                message : 'hello VueJS'
             }
         });
     </script>
