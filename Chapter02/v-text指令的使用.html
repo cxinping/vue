@@ -7,15 +7,16 @@
 <body>
 
 <div id="app">
-  <h2>{{url}}</h2>
-  <h2 v-html="url"></h2>
+  <h2>{{message}}, 信平</h2>
+  <h2 v-text="message">, 信平</h2>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
   var app = new Vue({
     el: '#app',
     data: {
-      url: '<a href="http://www.cnblogs.com">博客园</a>'
+      message: '你好'
     }
   })
 </script>
