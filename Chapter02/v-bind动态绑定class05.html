@@ -3,18 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-
-  <style>
-    .active {
-      color: red;
-    }
-  </style>
 </head>
 <body>
 
-<div id="app"> 
-  <h2  v-bind:class="getClasses()">{{message}}</h2>
-  <button v-on:click="btnClick()">按钮</button>
+<div id="app">
+  <h2 class="title" :class="[active, line]">{{message}}</h2>
+  <h2 class="title" :class="getClasses()">{{message}}</h2>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -23,15 +17,12 @@
     el: '#app',
     data: {
       message: '你好',
-      isActive: true,
-      isLine: true
+      active: 'aaa',
+      line: 'bbb'
     },
     methods: {
-      btnClick: function () {
-        this.isActive = !this.isActive
-      },
       getClasses: function () {
-        return {active: this.isActive, line: this.isLine}
+        return [this.active, this.line]
       }
     }
   })
