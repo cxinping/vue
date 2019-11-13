@@ -19,26 +19,17 @@
       lastName: 'xinping'
     },
     computed: {
-      // fullName: function () {
-      //   return this.firstName + ' ' + this.lastName
-      // }
-      // name: 'coderwhy'
       // 计算属性一般是没有set方法, 只读属性.
       fullName: {
         set: function(newValue) {
-          // console.log('-----', newValue);
-          const names = newValue.split(' ');
-          this.firstName = names[0];
-          this.lastName = names[1];
+            var names = newValue.split(' ');
+            this.firstName = names[0];
+            this.lastName = names[1];
         },
         get: function () {
-          return this.firstName + ' ' + this.lastName
+            return this.firstName + ' ' + this.lastName
         }
       },
-
-      // fullName: function () {
-      //   return this.firstName + ' ' + this.lastName
-      // }
     }
   })
 </script>
