@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+<div id="app">
+  <h2>{{count}}</h2>
+
+  <!--1.事件调用的方法没有参数-->
+  <button @click="handleAdd1()">加1</button>
+
+  <!--2.在事件定义时, 写方法时省略了小括号, 但是方法本身是需要一个参数的, 这个时候, Vue会默认将浏览器生产的event事件对象作为参数传入到方法-->
+  <button @click="handleAdd2(10)">加10</button>
+  
+   <!--3.方法定义时, 需要event对象, 同时又需要其他参数 -->
+   <button @click="handleAdd3(10, $event)">加10</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {      
+      count: 0
+    },
+    methods: {
+      handleAdd1(){
+        this.count++
+      },
+      handleAdd2(count){
+        this.count += count
+      },
+      handleAdd3(count , event){
+        console.log(event);
+        this.count += count
+      }
+    }
+  })
+
+</script>
+
+</body>
+</html>
