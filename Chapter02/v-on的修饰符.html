@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title></title>
 </head>
 <body>
 
 <div id="app">
   <!--1. .stop修饰符的使用-->
   <div @click="divClick">
-    aaaaaaa
+    你好，信平
     <button @click.stop="btnClick">按钮</button>
   </div>
 
-  <!--2. .prevent修饰符的使用-->
+  <!--2. .prevent修饰符的使用,阻止默认的提交-->
   <br>
   <form action="baidu">
     <input type="submit" value="提交" @click.prevent="submitClick">
