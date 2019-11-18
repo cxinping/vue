@@ -7,19 +7,17 @@
 <body>
 
 <div id="app">
-  <h2 v-if="isShow">
-    {{message}}
-  </h2>
-  <h1 v-else>isShow为false时显示</h1>
+  <p v-if="score>=90">优秀</p>
+  <p v-else-if="score>=80">良好</p>
+  <p v-else-if="score>=60">及格</p>
+  <p v-else>不及格</p>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
   const app = new Vue({
     el: '#app',
     data: {
-      message: '你好',
-      isShow: true
+      score: 39
     }
   })
 </script>
