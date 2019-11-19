@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+<div id="app">
+  <button @click="toggle">切换显示</button>
+  <h2 v-show="isShow">是否显示呢?</h2>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {      
+      isShow: true
+    },
+    methods:{
+        toggle(){
+            this.isShow = !this.isShow
+        }
+    }
+  })
+</script>
+
+</body>
+</html>
