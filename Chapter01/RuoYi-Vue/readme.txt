@@ -13,6 +13,24 @@ npm install --registry=https://registry.npm.taobao.org
 npm run dev
 
 
-4、打开浏览器，输入：http://localhost:80 （默认账户 admin/admin123）
+4、打开浏览器，输入：http://localhost:8011 （默认账户 admin/admin123）
 
-http://localhost:80
+http://localhost:8011/
+
+5. 登录接口
+
+http://localhost:8080/login
+username=admin
+password=admin123
+code
+uuid
+
+{
+   "msg": "操作成功",
+   "code": 200,
+   "token": "eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImFlMzYxMjAzLTJlOWQtNDE0Yi04NWQzLTAyNmNjZGZiMjY3MSJ9.rod4cZpJGzN1dPfl_seI3P_cuaM71hOq_uDh3I30rcEJX6gWOL4nYPuv22Xhv5LdmovKyEMcUIifE_ZM_GRybw"
+}
+
+Authorization:eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImFlMzYxMjAzLTJlOWQtNDE0Yi04NWQzLTAyNmNjZGZiMjY3MSJ9.rod4cZpJGzN1dPfl_seI3P_cuaM71hOq_uDh3I30rcEJX6gWOL4nYPuv22Xhv5LdmovKyEMcUIifE_ZM_GRybw
+
+
