@@ -13,5 +13,6 @@ npm install --registry=https://registry.npm.taobao.org
 npm run dev
 
 
+4、打开浏览器，输入：http://localhost:80 （默认账户 admin/admin123）
 
-
+http://localhost:80
