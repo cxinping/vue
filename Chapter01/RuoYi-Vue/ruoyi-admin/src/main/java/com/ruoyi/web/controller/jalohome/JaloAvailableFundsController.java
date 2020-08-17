@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,9 @@ public class JaloAvailableFundsController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody JaloAvailableFunds jaloAvailableFunds)
     {
+        if(null != jaloAvailableFunds){
+            jaloAvailableFunds.setUpdateTime(new Date());
+        }
         return toAjax(jaloAvailableFundsService.insertJaloAvailableFunds(jaloAvailableFunds));
     }
 

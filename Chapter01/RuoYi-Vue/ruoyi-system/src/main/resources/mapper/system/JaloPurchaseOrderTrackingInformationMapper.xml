@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.JaloPurchaseOrderTrackingInformationMapper">
+    
+    <resultMap type="JaloPurchaseOrderTrackingInformation" id="JaloPurchaseOrderTrackingInformationResult">
+        <result property="id"    column="id"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="supplier"    column="supplier"    />
+        <result property="contractSigningTime"    column="contract_signing_time"    />
+        <result property="contractEndTime"    column="contract_end_time"    />
+        <result property="contractAmount"    column="contract_amount"    />
+        <result property="payableTime"    column="payable_time"    />
+        <result property="prepaymentAmountPayable"    column="prepayment_amount_payable"    />
+        <result property="prepaymentAmountPaid"    column="prepayment_amount_paid"    />
+        <result property="prepaymentPayableTime"    column="prepayment_payable_time"    />
+        <result property="prepaymentPayableAmount"    column="prepayment_payable_amount"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectJaloPurchaseOrderTrackingInformationVo">
+        select id, project_name, supplier, contract_signing_time, contract_end_time, contract_amount, payable_time, prepayment_amount_payable, prepayment_amount_paid, prepayment_payable_time, prepayment_payable_amount, create_time, update_time from jalo_purchase_order_tracking_information
+    </sql>
+
+    <select id="selectJaloPurchaseOrderTrackingInformationList" parameterType="JaloPurchaseOrderTrackingInformation" resultMap="JaloPurchaseOrderTrackingInformationResult">
+        <include refid="selectJaloPurchaseOrderTrackingInformationVo"/>
+        <where>  
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="supplier != null  and supplier != ''"> and supplier = #{supplier}</if>
+            <if test="contractSigningTime != null "> and contract_signing_time = #{contractSigningTime}</if>
+            <if test="contractEndTime != null "> and contract_end_time = #{contractEndTime}</if>
+            <if test="contractAmount != null "> and contract_amount = #{contractAmount}</if>
+            <if test="payableTime != null "> and payable_time = #{payableTime}</if>
+            <if test="prepaymentAmountPayable != null "> and prepayment_amount_payable = #{prepaymentAmountPayable}</if>
+            <if test="prepaymentAmountPaid != null "> and prepayment_amount_paid = #{prepaymentAmountPaid}</if>
+            <if test="prepaymentPayableTime != null "> and prepayment_payable_time = #{prepaymentPayableTime}</if>
+            <if test="prepaymentPayableAmount != null "> and prepayment_payable_amount = #{prepaymentPayableAmount}</if>
+        </where>
+    </select>
+    
+    <select id="selectJaloPurchaseOrderTrackingInformationById" parameterType="Long" resultMap="JaloPurchaseOrderTrackingInformationResult">
+        <include refid="selectJaloPurchaseOrderTrackingInformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJaloPurchaseOrderTrackingInformation" parameterType="JaloPurchaseOrderTrackingInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into jalo_purchase_order_tracking_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectName != null">project_name,</if>
+            <if test="supplier != null">supplier,</if>
+            <if test="contractSigningTime != null">contract_signing_time,</if>
+            <if test="contractEndTime != null">contract_end_time,</if>
+            <if test="contractAmount != null">contract_amount,</if>
+            <if test="payableTime != null">payable_time,</if>
+            <if test="prepaymentAmountPayable != null">prepayment_amount_payable,</if>
+            <if test="prepaymentAmountPaid != null">prepayment_amount_paid,</if>
+            <if test="prepaymentPayableTime != null">prepayment_payable_time,</if>
+            <if test="prepaymentPayableAmount != null">prepayment_payable_amount,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectName != null">#{projectName},</if>
+            <if test="supplier != null">#{supplier},</if>
+            <if test="contractSigningTime != null">#{contractSigningTime},</if>
+            <if test="contractEndTime != null">#{contractEndTime},</if>
+            <if test="contractAmount != null">#{contractAmount},</if>
+            <if test="payableTime != null">#{payableTime},</if>
+            <if test="prepaymentAmountPayable != null">#{prepaymentAmountPayable},</if>
+            <if test="prepaymentAmountPaid != null">#{prepaymentAmountPaid},</if>
+            <if test="prepaymentPayableTime != null">#{prepaymentPayableTime},</if>
+            <if test="prepaymentPayableAmount != null">#{prepaymentPayableAmount},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJaloPurchaseOrderTrackingInformation" parameterType="JaloPurchaseOrderTrackingInformation">
+        update jalo_purchase_order_tracking_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="supplier != null">supplier = #{supplier},</if>
+            <if test="contractSigningTime != null">contract_signing_time = #{contractSigningTime},</if>
+            <if test="contractEndTime != null">contract_end_time = #{contractEndTime},</if>
+            <if test="contractAmount != null">contract_amount = #{contractAmount},</if>
+            <if test="payableTime != null">payable_time = #{payableTime},</if>
+            <if test="prepaymentAmountPayable != null">prepayment_amount_payable = #{prepaymentAmountPayable},</if>
+            <if test="prepaymentAmountPaid != null">prepayment_amount_paid = #{prepaymentAmountPaid},</if>
+            <if test="prepaymentPayableTime != null">prepayment_payable_time = #{prepaymentPayableTime},</if>
+            <if test="prepaymentPayableAmount != null">prepayment_payable_amount = #{prepaymentPayableAmount},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJaloPurchaseOrderTrackingInformationById" parameterType="Long">
+        delete from jalo_purchase_order_tracking_information where id = #{id}
+    </delete>
+
+    <delete id="deleteJaloPurchaseOrderTrackingInformationByIds" parameterType="String">
+        delete from jalo_purchase_order_tracking_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
