@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,10 @@ public class JaloLoanUsageTableController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody JaloLoanUsageTable jaloLoanUsageTable)
     {
+        if(null != jaloLoanUsageTable){
+            jaloLoanUsageTable.setUpdateTime(new Date());
+        }
+
         return toAjax(jaloLoanUsageTableService.insertJaloLoanUsageTable(jaloLoanUsageTable));
     }
 

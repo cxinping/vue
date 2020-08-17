@@ -114,7 +114,7 @@
 
     <!-- 添加或修改贷款使用对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="110px">
         <el-form-item label="贷款授信金额" prop="loanCreditAmount">
           <el-input v-model="form.loanCreditAmount" placeholder="请输入贷款授信金额" />
         </el-form-item>
