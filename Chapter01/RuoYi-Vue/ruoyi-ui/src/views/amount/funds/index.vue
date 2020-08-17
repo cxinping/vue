@@ -68,7 +68,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:funds:add']"
+          v-hasPermi="['amount:funds:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -78,7 +78,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:funds:edit']"
+          v-hasPermi="['amount:funds:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -88,7 +88,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:funds:remove']"
+          v-hasPermi="['amount:funds:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -97,7 +97,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:funds:export']"
+          v-hasPermi="['amount:funds:export']"
         >导出</el-button>
       </el-col>
       <div class="top-right-btn">
@@ -113,27 +113,32 @@
     <el-table v-loading="loading" :data="fundsList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="id" />
-      <el-table-column label="招行（单位：万元）" align="center" prop="merchantsBank" />
-      <el-table-column label="浦发（单位：万元）" align="center" prop="pufaBank" />
-      <el-table-column label="工行（单位：万元）" align="center" prop="icbcBank" />
-      <el-table-column label="有赞（单位：万元）" align="center" prop="youZan" />
-      <el-table-column label="支付宝（单位：万元）" align="center" prop="alipay" />
-      <el-table-column label="京东（单位：万元）" align="center" prop="jingdong" />
-      <el-table-column label="操作（单位：万元）" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="招行(单位:万元)" align="center" prop="merchantsBank" />
+      <el-table-column label="浦发(单位:万元)" align="center" prop="pufaBank" />
+      <el-table-column label="工行(单位:万元)" align="center" prop="icbcBank" />
+      <el-table-column label="有赞(单位:万元)" align="center" prop="youZan" />
+      <el-table-column label="支付宝(单位:万元)" align="center" prop="alipay" />
+      <el-table-column label="京东(单位:万元)" align="center" prop="jingdong" />
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime) }}</span>
+        </template>
+      </el-table-column>      
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:funds:edit']"
+            v-hasPermi="['amount:funds:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:funds:remove']"
+            v-hasPermi="['amount:funds:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -150,23 +155,23 @@
     <!-- 添加或修改可用资金对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="招行" prop="merchantsBank">
-          <el-input v-model="form.merchantsBank" placeholder="请输入招行" />
+        <el-form-item label="招行" prop="merchantsBank" required >
+          <el-input v-model="form.merchantsBank" placeholder="请输入招行的可用资金余额" type="number" clearable/>
         </el-form-item>
-        <el-form-item label="浦发" prop="pufaBank">
-          <el-input v-model="form.pufaBank" placeholder="请输入浦发" />
+        <el-form-item label="浦发" prop="pufaBank" required >
+          <el-input v-model="form.pufaBank" placeholder="请输入浦发的可用资金余额" type="number" clearable/>
         </el-form-item>
-        <el-form-item label="工行" prop="icbcBank">
-          <el-input v-model="form.icbcBank" placeholder="请输入工行" />
+        <el-form-item label="工行" prop="icbcBank" required >
+          <el-input v-model="form.icbcBank" placeholder="请输入工行的可用资金余额" type="number" clearable/>
         </el-form-item>
-        <el-form-item label="有赞" prop="youZan">
-          <el-input v-model="form.youZan" placeholder="请输入有赞" />
+        <el-form-item label="有赞" prop="youZan" required >
+          <el-input v-model="form.youZan" placeholder="请输入有赞的可用资金余额" type="number" clearable/>
         </el-form-item>
-        <el-form-item label="支付宝" prop="alipay">
-          <el-input v-model="form.alipay" placeholder="请输入支付宝" />
+        <el-form-item label="支付宝" prop="alipay" required >
+          <el-input v-model="form.alipay" placeholder="请输入支付宝的可用资金余额" type="number" clearable/>
         </el-form-item>
-        <el-form-item label="京东" prop="jingdong">
-          <el-input v-model="form.jingdong" placeholder="请输入京东" />
+        <el-form-item label="京东" prop="jingdong" required >
+          <el-input v-model="form.jingdong" placeholder="请输入京东" type="number" clearable/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -217,6 +222,10 @@ export default {
       form: {},
       // 表单校验
       rules: {
+
+
+
+        
       }
     };
   },

@@ -79,7 +79,7 @@
       <el-table-column label="编号" align="center" prop="id" />
       <el-table-column label="贷款授信金额（单位：万元）" align="center" prop="loanCreditAmount" />
       <el-table-column label="贷款授信余额（单位：万元）" align="center" prop="loanCreditBalance" />
-       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
         </template>
@@ -91,14 +91,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:table:edit']"
+            v-hasPermi="['amount:table:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:table:remove']"
+            v-hasPermi="['amount:table:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
