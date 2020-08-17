@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="98px">
       <el-form-item label="贷款授信金额" prop="loanCreditAmount">
         <el-input
           v-model="queryParams.loanCreditAmount"
@@ -79,6 +79,11 @@
       <el-table-column label="编号" align="center" prop="id" />
       <el-table-column label="贷款授信金额" align="center" prop="loanCreditAmount" />
       <el-table-column label="贷款授信余额" align="center" prop="loanCreditBalance" />
+       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime) }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
