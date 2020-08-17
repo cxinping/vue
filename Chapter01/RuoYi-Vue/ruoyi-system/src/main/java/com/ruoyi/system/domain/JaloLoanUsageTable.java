@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import java.math.BigDecimal;
+
 /**
  * 贷款使用对象 jalo_loan_usage_table
  * 
@@ -20,11 +22,11 @@ public class JaloLoanUsageTable extends BaseEntity
 
     /** 贷款授信金额 */
     @Excel(name = "贷款授信金额")
-    private Long loanCreditAmount;
+    private BigDecimal loanCreditAmount;
 
     /** 贷款授信余额 */
     @Excel(name = "贷款授信余额")
-    private Long loanCreditBalance;
+    private BigDecimal loanCreditBalance;
 
     public void setId(Long id) 
     {
@@ -35,21 +37,22 @@ public class JaloLoanUsageTable extends BaseEntity
     {
         return id;
     }
-    public void setLoanCreditAmount(Long loanCreditAmount) 
+
+    public void setLoanCreditAmount(BigDecimal loanCreditAmount)
     {
         this.loanCreditAmount = loanCreditAmount;
     }
 
-    public Long getLoanCreditAmount() 
+    public BigDecimal getLoanCreditAmount()
     {
         return loanCreditAmount;
     }
-    public void setLoanCreditBalance(Long loanCreditBalance) 
+    public void setLoanCreditBalance(BigDecimal loanCreditBalance)
     {
         this.loanCreditBalance = loanCreditBalance;
     }
 
-    public Long getLoanCreditBalance() 
+    public BigDecimal getLoanCreditBalance()
     {
         return loanCreditBalance;
     }

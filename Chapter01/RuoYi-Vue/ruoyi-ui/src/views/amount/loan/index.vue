@@ -4,7 +4,7 @@
       <el-form-item label="贷款授信金额" prop="loanCreditAmount">
         <el-input
           v-model="queryParams.loanCreditAmount"
-          placeholder="请输入贷款授信金额"
+          placeholder="请输入贷款授信金额，单位：元"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -13,7 +13,7 @@
       <el-form-item label="贷款授信余额" prop="loanCreditBalance">
         <el-input
           v-model="queryParams.loanCreditBalance"
-          placeholder="请输入贷款授信余额"
+          placeholder="请输入贷款授信余额，单位：元"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -115,11 +115,13 @@
     <!-- 添加或修改贷款使用对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="110px">
-        <el-form-item label="贷款授信金额" prop="loanCreditAmount">
-          <el-input v-model="form.loanCreditAmount" placeholder="请输入贷款授信金额" />
+        <el-form-item label="贷款授信金额" prop="loanCreditAmount" required >
+          <el-input v-model="form.loanCreditAmount" placeholder="请输入贷款授信金额" 
+               type="number" clearable  />
         </el-form-item>
-        <el-form-item label="贷款授信余额" prop="loanCreditBalance">
-          <el-input v-model="form.loanCreditBalance" placeholder="请输入贷款授信余额" />
+        <el-form-item label="贷款授信余额" prop="loanCreditBalance" required >
+          <el-input v-model="form.loanCreditBalance" placeholder="请输入贷款授信余额"
+              type="number" clearable  />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -166,6 +168,14 @@ export default {
       form: {},
       // 表单校验
       rules: {
+          loanCreditAmount: [
+            { required: true, message: '请输入贷款授信金额，单位：元', trigger: 'blur' }             
+          ],
+          loanCreditBalance: [
+            { required: true, message: '请输入贷款授信余额，单位：元', trigger: 'blur' }             
+          ]
+
+
       }
     };
   },
