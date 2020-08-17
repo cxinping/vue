@@ -119,7 +119,7 @@
       <el-table-column label="有赞(单位:万元)" align="center" prop="youZan" />
       <el-table-column label="支付宝(单位:万元)" align="center" prop="alipay" />
       <el-table-column label="京东(单位:万元)" align="center" prop="jingdong" />
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+      <el-table-column label="更新时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
         </template>
@@ -315,7 +315,6 @@ export default {
         this.form.alipay = this.form.alipay * 10000;
         this.form.jingdong = this.form.jingdong * 10000;
         
-
         this.open = true;
         this.title = "修改可用资金";
       });

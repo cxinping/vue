@@ -79,7 +79,7 @@
       <el-table-column label="编号" align="center" prop="id" />
       <el-table-column label="贷款授信金额（单位：万元）" align="center" prop="loanCreditAmount" />
       <el-table-column label="贷款授信余额（单位：万元）" align="center" prop="loanCreditBalance" />
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+      <el-table-column label="更新时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
         </template>

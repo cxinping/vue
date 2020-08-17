@@ -175,6 +175,11 @@
         </template>
       </el-table-column>
       <el-table-column label="应付预付款金额" align="center" prop="prepaymentPayableAmount" />
+      <el-table-column label="更新时间" align="center" prop="createTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime) }}</span>
+        </template>
+      </el-table-column>      
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
