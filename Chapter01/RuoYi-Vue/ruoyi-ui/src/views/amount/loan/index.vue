@@ -32,7 +32,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:table:add']"
+          v-hasPermi="['amount:loan:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -42,7 +42,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:table:edit']"
+          v-hasPermi="['amount:loan:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -52,7 +52,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:table:remove']"
+          v-hasPermi="['amount:loan:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -61,7 +61,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:table:export']"
+          v-hasPermi="['amount:loan:export']"
         >导出</el-button>
       </el-col>
       <div class="top-right-btn">
@@ -77,8 +77,8 @@
     <el-table v-loading="loading" :data="tableList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="id" />
-      <el-table-column label="贷款授信金额" align="center" prop="loanCreditAmount" />
-      <el-table-column label="贷款授信余额" align="center" prop="loanCreditBalance" />
+      <el-table-column label="贷款授信金额（单位：万元）" align="center" prop="loanCreditAmount" />
+      <el-table-column label="贷款授信余额（单位：万元）" align="center" prop="loanCreditBalance" />
        <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
@@ -116,11 +116,11 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="110px">
         <el-form-item label="贷款授信金额" prop="loanCreditAmount" required >
-          <el-input v-model="form.loanCreditAmount" placeholder="请输入贷款授信金额" 
+          <el-input v-model="form.loanCreditAmount" placeholder="请输入贷款授信金额，单位：元" 
                type="number" clearable  />
         </el-form-item>
         <el-form-item label="贷款授信余额" prop="loanCreditBalance" required >
-          <el-input v-model="form.loanCreditBalance" placeholder="请输入贷款授信余额"
+          <el-input v-model="form.loanCreditBalance" placeholder="请输入贷款授信余额，单位：元"
               type="number" clearable  />
         </el-form-item>
       </el-form>
@@ -174,7 +174,6 @@ export default {
           loanCreditBalance: [
             { required: true, message: '请输入贷款授信余额，单位：元', trigger: 'blur' }             
           ]
-
 
       }
     };
@@ -236,6 +235,11 @@ export default {
       const id = row.id || this.ids
       getTable(id).then(response => {
         this.form = response.data;
+
+        // 修改数据时，乘以 10000
+        this.form.loanCreditAmount = this.form.loanCreditAmount * 10000;
+        this.form.loanCreditBalance = this.form.loanCreditBalance * 10000;
+       
         this.open = true;
         this.title = "修改贷款使用";
       });
@@ -244,6 +248,13 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+             // 对输入金额进行转换，保留小数点后2位
+            const loanCreditAmountFmt = this.keepTwoDecimal( this.form.loanCreditAmount / 10000 );
+            this.form.loanCreditAmount = loanCreditAmountFmt ;
+            const loanCreditBalanceFmt = this.keepTwoDecimal( this.form.loanCreditBalance / 10000 );
+            this.form.loanCreditBalance = loanCreditBalanceFmt ;
+
+
           if (this.form.id != null) {
             updateTable(this.form).then(response => {
               if (response.code === 200) {
@@ -252,7 +263,8 @@ export default {
                 this.getList();
               }
             });
-          } else {
+          } else {          
+
             addTable(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess("新增成功");
@@ -264,6 +276,17 @@ export default {
         }
       });
     },
+    /** 保留小数点后2位 */
+    keepTwoDecimal(num) {
+        var result = parseFloat(num);
+        if (isNaN(result)) {
+        alert('传递参数错误，请检查！');
+        return false;
+        }
+        result = Math.round(num * 100) / 100;
+        return result;
+    },
+
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
