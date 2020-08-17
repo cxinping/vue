@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2020-08-17
  */
 @RestController
-@RequestMapping("/system/funds")
+@RequestMapping("/amount/funds")
 public class JaloAvailableFundsController extends BaseController
 {
     @Autowired
@@ -36,7 +36,7 @@ public class JaloAvailableFundsController extends BaseController
     /**
      * 查询可用资金列表
      */
-    @PreAuthorize("@ss.hasPermi('system:funds:list')")
+    @PreAuthorize("@ss.hasPermi('amount:funds:list')")
     @GetMapping("/list")
     public TableDataInfo list(JaloAvailableFunds jaloAvailableFunds)
     {
@@ -48,7 +48,7 @@ public class JaloAvailableFundsController extends BaseController
     /**
      * 导出可用资金列表
      */
-    @PreAuthorize("@ss.hasPermi('system:funds:export')")
+    @PreAuthorize("@ss.hasPermi('amount:funds:export')")
     @Log(title = "可用资金", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(JaloAvailableFunds jaloAvailableFunds)
@@ -61,7 +61,7 @@ public class JaloAvailableFundsController extends BaseController
     /**
      * 获取可用资金详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:funds:query')")
+    @PreAuthorize("@ss.hasPermi('amount:funds:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -71,7 +71,7 @@ public class JaloAvailableFundsController extends BaseController
     /**
      * 新增可用资金
      */
-    @PreAuthorize("@ss.hasPermi('system:funds:add')")
+    @PreAuthorize("@ss.hasPermi('amount:funds:add')")
     @Log(title = "可用资金", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody JaloAvailableFunds jaloAvailableFunds)
@@ -82,7 +82,7 @@ public class JaloAvailableFundsController extends BaseController
     /**
      * 修改可用资金
      */
-    @PreAuthorize("@ss.hasPermi('system:funds:edit')")
+    @PreAuthorize("@ss.hasPermi('amount:funds:edit')")
     @Log(title = "可用资金", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody JaloAvailableFunds jaloAvailableFunds)
@@ -93,7 +93,7 @@ public class JaloAvailableFundsController extends BaseController
     /**
      * 删除可用资金
      */
-    @PreAuthorize("@ss.hasPermi('system:funds:remove')")
+    @PreAuthorize("@ss.hasPermi('amount:funds:remove')")
     @Log(title = "可用资金", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
