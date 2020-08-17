@@ -248,7 +248,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-             // 对输入金额进行转换，保留小数点后2位
+            // 对输入金额进行转换，保留小数点后2位
             const loanCreditAmountFmt = this.keepTwoDecimal( this.form.loanCreditAmount / 10000 );
             this.form.loanCreditAmount = loanCreditAmountFmt ;
             const loanCreditBalanceFmt = this.keepTwoDecimal( this.form.loanCreditBalance / 10000 );

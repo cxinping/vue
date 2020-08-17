@@ -156,22 +156,22 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="招行" prop="merchantsBank" required >
-          <el-input v-model="form.merchantsBank" placeholder="请输入招行的可用资金余额" type="number" clearable/>
+          <el-input v-model="form.merchantsBank" placeholder="请输入招行的可用资金余额，单位：元" type="number" clearable/>
         </el-form-item>
         <el-form-item label="浦发" prop="pufaBank" required >
-          <el-input v-model="form.pufaBank" placeholder="请输入浦发的可用资金余额" type="number" clearable/>
+          <el-input v-model="form.pufaBank" placeholder="请输入浦发的可用资金余额，单位：元" type="number" clearable/>
         </el-form-item>
         <el-form-item label="工行" prop="icbcBank" required >
-          <el-input v-model="form.icbcBank" placeholder="请输入工行的可用资金余额" type="number" clearable/>
+          <el-input v-model="form.icbcBank" placeholder="请输入工行的可用资金余额，单位：元" type="number" clearable/>
         </el-form-item>
         <el-form-item label="有赞" prop="youZan" required >
-          <el-input v-model="form.youZan" placeholder="请输入有赞的可用资金余额" type="number" clearable/>
+          <el-input v-model="form.youZan" placeholder="请输入有赞的可用资金余额，单位：元" type="number" clearable/>
         </el-form-item>
         <el-form-item label="支付宝" prop="alipay" required >
-          <el-input v-model="form.alipay" placeholder="请输入支付宝的可用资金余额" type="number" clearable/>
+          <el-input v-model="form.alipay" placeholder="请输入支付宝的可用资金余额，单位：元" type="number" clearable/>
         </el-form-item>
         <el-form-item label="京东" prop="jingdong" required >
-          <el-input v-model="form.jingdong" placeholder="请输入京东" type="number" clearable/>
+          <el-input v-model="form.jingdong" placeholder="请输入京东的可用资金余额，单位：元" type="number" clearable/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -222,10 +222,26 @@ export default {
       form: {},
       // 表单校验
       rules: {
+          merchantsBank: [
+            { required: true, message: '请输入招行的可用资金余额，单位：元', trigger: 'blur' }             
+          ],
+          pufaBank: [
+            { required: true, message: '请输入浦发的可用资金余额，单位：元', trigger: 'blur' }             
+          ],
+          icbcBank: [
+            { required: true, message: '请输入工行的可用资金余额，单位：元', trigger: 'blur' }             
+          ],
+          youZan: [
+            { required: true, message: '请输入有赞的可用资金余额，单位：元', trigger: 'blur' }             
+          ],
+          alipay: [
+            { required: true, message: '请输入支付宝的可用资金余额，单位：元', trigger: 'blur' }             
+          ],
+          jingdong: [
+            { required: true, message: '请输入京东的可用资金余额，单位：元', trigger: 'blur' }             
+          ]
 
 
-
-        
       }
     };
   },
@@ -290,6 +306,16 @@ export default {
       const id = row.id || this.ids
       getFunds(id).then(response => {
         this.form = response.data;
+
+        // 修改数据时，乘以 10000
+        this.form.merchantsBank = this.form.merchantsBank * 10000;
+        this.form.pufaBank = this.form.pufaBank * 10000;
+        this.form.icbcBank = this.form.icbcBank * 10000;
+        this.form.youZan = this.form.youZan * 10000;
+        this.form.alipay = this.form.alipay * 10000;
+        this.form.jingdong = this.form.jingdong * 10000;
+        
+
         this.open = true;
         this.title = "修改可用资金";
       });
@@ -298,6 +324,21 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          // 对输入金额进行转换，保留小数点后2位
+          const merchantsBankFmt = this.keepTwoDecimal( this.form.merchantsBank / 10000 );
+          this.form.merchantsBank = merchantsBankFmt ;
+          const pufaBankFmt = this.keepTwoDecimal( this.form.pufaBank / 10000 );
+          this.form.pufaBank = pufaBankFmt ;
+          const icbcBankFmt = this.keepTwoDecimal( this.form.icbcBank / 10000 );
+          this.form.icbcBank = icbcBankFmt ;
+          const youZanFmt = this.keepTwoDecimal( this.form.youZan / 10000 );
+          this.form.youZan = youZanFmt ;   
+          const alipayFmt = this.keepTwoDecimal( this.form.alipay / 10000 );
+          this.form.alipay = alipayFmt ;
+          const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
+          this.form.jingdong = jingdongFmt ;   
+
+
           if (this.form.id != null) {
             updateFunds(this.form).then(response => {
               if (response.code === 200) {
@@ -318,6 +359,16 @@ export default {
         }
       });
     },
+    /** 保留小数点后2位 */
+    keepTwoDecimal(num) {
+        var result = parseFloat(num);
+        if (isNaN(result)) {
+        alert('传递参数错误，请检查！');
+        return false;
+        }
+        result = Math.round(num * 100) / 100;
+        return result;
+    },   
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
