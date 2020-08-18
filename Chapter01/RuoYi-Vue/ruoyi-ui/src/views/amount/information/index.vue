@@ -146,36 +146,44 @@
       </div>
     </el-row>
 
-    <el-table v-loading="loading" :data="informationList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="informationList" @selection-change="handleSelectionChange"
+      border style="width: 100%" >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="id" />
       <el-table-column label="项目名称" align="center" prop="projectName" />
       <el-table-column label="供应商" align="center" prop="supplier" />
-      <el-table-column label="合同签订时间" align="center" prop="contractSigningTime" width="180">
+      <el-table-column label="合同签订时间" align="center" prop="contractSigningTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.contractSigningTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="合同结束时间" align="center" prop="contractEndTime" width="180">
+      <el-table-column label="合同结束时间" align="center" prop="contractEndTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.contractEndTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="合同金额" align="center" prop="contractAmount" />
-      <el-table-column label="应付预付款时间" align="center" prop="payableTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.payableTime, '{y}-{m}-{d}') }}</span>
-        </template>
+      
+      <el-table-column label="预付款金额">      
+        <el-table-column label="应付预付款时间" align="center" prop="payableTime" width="130">
+          <template slot-scope="scope">
+            <span>{{ parseTime(scope.row.payableTime, '{y}-{m}-{d}') }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="应付预付款金额" align="center" prop="prepaymentAmountPayable" />
+        <el-table-column label="已付预付款金额" align="center" prop="prepaymentAmountPaid" />
       </el-table-column>
-      <el-table-column label="应付预付款金额" align="center" prop="prepaymentAmountPayable" />
-      <el-table-column label="已付预付款金额" align="center" prop="prepaymentAmountPaid" />
-      <el-table-column label="应付预付款时间" align="center" prop="prepaymentPayableTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.prepaymentPayableTime, '{y}-{m}-{d}') }}</span>
-        </template>
+
+      <el-table-column label="预付款金额"> 
+        <el-table-column label="应付预付款时间" align="center" prop="prepaymentPayableTime" width="130">
+          <template slot-scope="scope">
+            <span>{{ parseTime(scope.row.prepaymentPayableTime, '{y}-{m}-{d}') }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="应付预付款金额" align="center" prop="prepaymentPayableAmount" />
       </el-table-column>
-      <el-table-column label="应付预付款金额" align="center" prop="prepaymentPayableAmount" />
-      <el-table-column label="更新时间" align="center" prop="createTime" width="180">
+      
+      <el-table-column label="更新时间" align="center" prop="createTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
         </template>
