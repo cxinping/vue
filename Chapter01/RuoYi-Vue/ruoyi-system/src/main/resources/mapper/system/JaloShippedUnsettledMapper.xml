@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.JaloShippedUnsettledMapper">
+    
+    <resultMap type="JaloShippedUnsettled" id="JaloShippedUnsettledResult">
+        <result property="id"    column="id"    />
+        <result property="youzan"    column="youzan"    />
+        <result property="taobao"    column="taobao"    />
+        <result property="tianmao"    column="tianmao"    />
+        <result property="jingdong"    column="jingdong"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectJaloShippedUnsettledVo">
+        select id, youzan, taobao, tianmao, jingdong, create_time, update_time from jalo_shipped_unsettled
+    </sql>
+
+    <select id="selectJaloShippedUnsettledList" parameterType="JaloShippedUnsettled" resultMap="JaloShippedUnsettledResult">
+        <include refid="selectJaloShippedUnsettledVo"/>
+        <where>  
+            <if test="youzan != null "> and youzan = #{youzan}</if>
+            <if test="taobao != null "> and taobao = #{taobao}</if>
+            <if test="tianmao != null "> and tianmao = #{tianmao}</if>
+            <if test="jingdong != null "> and jingdong = #{jingdong}</if>
+        </where>
+    </select>
+    
+    <select id="selectJaloShippedUnsettledById" parameterType="Long" resultMap="JaloShippedUnsettledResult">
+        <include refid="selectJaloShippedUnsettledVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJaloShippedUnsettled" parameterType="JaloShippedUnsettled" useGeneratedKeys="true" keyProperty="id">
+        insert into jalo_shipped_unsettled
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="youzan != null">youzan,</if>
+            <if test="taobao != null">taobao,</if>
+            <if test="tianmao != null">tianmao,</if>
+            <if test="jingdong != null">jingdong,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="youzan != null">#{youzan},</if>
+            <if test="taobao != null">#{taobao},</if>
+            <if test="tianmao != null">#{tianmao},</if>
+            <if test="jingdong != null">#{jingdong},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJaloShippedUnsettled" parameterType="JaloShippedUnsettled">
+        update jalo_shipped_unsettled
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="youzan != null">youzan = #{youzan},</if>
+            <if test="taobao != null">taobao = #{taobao},</if>
+            <if test="tianmao != null">tianmao = #{tianmao},</if>
+            <if test="jingdong != null">jingdong = #{jingdong},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJaloShippedUnsettledById" parameterType="Long">
+        delete from jalo_shipped_unsettled where id = #{id}
+    </delete>
+
+    <delete id="deleteJaloShippedUnsettledByIds" parameterType="String">
+        delete from jalo_shipped_unsettled where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
