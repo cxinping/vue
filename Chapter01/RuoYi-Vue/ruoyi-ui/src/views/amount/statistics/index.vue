@@ -131,6 +131,12 @@
       <el-table-column label="可用资金" align="center" prop="totalAvailableFunds" />
       <el-table-column label="在途物资" align="center" prop="totalMaterialsInTransit" />
       <el-table-column label="已下单未发货金额合计数" align="center" prop="ordersNumber" />
+      <el-table-column label="更新时间" align="center" prop="createTime" width="130">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime) }}</span>
+        </template>
+      </el-table-column>  
+
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
