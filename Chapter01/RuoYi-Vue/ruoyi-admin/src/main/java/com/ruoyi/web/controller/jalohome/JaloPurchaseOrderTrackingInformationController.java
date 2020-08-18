@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,9 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
     @PostMapping
     public AjaxResult add(@RequestBody JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation)
     {
+        if(null != jaloPurchaseOrderTrackingInformation){
+            jaloPurchaseOrderTrackingInformation.setUpdateTime(new Date());
+        }
         return toAjax(jaloPurchaseOrderTrackingInformationService.insertJaloPurchaseOrderTrackingInformation(jaloPurchaseOrderTrackingInformation));
     }
 

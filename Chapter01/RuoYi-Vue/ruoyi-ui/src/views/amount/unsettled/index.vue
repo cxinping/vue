@@ -4,7 +4,7 @@
       <el-form-item label="有赞" prop="youzan">
         <el-input
           v-model="queryParams.youzan"
-          placeholder="请输入有赞"
+          placeholder="请输入有赞已发货未结算金额，单位：元"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -13,7 +13,7 @@
       <el-form-item label="淘宝" prop="taobao">
         <el-input
           v-model="queryParams.taobao"
-          placeholder="请输入淘宝"
+          placeholder="请输入淘宝已发货未结算金额，单位：元"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -22,7 +22,7 @@
       <el-form-item label="天猫" prop="tianmao">
         <el-input
           v-model="queryParams.tianmao"
-          placeholder="请输入天猫"
+          placeholder="请输入天猫已发货未结算金额，单位：元"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -31,7 +31,7 @@
       <el-form-item label="京东" prop="jingdong">
         <el-input
           v-model="queryParams.jingdong"
-          placeholder="请输入京东"
+          placeholder="请输入京东已发货未结算金额，单位：元"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -95,10 +95,16 @@
     <el-table v-loading="loading" :data="unsettledList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="id" />
-      <el-table-column label="有赞" align="center" prop="youzan" />
-      <el-table-column label="淘宝" align="center" prop="taobao" />
-      <el-table-column label="天猫" align="center" prop="tianmao" />
-      <el-table-column label="京东" align="center" prop="jingdong" />
+      <el-table-column label="有赞（单位：万元）" align="center" prop="youzan" />
+      <el-table-column label="淘宝（单位：万元）" align="center" prop="taobao" />
+      <el-table-column label="天猫（单位：万元）" align="center" prop="tianmao" />
+      <el-table-column label="京东（单位：万元）" align="center" prop="jingdong" />
+      <el-table-column label="更新时间" align="center" prop="createTime" width="130">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime) }}</span>
+        </template>
+      </el-table-column>  
+
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -130,17 +136,17 @@
     <!-- 添加或修改已发货未结算金额对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="有赞" prop="youzan">
-          <el-input v-model="form.youzan" placeholder="请输入有赞" />
+        <el-form-item label="有赞" prop="youzan" required >
+          <el-input v-model="form.youzan" placeholder="请输入有赞已发货未结算金额，单位：元" />
         </el-form-item>
-        <el-form-item label="淘宝" prop="taobao">
-          <el-input v-model="form.taobao" placeholder="请输入淘宝" />
+        <el-form-item label="淘宝" prop="taobao" required >
+          <el-input v-model="form.taobao" placeholder="请输入淘宝已发货未结算金额，单位：元" />
         </el-form-item>
-        <el-form-item label="天猫" prop="tianmao">
-          <el-input v-model="form.tianmao" placeholder="请输入天猫" />
+        <el-form-item label="天猫" prop="tianmao" required >
+          <el-input v-model="form.tianmao" placeholder="请输入天猫已发货未结算金额，单位：元" />
         </el-form-item>
-        <el-form-item label="京东" prop="jingdong">
-          <el-input v-model="form.jingdong" placeholder="请输入京东" />
+        <el-form-item label="京东" prop="jingdong" required >
+          <el-input v-model="form.jingdong" placeholder="请输入京东已发货未结算金额，单位：元" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -189,6 +195,19 @@ export default {
       form: {},
       // 表单校验
       rules: {
+          youzan: [
+            { required: true, message: '请输入有赞已发货未结算金额，单位：元', trigger: 'blur' }             
+          ],
+          taobao: [
+            { required: true, message: '请输入淘宝已发货未结算金额，单位：元', trigger: 'blur' }             
+          ],
+          tianmao: [
+            { required: true, message: '请输入天猫已发货未结算金额，单位：元', trigger: 'blur' }             
+          ],
+          jingdong: [
+            { required: true, message: '请输入京东已发货未结算金额，单位：元', trigger: 'blur' }             
+          ]
+
       }
     };
   },
@@ -251,6 +270,13 @@ export default {
       const id = row.id || this.ids
       getUnsettled(id).then(response => {
         this.form = response.data;
+
+        // 修改数据时，乘以 10000
+        this.form.youzan = this.form.youzan * 10000;
+        this.form.taobao = this.form.taobao * 10000;
+        this.form.tianmao = this.form.tianmao * 10000;
+        this.form.jingdong = this.form.jingdong * 10000;
+
         this.open = true;
         this.title = "修改已发货未结算金额";
       });
@@ -259,6 +285,17 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          // 对输入金额进行转换，保留小数点后2位
+          const youzanFmt = this.keepTwoDecimal( this.form.youzan / 10000 );
+          this.form.youzan = youzanFmt ;
+          const taobaoFmt = this.keepTwoDecimal( this.form.taobao / 10000 );
+          this.form.taobao = taobaoFmt ;
+          const tianmaoFmt = this.keepTwoDecimal( this.form.tianmao / 10000 );
+          this.form.tianmao = tianmaoFmt ;
+          const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
+          this.form.jingdong = jingdongFmt ;
+
+
           if (this.form.id != null) {
             updateUnsettled(this.form).then(response => {
               if (response.code === 200) {
@@ -278,6 +315,16 @@ export default {
           }
         }
       });
+    },
+    /** 保留小数点后2位 */
+    keepTwoDecimal(num) {
+        var result = parseFloat(num);
+        if (isNaN(result)) {
+        alert('传递参数错误，请检查！');
+        return false;
+        }
+        result = Math.round(num * 100) / 100;
+        return result;
     },
     /** 删除按钮操作 */
     handleDelete(row) {
