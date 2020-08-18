@@ -1,7 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.AmountStatistics;
+import com.ruoyi.system.domain.JaloAmountStatistics;
 
 /**
  * 统计页面Service接口
@@ -9,7 +9,7 @@ import com.ruoyi.system.domain.AmountStatistics;
  * @author ruoyi
  * @date 2020-08-18
  */
-public interface IAmountStatisticsService 
+public interface IJaloAmountStatisticsService 
 {
     /**
      * 查询统计页面
@@ -17,31 +17,31 @@ public interface IAmountStatisticsService
      * @param id 统计页面ID
      * @return 统计页面
      */
-    public AmountStatistics selectAmountStatisticsById(Long id);
+    public JaloAmountStatistics selectJaloAmountStatisticsById(Long id);
 
     /**
      * 查询统计页面列表
      * 
-     * @param amountStatistics 统计页面
+     * @param jaloAmountStatistics 统计页面
      * @return 统计页面集合
      */
-    public List<AmountStatistics> selectAmountStatisticsList(AmountStatistics amountStatistics);
+    public List<JaloAmountStatistics> selectJaloAmountStatisticsList(JaloAmountStatistics jaloAmountStatistics);
 
     /**
      * 新增统计页面
      * 
-     * @param amountStatistics 统计页面
+     * @param jaloAmountStatistics 统计页面
      * @return 结果
      */
-    public int insertAmountStatistics(AmountStatistics amountStatistics);
+    public int insertJaloAmountStatistics(JaloAmountStatistics jaloAmountStatistics);
 
     /**
      * 修改统计页面
      * 
-     * @param amountStatistics 统计页面
+     * @param jaloAmountStatistics 统计页面
      * @return 结果
      */
-    public int updateAmountStatistics(AmountStatistics amountStatistics);
+    public int updateJaloAmountStatistics(JaloAmountStatistics jaloAmountStatistics);
 
     /**
      * 批量删除统计页面
@@ -49,7 +49,7 @@ public interface IAmountStatisticsService
      * @param ids 需要删除的统计页面ID
      * @return 结果
      */
-    public int deleteAmountStatisticsByIds(Long[] ids);
+    public int deleteJaloAmountStatisticsByIds(Long[] ids);
 
     /**
      * 删除统计页面信息
@@ -57,5 +57,5 @@ public interface IAmountStatisticsService
      * @param id 统计页面ID
      * @return 结果
      */
-    public int deleteAmountStatisticsById(Long id);
+    public int deleteJaloAmountStatisticsById(Long id);
 }

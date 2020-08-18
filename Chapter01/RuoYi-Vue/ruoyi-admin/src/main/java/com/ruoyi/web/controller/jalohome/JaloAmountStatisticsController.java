@@ -15,8 +15,8 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.domain.AmountStatistics;
-import com.ruoyi.system.service.IAmountStatisticsService;
+import com.ruoyi.system.domain.JaloAmountStatistics;
+import com.ruoyi.system.service.IJaloAmountStatisticsService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
@@ -28,20 +28,20 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/amount/statistics")
-public class AmountStatisticsController extends BaseController
+public class JaloAmountStatisticsController extends BaseController
 {
     @Autowired
-    private IAmountStatisticsService amountStatisticsService;
+    private IJaloAmountStatisticsService jaloAmountStatisticsService;
 
     /**
      * 查询统计页面列表
      */
     @PreAuthorize("@ss.hasPermi('amount:statistics:list')")
     @GetMapping("/list")
-    public TableDataInfo list(AmountStatistics amountStatistics)
+    public TableDataInfo list(JaloAmountStatistics jaloAmountStatistics)
     {
         startPage();
-        List<AmountStatistics> list = amountStatisticsService.selectAmountStatisticsList(amountStatistics);
+        List<JaloAmountStatistics> list = jaloAmountStatisticsService.selectJaloAmountStatisticsList(jaloAmountStatistics);
         return getDataTable(list);
     }
 
@@ -51,10 +51,10 @@ public class AmountStatisticsController extends BaseController
     @PreAuthorize("@ss.hasPermi('amount:statistics:export')")
     @Log(title = "统计页面", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(AmountStatistics amountStatistics)
+    public AjaxResult export(JaloAmountStatistics jaloAmountStatistics)
     {
-        List<AmountStatistics> list = amountStatisticsService.selectAmountStatisticsList(amountStatistics);
-        ExcelUtil<AmountStatistics> util = new ExcelUtil<AmountStatistics>(AmountStatistics.class);
+        List<JaloAmountStatistics> list = jaloAmountStatisticsService.selectJaloAmountStatisticsList(jaloAmountStatistics);
+        ExcelUtil<JaloAmountStatistics> util = new ExcelUtil<JaloAmountStatistics>(JaloAmountStatistics.class);
         return util.exportExcel(list, "statistics");
     }
 
@@ -65,7 +65,7 @@ public class AmountStatisticsController extends BaseController
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return AjaxResult.success(amountStatisticsService.selectAmountStatisticsById(id));
+        return AjaxResult.success(jaloAmountStatisticsService.selectJaloAmountStatisticsById(id));
     }
 
     /**
@@ -74,9 +74,9 @@ public class AmountStatisticsController extends BaseController
     @PreAuthorize("@ss.hasPermi('amount:statistics:add')")
     @Log(title = "统计页面", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody AmountStatistics amountStatistics)
+    public AjaxResult add(@RequestBody JaloAmountStatistics jaloAmountStatistics)
     {
-        return toAjax(amountStatisticsService.insertAmountStatistics(amountStatistics));
+        return toAjax(jaloAmountStatisticsService.insertJaloAmountStatistics(jaloAmountStatistics));
     }
 
     /**
@@ -85,9 +85,9 @@ public class AmountStatisticsController extends BaseController
     @PreAuthorize("@ss.hasPermi('amount:statistics:edit')")
     @Log(title = "统计页面", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody AmountStatistics amountStatistics)
+    public AjaxResult edit(@RequestBody JaloAmountStatistics jaloAmountStatistics)
     {
-        return toAjax(amountStatisticsService.updateAmountStatistics(amountStatistics));
+        return toAjax(jaloAmountStatisticsService.updateJaloAmountStatistics(jaloAmountStatistics));
     }
 
     /**
@@ -98,6 +98,6 @@ public class AmountStatisticsController extends BaseController
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(amountStatisticsService.deleteAmountStatisticsByIds(ids));
+        return toAjax(jaloAmountStatisticsService.deleteJaloAmountStatisticsByIds(ids));
     }
 }

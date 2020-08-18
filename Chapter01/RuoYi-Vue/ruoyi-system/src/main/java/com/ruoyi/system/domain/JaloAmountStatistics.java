@@ -7,12 +7,12 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 统计页面对象 amount_statistics
+ * 统计页面对象 jalo_amount_statistics
  * 
  * @author ruoyi
  * @date 2020-08-18
  */
-public class AmountStatistics extends BaseEntity
+public class JaloAmountStatistics extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.system.mapper.AmountStatisticsMapper">
+<mapper namespace="com.ruoyi.system.mapper.JaloAmountStatisticsMapper">
     
-    <resultMap type="AmountStatistics" id="AmountStatisticsResult">
+    <resultMap type="JaloAmountStatistics" id="JaloAmountStatisticsResult">
         <result property="id"    column="id"    />
         <result property="prepayments"    column="prepayments"    />
         <result property="inStock"    column="in_stock"    />
@@ -14,12 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="ordersNumber"    column="orders_number"    />
     </resultMap>
 
-    <sql id="selectAmountStatisticsVo">
-        select id, prepayments, in_stock, shipped_unsettled_amount, total_available_funds, total_materials_in_transit, orders_number from amount_statistics
+    <sql id="selectJaloAmountStatisticsVo">
+        select id, prepayments, in_stock, shipped_unsettled_amount, total_available_funds, total_materials_in_transit, orders_number from jalo_amount_statistics
     </sql>
 
-    <select id="selectAmountStatisticsList" parameterType="AmountStatistics" resultMap="AmountStatisticsResult">
-        <include refid="selectAmountStatisticsVo"/>
+    <select id="selectJaloAmountStatisticsList" parameterType="JaloAmountStatistics" resultMap="JaloAmountStatisticsResult">
+        <include refid="selectJaloAmountStatisticsVo"/>
         <where>  
             <if test="prepayments != null "> and prepayments = #{prepayments}</if>
             <if test="inStock != null "> and in_stock = #{inStock}</if>
@@ -30,13 +30,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectAmountStatisticsById" parameterType="Long" resultMap="AmountStatisticsResult">
-        <include refid="selectAmountStatisticsVo"/>
+    <select id="selectJaloAmountStatisticsById" parameterType="Long" resultMap="JaloAmountStatisticsResult">
+        <include refid="selectJaloAmountStatisticsVo"/>
         where id = #{id}
     </select>
         
-    <insert id="insertAmountStatistics" parameterType="AmountStatistics" useGeneratedKeys="true" keyProperty="id">
-        insert into amount_statistics
+    <insert id="insertJaloAmountStatistics" parameterType="JaloAmountStatistics" useGeneratedKeys="true" keyProperty="id">
+        insert into jalo_amount_statistics
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="prepayments != null">prepayments,</if>
             <if test="inStock != null">in_stock,</if>
@@ -55,8 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateAmountStatistics" parameterType="AmountStatistics">
-        update amount_statistics
+    <update id="updateJaloAmountStatistics" parameterType="JaloAmountStatistics">
+        update jalo_amount_statistics
         <trim prefix="SET" suffixOverrides=",">
             <if test="prepayments != null">prepayments = #{prepayments},</if>
             <if test="inStock != null">in_stock = #{inStock},</if>
@@ -68,12 +68,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteAmountStatisticsById" parameterType="Long">
-        delete from amount_statistics where id = #{id}
+    <delete id="deleteJaloAmountStatisticsById" parameterType="Long">
+        delete from jalo_amount_statistics where id = #{id}
     </delete>
 
-    <delete id="deleteAmountStatisticsByIds" parameterType="String">
-        delete from amount_statistics where id in 
+    <delete id="deleteJaloAmountStatisticsByIds" parameterType="String">
+        delete from jalo_amount_statistics where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
