@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.JaloGoodsTransitMapper">
+    
+    <resultMap type="JaloGoodsTransit" id="JaloGoodsTransitResult">
+        <result property="id"    column="id"    />
+        <result property="buildingMaterials"    column="building_materials"    />
+        <result property="dailyNecessities"    column="daily_necessities"    />
+        <result property="device"    column="device"    />
+        <result property="furniture"    column="furniture"    />
+        <result property="kitchenBathroom"    column="kitchen_bathroom"    />
+        <result property="lamps"    column="lamps"    />
+        <result property="softOutfit"    column="soft_outfit"    />
+        <result property="textile"    column="textile"    />
+        <result property="other"    column="other"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectJaloGoodsTransitVo">
+        select id, building_materials, daily_necessities, device, furniture, kitchen_bathroom, lamps, soft_outfit, textile, other, create_time, update_time from jalo_goods_transit
+    </sql>
+
+    <select id="selectJaloGoodsTransitList" parameterType="JaloGoodsTransit" resultMap="JaloGoodsTransitResult">
+        <include refid="selectJaloGoodsTransitVo"/>
+        <where>  
+            <if test="buildingMaterials != null "> and building_materials = #{buildingMaterials}</if>
+            <if test="dailyNecessities != null "> and daily_necessities = #{dailyNecessities}</if>
+            <if test="device != null "> and device = #{device}</if>
+            <if test="furniture != null "> and furniture = #{furniture}</if>
+            <if test="kitchenBathroom != null "> and kitchen_bathroom = #{kitchenBathroom}</if>
+            <if test="lamps != null "> and lamps = #{lamps}</if>
+            <if test="softOutfit != null "> and soft_outfit = #{softOutfit}</if>
+            <if test="textile != null "> and textile = #{textile}</if>
+            <if test="other != null "> and other = #{other}</if>
+        </where>
+    </select>
+    
+    <select id="selectJaloGoodsTransitById" parameterType="Long" resultMap="JaloGoodsTransitResult">
+        <include refid="selectJaloGoodsTransitVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJaloGoodsTransit" parameterType="JaloGoodsTransit" useGeneratedKeys="true" keyProperty="id">
+        insert into jalo_goods_transit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buildingMaterials != null">building_materials,</if>
+            <if test="dailyNecessities != null">daily_necessities,</if>
+            <if test="device != null">device,</if>
+            <if test="furniture != null">furniture,</if>
+            <if test="kitchenBathroom != null">kitchen_bathroom,</if>
+            <if test="lamps != null">lamps,</if>
+            <if test="softOutfit != null">soft_outfit,</if>
+            <if test="textile != null">textile,</if>
+            <if test="other != null">other,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buildingMaterials != null">#{buildingMaterials},</if>
+            <if test="dailyNecessities != null">#{dailyNecessities},</if>
+            <if test="device != null">#{device},</if>
+            <if test="furniture != null">#{furniture},</if>
+            <if test="kitchenBathroom != null">#{kitchenBathroom},</if>
+            <if test="lamps != null">#{lamps},</if>
+            <if test="softOutfit != null">#{softOutfit},</if>
+            <if test="textile != null">#{textile},</if>
+            <if test="other != null">#{other},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJaloGoodsTransit" parameterType="JaloGoodsTransit">
+        update jalo_goods_transit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buildingMaterials != null">building_materials = #{buildingMaterials},</if>
+            <if test="dailyNecessities != null">daily_necessities = #{dailyNecessities},</if>
+            <if test="device != null">device = #{device},</if>
+            <if test="furniture != null">furniture = #{furniture},</if>
+            <if test="kitchenBathroom != null">kitchen_bathroom = #{kitchenBathroom},</if>
+            <if test="lamps != null">lamps = #{lamps},</if>
+            <if test="softOutfit != null">soft_outfit = #{softOutfit},</if>
+            <if test="textile != null">textile = #{textile},</if>
+            <if test="other != null">other = #{other},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJaloGoodsTransitById" parameterType="Long">
+        delete from jalo_goods_transit where id = #{id}
+    </delete>
+
+    <delete id="deleteJaloGoodsTransitByIds" parameterType="String">
+        delete from jalo_goods_transit where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
