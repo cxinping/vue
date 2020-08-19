@@ -1,37 +1,28 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="产品" prop="product">
+      <el-form-item label="合计金额汇总" prop="sumSaleableInventoryAmount">
         <el-input
-          v-model="queryParams.product"
-          placeholder="请输入产品"
+          v-model="queryParams.sumSaleableInventoryAmount"
+          placeholder="请输入合计金额汇总"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="可销售库存金额" prop="saleableInventoryAmount">
+      <el-form-item label="不可销售库存金额汇总" prop="sumUnsaleableInventoryAmount">
         <el-input
-          v-model="queryParams.saleableInventoryAmount"
-          placeholder="请输入可销售库存金额"
+          v-model="queryParams.sumUnsaleableInventoryAmount"
+          placeholder="请输入不可销售库存金额汇总"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="不可销售库存金额" prop="unsaleableInventoryAmount">
+      <el-form-item label="合计金额汇总" prop="sumInventoryAmount">
         <el-input
-          v-model="queryParams.unsaleableInventoryAmount"
-          placeholder="请输入不可销售库存金额"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="合计金额" prop="inventoryAmount">
-        <el-input
-          v-model="queryParams.inventoryAmount"
-          placeholder="请输入合计金额"
+          v-model="queryParams.sumInventoryAmount"
+          placeholder="请输入合计金额汇总"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -50,7 +41,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:inventory:add']"
+          v-hasPermi="['amount:sum:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -60,7 +51,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:inventory:edit']"
+          v-hasPermi="['amount:sum:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -70,7 +61,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:inventory:remove']"
+          v-hasPermi="['amount:sum:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -79,7 +70,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:inventory:export']"
+          v-hasPermi="['amount:sum:export']"
         >导出</el-button>
       </el-col>
       <div class="top-right-btn">
@@ -92,13 +83,13 @@
       </div>
     </el-row>
 
-    <el-table v-loading="loading" :data="inventoryList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="sumList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="id" />
-      <el-table-column label="产品" align="center" prop="product" />
-      <el-table-column label="可销售库存金额" align="center" prop="saleableInventoryAmount" />
-      <el-table-column label="不可销售库存金额" align="center" prop="unsaleableInventoryAmount" />
-      <el-table-column label="合计金额" align="center" prop="inventoryAmount" />
+      <el-table-column label="合计金额汇总" align="center" prop="sumSaleableInventoryAmount" />
+      <el-table-column label="不可销售库存金额汇总" align="center" prop="sumUnsaleableInventoryAmount" />
+      <el-table-column label="合计金额汇总" align="center" prop="sumInventoryAmount" />
+
       <el-table-column label="更新时间" align="center" prop="createTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
@@ -112,14 +103,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:inventory:edit']"
+            v-hasPermi="['amount:sum:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:inventory:remove']"
+            v-hasPermi="['amount:sum:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -133,20 +124,17 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改库存对话框 -->
+    <!-- 添加或修改库存汇总对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="产品" prop="product">
-          <el-input v-model="form.product" placeholder="请输入产品" />
+        <el-form-item label="合计金额汇总" prop="sumSaleableInventoryAmount">
+          <el-input v-model="form.sumSaleableInventoryAmount" placeholder="请输入合计金额汇总" />
         </el-form-item>
-        <el-form-item label="可销售库存金额" prop="saleableInventoryAmount">
-          <el-input v-model="form.saleableInventoryAmount" placeholder="请输入可销售库存金额" />
+        <el-form-item label="不可销售库存金额汇总" prop="sumUnsaleableInventoryAmount">
+          <el-input v-model="form.sumUnsaleableInventoryAmount" placeholder="请输入不可销售库存金额汇总" />
         </el-form-item>
-        <el-form-item label="不可销售库存金额" prop="unsaleableInventoryAmount">
-          <el-input v-model="form.unsaleableInventoryAmount" placeholder="请输入不可销售库存金额" />
-        </el-form-item>
-        <el-form-item label="合计金额" prop="inventoryAmount">
-          <el-input v-model="form.inventoryAmount" placeholder="请输入合计金额" />
+        <el-form-item label="合计金额汇总" prop="sumInventoryAmount">
+          <el-input v-model="form.sumInventoryAmount" placeholder="请输入合计金额汇总" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -158,10 +146,10 @@
 </template>
 
 <script>
-import { listInventory, getInventory, delInventory, addInventory, updateInventory, exportInventory } from "@/api/amount/inventory";
+import { listSum, getSum, delSum, addSum, updateSum, exportSum } from "@/api/amount/inventory";
 
 export default {
-  name: "Inventory",
+  name: "Sum",
   data() {
     return {
       // 遮罩层
@@ -176,8 +164,8 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 库存表格数据
-      inventoryList: [],
+      // 库存汇总表格数据
+      sumList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -186,10 +174,9 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        product: null,
-        saleableInventoryAmount: null,
-        unsaleableInventoryAmount: null,
-        inventoryAmount: null,
+        sumSaleableInventoryAmount: null,
+        sumUnsaleableInventoryAmount: null,
+        sumInventoryAmount: null,
       },
       // 表单参数
       form: {},
@@ -202,11 +189,11 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询库存列表 */
+    /** 查询库存汇总列表 */
     getList() {
       this.loading = true;
-      listInventory(this.queryParams).then(response => {
-        this.inventoryList = response.rows;
+      listSum(this.queryParams).then(response => {
+        this.sumList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
@@ -220,10 +207,9 @@ export default {
     reset() {
       this.form = {
         id: null,
-        product: null,
-        saleableInventoryAmount: null,
-        unsaleableInventoryAmount: null,
-        inventoryAmount: null,
+        sumSaleableInventoryAmount: null,
+        sumUnsaleableInventoryAmount: null,
+        sumInventoryAmount: null,
         createTime: null,
         updateTime: null
       };
@@ -249,16 +235,16 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加库存";
+      this.title = "添加库存汇总";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids
-      getInventory(id).then(response => {
+      getSum(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改库存";
+        this.title = "修改库存汇总";
       });
     },
     /** 提交按钮 */
@@ -266,7 +252,7 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.id != null) {
-            updateInventory(this.form).then(response => {
+            updateSum(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess("修改成功");
                 this.open = false;
@@ -274,7 +260,7 @@ export default {
               }
             });
           } else {
-            addInventory(this.form).then(response => {
+            addSum(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess("新增成功");
                 this.open = false;
@@ -288,12 +274,12 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$confirm('是否确认删除库存编号为"' + ids + '"的数据项?', "警告", {
+      this.$confirm('是否确认删除库存汇总编号为"' + ids + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return delInventory(ids);
+          return delSum(ids);
         }).then(() => {
           this.getList();
           this.msgSuccess("删除成功");
@@ -302,12 +288,12 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有库存数据项?', "警告", {
+      this.$confirm('是否确认导出所有库存汇总数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return exportInventory(queryParams);
+          return exportSum(queryParams);
         }).then(response => {
           this.download(response.msg);
         }).catch(function() {});

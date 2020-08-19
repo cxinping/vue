@@ -7,12 +7,12 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 库存对象 jalo_inventory
+ * 库存详细对象 jalo_inventory_detail
  * 
  * @author ruoyi
  * @date 2020-08-19
  */
-public class JaloInventory extends BaseEntity
+public class JaloInventoryDetail extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -34,6 +34,10 @@ public class JaloInventory extends BaseEntity
     /** 合计金额 */
     @Excel(name = "合计金额")
     private BigDecimal inventoryAmount;
+
+    /** 顺序号 */
+    @Excel(name = "顺序号")
+    private Long ordernum;
 
     public void setId(Long id) 
     {
@@ -80,6 +84,15 @@ public class JaloInventory extends BaseEntity
     {
         return inventoryAmount;
     }
+    public void setOrdernum(Long ordernum) 
+    {
+        this.ordernum = ordernum;
+    }
+
+    public Long getOrdernum() 
+    {
+        return ordernum;
+    }
 
     @Override
     public String toString() {
@@ -89,6 +102,7 @@ public class JaloInventory extends BaseEntity
             .append("saleableInventoryAmount", getSaleableInventoryAmount())
             .append("unsaleableInventoryAmount", getUnsaleableInventoryAmount())
             .append("inventoryAmount", getInventoryAmount())
+            .append("ordernum", getOrdernum())
             .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .toString();

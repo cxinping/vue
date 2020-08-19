@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,9 @@ public class JaloPlacedNotShippedController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody JaloPlacedNotShipped jaloPlacedNotShipped)
     {
+        if(null != jaloPlacedNotShipped){
+            jaloPlacedNotShipped.setUpdateTime(new Date());
+        }
         return toAjax(jaloPlacedNotShippedService.insertJaloPlacedNotShipped(jaloPlacedNotShipped));
     }
 

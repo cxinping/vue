@@ -1,52 +1,52 @@
 import request from '@/utils/request'
 
-// 查询库存列表
-export function listInventory(query) {
+// 查询库存汇总列表
+export function listSum(query) {
   return request({
-    url: '/amount/inventory/list',
+    url: '/system/sum/list',
     method: 'get',
     params: query
   })
 }
 
-// 查询库存详细
-export function getInventory(id) {
+// 查询库存汇总详细
+export function getSum(id) {
   return request({
-    url: '/amount/inventory/' + id,
+    url: '/system/sum/' + id,
     method: 'get'
   })
 }
 
-// 新增库存
-export function addInventory(data) {
+// 新增库存汇总
+export function addSum(data) {
   return request({
-    url: '/amount/inventory',
+    url: '/system/sum',
     method: 'post',
     data: data
   })
 }
 
-// 修改库存
-export function updateInventory(data) {
+// 修改库存汇总
+export function updateSum(data) {
   return request({
-    url: '/amount/inventory',
+    url: '/system/sum',
     method: 'put',
     data: data
   })
 }
 
-// 删除库存
-export function delInventory(id) {
+// 删除库存汇总
+export function delSum(id) {
   return request({
-    url: '/amount/inventory/' + id,
+    url: '/system/sum/' + id,
     method: 'delete'
   })
 }
 
-// 导出库存
-export function exportInventory(query) {
+// 导出库存汇总
+export function exportSum(query) {
   return request({
-    url: '/amount/inventory/export',
+    url: '/system/sum/export',
     method: 'get',
     params: query
   })
