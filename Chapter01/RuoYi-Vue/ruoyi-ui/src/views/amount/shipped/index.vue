@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="188px">
       <el-form-item label="已下单未发货合计金额数" prop="placedNotShipped">
         <el-input
           v-model="queryParams.placedNotShipped"
@@ -68,7 +68,12 @@
     <el-table v-loading="loading" :data="shippedList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="id" />
-      <el-table-column label="已下单未发货合计金额数" align="center" prop="placedNotShipped" />
+      <el-table-column label="已下单未发货合计金额数（单位：万元）" align="center" prop="placedNotShipped" />
+      <el-table-column label="更新时间" align="center" prop="createTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime) }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -100,8 +105,8 @@
     <!-- 添加或修改已下单未发货对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="已下单未发货合计金额数" prop="placedNotShipped">
-          <el-input v-model="form.placedNotShipped" placeholder="请输入已下单未发货合计金额数" />
+        <el-form-item label="已下单未发货合计金额数" prop="placedNotShipped" required >
+          <el-input v-model="form.placedNotShipped" placeholder="请输入已下单未发货合计金额数，单位：元" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -147,6 +152,11 @@ export default {
       form: {},
       // 表单校验
       rules: {
+          placedNotShipped: [
+            { required: true, message: '请输入已下单未发货合计金额数，单位：元', trigger: 'blur' }             
+          ]
+
+
       }
     };
   },
@@ -206,6 +216,10 @@ export default {
       const id = row.id || this.ids
       getShipped(id).then(response => {
         this.form = response.data;
+
+        // 修改数据时，乘以 10000
+        this.form.placedNotShipped = this.form.placedNotShipped * 10000;
+
         this.open = true;
         this.title = "修改已下单未发货";
       });
@@ -214,6 +228,10 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          // 对输入金额进行转换，保留小数点后2位
+          const placedNotShippedFmt = this.keepTwoDecimal( this.form.placedNotShipped / 10000 );
+          this.form.placedNotShipped = placedNotShippedFmt ;
+
           if (this.form.id != null) {
             updateShipped(this.form).then(response => {
               if (response.code === 200) {
@@ -233,6 +251,16 @@ export default {
           }
         }
       });
+    },
+    /** 保留小数点后2位 */
+    keepTwoDecimal(num) {
+        var result = parseFloat(num);
+        if (isNaN(result)) {
+        alert('传递参数错误，请检查！');
+        return false;
+        }
+        result = Math.round(num * 100) / 100;
+        return result;
     },
     /** 删除按钮操作 */
     handleDelete(row) {

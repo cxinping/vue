@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询已下单未发货列表
 export function listShipped(query) {
   return request({
-    url: '/system/shipped/list',
+    url: '/amount/shipped/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listShipped(query) {
 // 查询已下单未发货详细
 export function getShipped(id) {
   return request({
-    url: '/system/shipped/' + id,
+    url: '/amount/shipped/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getShipped(id) {
 // 新增已下单未发货
 export function addShipped(data) {
   return request({
-    url: '/system/shipped',
+    url: '/amount/shipped',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addShipped(data) {
 // 修改已下单未发货
 export function updateShipped(data) {
   return request({
-    url: '/system/shipped',
+    url: '/amount/shipped',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateShipped(data) {
 // 删除已下单未发货
 export function delShipped(id) {
   return request({
-    url: '/system/shipped/' + id,
+    url: '/amount/shipped/' + id,
     method: 'delete'
   })
 }
@@ -46,7 +46,7 @@ export function delShipped(id) {
 // 导出已下单未发货
 export function exportShipped(query) {
   return request({
-    url: '/system/shipped/export',
+    url: '/amount/shipped/export',
     method: 'get',
     params: query
   })
