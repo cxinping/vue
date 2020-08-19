@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.JaloInventoryMapper">
+    
+    <resultMap type="JaloInventory" id="JaloInventoryResult">
+        <result property="id"    column="id"    />
+        <result property="product"    column="product"    />
+        <result property="saleableInventoryAmount"    column="saleable_inventory_amount"    />
+        <result property="unsaleableInventoryAmount"    column="unsaleable_inventory_amount"    />
+        <result property="inventoryAmount"    column="inventory_amount"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectJaloInventoryVo">
+        select id, product, saleable_inventory_amount, unsaleable_inventory_amount, inventory_amount, create_time, update_time from jalo_inventory
+    </sql>
+
+    <select id="selectJaloInventoryList" parameterType="JaloInventory" resultMap="JaloInventoryResult">
+        <include refid="selectJaloInventoryVo"/>
+        <where>  
+            <if test="product != null  and product != ''"> and product = #{product}</if>
+            <if test="saleableInventoryAmount != null "> and saleable_inventory_amount = #{saleableInventoryAmount}</if>
+            <if test="unsaleableInventoryAmount != null "> and unsaleable_inventory_amount = #{unsaleableInventoryAmount}</if>
+            <if test="inventoryAmount != null "> and inventory_amount = #{inventoryAmount}</if>
+        </where>
+    </select>
+    
+    <select id="selectJaloInventoryById" parameterType="Long" resultMap="JaloInventoryResult">
+        <include refid="selectJaloInventoryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJaloInventory" parameterType="JaloInventory" useGeneratedKeys="true" keyProperty="id">
+        insert into jalo_inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="product != null">product,</if>
+            <if test="saleableInventoryAmount != null">saleable_inventory_amount,</if>
+            <if test="unsaleableInventoryAmount != null">unsaleable_inventory_amount,</if>
+            <if test="inventoryAmount != null">inventory_amount,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="product != null">#{product},</if>
+            <if test="saleableInventoryAmount != null">#{saleableInventoryAmount},</if>
+            <if test="unsaleableInventoryAmount != null">#{unsaleableInventoryAmount},</if>
+            <if test="inventoryAmount != null">#{inventoryAmount},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJaloInventory" parameterType="JaloInventory">
+        update jalo_inventory
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="product != null">product = #{product},</if>
+            <if test="saleableInventoryAmount != null">saleable_inventory_amount = #{saleableInventoryAmount},</if>
+            <if test="unsaleableInventoryAmount != null">unsaleable_inventory_amount = #{unsaleableInventoryAmount},</if>
+            <if test="inventoryAmount != null">inventory_amount = #{inventoryAmount},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJaloInventoryById" parameterType="Long">
+        delete from jalo_inventory where id = #{id}
+    </delete>
+
+    <delete id="deleteJaloInventoryByIds" parameterType="String">
+        delete from jalo_inventory where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
