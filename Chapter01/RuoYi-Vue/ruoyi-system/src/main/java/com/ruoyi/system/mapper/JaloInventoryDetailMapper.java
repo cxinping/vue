@@ -27,6 +27,9 @@ public interface JaloInventoryDetailMapper
      */
     public List<JaloInventoryDetail> selectJaloInventoryDetailList(JaloInventoryDetail jaloInventoryDetail);
 
+
+    public List<JaloInventoryDetail> selectJaloInventoryDetailListByInventorySumId(String jaloInventorySumId);
+
     /**
      * 新增库存详细
      * 

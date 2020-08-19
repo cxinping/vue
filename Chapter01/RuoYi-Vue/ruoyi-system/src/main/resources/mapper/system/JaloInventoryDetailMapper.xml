@@ -20,9 +20,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select jalo_inventory_sum_id,id, product, saleable_inventory_amount, unsaleable_inventory_amount, inventory_amount, orderNum, create_time, update_time from jalo_inventory_detail
     </sql>
 
+    <select id="selectJaloInventoryDetailListByInventorySumId" parameterType="String" resultMap="JaloInventoryDetailResult">
+        <include refid="selectJaloInventoryDetailVo"/>
+        where jalo_inventory_sum_id = #{jaloInventorySumId}
+
+    </select>
+
     <select id="selectJaloInventoryDetailList" parameterType="JaloInventoryDetail" resultMap="JaloInventoryDetailResult">
         <include refid="selectJaloInventoryDetailVo"/>
-        <where>  
+        <where>
             <if test="product != null  and product != ''"> and product = #{product}</if>
             <if test="saleableInventoryAmount != null "> and saleable_inventory_amount = #{saleableInventoryAmount}</if>
             <if test="unsaleableInventoryAmount != null "> and unsaleable_inventory_amount = #{unsaleableInventoryAmount}</if>

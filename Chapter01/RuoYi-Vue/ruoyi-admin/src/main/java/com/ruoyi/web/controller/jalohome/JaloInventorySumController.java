@@ -2,6 +2,9 @@ package com.ruoyi.web.controller.jalohome;
 
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.system.domain.JaloInventoryDetail;
+import com.ruoyi.system.service.IJaloInventoryDetailService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +37,9 @@ public class JaloInventorySumController extends BaseController
     @Autowired
     private IJaloInventorySumService jaloInventorySumService;
 
+    @Autowired
+    private IJaloInventoryDetailService jaloInventoryDetailService;
+
     /**
      * 查询库存汇总列表
      */
@@ -43,6 +49,13 @@ public class JaloInventorySumController extends BaseController
     {
         startPage();
         List<JaloInventorySum> list = jaloInventorySumService.selectJaloInventorySumList(jaloInventorySum);
+        String inventory_id = null;
+        for(JaloInventorySum inventory : list){
+            inventory_id = inventory.getId();
+            List<JaloInventoryDetail> inventoryDetails =  jaloInventoryDetailService.selectJaloInventoryDetailListByInventorySumId(inventory_id);
+            inventory.setInventoryDetails(inventoryDetails );
+        }
+
         return getDataTable(list);
     }
 

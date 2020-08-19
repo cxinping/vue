@@ -1,6 +1,8 @@
 package com.ruoyi.system.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -33,6 +35,8 @@ public class JaloInventorySum extends BaseEntity
     @Excel(name = "合计金额汇总")
     private BigDecimal sumInventoryAmount;
 
+    private List<JaloInventoryDetail> inventoryDetails = null;
+
     public void setId(String id)
     {
         this.id = id;
@@ -41,6 +45,14 @@ public class JaloInventorySum extends BaseEntity
     public String getId()
     {
         return id;
+    }
+
+    public List<JaloInventoryDetail> getInventoryDetails() {
+        return inventoryDetails;
+    }
+
+    public void setInventoryDetails(List<JaloInventoryDetail> inventoryDetails) {
+        this.inventoryDetails = inventoryDetails;
     }
 
     public String getProduct() {

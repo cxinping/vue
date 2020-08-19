@@ -44,6 +44,13 @@ public class JaloInventoryDetailServiceImpl implements IJaloInventoryDetailServi
         return jaloInventoryDetailMapper.selectJaloInventoryDetailList(jaloInventoryDetail);
     }
 
+    public List<JaloInventoryDetail> selectJaloInventoryDetailListByInventorySumId(String jaloInventorySumId){
+        return jaloInventoryDetailMapper.selectJaloInventoryDetailListByInventorySumId(jaloInventorySumId);
+    }
+
+
+
+
     /**
      * 新增库存详细
      * 
