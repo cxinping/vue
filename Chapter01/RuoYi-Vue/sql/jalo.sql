@@ -52,4 +52,20 @@ CREATE TABLE `jalo_loan_usage_table` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='贷款使用表';
 
+-- ----------------------------
+-- 创建库存表表的视图
+-- ----------------------------
+CREATE VIEW jalo_inventory_view AS SELECT
+	DATE_FORMAT(create_time, '%Y-%m-%d') AS days,
+	SUM(saleable_inventory_amount) AS sum_saleable_inventory_amount,
+	SUM(unsaleable_inventory_amount	) AS sum_unsaleable_inventory_amount,
+	SUM(inventory_amount) AS sum_inventory_amount
+FROM
+	jalo_inventory_sum
+GROUP BY
+	days
+ORDER BY
+	create_time DESC
+
+
 

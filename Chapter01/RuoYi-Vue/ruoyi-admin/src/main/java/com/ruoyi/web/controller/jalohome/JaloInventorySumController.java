@@ -28,7 +28,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2020-08-19
  */
 @RestController
-@RequestMapping("/system/sum")
+@RequestMapping("/amount/sum")
 public class JaloInventorySumController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class JaloInventorySumController extends BaseController
     /**
      * 查询库存汇总列表
      */
-    @PreAuthorize("@ss.hasPermi('system:sum:list')")
+    @PreAuthorize("@ss.hasPermi('amount:sum:list')")
     @GetMapping("/list")
     public TableDataInfo list(JaloInventorySum jaloInventorySum)
     {
@@ -49,7 +49,7 @@ public class JaloInventorySumController extends BaseController
     /**
      * 导出库存汇总列表
      */
-    @PreAuthorize("@ss.hasPermi('system:sum:export')")
+    @PreAuthorize("@ss.hasPermi('amount:sum:export')")
     @Log(title = "库存汇总", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(JaloInventorySum jaloInventorySum)
@@ -62,7 +62,7 @@ public class JaloInventorySumController extends BaseController
     /**
      * 获取库存汇总详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:sum:query')")
+    @PreAuthorize("@ss.hasPermi('amount:sum:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class JaloInventorySumController extends BaseController
     /**
      * 新增库存汇总
      */
-    @PreAuthorize("@ss.hasPermi('system:sum:add')")
+    @PreAuthorize("@ss.hasPermi('amount:sum:add')")
     @Log(title = "库存汇总", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody JaloInventorySum jaloInventorySum)
@@ -86,7 +86,7 @@ public class JaloInventorySumController extends BaseController
     /**
      * 修改库存汇总
      */
-    @PreAuthorize("@ss.hasPermi('system:sum:edit')")
+    @PreAuthorize("@ss.hasPermi('amount:sum:edit')")
     @Log(title = "库存汇总", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody JaloInventorySum jaloInventorySum)
@@ -97,11 +97,16 @@ public class JaloInventorySumController extends BaseController
     /**
      * 删除库存汇总
      */
-    @PreAuthorize("@ss.hasPermi('system:sum:remove')")
+    @PreAuthorize("@ss.hasPermi('amount:sum:remove')")
     @Log(title = "库存汇总", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(jaloInventorySumService.deleteJaloInventorySumByIds(ids));
     }
+
+
+
+
+
 }

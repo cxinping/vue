@@ -24,6 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sumUnsaleableInventoryAmount != null "> and sum_unsaleable_inventory_amount = #{sumUnsaleableInventoryAmount}</if>
             <if test="sumInventoryAmount != null "> and sum_inventory_amount = #{sumInventoryAmount}</if>
         </where>
+
+        ORDER BY update_time DESC
     </select>
     
     <select id="selectJaloInventorySumById" parameterType="Long" resultMap="JaloInventorySumResult">

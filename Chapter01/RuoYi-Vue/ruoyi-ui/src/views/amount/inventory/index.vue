@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!-- 
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="合计金额汇总" prop="sumSaleableInventoryAmount">
         <el-input
@@ -33,6 +34,7 @@
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
+    -->
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
@@ -73,6 +75,15 @@
           v-hasPermi="['amount:sum:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+        >搜索</el-button>
+      </el-col>
+
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
           <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />
