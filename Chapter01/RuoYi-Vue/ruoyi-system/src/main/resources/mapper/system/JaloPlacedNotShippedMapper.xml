@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.JaloPlacedNotShippedMapper">
+    
+    <resultMap type="JaloPlacedNotShipped" id="JaloPlacedNotShippedResult">
+        <result property="id"    column="id"    />
+        <result property="placedNotShipped"    column="placed_not_shipped"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectJaloPlacedNotShippedVo">
+        select id, placed_not_shipped, create_time, update_time from jalo_placed_not_shipped
+    </sql>
+
+    <select id="selectJaloPlacedNotShippedList" parameterType="JaloPlacedNotShipped" resultMap="JaloPlacedNotShippedResult">
+        <include refid="selectJaloPlacedNotShippedVo"/>
+        <where>  
+            <if test="placedNotShipped != null "> and placed_not_shipped = #{placedNotShipped}</if>
+        </where>
+    </select>
+    
+    <select id="selectJaloPlacedNotShippedById" parameterType="Long" resultMap="JaloPlacedNotShippedResult">
+        <include refid="selectJaloPlacedNotShippedVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJaloPlacedNotShipped" parameterType="JaloPlacedNotShipped" useGeneratedKeys="true" keyProperty="id">
+        insert into jalo_placed_not_shipped
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="placedNotShipped != null">placed_not_shipped,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="placedNotShipped != null">#{placedNotShipped},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJaloPlacedNotShipped" parameterType="JaloPlacedNotShipped">
+        update jalo_placed_not_shipped
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="placedNotShipped != null">placed_not_shipped = #{placedNotShipped},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJaloPlacedNotShippedById" parameterType="Long">
+        delete from jalo_placed_not_shipped where id = #{id}
+    </delete>
+
+    <delete id="deleteJaloPlacedNotShippedByIds" parameterType="String">
+        delete from jalo_placed_not_shipped where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
