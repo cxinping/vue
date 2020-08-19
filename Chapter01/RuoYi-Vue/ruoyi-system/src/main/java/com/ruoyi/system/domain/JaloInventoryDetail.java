@@ -17,7 +17,7 @@ public class JaloInventoryDetail extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 编号 */
-    private Long id;
+    private String id;
 
     /** 产品 */
     @Excel(name = "产品")
@@ -39,12 +39,22 @@ public class JaloInventoryDetail extends BaseEntity
     @Excel(name = "顺序号")
     private Long ordernum;
 
-    public void setId(Long id) 
+    private String jaloInventorySumId;
+
+    public String getJaloInventorySumId() {
+        return jaloInventorySumId;
+    }
+
+    public void setJaloInventorySumId(String jaloInventorySumId) {
+        this.jaloInventorySumId = jaloInventorySumId;
+    }
+
+    public void setId(String id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public String getId()
     {
         return id;
     }

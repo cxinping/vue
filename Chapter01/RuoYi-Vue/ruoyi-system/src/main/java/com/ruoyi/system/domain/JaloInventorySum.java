@@ -17,7 +17,9 @@ public class JaloInventorySum extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 编号 */
-    private Long id;
+    private String id;
+
+    private String product;
 
     /** 合计金额汇总 */
     @Excel(name = "合计金额汇总")
@@ -31,16 +33,25 @@ public class JaloInventorySum extends BaseEntity
     @Excel(name = "合计金额汇总")
     private BigDecimal sumInventoryAmount;
 
-    public void setId(Long id) 
+    public void setId(String id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public String getId()
     {
         return id;
     }
-    public void setSumSaleableInventoryAmount(BigDecimal sumSaleableInventoryAmount) 
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public void setSumSaleableInventoryAmount(BigDecimal sumSaleableInventoryAmount)
     {
         this.sumSaleableInventoryAmount = sumSaleableInventoryAmount;
     }

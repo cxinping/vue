@@ -11,12 +11,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="unsaleableInventoryAmount"    column="unsaleable_inventory_amount"    />
         <result property="inventoryAmount"    column="inventory_amount"    />
         <result property="ordernum"    column="orderNum"    />
+        <result property="jaloInventorySumId"    column="jalo_inventory_sum_id"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectJaloInventoryDetailVo">
-        select id, product, saleable_inventory_amount, unsaleable_inventory_amount, inventory_amount, orderNum, create_time, update_time from jalo_inventory_detail
+        select jalo_inventory_sum_id,id, product, saleable_inventory_amount, unsaleable_inventory_amount, inventory_amount, orderNum, create_time, update_time from jalo_inventory_detail
     </sql>
 
     <select id="selectJaloInventoryDetailList" parameterType="JaloInventoryDetail" resultMap="JaloInventoryDetailResult">
