@@ -83,7 +83,10 @@
           @click="handleQuery"
         >搜索</el-button>
       </el-col>
-
+      <el-col :span="1.5">        
+         <el-tag>页面显示，单位：万元</el-tag>               
+      </el-col>
+      
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
           <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />
@@ -96,7 +99,7 @@
 
     <el-table v-loading="loading" :data="sumList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
+      <!-- <el-table-column label="编号" align="center" prop="id" />-->
       <el-table-column label="合计金额汇总" align="center" prop="sumSaleableInventoryAmount" />
       <el-table-column label="不可销售库存金额汇总" align="center" prop="sumUnsaleableInventoryAmount" />
       <el-table-column label="合计金额汇总" align="center" prop="sumInventoryAmount" />

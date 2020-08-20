@@ -55,6 +55,10 @@
           v-hasPermi="['amount:shipped:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">        
+         <el-tag>页面显示，单位：万元</el-tag>               
+      </el-col>
+
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
           <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />

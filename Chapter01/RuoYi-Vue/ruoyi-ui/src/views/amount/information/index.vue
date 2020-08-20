@@ -144,6 +144,9 @@
           @click="handleQuery"
         >搜索</el-button>
       </el-col>
+      <el-col :span="1.5">        
+         <el-tag>页面显示，单位：万元</el-tag>               
+      </el-col>
 
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
@@ -158,7 +161,7 @@
     <el-table v-loading="loading" :data="informationList" @selection-change="handleSelectionChange"
       border style="width: 100%" >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
+      <!-- <el-table-column label="编号" align="center" prop="id" />-->
       <el-table-column label="项目名称" align="center" prop="projectName" />
       <el-table-column label="供应商" align="center" prop="supplier" />
       <el-table-column label="合同签订时间" align="center" prop="contractSigningTime" width="130">
@@ -228,13 +231,13 @@
     <!-- 添加或修改采购订单跟踪信息对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="项目名称" prop="projectName">
+        <el-form-item label="项目名称" prop="projectName" required >
           <el-input v-model="form.projectName" placeholder="请输入项目名称" />
         </el-form-item>
-        <el-form-item label="供应商" prop="supplier">
+        <el-form-item label="供应商" prop="supplier" required >
           <el-input v-model="form.supplier" placeholder="请输入供应商" />
         </el-form-item>
-        <el-form-item label="合同签订时间" prop="contractSigningTime">
+        <el-form-item label="合同签订时间" prop="contractSigningTime" required >
           <el-date-picker clearable size="small" style="width: 200px"
             v-model="form.contractSigningTime"
             type="date"
@@ -242,7 +245,7 @@
             placeholder="选择合同签订时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="合同结束时间" prop="contractEndTime">
+        <el-form-item label="合同结束时间" prop="contractEndTime" required >
           <el-date-picker clearable size="small" style="width: 200px"
             v-model="form.contractEndTime"
             type="date"
@@ -250,10 +253,10 @@
             placeholder="选择合同结束时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="合同金额" prop="contractAmount">
-          <el-input v-model="form.contractAmount" placeholder="请输入合同金额" />
+        <el-form-item label="合同金额" prop="contractAmount" required >
+          <el-input v-model="form.contractAmount" placeholder="请输入合同金额，单位：元" />
         </el-form-item>
-        <el-form-item label="应付预付款时间" prop="payableTime">
+        <el-form-item label="应付预付款时间" prop="payableTime" required >
           <el-date-picker clearable size="small" style="width: 200px"
             v-model="form.payableTime"
             type="date"
@@ -261,13 +264,13 @@
             placeholder="选择应付预付款时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="应付预付款金额" prop="prepaymentAmountPayable">
-          <el-input v-model="form.prepaymentAmountPayable" placeholder="请输入应付预付款金额" />
+        <el-form-item label="应付预付款金额" prop="prepaymentAmountPayable" required >
+          <el-input v-model="form.prepaymentAmountPayable" placeholder="请输入应付预付款金额，单位：元" />
         </el-form-item>
-        <el-form-item label="已付预付款金额" prop="prepaymentAmountPaid">
-          <el-input v-model="form.prepaymentAmountPaid" placeholder="请输入已付预付款金额" />
+        <el-form-item label="已付预付款金额" prop="prepaymentAmountPaid" required >
+          <el-input v-model="form.prepaymentAmountPaid" placeholder="请输入已付预付款金额，单位：元" />
         </el-form-item>
-        <el-form-item label="应付预付款时间" prop="prepaymentPayableTime">
+        <el-form-item label="应付预付款时间" prop="prepaymentPayableTime" required >
           <el-date-picker clearable size="small" style="width: 200px"
             v-model="form.prepaymentPayableTime"
             type="date"
@@ -275,8 +278,8 @@
             placeholder="选择应付预付款时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="应付预付款金额" prop="prepaymentPayableAmount">
-          <el-input v-model="form.prepaymentPayableAmount" placeholder="请输入应付预付款金额" />
+        <el-form-item label="应付预付款金额" prop="prepaymentPayableAmount" required >
+          <el-input v-model="form.prepaymentPayableAmount" placeholder="请输入应付预付款金额，单位：元" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -331,6 +334,38 @@ export default {
       form: {},
       // 表单校验
       rules: {
+          projectName: [
+            { required: true, message: '请输入项目名称', trigger: 'blur' }             
+          ],
+          supplier: [
+            { required: true, message: '请输入供应商', trigger: 'blur' }             
+          ],
+          contractSigningTime: [
+            { required: true, message: '请输入合同签订时间', trigger: 'blur' }             
+          ] ,
+          contractEndTime: [
+            { required: true, message: '请输入合同结束时间', trigger: 'blur' }             
+          ],
+          contractAmount: [
+            { required: true, message: '请输入合同金额，单位：元', trigger: 'blur' }             
+          ] ,
+          payableTime: [
+            { required: true, message: '请输入应付预付款时间', trigger: 'blur' }             
+          ],
+          prepaymentAmountPayable: [
+            { required: true, message: '请输入应付预付款金额，单位：元', trigger: 'blur' }             
+          ],
+          prepaymentAmountPaid: [
+            { required: true, message: '请输入已付预付款金额，单位：元', trigger: 'blur' }             
+          ] ,
+          prepaymentPayableTime: [
+            { required: true, message: '请输入应付预付款时间', trigger: 'blur' }             
+          ],
+          prepaymentPayableAmount: [
+            { required: true, message: '请输入应付预付款金额，单位：元', trigger: 'blur' }             
+          ]
+
+
       }
     };
   },
@@ -399,6 +434,13 @@ export default {
       const id = row.id || this.ids
       getInformation(id).then(response => {
         this.form = response.data;
+
+        // 修改数据时，乘以 10000
+        this.form.contractAmount = this.form.contractAmount * 10000;
+        this.form.prepaymentAmountPayable = this.form.prepaymentAmountPayable * 10000;
+        this.form.prepaymentAmountPaid = this.form.prepaymentAmountPaid * 10000;
+        this.form.prepaymentPayableAmount = this.form.prepaymentPayableAmount * 10000;
+
         this.open = true;
         this.title = "修改采购订单跟踪信息";
       });
@@ -407,6 +449,17 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+
+          // 对输入金额进行转换，保留小数点后2位
+          const contractAmountFmt = this.keepTwoDecimal( this.form.contractAmount / 10000 );
+          this.form.contractAmount = contractAmountFmt ;
+          const prepaymentAmountPayableFmt = this.keepTwoDecimal( this.form.prepaymentAmountPayable / 10000 );
+          this.form.prepaymentAmountPayable = prepaymentAmountPayableFmt ;
+          const prepaymentAmountPaidFmt = this.keepTwoDecimal( this.form.prepaymentAmountPaid / 10000 );
+          this.form.prepaymentAmountPaid = prepaymentAmountPaidFmt ;
+          const prepaymentPayableAmountFmt = this.keepTwoDecimal( this.form.prepaymentPayableAmount / 10000 );
+          this.form.prepaymentPayableAmount = prepaymentPayableAmountFmt ;
+
           if (this.form.id != null) {
             updateInformation(this.form).then(response => {
               if (response.code === 200) {
@@ -427,6 +480,17 @@ export default {
         }
       });
     },
+    /** 保留小数点后2位 */
+    keepTwoDecimal(num) {
+        var result = parseFloat(num);
+        if (isNaN(result)) {
+        alert('传递参数错误，请检查！');
+        return false;
+        }
+        result = Math.round(num * 100) / 100;
+        return result;
+    },
+
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;

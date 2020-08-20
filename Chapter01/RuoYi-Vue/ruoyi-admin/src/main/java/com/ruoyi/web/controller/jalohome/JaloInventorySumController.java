@@ -93,6 +93,7 @@ public class JaloInventorySumController extends BaseController
         if(null != jaloInventorySum){
             jaloInventorySum.setUpdateTime(new Date());
         }
+
         return toAjax(jaloInventorySumService.insertJaloInventorySum(jaloInventorySum));
     }
 

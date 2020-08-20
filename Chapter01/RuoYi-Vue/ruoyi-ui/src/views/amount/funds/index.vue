@@ -343,7 +343,6 @@ export default {
           const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
           this.form.jingdong = jingdongFmt ;   
 
-
           if (this.form.id != null) {
             updateFunds(this.form).then(response => {
               if (response.code === 200) {
