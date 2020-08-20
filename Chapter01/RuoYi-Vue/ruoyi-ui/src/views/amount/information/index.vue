@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+      <!-- 
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="98px">
       <el-form-item label="项目名称" prop="projectName">
         <el-input
@@ -36,7 +37,6 @@
         </el-date-picker>
       </el-form-item>
 
-      <!-- 
       <el-form-item label="合同金额" prop="contractAmount">
         <el-input
           v-model="queryParams.contractAmount"
@@ -89,13 +89,13 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      -->
-
+    
       <el-form-item>
         <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
+  -->
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
@@ -136,6 +136,15 @@
           v-hasPermi="['amount:information:export']"
         >导出</el-button>
       </el-col>
+       <el-col :span="1.5">
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+        >搜索</el-button>
+      </el-col>
+
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
           <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />

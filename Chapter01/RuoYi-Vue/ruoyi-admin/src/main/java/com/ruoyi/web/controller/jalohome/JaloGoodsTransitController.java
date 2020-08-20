@@ -88,7 +88,7 @@ public class JaloGoodsTransitController extends BaseController
                                     .add(jaloGoodsTransit.getOther()).add(jaloGoodsTransit.getDailyNecessities())
                                     .add(jaloGoodsTransit.getTextile());
         jaloGoodsTransit.setTotalAmount(totalAmount);
-        
+
         return toAjax(jaloGoodsTransitService.insertJaloGoodsTransit(jaloGoodsTransit));
     }
 
