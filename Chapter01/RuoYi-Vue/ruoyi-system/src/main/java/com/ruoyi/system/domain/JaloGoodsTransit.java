@@ -55,7 +55,17 @@ public class JaloGoodsTransit extends BaseEntity
     @Excel(name = "其他")
     private BigDecimal other;
 
-    public void setId(Long id) 
+    private BigDecimal totalAmount;
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }

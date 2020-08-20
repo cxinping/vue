@@ -15,12 +15,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="softOutfit"    column="soft_outfit"    />
         <result property="textile"    column="textile"    />
         <result property="other"    column="other"    />
+        <result property="totalAmount"    column="total_amount"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectJaloGoodsTransitVo">
-        select id, building_materials, daily_necessities, device, furniture, kitchen_bathroom, lamps, soft_outfit, textile, other, create_time, update_time from jalo_goods_transit
+        select id, building_materials, daily_necessities, device, furniture, kitchen_bathroom, lamps, soft_outfit, textile, other, create_time, update_time, total_amount from jalo_goods_transit
     </sql>
 
     <select id="selectJaloGoodsTransitList" parameterType="JaloGoodsTransit" resultMap="JaloGoodsTransitResult">
@@ -57,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="other != null">other,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="totalAmount != null">total_amount,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="buildingMaterials != null">#{buildingMaterials},</if>
@@ -70,6 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="other != null">#{other},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
          </trim>
     </insert>
 

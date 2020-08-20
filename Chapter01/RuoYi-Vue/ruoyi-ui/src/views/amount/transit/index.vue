@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!-- 
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="建材" prop="buildingMaterials">
         <el-input
@@ -87,6 +88,7 @@
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
+-->
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
@@ -127,6 +129,20 @@
           v-hasPermi="['amount:transit:export']"
         >导出</el-button>
       </el-col>
+      
+      <el-col :span="1.5">
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+        >导出</el-button>
+      </el-col>
+
+      <el-col :span="1.5">        
+        <el-tag>页面显示，单位：万元</el-tag>               
+      </el-col>
+
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
           <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />
@@ -139,7 +155,7 @@
 
     <el-table v-loading="loading" :data="transitList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
+      <!-- <el-table-column label="编号" align="center" prop="id" />-->
       <el-table-column label="建材" align="center" prop="buildingMaterials" />
       <el-table-column label="日用品" align="center" prop="dailyNecessities" />
       <el-table-column label="电器" align="center" prop="device" />
@@ -149,6 +165,7 @@
       <el-table-column label="软装" align="center" prop="softOutfit" />
       <el-table-column label="纺织品" align="center" prop="textile" />
       <el-table-column label="其他" align="center" prop="other" />
+      <el-table-column label="合计金额" align="center" prop="totalAmount" />
       <el-table-column label="更新时间" align="center" prop="createTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
@@ -189,30 +206,39 @@
         <el-form-item label="建材" prop="buildingMaterials" required >
           <el-input v-model="form.buildingMaterials" placeholder="请输入建材的在途物资金额，单位：元" />
         </el-form-item>
+
         <el-form-item label="日用品" prop="dailyNecessities" required >
           <el-input v-model="form.dailyNecessities" placeholder="请输入日用品的在途物资金额，单位：元" />
         </el-form-item>
+       
         <el-form-item label="电器" prop="device" required >
           <el-input v-model="form.device" placeholder="请输入电器的在途物资金额，单位：元" />
         </el-form-item>
+
         <el-form-item label="家具" prop="furniture" required >
           <el-input v-model="form.furniture" placeholder="请输入家具的在途物资金额，单位：元" />
         </el-form-item>
+
         <el-form-item label="厨房卫浴" prop="kitchenBathroom" required >
           <el-input v-model="form.kitchenBathroom" placeholder="请输入厨房卫浴的在途物资金额，单位：元" />
         </el-form-item>
+
         <el-form-item label="灯具" prop="lamps" required >
           <el-input v-model="form.lamps" placeholder="请输入灯具的在途物资金额，单位：元" />
         </el-form-item>
+
         <el-form-item label="软装" prop="softOutfit" required >
           <el-input v-model="form.softOutfit" placeholder="请输入软装的在途物资金额，单位：元" />
         </el-form-item>
+
         <el-form-item label="纺织品" prop="textile" required >
           <el-input v-model="form.textile" placeholder="请输入纺织品的在途物资金额，单位：元" />
         </el-form-item>
+        
         <el-form-item label="其他" prop="other" required >
           <el-input v-model="form.other" placeholder="请输入其他的在途物资金额，单位：元" />
         </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>

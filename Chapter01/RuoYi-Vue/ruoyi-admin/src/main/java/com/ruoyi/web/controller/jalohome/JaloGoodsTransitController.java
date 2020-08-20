@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -80,6 +81,14 @@ public class JaloGoodsTransitController extends BaseController
         if(null != jaloGoodsTransit){
             jaloGoodsTransit.setUpdateTime(new Date());
         }
+
+        BigDecimal totalAmount = jaloGoodsTransit.getBuildingMaterials().add( jaloGoodsTransit.getDailyNecessities())
+                                    .add(jaloGoodsTransit.getDevice()).add(jaloGoodsTransit.getFurniture())
+                                    .add(jaloGoodsTransit.getKitchenBathroom()).add(jaloGoodsTransit.getLamps())
+                                    .add(jaloGoodsTransit.getOther()).add(jaloGoodsTransit.getDailyNecessities())
+                                    .add(jaloGoodsTransit.getTextile());
+        jaloGoodsTransit.setTotalAmount(totalAmount);
+        
         return toAjax(jaloGoodsTransitService.insertJaloGoodsTransit(jaloGoodsTransit));
     }
 
