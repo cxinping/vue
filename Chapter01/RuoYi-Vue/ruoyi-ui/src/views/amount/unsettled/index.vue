@@ -82,6 +82,10 @@
           v-hasPermi="['amount:unsettled:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">        
+        <el-tag>页面显示，单位：万元</el-tag>               
+      </el-col>
+
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
           <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />
@@ -95,11 +99,11 @@
     <el-table v-loading="loading" :data="unsettledList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="id" />
-      <el-table-column label="有赞（单位：万元）" align="center" prop="youzan" />
-      <el-table-column label="淘宝（单位：万元）" align="center" prop="taobao" />
-      <el-table-column label="天猫（单位：万元）" align="center" prop="tianmao" />
-      <el-table-column label="京东（单位：万元）" align="center" prop="jingdong" />
-      <el-table-column label="合计金额（单位：万元）" align="center" prop="totalAmount" />
+      <el-table-column label="有赞" align="center" prop="youzan" />
+      <el-table-column label="淘宝" align="center" prop="taobao" />
+      <el-table-column label="天猫" align="center" prop="tianmao" />
+      <el-table-column label="京东" align="center" prop="jingdong" />
+      <el-table-column label="合计金额" align="center" prop="totalAmount" />
 
       <el-table-column label="更新时间" align="center" prop="createTime" width="130">
         <template slot-scope="scope">

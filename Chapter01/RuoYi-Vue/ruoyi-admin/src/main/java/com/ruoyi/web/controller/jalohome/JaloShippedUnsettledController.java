@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -80,6 +81,10 @@ public class JaloShippedUnsettledController extends BaseController
         if(null != jaloShippedUnsettled){
             jaloShippedUnsettled.setUpdateTime(new Date());
         }
+
+        BigDecimal totalAmount = jaloShippedUnsettled.getJingdong().add( jaloShippedUnsettled.getTaobao()).add(jaloShippedUnsettled.getTianmao()).add( jaloShippedUnsettled.getYouzan()) ;
+        jaloShippedUnsettled.setTotalAmount( totalAmount);
+
         return toAjax(jaloShippedUnsettledService.insertJaloShippedUnsettled(jaloShippedUnsettled));
     }
 
