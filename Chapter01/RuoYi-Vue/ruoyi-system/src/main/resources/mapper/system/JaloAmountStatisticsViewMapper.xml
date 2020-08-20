@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.JaloAmountStatisticsViewMapper">
+    
+    <resultMap type="JaloAmountStatisticsView" id="JaloAmountStatisticsViewResult">
+        <result property="days"    column="days"    />
+        <result property="sumSaleableInventoryAmount"    column="sum_saleable_inventory_amount"    />
+        <result property="sumUnsaleableInventoryAmount"    column="sum_unsaleable_inventory_amount"    />
+        <result property="sumInventoryAmount"    column="sum_inventory_amount"    />
+        <result property="sumPrepaymentAmountPaid"    column="sum_prepayment_amount_paid"    />
+        <result property="sumShippedUnsettledTotalAmount"    column="sum_shipped_unsettled_total_amount"    />
+        <result property="sumAvailableFundsTotalAmount"    column="sum_available_funds_total_amount"    />
+        <result property="goodsTransitTotalAmount"    column="goods_transit_total_amount"    />
+        <result property="placedNotShippedTotalAmount"    column="placed_not_shipped_total_amount"    />
+    </resultMap>
+
+    <sql id="selectJaloAmountStatisticsViewVo">
+        select days, sum_saleable_inventory_amount, sum_unsaleable_inventory_amount, sum_inventory_amount, sum_prepayment_amount_paid, sum_shipped_unsettled_total_amount, sum_available_funds_total_amount, goods_transit_total_amount, placed_not_shipped_total_amount from jalo_amount_statistics_view
+    </sql>
+
+    <select id="selectJaloAmountStatisticsViewList" parameterType="JaloAmountStatisticsView" resultMap="JaloAmountStatisticsViewResult">
+        <include refid="selectJaloAmountStatisticsViewVo"/>
+        <where>  
+            <if test="days != null  and days != ''"> and days = #{days}</if>
+            <if test="sumSaleableInventoryAmount != null "> and sum_saleable_inventory_amount = #{sumSaleableInventoryAmount}</if>
+            <if test="sumUnsaleableInventoryAmount != null "> and sum_unsaleable_inventory_amount = #{sumUnsaleableInventoryAmount}</if>
+            <if test="sumInventoryAmount != null "> and sum_inventory_amount = #{sumInventoryAmount}</if>
+            <if test="sumPrepaymentAmountPaid != null "> and sum_prepayment_amount_paid = #{sumPrepaymentAmountPaid}</if>
+            <if test="sumShippedUnsettledTotalAmount != null "> and sum_shipped_unsettled_total_amount = #{sumShippedUnsettledTotalAmount}</if>
+            <if test="sumAvailableFundsTotalAmount != null "> and sum_available_funds_total_amount = #{sumAvailableFundsTotalAmount}</if>
+            <if test="goodsTransitTotalAmount != null "> and goods_transit_total_amount = #{goodsTransitTotalAmount}</if>
+            <if test="placedNotShippedTotalAmount != null "> and placed_not_shipped_total_amount = #{placedNotShippedTotalAmount}</if>
+        </where>
+    </select>
+    
+    <select id="selectJaloAmountStatisticsViewById" parameterType="String" resultMap="JaloAmountStatisticsViewResult">
+        <include refid="selectJaloAmountStatisticsViewVo"/>
+        where days = #{days}
+    </select>
+        
+    <insert id="insertJaloAmountStatisticsView" parameterType="JaloAmountStatisticsView">
+        insert into jalo_amount_statistics_view
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="days != null">days,</if>
+            <if test="sumSaleableInventoryAmount != null">sum_saleable_inventory_amount,</if>
+            <if test="sumUnsaleableInventoryAmount != null">sum_unsaleable_inventory_amount,</if>
+            <if test="sumInventoryAmount != null">sum_inventory_amount,</if>
+            <if test="sumPrepaymentAmountPaid != null">sum_prepayment_amount_paid,</if>
+            <if test="sumShippedUnsettledTotalAmount != null">sum_shipped_unsettled_total_amount,</if>
+            <if test="sumAvailableFundsTotalAmount != null">sum_available_funds_total_amount,</if>
+            <if test="goodsTransitTotalAmount != null">goods_transit_total_amount,</if>
+            <if test="placedNotShippedTotalAmount != null">placed_not_shipped_total_amount,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="days != null">#{days},</if>
+            <if test="sumSaleableInventoryAmount != null">#{sumSaleableInventoryAmount},</if>
+            <if test="sumUnsaleableInventoryAmount != null">#{sumUnsaleableInventoryAmount},</if>
+            <if test="sumInventoryAmount != null">#{sumInventoryAmount},</if>
+            <if test="sumPrepaymentAmountPaid != null">#{sumPrepaymentAmountPaid},</if>
+            <if test="sumShippedUnsettledTotalAmount != null">#{sumShippedUnsettledTotalAmount},</if>
+            <if test="sumAvailableFundsTotalAmount != null">#{sumAvailableFundsTotalAmount},</if>
+            <if test="goodsTransitTotalAmount != null">#{goodsTransitTotalAmount},</if>
+            <if test="placedNotShippedTotalAmount != null">#{placedNotShippedTotalAmount},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJaloAmountStatisticsView" parameterType="JaloAmountStatisticsView">
+        update jalo_amount_statistics_view
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sumSaleableInventoryAmount != null">sum_saleable_inventory_amount = #{sumSaleableInventoryAmount},</if>
+            <if test="sumUnsaleableInventoryAmount != null">sum_unsaleable_inventory_amount = #{sumUnsaleableInventoryAmount},</if>
+            <if test="sumInventoryAmount != null">sum_inventory_amount = #{sumInventoryAmount},</if>
+            <if test="sumPrepaymentAmountPaid != null">sum_prepayment_amount_paid = #{sumPrepaymentAmountPaid},</if>
+            <if test="sumShippedUnsettledTotalAmount != null">sum_shipped_unsettled_total_amount = #{sumShippedUnsettledTotalAmount},</if>
+            <if test="sumAvailableFundsTotalAmount != null">sum_available_funds_total_amount = #{sumAvailableFundsTotalAmount},</if>
+            <if test="goodsTransitTotalAmount != null">goods_transit_total_amount = #{goodsTransitTotalAmount},</if>
+            <if test="placedNotShippedTotalAmount != null">placed_not_shipped_total_amount = #{placedNotShippedTotalAmount},</if>
+        </trim>
+        where days = #{days}
+    </update>
+
+    <delete id="deleteJaloAmountStatisticsViewById" parameterType="String">
+        delete from jalo_amount_statistics_view where days = #{days}
+    </delete>
+
+    <delete id="deleteJaloAmountStatisticsViewByIds" parameterType="String">
+        delete from jalo_amount_statistics_view where days in 
+        <foreach item="days" collection="array" open="(" separator="," close=")">
+            #{days}
+        </foreach>
+    </delete>
+    
+</mapper>

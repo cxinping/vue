@@ -71,8 +71,8 @@
 
     <el-table v-loading="loading" :data="shippedList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
-      <el-table-column label="已下单未发货合计金额数（单位：万元）" align="center" prop="placedNotShipped" />
+      <!-- <el-table-column label="编号" align="center" prop="id" />-->
+      <el-table-column label="已下单未发货合计金额数" align="center" prop="placedNotShipped" />
       <el-table-column label="更新时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
