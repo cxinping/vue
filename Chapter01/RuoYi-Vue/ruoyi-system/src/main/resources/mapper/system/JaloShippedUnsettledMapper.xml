@@ -10,12 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="taobao"    column="taobao"    />
         <result property="tianmao"    column="tianmao"    />
         <result property="jingdong"    column="jingdong"    />
+        <result property="totalAmount"    column="total_amount"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectJaloShippedUnsettledVo">
-        select id, youzan, taobao, tianmao, jingdong, create_time, update_time from jalo_shipped_unsettled
+        select id, youzan, taobao, tianmao, jingdong, create_time, update_time , total_amount  from jalo_shipped_unsettled
     </sql>
 
     <select id="selectJaloShippedUnsettledList" parameterType="JaloShippedUnsettled" resultMap="JaloShippedUnsettledResult">
@@ -26,6 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="tianmao != null "> and tianmao = #{tianmao}</if>
             <if test="jingdong != null "> and jingdong = #{jingdong}</if>
         </where>
+
+        ORDER BY create_time DESC
     </select>
     
     <select id="selectJaloShippedUnsettledById" parameterType="Long" resultMap="JaloShippedUnsettledResult">

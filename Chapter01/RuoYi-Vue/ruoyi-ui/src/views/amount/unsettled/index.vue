@@ -99,6 +99,8 @@
       <el-table-column label="淘宝（单位：万元）" align="center" prop="taobao" />
       <el-table-column label="天猫（单位：万元）" align="center" prop="tianmao" />
       <el-table-column label="京东（单位：万元）" align="center" prop="jingdong" />
+      <el-table-column label="合计金额（单位：万元）" align="center" prop="totalAmount" />
+
       <el-table-column label="更新时间" align="center" prop="createTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
