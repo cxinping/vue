@@ -155,7 +155,7 @@
     </el-row>
  
     <el-table v-loading="loading" :data="viewList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
+      <!-- <el-table-column type="selection" width="55" align="center" />-->
       <el-table-column label="日期" align="center" prop="days" />
       <el-table-column label="预付款合计金额" align="center" prop="sumPrepaymentAmountPaid" />
       <el-table-column label="可销售库存合计金额" align="center" prop="sumSaleableInventoryAmount" />
