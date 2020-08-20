@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -80,6 +81,15 @@ public class JaloAvailableFundsController extends BaseController
         if(null != jaloAvailableFunds){
             jaloAvailableFunds.setUpdateTime(new Date());
         }
+
+        BigDecimal totalAmount = jaloAvailableFunds.getAlipay().add(jaloAvailableFunds.getIcbcBank())
+                                    .add(jaloAvailableFunds.getJingdong())
+                                    .add(jaloAvailableFunds.getMerchantsBank())
+                                    .add(jaloAvailableFunds.getPufaBank())
+                .add(jaloAvailableFunds.getYouZan());
+
+        jaloAvailableFunds.setTotalAmount(totalAmount );
+
         return toAjax(jaloAvailableFundsService.insertJaloAvailableFunds(jaloAvailableFunds));
     }
 

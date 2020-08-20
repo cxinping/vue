@@ -98,7 +98,7 @@
 
     <el-table v-loading="loading" :data="unsettledList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
+      <!-- <el-table-column label="编号" align="center" prop="id" />-->
       <el-table-column label="有赞" align="center" prop="youzan" />
       <el-table-column label="淘宝" align="center" prop="taobao" />
       <el-table-column label="天猫" align="center" prop="tianmao" />

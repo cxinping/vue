@@ -43,7 +43,17 @@ public class JaloAvailableFunds extends BaseEntity
     @Excel(name = "京东")
     private BigDecimal jingdong;
 
-    public void setId(Long id) 
+    private BigDecimal totalAmount;
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }

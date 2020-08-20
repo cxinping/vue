@@ -12,12 +12,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="youZan"    column="you_zan"    />
         <result property="alipay"    column="alipay"    />
         <result property="jingdong"    column="jingdong"    />
+        <result property="totalAmount"    column="total_amount"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectJaloAvailableFundsVo">
-        select id, merchants_bank, pufa_bank, icbc_bank, you_zan, alipay, jingdong, create_time, update_time from jalo_available_funds
+        select id, merchants_bank, pufa_bank, icbc_bank, you_zan, alipay, jingdong, create_time, update_time, total_amount from jalo_available_funds
     </sql>
 
     <select id="selectJaloAvailableFundsList" parameterType="JaloAvailableFunds" resultMap="JaloAvailableFundsResult">
@@ -48,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="jingdong != null">jingdong,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="totalAmount != null">total_amount,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="merchantsBank != null">#{merchantsBank},</if>
@@ -58,6 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="jingdong != null">#{jingdong},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
          </trim>
     </insert>
 

@@ -64,6 +64,10 @@
           v-hasPermi="['amount:loan:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">        
+        <el-tag>页面显示，单位：万元</el-tag>               
+      </el-col>
+
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
           <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />
@@ -76,9 +80,9 @@
 
     <el-table v-loading="loading" :data="tableList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
-      <el-table-column label="贷款授信金额（单位：万元）" align="center" prop="loanCreditAmount" />
-      <el-table-column label="贷款授信余额（单位：万元）" align="center" prop="loanCreditBalance" />
+      <!-- <el-table-column label="编号" align="center" prop="id" />-->
+      <el-table-column label="贷款授信金额" align="center" prop="loanCreditAmount" />
+      <el-table-column label="贷款授信余额" align="center" prop="loanCreditBalance" />
       <el-table-column label="更新时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
@@ -248,12 +252,11 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-            // 对输入金额进行转换，保留小数点后2位
-            const loanCreditAmountFmt = this.keepTwoDecimal( this.form.loanCreditAmount / 10000 );
-            this.form.loanCreditAmount = loanCreditAmountFmt ;
-            const loanCreditBalanceFmt = this.keepTwoDecimal( this.form.loanCreditBalance / 10000 );
-            this.form.loanCreditBalance = loanCreditBalanceFmt ;
-
+          // 对输入金额进行转换，保留小数点后2位
+          const loanCreditAmountFmt = this.keepTwoDecimal( this.form.loanCreditAmount / 10000 );
+          this.form.loanCreditAmount = loanCreditAmountFmt ;
+          const loanCreditBalanceFmt = this.keepTwoDecimal( this.form.loanCreditBalance / 10000 );
+          this.form.loanCreditBalance = loanCreditBalanceFmt ;
 
           if (this.form.id != null) {
             updateTable(this.form).then(response => {
