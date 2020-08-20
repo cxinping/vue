@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJaloGoodsTransitVo">
-        select id, building_materials, daily_necessities, device, furniture, kitchen_bathroom, lamps, soft_outfit, textile, other, create_time, update_time, total_amount from jalo_goods_transit
+        select id, building_materials, daily_necessities, device, furniture, kitchen_bathroom, lamps, soft_outfit, textile, other, create_time, update_time, total_amount from jalo_goods_transit ORDER BY create_time DESC
     </sql>
 
     <select id="selectJaloGoodsTransitList" parameterType="JaloGoodsTransit" resultMap="JaloGoodsTransitResult">

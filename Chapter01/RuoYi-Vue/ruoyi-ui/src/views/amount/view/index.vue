@@ -147,13 +147,13 @@
  
     <el-table v-loading="loading" :data="viewList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="${comment}" align="center" prop="days" />
-      <el-table-column label="${comment}" align="center" prop="sumSaleableInventoryAmount" />
-      <el-table-column label="${comment}" align="center" prop="sumUnsaleableInventoryAmount" />
-      <el-table-column label="${comment}" align="center" prop="sumInventoryAmount" />
-      <el-table-column label="${comment}" align="center" prop="sumPrepaymentAmountPaid" />
-      <el-table-column label="${comment}" align="center" prop="sumShippedUnsettledTotalAmount" />
-      <el-table-column label="${comment}" align="center" prop="sumAvailableFundsTotalAmount" />
+      <el-table-column label="日期" align="center" prop="days" />
+      <el-table-column label="预付款合计金额" align="center" prop="sumPrepaymentAmountPaid" />
+      <el-table-column label="可销售库存合计金额" align="center" prop="sumSaleableInventoryAmount" />
+      <el-table-column label="不可销售库存合计金额" align="center" prop="sumUnsaleableInventoryAmount" />
+      <el-table-column label="库存合计金额" align="center" prop="sumInventoryAmount" />
+      <el-table-column label="已发货未结算合计金额" align="center" prop="sumShippedUnsettledTotalAmount" />
+      <el-table-column label="可用资金取合计金额" align="center" prop="sumAvailableFundsTotalAmount" />
       <el-table-column label="在途物资取合计金额" align="center" prop="goodsTransitTotalAmount" />
       <el-table-column label="已下单未发货合计金额数" align="center" prop="placedNotShippedTotalAmount" />
       <!-- 

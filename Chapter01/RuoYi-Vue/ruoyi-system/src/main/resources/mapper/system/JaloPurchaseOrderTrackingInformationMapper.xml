@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJaloPurchaseOrderTrackingInformationVo">
-        select id, project_name, supplier, contract_signing_time, contract_end_time, contract_amount, payable_time, prepayment_amount_payable, prepayment_amount_paid, prepayment_payable_time, prepayment_payable_amount, create_time, update_time from jalo_purchase_order_tracking_information
+        select id, project_name, supplier, contract_signing_time, contract_end_time, contract_amount, payable_time, prepayment_amount_payable, prepayment_amount_paid, prepayment_payable_time, prepayment_payable_amount, create_time, update_time from jalo_purchase_order_tracking_information  ORDER BY create_time DESC
     </sql>
 
     <select id="selectJaloPurchaseOrderTrackingInformationList" parameterType="JaloPurchaseOrderTrackingInformation" resultMap="JaloPurchaseOrderTrackingInformationResult">

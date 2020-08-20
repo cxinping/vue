@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJaloLoanUsageTableVo">
-        select id, loan_credit_amount, loan_credit_balance, create_time, update_time from jalo_loan_usage_table
+        select id, loan_credit_amount, loan_credit_balance, create_time, update_time from jalo_loan_usage_table ORDER BY create_time DESC
     </sql>
 
     <select id="selectJaloLoanUsageTableList" parameterType="JaloLoanUsageTable" resultMap="JaloLoanUsageTableResult">

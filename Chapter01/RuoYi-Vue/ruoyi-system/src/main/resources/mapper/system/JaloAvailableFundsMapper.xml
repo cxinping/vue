@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJaloAvailableFundsVo">
-        select id, merchants_bank, pufa_bank, icbc_bank, you_zan, alipay, jingdong, create_time, update_time, total_amount from jalo_available_funds
+        select id, merchants_bank, pufa_bank, icbc_bank, you_zan, alipay, jingdong, create_time, update_time, total_amount from jalo_available_funds ORDER BY create_time DESC
     </sql>
 
     <select id="selectJaloAvailableFundsList" parameterType="JaloAvailableFunds" resultMap="JaloAvailableFundsResult">
