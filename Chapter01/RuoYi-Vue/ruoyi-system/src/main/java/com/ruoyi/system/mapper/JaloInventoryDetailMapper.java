@@ -54,6 +54,8 @@ public interface JaloInventoryDetailMapper
      */
     public int deleteJaloInventoryDetailById(Long id);
 
+    public int deleteJaloInventoryDetailByInventorySumId(String jaloInventorySumId);
+
     /**
      * 批量删除库存详细
      * 

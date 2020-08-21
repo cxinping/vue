@@ -53,6 +53,8 @@ public interface IJaloInventoryDetailService
      */
     public int deleteJaloInventoryDetailByIds(Long[] ids);
 
+    public int deleteJaloInventoryDetailByInventorySumId(String jaloInventorySumId);
+
     /**
      * 删除库存详细信息
      * 

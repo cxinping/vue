@@ -82,6 +82,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from jalo_inventory_detail where id = #{id}
     </delete>
 
+    <delete id="deleteJaloInventoryDetailByInventorySumId" parameterType="String">
+        delete from jalo_inventory_detail where jalo_inventory_sum_id = #{jaloInventorySumId}
+    </delete>
+
+
     <delete id="deleteJaloInventoryDetailByIds" parameterType="String">
         delete from jalo_inventory_detail where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">

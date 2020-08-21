@@ -3,6 +3,7 @@ package com.ruoyi.web.controller.jalohome;
 import java.util.Date;
 import java.util.List;
 
+import com.ruoyi.common.utils.id.IdGenerator;
 import com.ruoyi.system.domain.JaloInventoryDetail;
 import com.ruoyi.system.service.IJaloInventoryDetailService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -94,6 +95,20 @@ public class JaloInventorySumController extends BaseController
             jaloInventorySum.setUpdateTime(new Date());
         }
 
+        String id = IdGenerator.get();
+        jaloInventorySum.setId(id);
+
+        List<JaloInventoryDetail> inventoryDetails = jaloInventorySum.getInventoryDetails();
+
+        if(null != inventoryDetails ){
+            for(JaloInventoryDetail inventoryDetail :inventoryDetails){
+                inventoryDetail.setJaloInventorySumId(id);
+                inventoryDetail.setCreateTime(new Date());
+                inventoryDetail.setUpdateTime(new Date());
+                jaloInventoryDetailService.insertJaloInventoryDetail( inventoryDetail);
+            }
+        }
+
         return toAjax(jaloInventorySumService.insertJaloInventorySum(jaloInventorySum));
     }
 
@@ -105,6 +120,22 @@ public class JaloInventorySumController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody JaloInventorySum jaloInventorySum)
     {
+        System.out.println("------ edit --------");
+
+        String jaloInventorySumId = jaloInventorySum.getId();
+        if(null != jaloInventorySumId ){
+            jaloInventoryDetailService.deleteJaloInventoryDetailByInventorySumId(jaloInventorySumId );
+        }
+
+        List<JaloInventoryDetail> inventoryDetails = jaloInventorySum.getInventoryDetails();
+        if(null != inventoryDetails){
+            for(JaloInventoryDetail inventoryDetail : inventoryDetails){ inventoryDetail.setId(IdGenerator.get());
+               inventoryDetail.setUpdateTime(new Date());
+               inventoryDetail.setCreateTime(new Date());
+            }
+        }
+
+
         return toAjax(jaloInventorySumService.updateJaloInventorySum(jaloInventorySum));
     }
 

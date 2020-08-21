@@ -48,9 +48,6 @@ public class JaloInventoryDetailServiceImpl implements IJaloInventoryDetailServi
         return jaloInventoryDetailMapper.selectJaloInventoryDetailListByInventorySumId(jaloInventorySumId);
     }
 
-
-
-
     /**
      * 新增库存详细
      * 
@@ -87,6 +84,10 @@ public class JaloInventoryDetailServiceImpl implements IJaloInventoryDetailServi
     public int deleteJaloInventoryDetailByIds(Long[] ids)
     {
         return jaloInventoryDetailMapper.deleteJaloInventoryDetailByIds(ids);
+    }
+
+    public int deleteJaloInventoryDetailByInventorySumId(String jaloInventorySumId){
+        return jaloInventoryDetailMapper.deleteJaloInventoryDetailByInventorySumId(jaloInventorySumId);
     }
 
     /**
