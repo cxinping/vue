@@ -9,6 +9,14 @@ export function listView(query) {
   })
 }
 
+export function queryNewFromList(query) {
+  return request({
+    url: '/amount/view/list',
+    method: 'get',
+    params: query
+  })
+}
+
 // 查询VIEW详细
 export function getView(days) {
   return request({
