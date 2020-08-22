@@ -36,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertJaloInventorySum" parameterType="JaloInventorySum" useGeneratedKeys="true" keyProperty="id">
         insert into jalo_inventory_sum
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
             <if test="sumSaleableInventoryAmount != null">sum_saleable_inventory_amount,</if>
             <if test="sumUnsaleableInventoryAmount != null">sum_unsaleable_inventory_amount,</if>
             <if test="sumInventoryAmount != null">sum_inventory_amount,</if>
@@ -43,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
             <if test="sumSaleableInventoryAmount != null">#{sumSaleableInventoryAmount},</if>
             <if test="sumUnsaleableInventoryAmount != null">#{sumUnsaleableInventoryAmount},</if>
             <if test="sumInventoryAmount != null">#{sumInventoryAmount},</if>
@@ -63,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteJaloInventorySumById" parameterType="Long">
+    <delete id="deleteJaloInventorySumById" parameterType="String">
         delete from jalo_inventory_sum where id = #{id}
     </delete>
 

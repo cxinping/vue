@@ -81,7 +81,7 @@ public class JaloInventoryDetailServiceImpl implements IJaloInventoryDetailServi
      * @return 结果
      */
     @Override
-    public int deleteJaloInventoryDetailByIds(Long[] ids)
+    public int deleteJaloInventoryDetailByIds(String[] ids)
     {
         return jaloInventoryDetailMapper.deleteJaloInventoryDetailByIds(ids);
     }
@@ -97,7 +97,7 @@ public class JaloInventoryDetailServiceImpl implements IJaloInventoryDetailServi
      * @return 结果
      */
     @Override
-    public int deleteJaloInventoryDetailById(Long id)
+    public int deleteJaloInventoryDetailById(String id)
     {
         return jaloInventoryDetailMapper.deleteJaloInventoryDetailById(id);
     }

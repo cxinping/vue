@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,31 @@ public class JaloAmountStatisticsViewController extends BaseController
     public TableDataInfo list(JaloAmountStatisticsView jaloAmountStatisticsView)
     {
         startPage();
-        List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
-        return getDataTable(list);
+         List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
+         return getDataTable(list);
+
+//        List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
+//        List<JaloAmountStatisticsView> queryNewFromList = new ArrayList<JaloAmountStatisticsView>();
+//        if(list.size()>0){
+//            queryNewFromList.add( list.get(0));
+//        }
+//
+//        return getDataTable(queryNewFromList);
     }
+
+    @GetMapping("/queryNewFromList")
+    public TableDataInfo queryNewFromList (JaloAmountStatisticsView jaloAmountStatisticsView)
+    {
+        startPage();
+        List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
+        List<JaloAmountStatisticsView> queryNewFromList = new ArrayList<JaloAmountStatisticsView>();
+        if(list.size()>0){
+            queryNewFromList.add( list.get(0));
+        }
+
+        return getDataTable(queryNewFromList);
+    }
+
 
     /**
      * 导出VIEW列表

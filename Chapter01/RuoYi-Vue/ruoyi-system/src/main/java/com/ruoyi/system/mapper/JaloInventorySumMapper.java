@@ -49,7 +49,7 @@ public interface JaloInventorySumMapper
      * @param id 库存汇总ID
      * @return 结果
      */
-    public int deleteJaloInventorySumById(Long id);
+    public int deleteJaloInventorySumById(String id);
 
     /**
      * 批量删除库存汇总
@@ -57,5 +57,5 @@ public interface JaloInventorySumMapper
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteJaloInventorySumByIds(Long[] ids);
+    public int deleteJaloInventorySumByIds(String[] ids);
 }

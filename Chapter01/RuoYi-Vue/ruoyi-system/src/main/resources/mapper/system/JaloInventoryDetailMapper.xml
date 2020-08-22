@@ -10,14 +10,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="saleableInventoryAmount"    column="saleable_inventory_amount"    />
         <result property="unsaleableInventoryAmount"    column="unsaleable_inventory_amount"    />
         <result property="inventoryAmount"    column="inventory_amount"    />
-        <result property="ordernum"    column="orderNum"    />
+        <result property="orderNum"    column="order_num"    />
         <result property="jaloInventorySumId"    column="jalo_inventory_sum_id"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectJaloInventoryDetailVo">
-        select jalo_inventory_sum_id,id, product, saleable_inventory_amount, unsaleable_inventory_amount, inventory_amount, orderNum, create_time, update_time from jalo_inventory_detail
+        select jalo_inventory_sum_id,id, product, saleable_inventory_amount, unsaleable_inventory_amount, inventory_amount, order_num, create_time, update_time from jalo_inventory_detail
     </sql>
 
     <select id="selectJaloInventoryDetailListByInventorySumId" parameterType="String" resultMap="JaloInventoryDetailResult">
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="saleableInventoryAmount != null "> and saleable_inventory_amount = #{saleableInventoryAmount}</if>
             <if test="unsaleableInventoryAmount != null "> and unsaleable_inventory_amount = #{unsaleableInventoryAmount}</if>
             <if test="inventoryAmount != null "> and inventory_amount = #{inventoryAmount}</if>
-            <if test="ordernum != null "> and orderNum = #{ordernum}</if>
+            <if test="orderNum != null "> and order_num = #{orderNum}</if>
         </where>
     </select>
     
@@ -45,22 +45,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertJaloInventoryDetail" parameterType="JaloInventoryDetail" useGeneratedKeys="true" keyProperty="id">
         insert into jalo_inventory_detail
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
             <if test="product != null">product,</if>
             <if test="saleableInventoryAmount != null">saleable_inventory_amount,</if>
             <if test="unsaleableInventoryAmount != null">unsaleable_inventory_amount,</if>
             <if test="inventoryAmount != null">inventory_amount,</if>
-            <if test="ordernum != null">orderNum,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="jaloInventorySumId != null">jalo_inventory_sum_id,</if>
+            <if test="orderNum != null">order_num,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
             <if test="product != null">#{product},</if>
             <if test="saleableInventoryAmount != null">#{saleableInventoryAmount},</if>
             <if test="unsaleableInventoryAmount != null">#{unsaleableInventoryAmount},</if>
             <if test="inventoryAmount != null">#{inventoryAmount},</if>
-            <if test="ordernum != null">#{ordernum},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="jaloInventorySumId != null">#{jaloInventorySumId},</if>
+            <if test="orderNum != null">#{orderNum},</if>
          </trim>
     </insert>
 
@@ -71,14 +75,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="saleableInventoryAmount != null">saleable_inventory_amount = #{saleableInventoryAmount},</if>
             <if test="unsaleableInventoryAmount != null">unsaleable_inventory_amount = #{unsaleableInventoryAmount},</if>
             <if test="inventoryAmount != null">inventory_amount = #{inventoryAmount},</if>
-            <if test="ordernum != null">orderNum = #{ordernum},</if>
+            <if test="orderNum != null">order_num = #{ordernum},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>
         where id = #{id}
     </update>
 
-    <delete id="deleteJaloInventoryDetailById" parameterType="Long">
+    <delete id="deleteJaloInventoryDetailById" parameterType="String">
         delete from jalo_inventory_detail where id = #{id}
     </delete>
 

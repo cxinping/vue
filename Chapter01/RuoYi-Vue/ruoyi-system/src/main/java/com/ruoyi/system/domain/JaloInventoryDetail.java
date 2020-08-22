@@ -37,9 +37,11 @@ public class JaloInventoryDetail extends BaseEntity
 
     /** 顺序号 */
     @Excel(name = "顺序号")
-    private Long ordernum;
+    private Integer orderNum;
 
     private String jaloInventorySumId;
+
+
 
     public String getJaloInventorySumId() {
         return jaloInventorySumId;
@@ -94,27 +96,25 @@ public class JaloInventoryDetail extends BaseEntity
     {
         return inventoryAmount;
     }
-    public void setOrdernum(Long ordernum) 
-    {
-        this.ordernum = ordernum;
-    }
-
-    public Long getOrdernum() 
-    {
-        return ordernum;
-    }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("product", getProduct())
-            .append("saleableInventoryAmount", getSaleableInventoryAmount())
-            .append("unsaleableInventoryAmount", getUnsaleableInventoryAmount())
-            .append("inventoryAmount", getInventoryAmount())
-            .append("ordernum", getOrdernum())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
+        return "JaloInventoryDetail{" +
+                "id='" + id + '\'' +
+                ", product='" + product + '\'' +
+                ", saleableInventoryAmount=" + saleableInventoryAmount +
+                ", unsaleableInventoryAmount=" + unsaleableInventoryAmount +
+                ", inventoryAmount=" + inventoryAmount +
+                ", orderNum=" + orderNum +
+                ", jaloInventorySumId='" + jaloInventorySumId + '\'' +
+                '}';
+    }
+
+    public Integer getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(Integer orderNum) {
+        this.orderNum = orderNum;
     }
 }

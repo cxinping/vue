@@ -91,15 +91,16 @@ public class JaloInventorySum extends BaseEntity
         return sumInventoryAmount;
     }
 
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("sumSaleableInventoryAmount", getSumSaleableInventoryAmount())
-            .append("sumUnsaleableInventoryAmount", getSumUnsaleableInventoryAmount())
-            .append("sumInventoryAmount", getSumInventoryAmount())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
+        return "JaloInventorySum{" +
+                "id='" + id + '\'' +
+                ", product='" + product + '\'' +
+                ", sumSaleableInventoryAmount=" + sumSaleableInventoryAmount +
+                ", sumUnsaleableInventoryAmount=" + sumUnsaleableInventoryAmount +
+                ", sumInventoryAmount=" + sumInventoryAmount +
+                ", inventoryDetails=" + inventoryDetails +
+                '}';
     }
 }

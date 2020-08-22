@@ -90,48 +90,8 @@
     </el-form>
       -->
 
-    <el-row :gutter="10" class="mb8">
-      <!-- 
-      <el-col :span="1.5">
-        <el-button
-          type="primary"
-          icon="el-icon-plus"
-          size="mini"
-          @click="handleAdd"
-          v-hasPermi="['amount:view:add']"
-        >新增</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="success"
-          icon="el-icon-edit"
-          size="mini"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['amount:view:edit']"
-        >修改</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['amount:view:remove']"
-        >删除</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="warning"
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['amount:view:export']"
-        >导出</el-button>
-      </el-col>
-      -->
-
+<el-row :gutter="10" class="mb8">
+      
       <el-col :span="1.5">
         <el-button
           type="cyan"
@@ -153,9 +113,79 @@
         </el-tooltip>
       </div>
     </el-row>
- 
+
+    <el-row :gutter="10" style="background: #000;">
+      <el-col :span="24" style="color: #fff; text-align: right; padding: 10px 20px;">{{viewList[0].days}}</el-col>
+      <el-col :span="6">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            预付款合计金额
+          </div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumPrepaymentAmountPaid}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+      <el-col :span="6" >
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            可销售库存合计金额
+          </div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumSaleableInventoryAmount}} <span style="font-size: 14px;">万元</span> </div>
+        </div>
+      </el-col>
+      <el-col  :span="6">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            不可销售库存合计金额
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumUnsaleableInventoryAmount}} <span style="font-size: 14px;">万元</span> </div>
+        </div>
+      </el-col>
+       <el-col  :span="6">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            库存合计金额
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumInventoryAmount}} <span style="font-size: 14px;">万元</span> </div>
+        </div>
+      </el-col>
+       <el-col :span="6">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            已发货未结算合计金额
+          </div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumShippedUnsettledTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+      <el-col :span="6" >
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            可用资金取合计金额
+          </div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumAvailableFundsTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+      <el-col  :span="6">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            在途物资取合计金额
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].goodsTransitTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+       <el-col  :span="6">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            已下单未发货合计金额数
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].placedNotShippedTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+    </el-row>
+
+    
+   <!-- 
     <el-table v-loading="loading" :data="viewList" @selection-change="handleSelectionChange">
-      <!-- <el-table-column type="selection" width="55" align="center" />-->
+      <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="日期" align="center" prop="days" />
       <el-table-column label="预付款合计金额" align="center" prop="sumPrepaymentAmountPaid" />
       <el-table-column label="可销售库存合计金额" align="center" prop="sumSaleableInventoryAmount" />
@@ -165,7 +195,7 @@
       <el-table-column label="可用资金取合计金额" align="center" prop="sumAvailableFundsTotalAmount" />
       <el-table-column label="在途物资取合计金额" align="center" prop="goodsTransitTotalAmount" />
       <el-table-column label="已下单未发货合计金额数" align="center" prop="placedNotShippedTotalAmount" />
-      <!-- 
+    
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -184,7 +214,7 @@
           >删除</el-button>
         </template>
       </el-table-column>
-      -->
+     
 
     </el-table>
     
@@ -195,6 +225,7 @@
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
     />
+ -->
 
     <!-- 添加或修改VIEW对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
@@ -236,7 +267,7 @@
 </template>
 
 <script>
-import { listView, getView, delView, addView, updateView, exportView } from "@/api/amount/view";
+import { queryNewFromList,listView, getView, delView, addView, updateView, exportView } from "@/api/amount/view";
 
 export default {
   name: "View",
@@ -288,7 +319,8 @@ export default {
     /** 查询VIEW列表 */
     getList() {
       this.loading = true;
-      listView(this.queryParams).then(response => {
+      //listView(this.queryParams).then(response => {
+      queryNewFromList(this.queryParams).then(response => {
         this.viewList = response.rows;
         this.total = response.total;
         this.loading = false;

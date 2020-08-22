@@ -51,7 +51,7 @@ public interface IJaloInventoryDetailService
      * @param ids 需要删除的库存详细ID
      * @return 结果
      */
-    public int deleteJaloInventoryDetailByIds(Long[] ids);
+    public int deleteJaloInventoryDetailByIds(String[] ids);
 
     public int deleteJaloInventoryDetailByInventorySumId(String jaloInventorySumId);
 
@@ -61,5 +61,5 @@ public interface IJaloInventoryDetailService
      * @param id 库存详细ID
      * @return 结果
      */
-    public int deleteJaloInventoryDetailById(Long id);
+    public int deleteJaloInventoryDetailById(String id);
 }

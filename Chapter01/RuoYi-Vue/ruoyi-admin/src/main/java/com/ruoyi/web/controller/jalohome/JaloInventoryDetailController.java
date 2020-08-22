@@ -96,7 +96,7 @@ public class JaloInventoryDetailController extends BaseController
     @PreAuthorize("@ss.hasPermi('amount:detail:remove')")
     @Log(title = "库存详细", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
+    public AjaxResult remove(@PathVariable String[] ids)
     {
         return toAjax(jaloInventoryDetailService.deleteJaloInventoryDetailByIds(ids));
     }

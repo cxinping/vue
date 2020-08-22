@@ -49,7 +49,7 @@ public interface IJaloInventorySumService
      * @param ids 需要删除的库存汇总ID
      * @return 结果
      */
-    public int deleteJaloInventorySumByIds(Long[] ids);
+    public int deleteJaloInventorySumByIds(String[] ids);
 
     /**
      * 删除库存汇总信息
@@ -57,5 +57,5 @@ public interface IJaloInventorySumService
      * @param id 库存汇总ID
      * @return 结果
      */
-    public int deleteJaloInventorySumById(Long id);
+    public int deleteJaloInventorySumById(String id);
 }

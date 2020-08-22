@@ -77,7 +77,7 @@ public class JaloInventorySumServiceImpl implements IJaloInventorySumService
      * @return 结果
      */
     @Override
-    public int deleteJaloInventorySumByIds(Long[] ids)
+    public int deleteJaloInventorySumByIds(String[] ids)
     {
         return jaloInventorySumMapper.deleteJaloInventorySumByIds(ids);
     }
@@ -89,7 +89,7 @@ public class JaloInventorySumServiceImpl implements IJaloInventorySumService
      * @return 结果
      */
     @Override
-    public int deleteJaloInventorySumById(Long id)
+    public int deleteJaloInventorySumById(String id)
     {
         return jaloInventorySumMapper.deleteJaloInventorySumById(id);
     }

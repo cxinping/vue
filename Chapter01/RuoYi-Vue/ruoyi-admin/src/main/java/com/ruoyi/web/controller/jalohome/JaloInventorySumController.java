@@ -95,6 +95,10 @@ public class JaloInventorySumController extends BaseController
             jaloInventorySum.setUpdateTime(new Date());
         }
 
+        System.out.println("===========  add ===========");
+        System.out.println( jaloInventorySum );
+
+
         String id = IdGenerator.get();
         jaloInventorySum.setId(id);
 
@@ -102,10 +106,14 @@ public class JaloInventorySumController extends BaseController
 
         if(null != inventoryDetails ){
             for(JaloInventoryDetail inventoryDetail :inventoryDetails){
+                inventoryDetail.setId( IdGenerator.get());
                 inventoryDetail.setJaloInventorySumId(id);
                 inventoryDetail.setCreateTime(new Date());
                 inventoryDetail.setUpdateTime(new Date());
                 jaloInventoryDetailService.insertJaloInventoryDetail( inventoryDetail);
+
+                System.out.println( "orderNum = " + inventoryDetail.getOrderNum() +  "\n");
+
             }
         }
 
@@ -120,23 +128,35 @@ public class JaloInventorySumController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody JaloInventorySum jaloInventorySum)
     {
-        System.out.println("------ edit --------");
+        System.out.println("------ edit step 0 --------");
+        System.out.println( jaloInventorySum );
+
 
         String jaloInventorySumId = jaloInventorySum.getId();
         if(null != jaloInventorySumId ){
             jaloInventoryDetailService.deleteJaloInventoryDetailByInventorySumId(jaloInventorySumId );
         }
 
+        jaloInventorySum.setUpdateTime(new Date());
         List<JaloInventoryDetail> inventoryDetails = jaloInventorySum.getInventoryDetails();
+
         if(null != inventoryDetails){
-            for(JaloInventoryDetail inventoryDetail : inventoryDetails){ inventoryDetail.setId(IdGenerator.get());
+            for(JaloInventoryDetail inventoryDetail : inventoryDetails){
+               inventoryDetail.setId(IdGenerator.get());
+               inventoryDetail.setJaloInventorySumId( jaloInventorySumId );
                inventoryDetail.setUpdateTime(new Date());
                inventoryDetail.setCreateTime(new Date());
+               jaloInventoryDetailService.insertJaloInventoryDetail(inventoryDetail );
+
+               System.out.println( inventoryDetail + "\n");
             }
         }
 
+        int updateFlag = jaloInventorySumService.updateJaloInventorySum(jaloInventorySum);
+        updateFlag = 1;
+        System.out.println("**** step 2 updateFlag=" + updateFlag );
 
-        return toAjax(jaloInventorySumService.updateJaloInventorySum(jaloInventorySum));
+        return toAjax(updateFlag);
     }
 
     /**
@@ -145,8 +165,13 @@ public class JaloInventorySumController extends BaseController
     @PreAuthorize("@ss.hasPermi('amount:sum:remove')")
     @Log(title = "库存汇总", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
+    public AjaxResult remove(@PathVariable String[] ids)
     {
+        System.out.println("****** remove ************** ids=" + ids[0] );
+
+
+        jaloInventoryDetailService.deleteJaloInventoryDetailByInventorySumId(ids[0]);
+
         return toAjax(jaloInventorySumService.deleteJaloInventorySumByIds(ids));
     }
 
