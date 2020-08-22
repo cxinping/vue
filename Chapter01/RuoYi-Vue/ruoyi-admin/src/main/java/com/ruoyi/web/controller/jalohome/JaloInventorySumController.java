@@ -157,7 +157,7 @@ public class JaloInventorySumController extends BaseController
 
         int updateFlag = jaloInventorySumService.updateJaloInventorySum(jaloInventorySum);
         updateFlag = 1;
-        System.out.println("**** step 2 updateFlag=" + updateFlag );
+        System.out.println("**** step 1 updateFlag=" + updateFlag );
 
         return toAjax(updateFlag);
     }
@@ -170,11 +170,7 @@ public class JaloInventorySumController extends BaseController
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)
     {
-        System.out.println("****** remove ************** ids=" + ids[0] );
-
-
         jaloInventoryDetailService.deleteJaloInventoryDetailByInventorySumId(ids[0]);
-
         return toAjax(jaloInventorySumService.deleteJaloInventorySumByIds(ids));
     }
 

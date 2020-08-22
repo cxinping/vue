@@ -11,7 +11,7 @@ export function listView(query) {
 
 export function queryNewFromList(query) {
   return request({
-    url: '/amount/view/list',
+    url: '/amount/view/queryNewFromList',
     method: 'get',
     params: query
   })

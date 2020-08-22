@@ -108,7 +108,7 @@
 
     <!-- 添加或修改已下单未发货对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="180px">
         <el-form-item label="已下单未发货合计金额数" prop="placedNotShipped" required >
           <el-input v-model="form.placedNotShipped" placeholder="请输入已下单未发货合计金额数，单位：元" />
         </el-form-item>

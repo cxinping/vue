@@ -41,7 +41,8 @@ public class JaloAmountStatisticsViewController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(JaloAmountStatisticsView jaloAmountStatisticsView)
     {
-        startPage();
+        System.out.println("----- list ------- ");
+         startPage();
          List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
          return getDataTable(list);
 
@@ -57,6 +58,7 @@ public class JaloAmountStatisticsViewController extends BaseController
     @GetMapping("/queryNewFromList")
     public TableDataInfo queryNewFromList (JaloAmountStatisticsView jaloAmountStatisticsView)
     {
+        System.out.println("----- queryNewFromList ------- ");
         startPage();
         List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
         List<JaloAmountStatisticsView> queryNewFromList = new ArrayList<JaloAmountStatisticsView>();
