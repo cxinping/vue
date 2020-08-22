@@ -12,7 +12,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author ruoyi
  * @date 2020-08-19
  */
-public class JaloInventoryDetail extends BaseEntity
+public class JaloInventoryDetail extends BaseEntity implements Comparable<JaloInventoryDetail>
 {
     private static final long serialVersionUID = 1L;
 
@@ -116,5 +116,10 @@ public class JaloInventoryDetail extends BaseEntity
 
     public void setOrderNum(Integer orderNum) {
         this.orderNum = orderNum;
+    }
+
+    @Override
+    public int compareTo(JaloInventoryDetail inventoryDetail) {
+        return this.orderNum - inventoryDetail.getOrderNum();
     }
 }

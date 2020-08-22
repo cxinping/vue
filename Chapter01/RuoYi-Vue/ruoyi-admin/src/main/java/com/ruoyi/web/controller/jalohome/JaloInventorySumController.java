@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -54,6 +55,12 @@ public class JaloInventorySumController extends BaseController
         for(JaloInventorySum inventory : list){
             inventory_id = inventory.getId();
             List<JaloInventoryDetail> inventoryDetails =  jaloInventoryDetailService.selectJaloInventoryDetailListByInventorySumId(inventory_id);
+
+            if( null != inventoryDetails){
+                // 按照编号排序
+                Collections.sort(inventoryDetails);
+            }
+
             inventory.setInventoryDetails(inventoryDetails );
         }
 
@@ -98,7 +105,6 @@ public class JaloInventorySumController extends BaseController
         System.out.println("===========  add ===========");
         System.out.println( jaloInventorySum );
 
-
         String id = IdGenerator.get();
         jaloInventorySum.setId(id);
 
@@ -111,9 +117,6 @@ public class JaloInventorySumController extends BaseController
                 inventoryDetail.setCreateTime(new Date());
                 inventoryDetail.setUpdateTime(new Date());
                 jaloInventoryDetailService.insertJaloInventoryDetail( inventoryDetail);
-
-                System.out.println( "orderNum = " + inventoryDetail.getOrderNum() +  "\n");
-
             }
         }
 

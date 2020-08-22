@@ -46,6 +46,7 @@
           v-hasPermi="['amount:sum:add']"
         >新增</el-button>
       </el-col>
+      <!-- 
       <el-col :span="1.5">
         <el-button
           type="success"
@@ -75,6 +76,7 @@
           v-hasPermi="['amount:sum:export']"
         >导出</el-button>
       </el-col>
+      -->
       <el-col :span="1.5">
         <el-button
           type="cyan"
@@ -198,34 +200,34 @@
 
     <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
       <el-table
-    :data="newTable"
-    border
-    style="width: 100%">
-    <el-table-column
-      prop="product"
-      label="产品"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      label="可销售库存金额"
-      width="180">
-      <template slot-scope="scope">
-        <el-input v-model="scope.row.saleableInventoryAmount" placeholder="请输入合计金额汇总,单位：元" />
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="不可销售库存金额">
-       <template slot-scope="scope">
-        <el-input v-model="scope.row.unsaleableInventoryAmount" placeholder="请输入合计金额汇总,单位：元" />
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="合计金额">
-       <template slot-scope="scope">
-        <div>{{parseFloat(scope.row.saleableInventoryAmount || 0) + parseFloat(scope.row.unsaleableInventoryAmount || 0)}}</div>
-      </template>
-    </el-table-column>
-  </el-table>
+        :data="newTable"
+        border
+        style="width: 100%">
+        <el-table-column
+          prop="product"
+          label="产品"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          label="可销售库存金额"
+         >
+          <template slot-scope="scope">
+            <el-input v-model="scope.row.saleableInventoryAmount" placeholder="请输入合计金额汇总,单位：元" />
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="不可销售库存金额">
+          <template slot-scope="scope">
+            <el-input v-model="scope.row.unsaleableInventoryAmount" placeholder="请输入合计金额汇总,单位：元" />
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="合计金额">
+          <template slot-scope="scope">
+            <div>{{parseFloat(scope.row.saleableInventoryAmount || 0) + parseFloat(scope.row.unsaleableInventoryAmount || 0)}}</div>
+          </template>
+        </el-table-column>
+      </el-table>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
@@ -507,8 +509,9 @@ export default {
                 "sumSaleableInventoryAmount": sumSaleableInventoryAmount / 10000,
                 "sumUnsaleableInventoryAmount": sumUnsaleableInventoryAmount / 10000,
                 "sumInventoryAmount": (sumSaleableInventoryAmount + sumUnsaleableInventoryAmount) / 10000,
-                "inventoryDetails": this.newTable.map(item => ({
+                "inventoryDetails": this.newTable.map((item, index)  => ({
                   ...item,
+                  orderNum: index + 1,
                   saleableInventoryAmount: item.saleableInventoryAmount / 10000,
                   unsaleableInventoryAmount: item.unsaleableInventoryAmount / 10000,
                   inventoryAmount: parseFloat(item.saleableInventoryAmount  / 10000) + parseFloat( item.unsaleableInventoryAmount / 10000)
