@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!-- 
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="有赞" prop="youzan">
         <el-input
@@ -42,6 +43,7 @@
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
+-->
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
@@ -81,6 +83,14 @@
           @click="handleExport"
           v-hasPermi="['amount:unsettled:export']"
         >导出</el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+        >搜索</el-button>
       </el-col>
       <el-col :span="1.5">        
         <el-tag>页面显示，单位：万元</el-tag>               

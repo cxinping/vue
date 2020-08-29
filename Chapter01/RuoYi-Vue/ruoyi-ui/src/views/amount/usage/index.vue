@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!-- 
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="贷款授信金额" prop="loanCreditAmount">
         <el-input
@@ -33,6 +34,8 @@
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
+-->
+
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
@@ -73,6 +76,18 @@
           v-hasPermi="['amount:usage:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+        >搜索</el-button>
+      </el-col>
+      <el-col :span="1.5">        
+        <el-tag>页面显示，单位：万元</el-tag>               
+      </el-col>
+
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
           <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />
@@ -120,15 +135,20 @@
     <!-- 添加或修改贷款使用对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="110px">
-        <el-form-item label="贷款授信金额" prop="loanCreditAmount">
-          <el-input v-model="form.loanCreditAmount" placeholder="请输入贷款授信金额" />
+        <el-form-item label="贷款授信金额" prop="loanCreditAmount" required >
+          <el-input v-model="form.loanCreditAmount" placeholder="请输入贷款授信金额，单位：元" 
+            type="number" clearable />
         </el-form-item>
-        <el-form-item label="贷款授信余额" prop="loanCreditBalance">
-          <el-input v-model="form.loanCreditBalance" placeholder="请输入贷款授信余额" />
+        <el-form-item label="贷款使用余额" prop="loanCreditBalance" required >
+          <el-input v-model="form.loanCreditBalance" placeholder="请输入贷款使用余额，单位：元" 
+           type="number" clearable />
         </el-form-item>
+        <!--
         <el-form-item label="剩余可使用额度" prop="loanCreditRemaining">
           <el-input v-model="form.loanCreditRemaining" placeholder="请输入剩余可使用额度" />
         </el-form-item>
+         -->
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -175,6 +195,13 @@ export default {
       form: {},
       // 表单校验
       rules: {
+          loanCreditAmount: [
+            { required: true, message: '请输入贷款授信金额，单位：元', trigger: 'blur' }             
+          ],
+          loanCreditBalance: [
+            { required: true, message: '请输入贷款授信余额，单位：元', trigger: 'blur' }             
+          ]
+
       }
     };
   },
@@ -236,6 +263,11 @@ export default {
       const id = row.id || this.ids
       getUsage(id).then(response => {
         this.form = response.data;
+
+        // 修改数据时，乘以 10000
+        this.form.loanCreditAmount = this.form.loanCreditAmount * 10000;
+        this.form.loanCreditBalance = this.form.loanCreditBalance * 10000;
+
         this.open = true;
         this.title = "修改贷款使用";
       });
@@ -244,6 +276,15 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+
+          // 对输入金额进行转换，保留小数点后2位
+          const loanCreditAmountFmt = this.keepTwoDecimal( this.form.loanCreditAmount / 10000 );
+          this.form.loanCreditAmount = loanCreditAmountFmt ;
+          const loanCreditBalanceFmt = this.keepTwoDecimal( this.form.loanCreditBalance / 10000 );
+          this.form.loanCreditBalance = loanCreditBalanceFmt ;
+          const loanCreditRemainingFmt = this.keepTwoDecimal(this.form.loanCreditAmount - this.form.loanCreditBalance) ;
+          this.form.loanCreditRemaining = loanCreditRemainingFmt;
+
           if (this.form.id != null) {
             updateUsage(this.form).then(response => {
               if (response.code === 200) {
@@ -263,6 +304,16 @@ export default {
           }
         }
       });
+    },
+    /** 保留小数点后2位 */
+    keepTwoDecimal(num) {
+        var result = parseFloat(num);
+        if (isNaN(result)) {
+        alert('传递参数错误，请检查！');
+        return false;
+        }
+        result = Math.round(num * 100) / 100;
+        return result;
     },
     /** 删除按钮操作 */
     handleDelete(row) {

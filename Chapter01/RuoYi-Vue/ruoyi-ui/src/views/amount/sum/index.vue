@@ -55,6 +55,18 @@
           v-hasPermi="['amount:sum:add']"
         >新增</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+        >搜索</el-button>
+      </el-col>
+
+      <el-col :span="1.5">        
+        <el-tag>页面显示，单位：万元</el-tag>               
+      </el-col>
  
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">

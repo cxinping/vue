@@ -13,7 +13,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <sql id="selectJaloPlacedNotShippedVo">
         select id, placed_not_shipped, create_time, update_time from jalo_placed_not_shipped
-        ORDER BY create_time DESC
     </sql>
 
     <select id="selectJaloPlacedNotShippedList" parameterType="JaloPlacedNotShipped" resultMap="JaloPlacedNotShippedResult">
@@ -21,6 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="placedNotShipped != null "> and placed_not_shipped = #{placedNotShipped}</if>
         </where>
+        ORDER BY create_time DESC
+
     </select>
     
     <select id="selectJaloPlacedNotShippedById" parameterType="Long" resultMap="JaloPlacedNotShippedResult">
