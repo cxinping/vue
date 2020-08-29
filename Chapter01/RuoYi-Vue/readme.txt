@@ -12,6 +12,12 @@ npm install --registry=https://registry.npm.taobao.org
 # 本地开发 启动项目
 npm run dev
 
+# 打包正式环境
+npm run build:prod
+
+在Windows平台下结束该进程
+taskkill /f /t /im nginx.exe
+
 
 4、打开浏览器，输入：http://localhost:8011 （默认账户 admin/admin123）
 
