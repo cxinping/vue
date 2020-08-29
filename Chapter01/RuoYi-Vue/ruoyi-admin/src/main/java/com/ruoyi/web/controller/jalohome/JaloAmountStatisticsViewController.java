@@ -1,6 +1,9 @@
 package com.ruoyi.web.controller.jalohome;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +65,30 @@ public class JaloAmountStatisticsViewController extends BaseController
         startPage();
         List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
         List<JaloAmountStatisticsView> queryNewFromList = new ArrayList<JaloAmountStatisticsView>();
+
+        System.out.println(" step 1 list.size()=" + list.size() );
         if(list.size()>0){
+            System.out.println(list.get(0));
+
             queryNewFromList.add( list.get(0));
+        }else{
+            JaloAmountStatisticsView amountStatisticsView = new JaloAmountStatisticsView();
+            amountStatisticsView.setSumSaleableInventoryAmount(new BigDecimal(0));
+            amountStatisticsView.setSumInventoryAmount(new BigDecimal(0));
+            amountStatisticsView.setSumUnsaleableInventoryAmount(new BigDecimal(0));
+            amountStatisticsView.setSumPrepaymentAmountPaid(new BigDecimal(0));
+            amountStatisticsView.setSumShippedUnsettledTotalAmount(new BigDecimal(0));
+            amountStatisticsView.setSumAvailableFundsTotalAmount(new BigDecimal(0));
+            amountStatisticsView.setGoodsTransitTotalAmount(new BigDecimal(0));
+            amountStatisticsView.setPlacedNotShippedTotalAmount(new BigDecimal(0));
+
+
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+            String currTime = df.format(new Date());
+            amountStatisticsView.setDays(currTime);
+
+            queryNewFromList.add(amountStatisticsView);
+
         }
 
         return getDataTable(queryNewFromList);

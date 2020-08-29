@@ -229,58 +229,89 @@
     />
 
     <!-- 添加或修改采购订单跟踪信息对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="项目名称" prop="projectName" required >
-          <el-input v-model="form.projectName" placeholder="请输入项目名称" />
-        </el-form-item>
-        <el-form-item label="供应商" prop="supplier" required >
-          <el-input v-model="form.supplier" placeholder="请输入供应商" />
-        </el-form-item>
-        <el-form-item label="合同签订时间" prop="contractSigningTime" required >
-          <el-date-picker clearable size="small" style="width: 200px"
-            v-model="form.contractSigningTime"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="选择合同签订时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="合同结束时间" prop="contractEndTime" required >
-          <el-date-picker clearable size="small" style="width: 200px"
-            v-model="form.contractEndTime"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="选择合同结束时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="合同金额" prop="contractAmount" required >
-          <el-input v-model="form.contractAmount" placeholder="请输入合同金额，单位：元" />
-        </el-form-item>
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+        <el-row>
+        <el-col :span="12">
+          <el-form-item label="项目名称" prop="projectName" required >
+            <el-input v-model="form.projectName" placeholder="请输入项目名称" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="供应商" prop="supplier" required >
+            <el-input v-model="form.supplier" placeholder="请输入供应商" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="合同签订时间" prop="contractSigningTime" required >
+            <el-date-picker clearable size="small" style="width: 200px"
+              v-model="form.contractSigningTime"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="选择合同签订时间">
+            </el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="合同结束时间" prop="contractEndTime" required >
+            <el-date-picker clearable size="small" style="width: 200px"
+              v-model="form.contractEndTime"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="选择合同结束时间">
+            </el-date-picker>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+      <el-col :span="12">
+          <el-form-item label="合同金额" prop="contractAmount" required >
+            <el-input v-model="form.contractAmount" placeholder="请输入合同金额，单位：元" />
+          </el-form-item>
+      </el-col>
+      <el-col :span="12">
         <el-form-item label="应付预付款时间" prop="payableTime" required >
-          <el-date-picker clearable size="small" style="width: 200px"
-            v-model="form.payableTime"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="选择应付预付款时间">
-          </el-date-picker>
+            <el-date-picker clearable size="small" style="width: 200px"
+              v-model="form.payableTime"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="选择应付预付款时间">
+            </el-date-picker>
+          </el-form-item>
+      </el-col>
+    </el-row>            
+    <el-row>
+    <el-col :span="12">
+      <el-form-item label="应付预付款金额" prop="prepaymentAmountPayable" required >
+            <el-input v-model="form.prepaymentAmountPayable" placeholder="请输入应付预付款金额，单位：元" />
         </el-form-item>
-        <el-form-item label="应付预付款金额" prop="prepaymentAmountPayable" required >
-          <el-input v-model="form.prepaymentAmountPayable" placeholder="请输入应付预付款金额，单位：元" />
-        </el-form-item>
-        <el-form-item label="已付预付款金额" prop="prepaymentAmountPaid" required >
+    </el-col>
+    <el-col :span="12">
+         <el-form-item label="已付预付款金额" prop="prepaymentAmountPaid" required >
           <el-input v-model="form.prepaymentAmountPaid" placeholder="请输入已付预付款金额，单位：元" />
         </el-form-item>
-        <el-form-item label="应付预付款时间" prop="prepaymentPayableTime" required >
-          <el-date-picker clearable size="small" style="width: 200px"
-            v-model="form.prepaymentPayableTime"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="选择应付预付款时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="应付预付款金额" prop="prepaymentPayableAmount" required >
+    </el-col>
+  </el-row>    
+  <el-row>
+    <el-col :span="12">
+      <el-form-item label="应付预付款时间" prop="prepaymentPayableTime" required >
+            <el-date-picker clearable size="small" style="width: 200px"
+              v-model="form.prepaymentPayableTime"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="选择应付预付款时间">
+            </el-date-picker>
+          </el-form-item>
+    </el-col>
+    <el-col :span="12">
+         <el-form-item label="应付预付款金额" prop="prepaymentPayableAmount" required >
           <el-input v-model="form.prepaymentPayableAmount" placeholder="请输入应付预付款金额，单位：元" />
         </el-form-item>
+    </el-col>
+  </el-row>     
+               
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>

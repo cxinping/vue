@@ -1,6 +1,10 @@
 <template>
-  <div class="dashboard-editor-container">
 
+  <div class="dashboard-editor-container">
+ <el-row >
+      欢迎访问伽罗管理系统
+    </el-row>
+<!-- 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
@@ -24,9 +28,10 @@
         </div>
       </el-col>
     </el-row>
-
     
+     -->
   </div>
+ 
 </template>
 
 <script>

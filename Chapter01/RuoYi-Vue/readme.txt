@@ -40,3 +40,14 @@ uuid
 Authorization:eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImFlMzYxMjAzLTJlOWQtNDE0Yi04NWQzLTAyNmNjZGZiMjY3MSJ9.rod4cZpJGzN1dPfl_seI3P_cuaM71hOq_uDh3I30rcEJX6gWOL4nYPuv22Xhv5LdmovKyEMcUIifE_ZM_GRybw
 
 
+http://www.ultrapower.com:8888
+admin
+admin123
+
+gao
+123456
+
+leader
+123456
+
+
