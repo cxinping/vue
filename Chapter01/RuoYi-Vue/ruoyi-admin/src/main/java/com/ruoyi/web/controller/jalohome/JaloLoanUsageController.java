@@ -77,6 +77,9 @@ public class JaloLoanUsageController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody JaloLoanUsage jaloLoanUsage)
     {
+        System.out.println("*** add *** ");
+        System.out.println(jaloLoanUsage);
+
         if(null != jaloLoanUsage){
             jaloLoanUsage.setUpdateTime(new Date());
         }

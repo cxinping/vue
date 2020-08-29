@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJaloLoanUsageVo">
-        select id, loan_credit_amount, loan_credit_balance, loan_credit_remaining, create_time, update_time from jalo_loan_usage ORDER BY create_time DESC
+        select id, loan_credit_amount, loan_credit_balance, loan_credit_remaining, create_time, update_time from jalo_loan_usage
     </sql>
 
     <select id="selectJaloLoanUsageList" parameterType="JaloLoanUsage" resultMap="JaloLoanUsageResult">
@@ -24,6 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loanCreditBalance != null "> and loan_credit_balance = #{loanCreditBalance}</if>
             <if test="loanCreditRemaining != null "> and loan_credit_remaining = #{loanCreditRemaining}</if>
         </where>
+
+        ORDER BY create_time DESC
     </select>
     
     <select id="selectJaloLoanUsageById" parameterType="Long" resultMap="JaloLoanUsageResult">

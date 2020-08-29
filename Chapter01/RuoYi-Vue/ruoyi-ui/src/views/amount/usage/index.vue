@@ -85,7 +85,7 @@
 
     <el-table v-loading="loading" :data="usageList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
+      <!-- <el-table-column label="编号" align="center" prop="id" />-->
       <el-table-column label="贷款授信金额" align="center" prop="loanCreditAmount" />
       <el-table-column label="贷款授信余额" align="center" prop="loanCreditBalance" />
       <el-table-column label="剩余可使用额度" align="center" prop="loanCreditRemaining" />
@@ -119,7 +119,7 @@
 
     <!-- 添加或修改贷款使用对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="110px">
         <el-form-item label="贷款授信金额" prop="loanCreditAmount">
           <el-input v-model="form.loanCreditAmount" placeholder="请输入贷款授信金额" />
         </el-form-item>
