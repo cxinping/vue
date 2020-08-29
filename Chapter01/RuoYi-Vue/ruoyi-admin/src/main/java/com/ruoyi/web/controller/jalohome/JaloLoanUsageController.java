@@ -16,8 +16,8 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.domain.JaloLoanUsageTable;
-import com.ruoyi.system.service.IJaloLoanUsageTableService;
+import com.ruoyi.system.domain.JaloLoanUsage;
+import com.ruoyi.system.service.IJaloLoanUsageService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
@@ -25,84 +25,83 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 贷款使用Controller
  * 
  * @author ruoyi
- * @date 2020-08-17
+ * @date 2020-08-29
  */
 @RestController
-@RequestMapping("/amount/loan")
-public class JaloLoanUsageTableController extends BaseController
+@RequestMapping("/amount/usage")
+public class JaloLoanUsageController extends BaseController
 {
     @Autowired
-    private IJaloLoanUsageTableService jaloLoanUsageTableService;
+    private IJaloLoanUsageService jaloLoanUsageService;
 
     /**
      * 查询贷款使用列表
      */
-    @PreAuthorize("@ss.hasPermi('amount:loan:list')")
+    @PreAuthorize("@ss.hasPermi('amount:usage:list')")
     @GetMapping("/list")
-    public TableDataInfo list(JaloLoanUsageTable jaloLoanUsageTable)
+    public TableDataInfo list(JaloLoanUsage jaloLoanUsage)
     {
         startPage();
-        List<JaloLoanUsageTable> list = jaloLoanUsageTableService.selectJaloLoanUsageTableList(jaloLoanUsageTable);
+        List<JaloLoanUsage> list = jaloLoanUsageService.selectJaloLoanUsageList(jaloLoanUsage);
         return getDataTable(list);
     }
 
     /**
      * 导出贷款使用列表
      */
-    @PreAuthorize("@ss.hasPermi('amount:loan:export')")
+    @PreAuthorize("@ss.hasPermi('amount:usage:export')")
     @Log(title = "贷款使用", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(JaloLoanUsageTable jaloLoanUsageTable)
+    public AjaxResult export(JaloLoanUsage jaloLoanUsage)
     {
-        List<JaloLoanUsageTable> list = jaloLoanUsageTableService.selectJaloLoanUsageTableList(jaloLoanUsageTable);
-        ExcelUtil<JaloLoanUsageTable> util = new ExcelUtil<JaloLoanUsageTable>(JaloLoanUsageTable.class);
-        return util.exportExcel(list, "table");
+        List<JaloLoanUsage> list = jaloLoanUsageService.selectJaloLoanUsageList(jaloLoanUsage);
+        ExcelUtil<JaloLoanUsage> util = new ExcelUtil<JaloLoanUsage>(JaloLoanUsage.class);
+        return util.exportExcel(list, "usage");
     }
 
     /**
      * 获取贷款使用详细信息
      */
-    @PreAuthorize("@ss.hasPermi('amount:loan:query')")
+    @PreAuthorize("@ss.hasPermi('amount:usage:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return AjaxResult.success(jaloLoanUsageTableService.selectJaloLoanUsageTableById(id));
+        return AjaxResult.success(jaloLoanUsageService.selectJaloLoanUsageById(id));
     }
 
     /**
      * 新增贷款使用
      */
-    @PreAuthorize("@ss.hasPermi('amount:loan:add')")
+    @PreAuthorize("@ss.hasPermi('amount:usage:add')")
     @Log(title = "贷款使用", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody JaloLoanUsageTable jaloLoanUsageTable)
+    public AjaxResult add(@RequestBody JaloLoanUsage jaloLoanUsage)
     {
-        if(null != jaloLoanUsageTable){
-            jaloLoanUsageTable.setUpdateTime(new Date());
+        if(null != jaloLoanUsage){
+            jaloLoanUsage.setUpdateTime(new Date());
         }
-
-        return toAjax(jaloLoanUsageTableService.insertJaloLoanUsageTable(jaloLoanUsageTable));
+        return toAjax(jaloLoanUsageService.insertJaloLoanUsage(jaloLoanUsage));
     }
 
     /**
      * 修改贷款使用
      */
-    @PreAuthorize("@ss.hasPermi('amount:loan:edit')")
+    @PreAuthorize("@ss.hasPermi('amount:usage:edit')")
     @Log(title = "贷款使用", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody JaloLoanUsageTable jaloLoanUsageTable)
+    public AjaxResult edit(@RequestBody JaloLoanUsage jaloLoanUsage)
     {
-        return toAjax(jaloLoanUsageTableService.updateJaloLoanUsageTable(jaloLoanUsageTable));
+        return toAjax(jaloLoanUsageService.updateJaloLoanUsage(jaloLoanUsage));
     }
 
     /**
      * 删除贷款使用
      */
-    @PreAuthorize("@ss.hasPermi('amount:loan:remove')")
+    @PreAuthorize("@ss.hasPermi('amount:usage:remove')")
     @Log(title = "贷款使用", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(jaloLoanUsageTableService.deleteJaloLoanUsageTableByIds(ids));
+        return toAjax(jaloLoanUsageService.deleteJaloLoanUsageByIds(ids));
     }
 }
