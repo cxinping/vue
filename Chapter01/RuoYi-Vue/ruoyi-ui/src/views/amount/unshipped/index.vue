@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!-- 
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="有赞" prop="youzan">
         <el-input
@@ -51,6 +52,7 @@
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
+-->
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
@@ -91,6 +93,18 @@
           v-hasPermi="['amount:unshipped:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+        >搜索</el-button>
+      </el-col>
+      <el-col :span="1.5">        
+        <el-tag>页面显示，单位：万元</el-tag>               
+      </el-col>
+
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
           <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />
@@ -103,12 +117,19 @@
 
     <el-table v-loading="loading" :data="unshippedList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
+     <!--  <el-table-column label="编号" align="center" prop="id" />-->
       <el-table-column label="有赞" align="center" prop="youzan" />
       <el-table-column label="淘宝" align="center" prop="taobao" />
       <el-table-column label="天猫" align="center" prop="tianmao" />
       <el-table-column label="京东" align="center" prop="jingdong" />
       <el-table-column label="合计金额" align="center" prop="totalAmount" />
+
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="130">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime) }}</span>
+        </template>
+      </el-table-column>  
+
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -140,21 +161,23 @@
     <!-- 添加或修改已购买未发货对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="有赞" prop="youzan">
-          <el-input v-model="form.youzan" placeholder="请输入有赞" />
+        <el-form-item label="有赞" prop="youzan" required>
+          <el-input v-model="form.youzan" placeholder="请输入有赞已购买未发货金额，单位：元" />
         </el-form-item>
-        <el-form-item label="淘宝" prop="taobao">
-          <el-input v-model="form.taobao" placeholder="请输入淘宝" />
+        <el-form-item label="淘宝" prop="taobao" required>
+          <el-input v-model="form.taobao" placeholder="请输入淘宝已购买未发货金额，单位：元" />
         </el-form-item>
-        <el-form-item label="天猫" prop="tianmao">
-          <el-input v-model="form.tianmao" placeholder="请输入天猫" />
+        <el-form-item label="天猫" prop="tianmao" required>
+          <el-input v-model="form.tianmao" placeholder="请输入天猫已购买未发货金额，单位：元" />
         </el-form-item>
-        <el-form-item label="京东" prop="jingdong">
-          <el-input v-model="form.jingdong" placeholder="请输入京东" />
+        <el-form-item label="京东" prop="jingdong" required >
+          <el-input v-model="form.jingdong" placeholder="请输入京东已购买未发货金额，单位：元" />
         </el-form-item>
+        <!-- 
         <el-form-item label="合计金额" prop="totalAmount">
           <el-input v-model="form.totalAmount" placeholder="请输入合计金额" />
         </el-form-item>
+        -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -203,6 +226,19 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        youzan: [
+            { required: true, message: '请输入有赞已购买未发货金额，单位：元', trigger: 'blur' }             
+          ],
+          taobao: [
+            { required: true, message: '请输入淘宝已购买未发货金额，单位：元', trigger: 'blur' }             
+          ],
+          tianmao: [
+            { required: true, message: '请输入天猫已购买未发货金额，单位：元', trigger: 'blur' }             
+          ],
+          jingdong: [
+            { required: true, message: '请输入京东已购买未发货金额，单位：元', trigger: 'blur' }             
+          ]
+
       }
     };
   },
@@ -266,6 +302,13 @@ export default {
       const id = row.id || this.ids
       getUnshipped(id).then(response => {
         this.form = response.data;
+
+        // 修改数据时，乘以 10000
+        this.form.youzan = this.form.youzan * 10000;
+        this.form.taobao = this.form.taobao * 10000;
+        this.form.tianmao = this.form.tianmao * 10000;
+        this.form.jingdong = this.form.jingdong * 10000;
+
         this.open = true;
         this.title = "修改已购买未发货";
       });
@@ -274,6 +317,18 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          // 对输入金额进行转换，保留小数点后2位
+          const youzanFmt = this.keepTwoDecimal( this.form.youzan / 10000 );
+          this.form.youzan = youzanFmt ;
+          const taobaoFmt = this.keepTwoDecimal( this.form.taobao / 10000 );
+          this.form.taobao = taobaoFmt ;
+          const tianmaoFmt = this.keepTwoDecimal( this.form.tianmao / 10000 );
+          this.form.tianmao = tianmaoFmt ;
+          const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
+          this.form.jingdong = jingdongFmt ;
+
+          this.form.totalAmount = this.keepTwoDecimal(youzanFmt + taobaoFmt + tianmaoFmt + jingdongFmt);
+
           if (this.form.id != null) {
             updateUnshipped(this.form).then(response => {
               if (response.code === 200) {
@@ -293,6 +348,16 @@ export default {
           }
         }
       });
+    },
+    /** 保留小数点后2位 */
+    keepTwoDecimal(num) {
+        var result = parseFloat(num);
+        if (isNaN(result)) {
+        alert('传递参数错误，请检查！');
+        return false;
+        }
+        result = Math.round(num * 100) / 100;
+        return result;
     },
     /** 删除按钮操作 */
     handleDelete(row) {

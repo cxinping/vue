@@ -28,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="jingdong != null "> and jingdong = #{jingdong}</if>
             <if test="totalAmount != null "> and total_amount = #{totalAmount}</if>
         </where>
+        ORDER BY create_time DESC
     </select>
     
     <select id="selectJaloPurchasedUnshippedById" parameterType="Long" resultMap="JaloPurchasedUnshippedResult">
