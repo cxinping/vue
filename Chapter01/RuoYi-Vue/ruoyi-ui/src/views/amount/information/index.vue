@@ -176,16 +176,18 @@
       </el-table-column>
       <el-table-column label="合同金额" align="center" prop="contractAmount" />
       
-      <el-table-column label="预付款金额">      
-        <el-table-column label="应付预付款时间" align="center" prop="payableTime" width="130">
+      <el-table-column label="采购货款"  align="center">   
+        <el-table-column label="已付预付款金额" align="center" prop="prepaymentAmountPaid" />
+        <el-table-column label="应付尾款时间" align="center" prop="payableTime" width="130">
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.payableTime, '{y}-{m}-{d}') }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="应付预付款金额" align="center" prop="prepaymentAmountPayable" />
-        <el-table-column label="已付预付款金额" align="center" prop="prepaymentAmountPaid" />
+        <el-table-column label="应付尾款金额" align="center" prop="prepaymentAmountPayable" />
+       
       </el-table-column>
 
+      <!-- 
       <el-table-column label="预付款金额"> 
         <el-table-column label="应付预付款时间" align="center" prop="prepaymentPayableTime" width="130">
           <template slot-scope="scope">
@@ -194,7 +196,8 @@
         </el-table-column>
         <el-table-column label="应付预付款金额" align="center" prop="prepaymentPayableAmount" />
       </el-table-column>
-      
+      -->
+
       <el-table-column label="更新时间" align="center" prop="createTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
@@ -272,12 +275,12 @@
           </el-form-item>
       </el-col>
       <el-col :span="12">
-        <el-form-item label="应付预付款时间" prop="payableTime" required >
+        <el-form-item label="应付尾款时间" prop="payableTime" required >
             <el-date-picker clearable size="small" style="width: 200px"
               v-model="form.payableTime"
               type="date"
               value-format="yyyy-MM-dd"
-              placeholder="选择应付预付款时间">
+              placeholder="选择应付尾款时间">
             </el-date-picker>
           </el-form-item>
       </el-col>
@@ -289,11 +292,13 @@
         </el-form-item>
     </el-col>
     <el-col :span="12">
-         <el-form-item label="已付预付款金额" prop="prepaymentAmountPaid" required >
-          <el-input v-model="form.prepaymentAmountPaid" placeholder="请输入已付预付款金额，单位：元" />
+         <el-form-item label="应付尾款金额" prop="prepaymentAmountPaid" required >
+          <el-input v-model="form.prepaymentAmountPaid" placeholder="请输入应付尾款金额，单位：元" />
         </el-form-item>
     </el-col>
   </el-row>    
+
+  <!-- 
   <el-row>
     <el-col :span="12">
       <el-form-item label="应付预付款时间" prop="prepaymentPayableTime" required >
@@ -311,8 +316,9 @@
         </el-form-item>
     </el-col>
   </el-row>     
-               
-      </el-form>
+  -->
+
+  </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
@@ -381,21 +387,23 @@ export default {
             { required: true, message: '请输入合同金额，单位：元', trigger: 'blur' }             
           ] ,
           payableTime: [
-            { required: true, message: '请输入应付预付款时间', trigger: 'blur' }             
+            { required: true, message: '请输入应付尾款时间', trigger: 'blur' }             
           ],
           prepaymentAmountPayable: [
             { required: true, message: '请输入应付预付款金额，单位：元', trigger: 'blur' }             
           ],
           prepaymentAmountPaid: [
-            { required: true, message: '请输入已付预付款金额，单位：元', trigger: 'blur' }             
-          ] ,
+            { required: true, message: '请输入应付尾款金额，单位：元', trigger: 'blur' }             
+          ] 
+
+          /** 
           prepaymentPayableTime: [
             { required: true, message: '请输入应付预付款时间', trigger: 'blur' }             
           ],
           prepaymentPayableAmount: [
             { required: true, message: '请输入应付预付款金额，单位：元', trigger: 'blur' }             
           ]
-
+        **/
 
       }
     };
@@ -470,7 +478,7 @@ export default {
         this.form.contractAmount = this.form.contractAmount * 10000;
         this.form.prepaymentAmountPayable = this.form.prepaymentAmountPayable * 10000;
         this.form.prepaymentAmountPaid = this.form.prepaymentAmountPaid * 10000;
-        this.form.prepaymentPayableAmount = this.form.prepaymentPayableAmount * 10000;
+        //this.form.prepaymentPayableAmount = this.form.prepaymentPayableAmount * 10000;
 
         this.open = true;
         this.title = "修改采购订单跟踪信息";
@@ -488,8 +496,8 @@ export default {
           this.form.prepaymentAmountPayable = prepaymentAmountPayableFmt ;
           const prepaymentAmountPaidFmt = this.keepTwoDecimal( this.form.prepaymentAmountPaid / 10000 );
           this.form.prepaymentAmountPaid = prepaymentAmountPaidFmt ;
-          const prepaymentPayableAmountFmt = this.keepTwoDecimal( this.form.prepaymentPayableAmount / 10000 );
-          this.form.prepaymentPayableAmount = prepaymentPayableAmountFmt ;
+          //const prepaymentPayableAmountFmt = this.keepTwoDecimal( this.form.prepaymentPayableAmount / 10000 );
+          //this.form.prepaymentPayableAmount = prepaymentPayableAmountFmt ;
 
           if (this.form.id != null) {
             updateInformation(this.form).then(response => {

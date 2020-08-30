@@ -7,7 +7,7 @@ import com.ruoyi.system.domain.JaloAmountStatisticsView;
  * VIEWMapper接口
  * 
  * @author ruoyi
- * @date 2020-08-20
+ * @date 2020-08-30
  */
 public interface JaloAmountStatisticsViewMapper 
 {

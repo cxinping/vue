@@ -6,32 +6,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="JaloAmountStatisticsView" id="JaloAmountStatisticsViewResult">
         <result property="days"    column="days"    />
-        <result property="sumSaleableInventoryAmount"    column="sum_saleable_inventory_amount"    />
-        <result property="sumUnsaleableInventoryAmount"    column="sum_unsaleable_inventory_amount"    />
-        <result property="sumInventoryAmount"    column="sum_inventory_amount"    />
+        <result property="sumContractAmount"    column="sum_contract_amount"    />
+        <result property="sumPrepaymentAmountPayable"    column="sum_prepayment_amount_payable"    />
         <result property="sumPrepaymentAmountPaid"    column="sum_prepayment_amount_paid"    />
         <result property="sumShippedUnsettledTotalAmount"    column="sum_shipped_unsettled_total_amount"    />
+        <result property="sumPurchasedUnshippedTotalAmount"    column="sum_purchased_unshipped_total_amount"    />
+        <result property="loanUsageTotalLoanCreditAmount"    column="loan_usage_total_loan_credit_amount"    />
+        <result property="loanUsageTotalLoanCreditBalance"    column="loan_usage_total_loan_credit_balance"    />
+        <result property="loanUsageTotalLoanCreditRemaining"    column="loan_usage_total_loan_credit_remaining"    />
         <result property="sumAvailableFundsTotalAmount"    column="sum_available_funds_total_amount"    />
+        <result property="sumInventoryAmount"    column="sum_inventory_amount"    />
+        <result property="sumSaleableInventoryAmount"    column="sum_saleable_inventory_amount"    />
+        <result property="sumUnsaleableInventoryAmount"    column="sum_unsaleable_inventory_amount"    />
         <result property="goodsTransitTotalAmount"    column="goods_transit_total_amount"    />
-        <result property="placedNotShippedTotalAmount"    column="placed_not_shipped_total_amount"    />
     </resultMap>
 
     <sql id="selectJaloAmountStatisticsViewVo">
-        select days, sum_saleable_inventory_amount, sum_unsaleable_inventory_amount, sum_inventory_amount, sum_prepayment_amount_paid, sum_shipped_unsettled_total_amount, sum_available_funds_total_amount, goods_transit_total_amount, placed_not_shipped_total_amount from jalo_amount_statistics_view
+        select days, sum_contract_amount, sum_prepayment_amount_payable, sum_prepayment_amount_paid, sum_shipped_unsettled_total_amount, sum_purchased_unshipped_total_amount, loan_usage_total_loan_credit_amount, loan_usage_total_loan_credit_balance, loan_usage_total_loan_credit_remaining, sum_available_funds_total_amount, sum_inventory_amount, sum_saleable_inventory_amount, sum_unsaleable_inventory_amount, goods_transit_total_amount from jalo_amount_statistics_view
     </sql>
 
     <select id="selectJaloAmountStatisticsViewList" parameterType="JaloAmountStatisticsView" resultMap="JaloAmountStatisticsViewResult">
         <include refid="selectJaloAmountStatisticsViewVo"/>
         <where>  
             <if test="days != null  and days != ''"> and days = #{days}</if>
-            <if test="sumSaleableInventoryAmount != null "> and sum_saleable_inventory_amount = #{sumSaleableInventoryAmount}</if>
-            <if test="sumUnsaleableInventoryAmount != null "> and sum_unsaleable_inventory_amount = #{sumUnsaleableInventoryAmount}</if>
-            <if test="sumInventoryAmount != null "> and sum_inventory_amount = #{sumInventoryAmount}</if>
+            <if test="sumContractAmount != null "> and sum_contract_amount = #{sumContractAmount}</if>
+            <if test="sumPrepaymentAmountPayable != null "> and sum_prepayment_amount_payable = #{sumPrepaymentAmountPayable}</if>
             <if test="sumPrepaymentAmountPaid != null "> and sum_prepayment_amount_paid = #{sumPrepaymentAmountPaid}</if>
             <if test="sumShippedUnsettledTotalAmount != null "> and sum_shipped_unsettled_total_amount = #{sumShippedUnsettledTotalAmount}</if>
+            <if test="sumPurchasedUnshippedTotalAmount != null "> and sum_purchased_unshipped_total_amount = #{sumPurchasedUnshippedTotalAmount}</if>
+            <if test="loanUsageTotalLoanCreditAmount != null "> and loan_usage_total_loan_credit_amount = #{loanUsageTotalLoanCreditAmount}</if>
+            <if test="loanUsageTotalLoanCreditBalance != null "> and loan_usage_total_loan_credit_balance = #{loanUsageTotalLoanCreditBalance}</if>
+            <if test="loanUsageTotalLoanCreditRemaining != null "> and loan_usage_total_loan_credit_remaining = #{loanUsageTotalLoanCreditRemaining}</if>
             <if test="sumAvailableFundsTotalAmount != null "> and sum_available_funds_total_amount = #{sumAvailableFundsTotalAmount}</if>
+            <if test="sumInventoryAmount != null "> and sum_inventory_amount = #{sumInventoryAmount}</if>
+            <if test="sumSaleableInventoryAmount != null "> and sum_saleable_inventory_amount = #{sumSaleableInventoryAmount}</if>
+            <if test="sumUnsaleableInventoryAmount != null "> and sum_unsaleable_inventory_amount = #{sumUnsaleableInventoryAmount}</if>
             <if test="goodsTransitTotalAmount != null "> and goods_transit_total_amount = #{goodsTransitTotalAmount}</if>
-            <if test="placedNotShippedTotalAmount != null "> and placed_not_shipped_total_amount = #{placedNotShippedTotalAmount}</if>
         </where>
     </select>
     
@@ -44,39 +54,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into jalo_amount_statistics_view
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="days != null">days,</if>
-            <if test="sumSaleableInventoryAmount != null">sum_saleable_inventory_amount,</if>
-            <if test="sumUnsaleableInventoryAmount != null">sum_unsaleable_inventory_amount,</if>
-            <if test="sumInventoryAmount != null">sum_inventory_amount,</if>
+            <if test="sumContractAmount != null">sum_contract_amount,</if>
+            <if test="sumPrepaymentAmountPayable != null">sum_prepayment_amount_payable,</if>
             <if test="sumPrepaymentAmountPaid != null">sum_prepayment_amount_paid,</if>
             <if test="sumShippedUnsettledTotalAmount != null">sum_shipped_unsettled_total_amount,</if>
+            <if test="sumPurchasedUnshippedTotalAmount != null">sum_purchased_unshipped_total_amount,</if>
+            <if test="loanUsageTotalLoanCreditAmount != null">loan_usage_total_loan_credit_amount,</if>
+            <if test="loanUsageTotalLoanCreditBalance != null">loan_usage_total_loan_credit_balance,</if>
+            <if test="loanUsageTotalLoanCreditRemaining != null">loan_usage_total_loan_credit_remaining,</if>
             <if test="sumAvailableFundsTotalAmount != null">sum_available_funds_total_amount,</if>
+            <if test="sumInventoryAmount != null">sum_inventory_amount,</if>
+            <if test="sumSaleableInventoryAmount != null">sum_saleable_inventory_amount,</if>
+            <if test="sumUnsaleableInventoryAmount != null">sum_unsaleable_inventory_amount,</if>
             <if test="goodsTransitTotalAmount != null">goods_transit_total_amount,</if>
-            <if test="placedNotShippedTotalAmount != null">placed_not_shipped_total_amount,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="days != null">#{days},</if>
-            <if test="sumSaleableInventoryAmount != null">#{sumSaleableInventoryAmount},</if>
-            <if test="sumUnsaleableInventoryAmount != null">#{sumUnsaleableInventoryAmount},</if>
-            <if test="sumInventoryAmount != null">#{sumInventoryAmount},</if>
+            <if test="sumContractAmount != null">#{sumContractAmount},</if>
+            <if test="sumPrepaymentAmountPayable != null">#{sumPrepaymentAmountPayable},</if>
             <if test="sumPrepaymentAmountPaid != null">#{sumPrepaymentAmountPaid},</if>
             <if test="sumShippedUnsettledTotalAmount != null">#{sumShippedUnsettledTotalAmount},</if>
+            <if test="sumPurchasedUnshippedTotalAmount != null">#{sumPurchasedUnshippedTotalAmount},</if>
+            <if test="loanUsageTotalLoanCreditAmount != null">#{loanUsageTotalLoanCreditAmount},</if>
+            <if test="loanUsageTotalLoanCreditBalance != null">#{loanUsageTotalLoanCreditBalance},</if>
+            <if test="loanUsageTotalLoanCreditRemaining != null">#{loanUsageTotalLoanCreditRemaining},</if>
             <if test="sumAvailableFundsTotalAmount != null">#{sumAvailableFundsTotalAmount},</if>
+            <if test="sumInventoryAmount != null">#{sumInventoryAmount},</if>
+            <if test="sumSaleableInventoryAmount != null">#{sumSaleableInventoryAmount},</if>
+            <if test="sumUnsaleableInventoryAmount != null">#{sumUnsaleableInventoryAmount},</if>
             <if test="goodsTransitTotalAmount != null">#{goodsTransitTotalAmount},</if>
-            <if test="placedNotShippedTotalAmount != null">#{placedNotShippedTotalAmount},</if>
          </trim>
     </insert>
 
     <update id="updateJaloAmountStatisticsView" parameterType="JaloAmountStatisticsView">
         update jalo_amount_statistics_view
         <trim prefix="SET" suffixOverrides=",">
-            <if test="sumSaleableInventoryAmount != null">sum_saleable_inventory_amount = #{sumSaleableInventoryAmount},</if>
-            <if test="sumUnsaleableInventoryAmount != null">sum_unsaleable_inventory_amount = #{sumUnsaleableInventoryAmount},</if>
-            <if test="sumInventoryAmount != null">sum_inventory_amount = #{sumInventoryAmount},</if>
+            <if test="sumContractAmount != null">sum_contract_amount = #{sumContractAmount},</if>
+            <if test="sumPrepaymentAmountPayable != null">sum_prepayment_amount_payable = #{sumPrepaymentAmountPayable},</if>
             <if test="sumPrepaymentAmountPaid != null">sum_prepayment_amount_paid = #{sumPrepaymentAmountPaid},</if>
             <if test="sumShippedUnsettledTotalAmount != null">sum_shipped_unsettled_total_amount = #{sumShippedUnsettledTotalAmount},</if>
+            <if test="sumPurchasedUnshippedTotalAmount != null">sum_purchased_unshipped_total_amount = #{sumPurchasedUnshippedTotalAmount},</if>
+            <if test="loanUsageTotalLoanCreditAmount != null">loan_usage_total_loan_credit_amount = #{loanUsageTotalLoanCreditAmount},</if>
+            <if test="loanUsageTotalLoanCreditBalance != null">loan_usage_total_loan_credit_balance = #{loanUsageTotalLoanCreditBalance},</if>
+            <if test="loanUsageTotalLoanCreditRemaining != null">loan_usage_total_loan_credit_remaining = #{loanUsageTotalLoanCreditRemaining},</if>
             <if test="sumAvailableFundsTotalAmount != null">sum_available_funds_total_amount = #{sumAvailableFundsTotalAmount},</if>
+            <if test="sumInventoryAmount != null">sum_inventory_amount = #{sumInventoryAmount},</if>
+            <if test="sumSaleableInventoryAmount != null">sum_saleable_inventory_amount = #{sumSaleableInventoryAmount},</if>
+            <if test="sumUnsaleableInventoryAmount != null">sum_unsaleable_inventory_amount = #{sumUnsaleableInventoryAmount},</if>
             <if test="goodsTransitTotalAmount != null">goods_transit_total_amount = #{goodsTransitTotalAmount},</if>
-            <if test="placedNotShippedTotalAmount != null">placed_not_shipped_total_amount = #{placedNotShippedTotalAmount},</if>
         </trim>
         where days = #{days}
     </update>

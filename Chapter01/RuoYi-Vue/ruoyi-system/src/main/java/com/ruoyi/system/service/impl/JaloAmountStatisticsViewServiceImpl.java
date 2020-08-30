@@ -11,7 +11,7 @@ import com.ruoyi.system.service.IJaloAmountStatisticsViewService;
  * VIEWService业务层处理
  * 
  * @author ruoyi
- * @date 2020-08-20
+ * @date 2020-08-30
  */
 @Service
 public class JaloAmountStatisticsViewServiceImpl implements IJaloAmountStatisticsViewService 

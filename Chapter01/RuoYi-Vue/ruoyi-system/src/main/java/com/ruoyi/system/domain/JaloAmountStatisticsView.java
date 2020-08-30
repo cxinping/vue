@@ -10,7 +10,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * VIEW对象 jalo_amount_statistics_view
  * 
  * @author ruoyi
- * @date 2020-08-20
+ * @date 2020-08-30
  */
 public class JaloAmountStatisticsView extends BaseEntity
 {
@@ -22,15 +22,11 @@ public class JaloAmountStatisticsView extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal sumSaleableInventoryAmount;
+    private BigDecimal sumContractAmount;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal sumUnsaleableInventoryAmount;
-
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal sumInventoryAmount;
+    private BigDecimal sumPrepaymentAmountPayable;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -42,15 +38,43 @@ public class JaloAmountStatisticsView extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private BigDecimal sumPurchasedUnshippedTotalAmount;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private BigDecimal loanUsageTotalLoanCreditAmount;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private BigDecimal loanUsageTotalLoanCreditBalance;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private BigDecimal loanUsageTotalLoanCreditRemaining;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private BigDecimal sumAvailableFundsTotalAmount;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private BigDecimal sumInventoryAmount;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private BigDecimal sumSaleableInventoryAmount;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private BigDecimal sumUnsaleableInventoryAmount;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private BigDecimal goodsTransitTotalAmount;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal placedNotShippedTotalAmount;
+    // 统计指标1 = 已下单未发货 + 已发货未结算 + 可用资金 – 贷款已使用金额
+    private BigDecimal statisticalIndicators1;
+
 
     public void setDays(String days) 
     {
@@ -61,32 +85,23 @@ public class JaloAmountStatisticsView extends BaseEntity
     {
         return days;
     }
-    public void setSumSaleableInventoryAmount(BigDecimal sumSaleableInventoryAmount) 
+    public void setSumContractAmount(BigDecimal sumContractAmount) 
     {
-        this.sumSaleableInventoryAmount = sumSaleableInventoryAmount;
+        this.sumContractAmount = sumContractAmount;
     }
 
-    public BigDecimal getSumSaleableInventoryAmount() 
+    public BigDecimal getSumContractAmount() 
     {
-        return sumSaleableInventoryAmount;
+        return sumContractAmount;
     }
-    public void setSumUnsaleableInventoryAmount(BigDecimal sumUnsaleableInventoryAmount) 
+    public void setSumPrepaymentAmountPayable(BigDecimal sumPrepaymentAmountPayable) 
     {
-        this.sumUnsaleableInventoryAmount = sumUnsaleableInventoryAmount;
-    }
-
-    public BigDecimal getSumUnsaleableInventoryAmount() 
-    {
-        return sumUnsaleableInventoryAmount;
-    }
-    public void setSumInventoryAmount(BigDecimal sumInventoryAmount) 
-    {
-        this.sumInventoryAmount = sumInventoryAmount;
+        this.sumPrepaymentAmountPayable = sumPrepaymentAmountPayable;
     }
 
-    public BigDecimal getSumInventoryAmount() 
+    public BigDecimal getSumPrepaymentAmountPayable() 
     {
-        return sumInventoryAmount;
+        return sumPrepaymentAmountPayable;
     }
     public void setSumPrepaymentAmountPaid(BigDecimal sumPrepaymentAmountPaid) 
     {
@@ -106,6 +121,42 @@ public class JaloAmountStatisticsView extends BaseEntity
     {
         return sumShippedUnsettledTotalAmount;
     }
+    public void setSumPurchasedUnshippedTotalAmount(BigDecimal sumPurchasedUnshippedTotalAmount) 
+    {
+        this.sumPurchasedUnshippedTotalAmount = sumPurchasedUnshippedTotalAmount;
+    }
+
+    public BigDecimal getSumPurchasedUnshippedTotalAmount() 
+    {
+        return sumPurchasedUnshippedTotalAmount;
+    }
+    public void setLoanUsageTotalLoanCreditAmount(BigDecimal loanUsageTotalLoanCreditAmount) 
+    {
+        this.loanUsageTotalLoanCreditAmount = loanUsageTotalLoanCreditAmount;
+    }
+
+    public BigDecimal getLoanUsageTotalLoanCreditAmount() 
+    {
+        return loanUsageTotalLoanCreditAmount;
+    }
+    public void setLoanUsageTotalLoanCreditBalance(BigDecimal loanUsageTotalLoanCreditBalance) 
+    {
+        this.loanUsageTotalLoanCreditBalance = loanUsageTotalLoanCreditBalance;
+    }
+
+    public BigDecimal getLoanUsageTotalLoanCreditBalance() 
+    {
+        return loanUsageTotalLoanCreditBalance;
+    }
+    public void setLoanUsageTotalLoanCreditRemaining(BigDecimal loanUsageTotalLoanCreditRemaining) 
+    {
+        this.loanUsageTotalLoanCreditRemaining = loanUsageTotalLoanCreditRemaining;
+    }
+
+    public BigDecimal getLoanUsageTotalLoanCreditRemaining() 
+    {
+        return loanUsageTotalLoanCreditRemaining;
+    }
     public void setSumAvailableFundsTotalAmount(BigDecimal sumAvailableFundsTotalAmount) 
     {
         this.sumAvailableFundsTotalAmount = sumAvailableFundsTotalAmount;
@@ -114,6 +165,33 @@ public class JaloAmountStatisticsView extends BaseEntity
     public BigDecimal getSumAvailableFundsTotalAmount() 
     {
         return sumAvailableFundsTotalAmount;
+    }
+    public void setSumInventoryAmount(BigDecimal sumInventoryAmount) 
+    {
+        this.sumInventoryAmount = sumInventoryAmount;
+    }
+
+    public BigDecimal getSumInventoryAmount() 
+    {
+        return sumInventoryAmount;
+    }
+    public void setSumSaleableInventoryAmount(BigDecimal sumSaleableInventoryAmount) 
+    {
+        this.sumSaleableInventoryAmount = sumSaleableInventoryAmount;
+    }
+
+    public BigDecimal getSumSaleableInventoryAmount() 
+    {
+        return sumSaleableInventoryAmount;
+    }
+    public void setSumUnsaleableInventoryAmount(BigDecimal sumUnsaleableInventoryAmount) 
+    {
+        this.sumUnsaleableInventoryAmount = sumUnsaleableInventoryAmount;
+    }
+
+    public BigDecimal getSumUnsaleableInventoryAmount() 
+    {
+        return sumUnsaleableInventoryAmount;
     }
     public void setGoodsTransitTotalAmount(BigDecimal goodsTransitTotalAmount) 
     {
@@ -124,28 +202,33 @@ public class JaloAmountStatisticsView extends BaseEntity
     {
         return goodsTransitTotalAmount;
     }
-    public void setPlacedNotShippedTotalAmount(BigDecimal placedNotShippedTotalAmount) 
-    {
-        this.placedNotShippedTotalAmount = placedNotShippedTotalAmount;
+
+    public BigDecimal getStatisticalIndicators1() {
+        return statisticalIndicators1;
     }
 
-    public BigDecimal getPlacedNotShippedTotalAmount() 
-    {
-        return placedNotShippedTotalAmount;
+    public void setStatisticalIndicators1(BigDecimal statisticalIndicators1) {
+        this.statisticalIndicators1 = statisticalIndicators1;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("days", getDays())
-            .append("sumSaleableInventoryAmount", getSumSaleableInventoryAmount())
-            .append("sumUnsaleableInventoryAmount", getSumUnsaleableInventoryAmount())
-            .append("sumInventoryAmount", getSumInventoryAmount())
-            .append("sumPrepaymentAmountPaid", getSumPrepaymentAmountPaid())
-            .append("sumShippedUnsettledTotalAmount", getSumShippedUnsettledTotalAmount())
-            .append("sumAvailableFundsTotalAmount", getSumAvailableFundsTotalAmount())
-            .append("goodsTransitTotalAmount", getGoodsTransitTotalAmount())
-            .append("placedNotShippedTotalAmount", getPlacedNotShippedTotalAmount())
-            .toString();
+        return "JaloAmountStatisticsView{" +
+                "days='" + days + '\'' +
+                ", sumContractAmount=" + sumContractAmount +
+                ", sumPrepaymentAmountPayable=" + sumPrepaymentAmountPayable +
+                ", sumPrepaymentAmountPaid=" + sumPrepaymentAmountPaid +
+                ", sumShippedUnsettledTotalAmount=" + sumShippedUnsettledTotalAmount +
+                ", sumPurchasedUnshippedTotalAmount=" + sumPurchasedUnshippedTotalAmount +
+                ", loanUsageTotalLoanCreditAmount=" + loanUsageTotalLoanCreditAmount +
+                ", loanUsageTotalLoanCreditBalance=" + loanUsageTotalLoanCreditBalance +
+                ", loanUsageTotalLoanCreditRemaining=" + loanUsageTotalLoanCreditRemaining +
+                ", sumAvailableFundsTotalAmount=" + sumAvailableFundsTotalAmount +
+                ", sumInventoryAmount=" + sumInventoryAmount +
+                ", sumSaleableInventoryAmount=" + sumSaleableInventoryAmount +
+                ", sumUnsaleableInventoryAmount=" + sumUnsaleableInventoryAmount +
+                ", goodsTransitTotalAmount=" + goodsTransitTotalAmount +
+                ", statisticalIndicators1=" + statisticalIndicators1 +
+                '}';
     }
 }

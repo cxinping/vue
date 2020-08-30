@@ -116,70 +116,119 @@
 
     <el-row :gutter="10" style="background: #000;">
       <el-col :span="24" style="color: #fff; text-align: right; padding: 10px 20px;">{{viewList[0].days}}</el-col>
-      <el-col :span="6">
+      <el-col :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
-            预付款合计金额
+            采购合同款
           </div>
-          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumPrepaymentAmountPaid}} <span style="font-size: 14px;">万元</span></div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumContractAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
-      <el-col :span="6" >
+      <el-col :span="24" >
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
-            可销售库存合计金额
+            已付预付款
           </div>
-          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumSaleableInventoryAmount}} <span style="font-size: 14px;">万元</span> </div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumPrepaymentAmountPayable}} <span style="font-size: 14px;">万元</span> </div>
         </div>
       </el-col>
-      <el-col  :span="6">
+      <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
-            不可销售库存合计金额
+            应付尾款
           </div>
-          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumUnsaleableInventoryAmount}} <span style="font-size: 14px;">万元</span> </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumPrepaymentAmountPaid}} <span style="font-size: 14px;">万元</span> </div>
         </div>
       </el-col>
-       <el-col  :span="6">
+       <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
-            库存合计金额
+            已发货未结算
           </div>
-          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumInventoryAmount}} <span style="font-size: 14px;">万元</span> </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumShippedUnsettledTotalAmount}} <span style="font-size: 14px;">万元</span> </div>
         </div>
       </el-col>
-       <el-col :span="6">
+       <el-col :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
-            已发货未结算合计金额
+            已下单未发货
           </div>
-          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumShippedUnsettledTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumPurchasedUnshippedTotalAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
-      <el-col :span="6" >
+      <el-col :span="24" >
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
-            可用资金取合计金额
+            贷款授信额度
           </div>
-          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumAvailableFundsTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].loanUsageTotalLoanCreditAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
-      <el-col  :span="6">
+      <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
-            在途物资取合计金额
+            贷款已使用金额
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].loanUsageTotalLoanCreditBalance}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+       <el-col  :span="24">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            剩余可使用额度
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].loanUsageTotalLoanCreditRemaining}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+      <el-col  :span="24">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            可用资金
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumAvailableFundsTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+      <el-col  :span="24">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            库存
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumInventoryAmount}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+      <el-col  :span="24">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            可销售库存
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumSaleableInventoryAmount}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+      <el-col  :span="24">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            等通知发货库存
+          </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumUnsaleableInventoryAmount}} <span style="font-size: 14px;">万元</span></div>
+        </div>
+      </el-col>
+      <el-col  :span="24">
+        <div class="card"  style="background: #000; color: #fff; padding: 20px;">
+          <div class="title">
+            在途物资
           </div>
           <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].goodsTransitTotalAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
-       <el-col  :span="6">
+      <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
-            已下单未发货合计金额数
+            综上所述指标
           </div>
-          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].placedNotShippedTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].statisticalIndicators1}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+
     </el-row>
 
     

@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.utils.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,30 +70,92 @@ public class JaloAmountStatisticsViewController extends BaseController
 
         System.out.println(" step 1 list.size()=" + list.size() );
         if(list.size()>0){
-            System.out.println(list.get(0));
 
-            queryNewFromList.add( list.get(0));
+            JaloAmountStatisticsView amountStatisticsView = list.get(0);
+            System.out.println(amountStatisticsView );
+            initJaloAmountStatisticsView(amountStatisticsView);
+
+            // 已下单未发货 + 已发货未结算 + 可用资金 – 贷款已使用金额
+            BigDecimal statisticalIndicators1 = amountStatisticsView.getSumPurchasedUnshippedTotalAmount().add(amountStatisticsView.getSumShippedUnsettledTotalAmount() )
+                    .add(amountStatisticsView.getSumAvailableFundsTotalAmount())
+                    .subtract(amountStatisticsView.getLoanUsageTotalLoanCreditBalance());
+
+            amountStatisticsView.setStatisticalIndicators1(statisticalIndicators1);
+            queryNewFromList.add(amountStatisticsView);
         }else{
             JaloAmountStatisticsView amountStatisticsView = new JaloAmountStatisticsView();
-            amountStatisticsView.setSumSaleableInventoryAmount(new BigDecimal(0));
-            amountStatisticsView.setSumInventoryAmount(new BigDecimal(0));
-            amountStatisticsView.setSumUnsaleableInventoryAmount(new BigDecimal(0));
-            amountStatisticsView.setSumPrepaymentAmountPaid(new BigDecimal(0));
-            amountStatisticsView.setSumShippedUnsettledTotalAmount(new BigDecimal(0));
-            amountStatisticsView.setSumAvailableFundsTotalAmount(new BigDecimal(0));
-            amountStatisticsView.setGoodsTransitTotalAmount(new BigDecimal(0));
-            amountStatisticsView.setPlacedNotShippedTotalAmount(new BigDecimal(0));
-
-
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-            String currTime = df.format(new Date());
-            amountStatisticsView.setDays(currTime);
+            initJaloAmountStatisticsView(amountStatisticsView);
 
             queryNewFromList.add(amountStatisticsView);
 
         }
 
         return getDataTable(queryNewFromList);
+    }
+
+    private void  initJaloAmountStatisticsView(JaloAmountStatisticsView amountStatisticsView){
+        if(amountStatisticsView.getSumContractAmount() == null){
+            amountStatisticsView.setSumContractAmount( new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getSumPrepaymentAmountPaid() == null){
+            amountStatisticsView.setSumPrepaymentAmountPaid(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getSumPrepaymentAmountPayable() == null){
+            amountStatisticsView.setSumPrepaymentAmountPayable( new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getSumShippedUnsettledTotalAmount() == null){
+            amountStatisticsView.setSumShippedUnsettledTotalAmount(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getSumPurchasedUnshippedTotalAmount() == null){
+            amountStatisticsView.setSumPurchasedUnshippedTotalAmount(new BigDecimal(0) );
+        }
+
+        if(amountStatisticsView.getLoanUsageTotalLoanCreditAmount() == null){
+            amountStatisticsView.setLoanUsageTotalLoanCreditAmount(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getLoanUsageTotalLoanCreditBalance() == null){
+            amountStatisticsView.setLoanUsageTotalLoanCreditBalance(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getLoanUsageTotalLoanCreditRemaining() == null){
+            amountStatisticsView.setLoanUsageTotalLoanCreditRemaining(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getSumAvailableFundsTotalAmount() == null){
+            amountStatisticsView.setSumAvailableFundsTotalAmount(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getSumInventoryAmount() == null){
+            amountStatisticsView.setSumInventoryAmount(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getSumSaleableInventoryAmount() == null){
+            amountStatisticsView.setSumSaleableInventoryAmount(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getSumUnsaleableInventoryAmount() == null){
+            amountStatisticsView.setSumUnsaleableInventoryAmount(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getGoodsTransitTotalAmount() == null){
+            amountStatisticsView.setGoodsTransitTotalAmount(new BigDecimal(0));
+        }
+
+        if(amountStatisticsView.getStatisticalIndicators1() == null){
+            amountStatisticsView.setStatisticalIndicators1( new BigDecimal(0) );
+        }
+
+        if(amountStatisticsView.getDays() == null){
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+            String currTime = df.format(new Date());
+            amountStatisticsView.setDays(currTime);
+        }
+
     }
 
 
