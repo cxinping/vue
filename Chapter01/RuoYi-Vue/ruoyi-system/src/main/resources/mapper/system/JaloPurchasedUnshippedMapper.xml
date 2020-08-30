@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.JaloPurchasedUnshippedMapper">
+    
+    <resultMap type="JaloPurchasedUnshipped" id="JaloPurchasedUnshippedResult">
+        <result property="id"    column="id"    />
+        <result property="youzan"    column="youzan"    />
+        <result property="taobao"    column="taobao"    />
+        <result property="tianmao"    column="tianmao"    />
+        <result property="jingdong"    column="jingdong"    />
+        <result property="totalAmount"    column="total_amount"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectJaloPurchasedUnshippedVo">
+        select id, youzan, taobao, tianmao, jingdong, total_amount, create_time, update_time from jalo_purchased_unshipped
+    </sql>
+
+    <select id="selectJaloPurchasedUnshippedList" parameterType="JaloPurchasedUnshipped" resultMap="JaloPurchasedUnshippedResult">
+        <include refid="selectJaloPurchasedUnshippedVo"/>
+        <where>  
+            <if test="youzan != null "> and youzan = #{youzan}</if>
+            <if test="taobao != null "> and taobao = #{taobao}</if>
+            <if test="tianmao != null "> and tianmao = #{tianmao}</if>
+            <if test="jingdong != null "> and jingdong = #{jingdong}</if>
+            <if test="totalAmount != null "> and total_amount = #{totalAmount}</if>
+        </where>
+    </select>
+    
+    <select id="selectJaloPurchasedUnshippedById" parameterType="Long" resultMap="JaloPurchasedUnshippedResult">
+        <include refid="selectJaloPurchasedUnshippedVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJaloPurchasedUnshipped" parameterType="JaloPurchasedUnshipped" useGeneratedKeys="true" keyProperty="id">
+        insert into jalo_purchased_unshipped
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="youzan != null">youzan,</if>
+            <if test="taobao != null">taobao,</if>
+            <if test="tianmao != null">tianmao,</if>
+            <if test="jingdong != null">jingdong,</if>
+            <if test="totalAmount != null">total_amount,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="youzan != null">#{youzan},</if>
+            <if test="taobao != null">#{taobao},</if>
+            <if test="tianmao != null">#{tianmao},</if>
+            <if test="jingdong != null">#{jingdong},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJaloPurchasedUnshipped" parameterType="JaloPurchasedUnshipped">
+        update jalo_purchased_unshipped
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="youzan != null">youzan = #{youzan},</if>
+            <if test="taobao != null">taobao = #{taobao},</if>
+            <if test="tianmao != null">tianmao = #{tianmao},</if>
+            <if test="jingdong != null">jingdong = #{jingdong},</if>
+            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJaloPurchasedUnshippedById" parameterType="Long">
+        delete from jalo_purchased_unshipped where id = #{id}
+    </delete>
+
+    <delete id="deleteJaloPurchasedUnshippedByIds" parameterType="String">
+        delete from jalo_purchased_unshipped where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
