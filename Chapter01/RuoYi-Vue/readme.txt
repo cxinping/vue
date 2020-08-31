@@ -40,17 +40,20 @@ uuid
 Authorization:eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImFlMzYxMjAzLTJlOWQtNDE0Yi04NWQzLTAyNmNjZGZiMjY3MSJ9.rod4cZpJGzN1dPfl_seI3P_cuaM71hOq_uDh3I30rcEJX6gWOL4nYPuv22Xhv5LdmovKyEMcUIifE_ZM_GRybw
 
 部署项目
-nohup jva -jar ruoyi-admin.jar &
+nohup java -jar ruoyi-admin.jar &
 
 
 http://www.ultrapower.com:8888
+超级管理员可以创建账号
 admin
 admin123
 
-gao
-123456
+员工账号，可以访问所有的输入页面，包括统计页面
+用户名：gao
+密码：123456
 
-leader
-123456
+领导账号，只能访问统计页面
+用户名：leader
+密码：123456
 
 

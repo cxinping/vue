@@ -66,6 +66,9 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
+        System.out.println("*** getInfo() **** id=" + id );
+
+
         return AjaxResult.success(jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInformationById(id));
     }
 
