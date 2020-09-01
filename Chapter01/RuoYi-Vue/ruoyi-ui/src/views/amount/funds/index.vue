@@ -112,7 +112,7 @@
       </el-col>
 
       <el-col :span="1.5">        
-        <el-tag>页面显示，单位：万元</el-tag>               
+        <el-tag>页面显示，单位：元</el-tag>               
       </el-col>
 
       <div class="top-right-btn">
@@ -325,12 +325,12 @@ export default {
         this.form = response.data;
 
         // 修改数据时，乘以 10000
-        this.form.merchantsBank = this.form.merchantsBank * 10000;
-        this.form.pufaBank = this.form.pufaBank * 10000;
-        this.form.icbcBank = this.form.icbcBank * 10000;
-        this.form.youZan = this.form.youZan * 10000;
-        this.form.alipay = this.form.alipay * 10000;
-        this.form.jingdong = this.form.jingdong * 10000;
+        //this.form.merchantsBank = this.form.merchantsBank * 10000;
+        //this.form.pufaBank = this.form.pufaBank * 10000;
+        //this.form.icbcBank = this.form.icbcBank * 10000;
+        //this.form.youZan = this.form.youZan * 10000;
+        //this.form.alipay = this.form.alipay * 10000;
+        //this.form.jingdong = this.form.jingdong * 10000;
         
         this.open = true;
         this.title = "修改可用资金";
@@ -341,18 +341,18 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           // 对输入金额进行转换，保留小数点后2位
-          const merchantsBankFmt = this.keepTwoDecimal( this.form.merchantsBank / 10000 );
-          this.form.merchantsBank = merchantsBankFmt ;
-          const pufaBankFmt = this.keepTwoDecimal( this.form.pufaBank / 10000 );
-          this.form.pufaBank = pufaBankFmt ;
-          const icbcBankFmt = this.keepTwoDecimal( this.form.icbcBank / 10000 );
-          this.form.icbcBank = icbcBankFmt ;
-          const youZanFmt = this.keepTwoDecimal( this.form.youZan / 10000 );
-          this.form.youZan = youZanFmt ;   
-          const alipayFmt = this.keepTwoDecimal( this.form.alipay / 10000 );
-          this.form.alipay = alipayFmt ;
-          const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
-          this.form.jingdong = jingdongFmt ;   
+          //const merchantsBankFmt = this.keepTwoDecimal( this.form.merchantsBank / 10000 );
+          //this.form.merchantsBank = merchantsBankFmt ;
+          //const pufaBankFmt = this.keepTwoDecimal( this.form.pufaBank / 10000 );
+          //this.form.pufaBank = pufaBankFmt ;
+          //const icbcBankFmt = this.keepTwoDecimal( this.form.icbcBank / 10000 );
+          //this.form.icbcBank = icbcBankFmt ;
+          //const youZanFmt = this.keepTwoDecimal( this.form.youZan / 10000 );
+          //this.form.youZan = youZanFmt ;   
+          //const alipayFmt = this.keepTwoDecimal( this.form.alipay / 10000 );
+          //this.form.alipay = alipayFmt ;
+          //const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
+          //this.form.jingdong = jingdongFmt ;   
 
           if (this.form.id != null) {
             updateFunds(this.form).then(response => {

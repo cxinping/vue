@@ -85,7 +85,7 @@
         >搜索</el-button>
       </el-col>
       <el-col :span="1.5">        
-        <el-tag>页面显示，单位：万元</el-tag>               
+        <el-tag>页面显示，单位：元</el-tag>               
       </el-col>
 
       <div class="top-right-btn">
@@ -265,8 +265,8 @@ export default {
         this.form = response.data;
 
         // 修改数据时，乘以 10000
-        this.form.loanCreditAmount = this.form.loanCreditAmount * 10000;
-        this.form.loanCreditBalance = this.form.loanCreditBalance * 10000;
+        //this.form.loanCreditAmount = this.form.loanCreditAmount * 10000;
+        //this.form.loanCreditBalance = this.form.loanCreditBalance * 10000;
 
         this.open = true;
         this.title = "修改贷款使用";
@@ -278,12 +278,12 @@ export default {
         if (valid) {
 
           // 对输入金额进行转换，保留小数点后2位
-          const loanCreditAmountFmt = this.keepTwoDecimal( this.form.loanCreditAmount / 10000 );
-          this.form.loanCreditAmount = loanCreditAmountFmt ;
-          const loanCreditBalanceFmt = this.keepTwoDecimal( this.form.loanCreditBalance / 10000 );
-          this.form.loanCreditBalance = loanCreditBalanceFmt ;
-          const loanCreditRemainingFmt = this.keepTwoDecimal(this.form.loanCreditAmount - this.form.loanCreditBalance) ;
-          this.form.loanCreditRemaining = loanCreditRemainingFmt;
+          //const loanCreditAmountFmt = this.keepTwoDecimal( this.form.loanCreditAmount / 10000 );
+          //this.form.loanCreditAmount = loanCreditAmountFmt ;
+          //const loanCreditBalanceFmt = this.keepTwoDecimal( this.form.loanCreditBalance / 10000 );
+          //this.form.loanCreditBalance = loanCreditBalanceFmt ;
+          //const loanCreditRemainingFmt = this.keepTwoDecimal(this.form.loanCreditAmount - this.form.loanCreditBalance) ;
+          //this.form.loanCreditRemaining = loanCreditRemainingFmt;
 
           if (this.form.id != null) {
             updateUsage(this.form).then(response => {

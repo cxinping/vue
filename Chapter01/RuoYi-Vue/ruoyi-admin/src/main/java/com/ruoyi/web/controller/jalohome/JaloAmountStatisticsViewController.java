@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.ruoyi.common.utils.Arith;
 import com.ruoyi.common.utils.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,58 +97,100 @@ public class JaloAmountStatisticsViewController extends BaseController
     private void  initJaloAmountStatisticsView(JaloAmountStatisticsView amountStatisticsView){
         if(amountStatisticsView.getSumContractAmount() == null){
             amountStatisticsView.setSumContractAmount( new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getSumContractAmount() ,10000,2);
+            amountStatisticsView.setSumContractAmount(result);
         }
 
         if(amountStatisticsView.getSumPrepaymentAmountPaid() == null){
             amountStatisticsView.setSumPrepaymentAmountPaid(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getSumPrepaymentAmountPaid() ,10000,2);
+            amountStatisticsView.setSumPrepaymentAmountPaid(result);
         }
 
         if(amountStatisticsView.getSumPrepaymentAmountPayable() == null){
             amountStatisticsView.setSumPrepaymentAmountPayable( new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getSumPrepaymentAmountPayable() ,10000,2);
+            amountStatisticsView.setSumPrepaymentAmountPayable(result);
         }
 
         if(amountStatisticsView.getSumShippedUnsettledTotalAmount() == null){
             amountStatisticsView.setSumShippedUnsettledTotalAmount(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getSumShippedUnsettledTotalAmount() ,10000,2);
+            amountStatisticsView.setSumShippedUnsettledTotalAmount(result);
         }
 
         if(amountStatisticsView.getSumPurchasedUnshippedTotalAmount() == null){
             amountStatisticsView.setSumPurchasedUnshippedTotalAmount(new BigDecimal(0) );
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getSumPurchasedUnshippedTotalAmount() ,10000,2);
+            amountStatisticsView.setSumPurchasedUnshippedTotalAmount(result);
         }
 
         if(amountStatisticsView.getLoanUsageTotalLoanCreditAmount() == null){
             amountStatisticsView.setLoanUsageTotalLoanCreditAmount(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getLoanUsageTotalLoanCreditAmount() ,10000,2);
+            amountStatisticsView.setLoanUsageTotalLoanCreditAmount(result);
         }
 
         if(amountStatisticsView.getLoanUsageTotalLoanCreditBalance() == null){
             amountStatisticsView.setLoanUsageTotalLoanCreditBalance(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getLoanUsageTotalLoanCreditBalance() ,10000,2);
+            amountStatisticsView.setLoanUsageTotalLoanCreditBalance(result);
         }
 
         if(amountStatisticsView.getLoanUsageTotalLoanCreditRemaining() == null){
             amountStatisticsView.setLoanUsageTotalLoanCreditRemaining(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getLoanUsageTotalLoanCreditRemaining() ,10000,2);
+            amountStatisticsView.setLoanUsageTotalLoanCreditRemaining(result);
         }
 
         if(amountStatisticsView.getSumAvailableFundsTotalAmount() == null){
             amountStatisticsView.setSumAvailableFundsTotalAmount(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getSumAvailableFundsTotalAmount() ,10000,2);
+            amountStatisticsView.setSumAvailableFundsTotalAmount(result);
         }
 
         if(amountStatisticsView.getSumInventoryAmount() == null){
             amountStatisticsView.setSumInventoryAmount(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getSumInventoryAmount() ,10000,2);
+            amountStatisticsView.setSumInventoryAmount(result);
         }
 
         if(amountStatisticsView.getSumSaleableInventoryAmount() == null){
             amountStatisticsView.setSumSaleableInventoryAmount(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getSumSaleableInventoryAmount() ,10000,2);
+            amountStatisticsView.setSumSaleableInventoryAmount(result);
         }
 
         if(amountStatisticsView.getSumUnsaleableInventoryAmount() == null){
             amountStatisticsView.setSumUnsaleableInventoryAmount(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getSumUnsaleableInventoryAmount() ,10000,2);
+            amountStatisticsView.setSumUnsaleableInventoryAmount(result);
         }
 
         if(amountStatisticsView.getGoodsTransitTotalAmount() == null){
             amountStatisticsView.setGoodsTransitTotalAmount(new BigDecimal(0));
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getGoodsTransitTotalAmount() ,10000,2);
+            amountStatisticsView.setGoodsTransitTotalAmount(result);
         }
 
         if(amountStatisticsView.getStatisticalIndicators1() == null){
             amountStatisticsView.setStatisticalIndicators1( new BigDecimal(0) );
+        }else{
+            BigDecimal result = Arith.divNumber(amountStatisticsView.getStatisticalIndicators1() ,10000,2);
+            amountStatisticsView.setStatisticalIndicators1(result);
         }
 
         if(amountStatisticsView.getDays() == null){

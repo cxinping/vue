@@ -102,7 +102,7 @@
         >搜索</el-button>
       </el-col>
       <el-col :span="1.5">        
-        <el-tag>页面显示，单位：万元</el-tag>               
+        <el-tag>页面显示，单位：元</el-tag>               
       </el-col>
 
       <div class="top-right-btn">
@@ -304,10 +304,10 @@ export default {
         this.form = response.data;
 
         // 修改数据时，乘以 10000
-        this.form.youzan = this.form.youzan * 10000;
-        this.form.taobao = this.form.taobao * 10000;
-        this.form.tianmao = this.form.tianmao * 10000;
-        this.form.jingdong = this.form.jingdong * 10000;
+        //this.form.youzan = this.form.youzan * 10000;
+        //this.form.taobao = this.form.taobao * 10000;
+        //this.form.tianmao = this.form.tianmao * 10000;
+        //this.form.jingdong = this.form.jingdong * 10000;
 
         this.open = true;
         this.title = "修改已购买未发货";
@@ -318,16 +318,18 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           // 对输入金额进行转换，保留小数点后2位
-          const youzanFmt = this.keepTwoDecimal( this.form.youzan / 10000 );
-          this.form.youzan = youzanFmt ;
-          const taobaoFmt = this.keepTwoDecimal( this.form.taobao / 10000 );
-          this.form.taobao = taobaoFmt ;
-          const tianmaoFmt = this.keepTwoDecimal( this.form.tianmao / 10000 );
-          this.form.tianmao = tianmaoFmt ;
-          const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
-          this.form.jingdong = jingdongFmt ;
+          //const youzanFmt = this.keepTwoDecimal( this.form.youzan / 10000 );
+          //this.form.youzan = youzanFmt ;
+          //const taobaoFmt = this.keepTwoDecimal( this.form.taobao / 10000 );
+          //this.form.taobao = taobaoFmt ;
+          //const tianmaoFmt = this.keepTwoDecimal( this.form.tianmao / 10000 );
+          //this.form.tianmao = tianmaoFmt ;
+          //const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
+          //this.form.jingdong = jingdongFmt ;
+          //this.form.totalAmount = this.keepTwoDecimal(youzanFmt + taobaoFmt + tianmaoFmt + jingdongFmt);
+          this.form.totalAmount = parseFloat(this.form.youzan) + parseFloat(this.form.taobao)
+               + parseFloat(this.form.tianmao) + parseFloat(this.form.jingdong) ;
 
-          this.form.totalAmount = this.keepTwoDecimal(youzanFmt + taobaoFmt + tianmaoFmt + jingdongFmt);
 
           if (this.form.id != null) {
             updateUnshipped(this.form).then(response => {

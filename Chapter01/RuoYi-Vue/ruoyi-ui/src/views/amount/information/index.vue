@@ -145,7 +145,7 @@
         >搜索</el-button>
       </el-col>
       <el-col :span="1.5">        
-         <el-tag>页面显示，单位：万元</el-tag>               
+         <el-tag>页面显示，单位：元</el-tag>               
       </el-col>
 
       <div class="top-right-btn">
@@ -475,9 +475,9 @@ export default {
         this.form = response.data;
 
         // 修改数据时，乘以 10000
-        this.form.contractAmount = this.form.contractAmount * 10000;
-        this.form.prepaymentAmountPayable = this.form.prepaymentAmountPayable * 10000;
-        this.form.prepaymentAmountPaid = this.form.prepaymentAmountPaid * 10000;
+        //this.form.contractAmount = this.form.contractAmount * 10000;
+        //this.form.prepaymentAmountPayable = this.form.prepaymentAmountPayable * 10000;
+        //this.form.prepaymentAmountPaid = this.form.prepaymentAmountPaid * 10000;
         //this.form.prepaymentPayableAmount = this.form.prepaymentPayableAmount * 10000;
 
         this.open = true;
@@ -490,12 +490,12 @@ export default {
         if (valid) {
 
           // 对输入金额进行转换，保留小数点后2位
-          const contractAmountFmt = this.keepTwoDecimal( this.form.contractAmount / 10000 );
-          this.form.contractAmount = contractAmountFmt ;
-          const prepaymentAmountPayableFmt = this.keepTwoDecimal( this.form.prepaymentAmountPayable / 10000 );
-          this.form.prepaymentAmountPayable = prepaymentAmountPayableFmt ;
-          const prepaymentAmountPaidFmt = this.keepTwoDecimal( this.form.prepaymentAmountPaid / 10000 );
-          this.form.prepaymentAmountPaid = prepaymentAmountPaidFmt ;
+          //const contractAmountFmt = this.keepTwoDecimal( this.form.contractAmount / 10000 );
+          //this.form.contractAmount = contractAmountFmt ;
+          //const prepaymentAmountPayableFmt = this.keepTwoDecimal( this.form.prepaymentAmountPayable / 10000 );
+          //this.form.prepaymentAmountPayable = prepaymentAmountPayableFmt ;
+          //const prepaymentAmountPaidFmt = this.keepTwoDecimal( this.form.prepaymentAmountPaid / 10000 );
+          //this.form.prepaymentAmountPaid = prepaymentAmountPaidFmt ;
           //const prepaymentPayableAmountFmt = this.keepTwoDecimal( this.form.prepaymentPayableAmount / 10000 );
           //this.form.prepaymentPayableAmount = prepaymentPayableAmountFmt ;
 

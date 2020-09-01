@@ -140,7 +140,7 @@
       </el-col>
 
       <el-col :span="1.5">        
-        <el-tag>页面显示，单位：万元</el-tag>               
+        <el-tag>页面显示，单位：元</el-tag>               
       </el-col>
 
       <div class="top-right-btn">
@@ -388,15 +388,15 @@ export default {
         this.form = response.data;
 
         // 修改数据时，乘以 10000
-        this.form.buildingMaterials = this.form.buildingMaterials * 10000;
-        this.form.dailyNecessities = this.form.dailyNecessities * 10000;
-        this.form.device = this.form.device * 10000;
-        this.form.furniture = this.form.furniture * 10000;
-        this.form.kitchenBathroom = this.form.kitchenBathroom * 10000;
-        this.form.lamps = this.form.lamps * 10000;
-        this.form.softOutfit = this.form.softOutfit * 10000;
-        this.form.textile = this.form.textile * 10000;
-        this.form.other = this.form.other * 10000;
+        //this.form.buildingMaterials = this.form.buildingMaterials * 10000;
+        //this.form.dailyNecessities = this.form.dailyNecessities * 10000;
+        //this.form.device = this.form.device * 10000;
+        //this.form.furniture = this.form.furniture * 10000;
+        //this.form.kitchenBathroom = this.form.kitchenBathroom * 10000;
+        //this.form.lamps = this.form.lamps * 10000;
+        //this.form.softOutfit = this.form.softOutfit * 10000;
+        //this.form.textile = this.form.textile * 10000;
+        //this.form.other = this.form.other * 10000;
 
         this.open = true;
         this.title = "修改在途物资";
@@ -407,24 +407,24 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           // 对输入金额进行转换，保留小数点后2位
-          const buildingMaterialsFmt = this.keepTwoDecimal( this.form.buildingMaterials / 10000 );
-          this.form.buildingMaterials = buildingMaterialsFmt ;
-          const dailyNecessitiesFmt = this.keepTwoDecimal( this.form.dailyNecessities / 10000 );
-          this.form.dailyNecessities = dailyNecessitiesFmt ;
-          const deviceFmt = this.keepTwoDecimal( this.form.device / 10000 );
-          this.form.device = deviceFmt ;
-          const furnitureFmt = this.keepTwoDecimal( this.form.furniture / 10000 );
-          this.form.furniture = furnitureFmt ;
-          const kitchenBathroomFmt = this.keepTwoDecimal( this.form.kitchenBathroom / 10000 );
-          this.form.kitchenBathroom = kitchenBathroomFmt ;
-          const lampsFmt = this.keepTwoDecimal( this.form.lamps / 10000 );
-          this.form.lamps = lampsFmt ;
-          const softOutfitFmt = this.keepTwoDecimal( this.form.softOutfit / 10000 );
-          this.form.softOutfit = softOutfitFmt ;
-          const textileFmt = this.keepTwoDecimal( this.form.textile / 10000 );
-          this.form.textile = textileFmt ;
-          const otherFmt = this.keepTwoDecimal( this.form.other / 10000 );
-          this.form.other = otherFmt ;
+          //const buildingMaterialsFmt = this.keepTwoDecimal( this.form.buildingMaterials / 10000 );
+          //this.form.buildingMaterials = buildingMaterialsFmt ;
+          //const dailyNecessitiesFmt = this.keepTwoDecimal( this.form.dailyNecessities / 10000 );
+          //this.form.dailyNecessities = dailyNecessitiesFmt ;
+          //const deviceFmt = this.keepTwoDecimal( this.form.device / 10000 );
+          //this.form.device = deviceFmt ;
+          //const furnitureFmt = this.keepTwoDecimal( this.form.furniture / 10000 );
+          //this.form.furniture = furnitureFmt ;
+          //const kitchenBathroomFmt = this.keepTwoDecimal( this.form.kitchenBathroom / 10000 );
+          //this.form.kitchenBathroom = kitchenBathroomFmt ;
+          //const lampsFmt = this.keepTwoDecimal( this.form.lamps / 10000 );
+          //this.form.lamps = lampsFmt ;
+          //const softOutfitFmt = this.keepTwoDecimal( this.form.softOutfit / 10000 );
+          //this.form.softOutfit = softOutfitFmt ;
+          //const textileFmt = this.keepTwoDecimal( this.form.textile / 10000 );
+          //this.form.textile = textileFmt ;
+          //const otherFmt = this.keepTwoDecimal( this.form.other / 10000 );
+          //this.form.other = otherFmt ;
 
 
           if (this.form.id != null) {

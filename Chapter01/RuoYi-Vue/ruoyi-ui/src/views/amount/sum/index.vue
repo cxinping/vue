@@ -65,7 +65,7 @@
       </el-col>
 
       <el-col :span="1.5">        
-        <el-tag>页面显示，单位：万元</el-tag>               
+        <el-tag>页面显示，单位：元</el-tag>               
       </el-col>
  
       <div class="top-right-btn">
@@ -331,8 +331,8 @@ export default {
       this.newTableId = row.id;
       this.newTable = row.inventoryDetails.map(item => ({
         ...item,
-        unsaleableInventoryAmount: item.unsaleableInventoryAmount * 10000,
-        saleableInventoryAmount: item.saleableInventoryAmount * 10000
+        unsaleableInventoryAmount: item.unsaleableInventoryAmount ,
+        saleableInventoryAmount: item.saleableInventoryAmount 
       }))
       // this.newTable = /
       // const id = row.id || this.ids
@@ -366,15 +366,15 @@ export default {
      addSum(
           {
                 "product": "产品",
-                "sumSaleableInventoryAmount": sumSaleableInventoryAmount / 10000,
-                "sumUnsaleableInventoryAmount": sumUnsaleableInventoryAmount / 10000,
-                "sumInventoryAmount": (sumSaleableInventoryAmount + sumUnsaleableInventoryAmount) / 10000,
+                "sumSaleableInventoryAmount": sumSaleableInventoryAmount  ,
+                "sumUnsaleableInventoryAmount": sumUnsaleableInventoryAmount  ,
+                "sumInventoryAmount": (sumSaleableInventoryAmount + sumUnsaleableInventoryAmount)  ,
                 "inventoryDetails": this.newTable.map((item, index) => ({
                   ...item,
                   orderNum: index + 1,
-                  saleableInventoryAmount: item.saleableInventoryAmount / 10000,
-                  unsaleableInventoryAmount: item.unsaleableInventoryAmount / 10000,
-                  inventoryAmount: parseFloat(item.saleableInventoryAmount  / 10000) + parseFloat( item.unsaleableInventoryAmount / 10000)
+                  saleableInventoryAmount: item.saleableInventoryAmount  ,
+                  unsaleableInventoryAmount: item.unsaleableInventoryAmount  ,
+                  inventoryAmount: parseFloat(item.saleableInventoryAmount   ) + parseFloat( item.unsaleableInventoryAmount  )
                 }))
             }
            ).then(response => {
@@ -430,15 +430,15 @@ export default {
      updateSum(
           {     "id": this.newTableId,
                  "product": "产品",
-                "sumSaleableInventoryAmount": sumSaleableInventoryAmount / 10000,
-                "sumUnsaleableInventoryAmount": sumUnsaleableInventoryAmount / 10000,
-                "sumInventoryAmount": (sumSaleableInventoryAmount + sumUnsaleableInventoryAmount) / 10000,
+                "sumSaleableInventoryAmount": sumSaleableInventoryAmount  ,
+                "sumUnsaleableInventoryAmount": sumUnsaleableInventoryAmount  ,
+                "sumInventoryAmount": (sumSaleableInventoryAmount + sumUnsaleableInventoryAmount) ,
                 "inventoryDetails": this.newTable.map((item, index)  => ({
                   ...item,
                   orderNum: index + 1,
-                  saleableInventoryAmount: item.saleableInventoryAmount / 10000,
-                  unsaleableInventoryAmount: item.unsaleableInventoryAmount / 10000,
-                  inventoryAmount: parseFloat(item.saleableInventoryAmount  / 10000) + parseFloat( item.unsaleableInventoryAmount / 10000)
+                  saleableInventoryAmount: item.saleableInventoryAmount  ,
+                  unsaleableInventoryAmount: item.unsaleableInventoryAmount  ,
+                  inventoryAmount: parseFloat(item.saleableInventoryAmount   ) + parseFloat( item.unsaleableInventoryAmount  )
                 }))
             }
            ).then(response => {

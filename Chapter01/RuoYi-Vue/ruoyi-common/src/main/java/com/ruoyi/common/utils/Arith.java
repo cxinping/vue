@@ -2,6 +2,7 @@ package com.ruoyi.common.utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 /**
  * 精确的浮点数运算
@@ -111,4 +112,16 @@ public class Arith
         BigDecimal one = new BigDecimal("1");
         return b.divide(one, scale, RoundingMode.HALF_UP).doubleValue();
     }
+
+    public static BigDecimal divNumber(BigDecimal bigDecimal,int divnum,int num){
+        double a=bigDecimal.doubleValue();
+        a=a/divnum;
+        String numString="0.";
+        for(int i=0;i<num;i++){
+            numString+="0";
+        }
+        DecimalFormat df=new DecimalFormat(numString);
+        return new BigDecimal(df.format(a).toString());
+    }
+
 }
