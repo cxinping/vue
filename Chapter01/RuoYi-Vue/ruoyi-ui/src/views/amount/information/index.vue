@@ -287,8 +287,8 @@
     </el-row>            
     <el-row>
     <el-col :span="12">
-      <el-form-item label="应付预付款金额" prop="prepaymentAmountPayable" required >
-            <el-input v-model="form.prepaymentAmountPayable" placeholder="请输入应付预付款金额，单位：元" />
+      <el-form-item label="已付预付款金额" prop="prepaymentAmountPayable" required >
+            <el-input v-model="form.prepaymentAmountPayable" placeholder="请输入已付预付款金额，单位：元" />
         </el-form-item>
     </el-col>
     <el-col :span="12">
@@ -390,7 +390,7 @@ export default {
             { required: true, message: '请输入应付尾款时间', trigger: 'blur' }             
           ],
           prepaymentAmountPayable: [
-            { required: true, message: '请输入应付预付款金额，单位：元', trigger: 'blur' }             
+            { required: true, message: '请输入已付预付款金额，单位：元', trigger: 'blur' }             
           ],
           prepaymentAmountPaid: [
             { required: true, message: '请输入应付尾款金额，单位：元', trigger: 'blur' }             
