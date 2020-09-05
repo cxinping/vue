@@ -116,6 +116,7 @@
 
     <el-row :gutter="10" style="background: #000;">
       <el-col :span="24" style="color: #fff; text-align: right; padding: 10px 20px;">{{viewList[0].days}}</el-col>
+      <!-- 
       <el-col :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
@@ -124,6 +125,8 @@
           <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumContractAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+      -->
+
       <el-col :span="24" >
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
@@ -156,6 +159,8 @@
           <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumPurchasedUnshippedTotalAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+
+      <!-- 
       <el-col :span="24" >
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
@@ -164,6 +169,8 @@
           <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].loanUsageTotalLoanCreditAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+      -->
+
       <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
@@ -172,6 +179,8 @@
           <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].loanUsageTotalLoanCreditBalance}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+
+      <!-- 
        <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
@@ -180,6 +189,8 @@
           <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].loanUsageTotalLoanCreditRemaining}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+    -->
+
       <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
@@ -196,6 +207,7 @@
           <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumInventoryAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+      <!-- 
       <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
@@ -204,6 +216,8 @@
           <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumSaleableInventoryAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+     
+
       <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
@@ -212,6 +226,8 @@
           <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumUnsaleableInventoryAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+     
+
       <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
@@ -220,6 +236,8 @@
           <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].goodsTransitTotalAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
+      -->
+
       <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
