@@ -236,7 +236,7 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
         <el-col :span="12">
-          <el-form-item label="项目名称" prop="projectName" required >
+          <el-form-item label="项目名称" prop="projectName"   >
             <el-input v-model="form.projectName" placeholder="请输入项目名称" />
           </el-form-item>
         </el-col>
@@ -275,7 +275,7 @@
           </el-form-item>
       </el-col>
       <el-col :span="12">
-        <el-form-item label="应付尾款时间" prop="payableTime" required >
+        <el-form-item label="应付尾款时间" prop="payableTime"  >
             <el-date-picker clearable size="small" style="width: 200px"
               v-model="form.payableTime"
               type="date"
@@ -371,9 +371,11 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        /***
           projectName: [
             { required: true, message: '请输入项目名称', trigger: 'blur' }             
-          ],
+          ], */
+
           supplier: [
             { required: true, message: '请输入供应商', trigger: 'blur' }             
           ],
@@ -386,9 +388,10 @@ export default {
           contractAmount: [
             { required: true, message: '请输入合同金额，单位：元', trigger: 'blur' }             
           ] ,
+          /*** 
           payableTime: [
             { required: true, message: '请输入应付尾款时间', trigger: 'blur' }             
-          ],
+          ],*/
           prepaymentAmountPayable: [
             { required: true, message: '请输入已付预付款金额，单位：元', trigger: 'blur' }             
           ],
