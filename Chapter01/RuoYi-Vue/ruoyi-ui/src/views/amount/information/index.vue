@@ -177,13 +177,13 @@
       <el-table-column label="合同金额" align="center" prop="contractAmount" />
       
       <el-table-column label="采购货款"  align="center">   
-        <el-table-column label="已付预付款金额" align="center" prop="prepaymentAmountPaid" />
+        <el-table-column label="已付预付款金额" align="center" prop="prepaymentAmountPayable" />
         <el-table-column label="应付尾款时间" align="center" prop="payableTime" width="130">
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.payableTime, '{y}-{m}-{d}') }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="应付尾款金额" align="center" prop="prepaymentAmountPayable" />
+        <el-table-column label="应付尾款金额" align="center" prop="prepaymentAmountPaid" />
        
       </el-table-column>
 

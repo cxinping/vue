@@ -284,6 +284,7 @@ export default {
           //this.form.loanCreditBalance = loanCreditBalanceFmt ;
           //const loanCreditRemainingFmt = this.keepTwoDecimal(this.form.loanCreditAmount - this.form.loanCreditBalance) ;
           //this.form.loanCreditRemaining = loanCreditRemainingFmt;
+          this.form.loanCreditRemaining = this.keepTwoDecimal(this.form.loanCreditAmount - this.form.loanCreditBalance) 
 
           if (this.form.id != null) {
             updateUsage(this.form).then(response => {
