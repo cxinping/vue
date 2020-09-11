@@ -128,13 +128,13 @@
     <el-table v-loading="loading" :data="fundsList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="编号" align="center" prop="id" />-->
-      <el-table-column label="招行" align="center" prop="merchantsBank" />
-      <el-table-column label="浦发" align="center" prop="pufaBank" />
-      <el-table-column label="工行" align="center" prop="icbcBank" />
-      <el-table-column label="有赞" align="center" prop="youZan" />
-      <el-table-column label="支付宝" align="center" prop="alipay" />
-      <el-table-column label="京东" align="center" prop="jingdong" />
-      <el-table-column label="合计金额" align="center" prop="totalAmount" />
+      <el-table-column label="招行" align="center" prop="merchantsBank" :formatter="stateFormat" />
+      <el-table-column label="浦发" align="center" prop="pufaBank" :formatter="stateFormat" />
+      <el-table-column label="工行" align="center" prop="icbcBank" :formatter="stateFormat" />
+      <el-table-column label="有赞" align="center" prop="youZan" :formatter="stateFormat" />
+      <el-table-column label="支付宝" align="center" prop="alipay" :formatter="stateFormat" />
+      <el-table-column label="京东" align="center" prop="jingdong" :formatter="stateFormat" />
+      <el-table-column label="合计金额" align="center" prop="totalAmount" :formatter="stateFormat" />
 
       <el-table-column label="更新时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
@@ -266,6 +266,14 @@ export default {
     this.getList();
   },
   methods: {
+    stateFormat(row, column, cellValue) {
+			cellValue += '';
+			if (!cellValue.includes('.')) cellValue += '.';
+			return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+				return $1 + ',';
+			}).replace(/\.$/, '');
+    },
+
     /** 查询可用资金列表 */
     getList() {
       this.loading = true;
@@ -353,6 +361,21 @@ export default {
           //this.form.alipay = alipayFmt ;
           //const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
           //this.form.jingdong = jingdongFmt ;   
+
+          // 去除输入的特殊字符，比如 ,
+          const merchantsBankFmt = String(this.form.merchantsBank).replace(",","");
+          this.form.merchantsBank = merchantsBankFmt ;
+          const pufaBankFmt = String(this.form.pufaBank).replace(",","");
+          this.form.pufaBank = pufaBankFmt ;
+          const icbcBankFmt = String(this.form.icbcBank).replace(",","");
+          this.form.icbcBank = icbcBankFmt ;
+          const youZanFmt = String(this.form.youZan).replace(",","");
+          this.form.youZan = youZanFmt ;
+          const alipayFmt = String(this.form.alipay).replace(",","");
+          this.form.alipay = alipayFmt ;
+          const jingdongFmt = String(this.form.jingdong).replace(",","");
+          this.form.jingdong = jingdongFmt ;
+
 
           if (this.form.id != null) {
             updateFunds(this.form).then(response => {

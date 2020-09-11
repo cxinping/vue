@@ -101,9 +101,15 @@
     <el-table v-loading="loading" :data="usageList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="编号" align="center" prop="id" />-->
-      <el-table-column label="贷款授信金额" align="center" prop="loanCreditAmount" />
-      <el-table-column label="贷款授信余额" align="center" prop="loanCreditBalance" />
-      <el-table-column label="剩余可使用额度" align="center" prop="loanCreditRemaining" />
+      <el-table-column label="贷款授信金额" align="center" prop="loanCreditAmount" :formatter="stateFormat"  />
+      <el-table-column label="贷款授信余额" align="center" prop="loanCreditBalance" :formatter="stateFormat"  />
+      <el-table-column label="剩余可使用额度" align="center" prop="loanCreditRemaining" :formatter="stateFormat"  />
+      <el-table-column label="更新时间" align="center" prop="createTime" width="130">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime) }}</span>
+        </template>
+      </el-table-column>  
+
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -209,6 +215,14 @@ export default {
     this.getList();
   },
   methods: {
+    stateFormat(row, column, cellValue) {
+			cellValue += '';
+			if (!cellValue.includes('.')) cellValue += '.';
+			return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+				return $1 + ',';
+			}).replace(/\.$/, '');
+    },
+
     /** 查询贷款使用列表 */
     getList() {
       this.loading = true;
@@ -284,7 +298,16 @@ export default {
           //this.form.loanCreditBalance = loanCreditBalanceFmt ;
           //const loanCreditRemainingFmt = this.keepTwoDecimal(this.form.loanCreditAmount - this.form.loanCreditBalance) ;
           //this.form.loanCreditRemaining = loanCreditRemainingFmt;
+          //this.form.loanCreditRemaining = this.keepTwoDecimal(this.form.loanCreditAmount - this.form.loanCreditBalance) 
+
+          // 去除输入的特殊字符，比如 ,
+          const loanCreditAmountFmt = String(this.form.loanCreditAmount).replace(",","");
+          this.form.loanCreditAmount = loanCreditAmountFmt ;
+          const loanCreditBalanceFmt = String(this.form.loanCreditBalance).replace(",","");
+          this.form.loanCreditBalance = loanCreditBalanceFmt ;
           this.form.loanCreditRemaining = this.keepTwoDecimal(this.form.loanCreditAmount - this.form.loanCreditBalance) 
+
+
 
           if (this.form.id != null) {
             updateUsage(this.form).then(response => {

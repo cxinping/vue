@@ -109,10 +109,10 @@
     <el-table v-loading="loading" :data="unsettledList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="编号" align="center" prop="id" />-->
-      <el-table-column label="有赞" align="center" prop="youzan" />
-      <el-table-column label="淘宝" align="center" prop="taobao" />
-      <el-table-column label="天猫" align="center" prop="tianmao" />
-      <el-table-column label="京东" align="center" prop="jingdong" />
+      <el-table-column label="有赞" align="center" prop="youzan" :formatter="stateFormat" />
+      <el-table-column label="淘宝" align="center" prop="taobao" :formatter="stateFormat" />
+      <el-table-column label="天猫" align="center" prop="tianmao"  :formatter="stateFormat" />
+      <el-table-column label="京东" align="center" prop="jingdong"  :formatter="stateFormat" />
       <el-table-column label="合计金额" align="center" prop="totalAmount" />
 
       <el-table-column label="更新时间" align="center" prop="createTime" width="130">
@@ -231,6 +231,15 @@ export default {
     this.getList();
   },
   methods: {
+    stateFormat(row, column, cellValue) {
+			cellValue += '';
+			if (!cellValue.includes('.')) cellValue += '.';
+			return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+				return $1 + ',';
+			}).replace(/\.$/, '');
+    },
+
+
     /** 查询已发货未结算金额列表 */
     getList() {
       this.loading = true;
@@ -310,6 +319,17 @@ export default {
           //this.form.tianmao = tianmaoFmt ;
           //const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
           //this.form.jingdong = jingdongFmt ;
+
+          // 去除输入的特殊字符，比如 ,
+          const youzanFmt = String(this.form.youzan).replace(",","");
+          this.form.youzan = youzanFmt ;
+          const taobaoFmt = String(this.form.taobao).replace(",","");
+          this.form.taobao = taobaoFmt ;
+          const tianmaoFmt = String(this.form.tianmao).replace(",","");
+          this.form.tianmao = tianmaoFmt ;
+          const jingdongFmt = String(this.form.jingdong).replace(",","");
+          this.form.jingdong = jingdongFmt ;
+
 
 
           if (this.form.id != null) {

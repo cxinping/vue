@@ -174,16 +174,16 @@
           <span>{{ parseTime(scope.row.contractEndTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="合同金额" align="center" prop="contractAmount" />
+      <el-table-column label="合同金额" align="center" prop="contractAmount"  :formatter="stateFormat"  />
       
       <el-table-column label="采购货款"  align="center">   
-        <el-table-column label="已付预付款金额" align="center" prop="prepaymentAmountPayable" />
+        <el-table-column label="已付预付款金额" align="center" prop="prepaymentAmountPayable"  :formatter="stateFormat"  />
         <el-table-column label="应付尾款时间" align="center" prop="payableTime" width="130">
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.payableTime, '{y}-{m}-{d}') }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="应付尾款金额" align="center" prop="prepaymentAmountPaid" />
+        <el-table-column label="应付尾款金额" align="center" prop="prepaymentAmountPaid"  :formatter="stateFormat" />
        
       </el-table-column>
 
@@ -415,6 +415,14 @@ export default {
     this.getList();
   },
   methods: {
+    stateFormat(row, column, cellValue) {
+			cellValue += '';
+			if (!cellValue.includes('.')) cellValue += '.';
+			return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+				return $1 + ',';
+			}).replace(/\.$/, '');
+    },
+    
     /** 查询采购订单跟踪信息列表 */
     getList() {
       this.loading = true;
@@ -501,6 +509,14 @@ export default {
           //this.form.prepaymentAmountPaid = prepaymentAmountPaidFmt ;
           //const prepaymentPayableAmountFmt = this.keepTwoDecimal( this.form.prepaymentPayableAmount / 10000 );
           //this.form.prepaymentPayableAmount = prepaymentPayableAmountFmt ;
+
+          // 去除输入的特殊字符，比如 ,
+          const contractAmountFmt = String(this.form.contractAmount).replace(",","");
+          this.form.contractAmount = contractAmountFmt ;
+          const prepaymentAmountPayableFmt = String(this.form.prepaymentAmountPayable).replace(",","");
+          this.form.prepaymentAmountPayable = prepaymentAmountPayableFmt ;
+          const prepaymentAmountPaidFmt = String(this.form.prepaymentAmountPaid).replace(",","");
+          this.form.prepaymentAmountPaid = prepaymentAmountPaidFmt ;
 
           if (this.form.id != null) {
             updateInformation(this.form).then(response => {
