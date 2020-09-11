@@ -156,17 +156,17 @@
     <el-table v-loading="loading" :data="transitList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="编号" align="center" prop="id" />-->
-      <el-table-column label="建材" align="center" prop="buildingMaterials" />
-      <el-table-column label="日用品" align="center" prop="dailyNecessities" />
-      <el-table-column label="电器" align="center" prop="device" />
-      <el-table-column label="家具" align="center" prop="furniture" />
-      <el-table-column label="厨房卫浴" align="center" prop="kitchenBathroom" />
-      <el-table-column label="灯具" align="center" prop="lamps" />
-      <el-table-column label="软装" align="center" prop="softOutfit" />
-      <el-table-column label="纺织品" align="center" prop="textile" />
-      <el-table-column label="其他" align="center" prop="other" />
-      <el-table-column label="合计金额" align="center" prop="totalAmount" />
-      <el-table-column label="更新时间" align="center" prop="createTime" width="130">
+      <el-table-column label="建材" align="center" prop="buildingMaterials" :formatter="stateFormat" />
+      <el-table-column label="日用品" align="center" prop="dailyNecessities" :formatter="stateFormat" />
+      <el-table-column label="电器" align="center" prop="device" :formatter="stateFormat" />
+      <el-table-column label="家具" align="center" prop="furniture" :formatter="stateFormat" />
+      <el-table-column label="厨房卫浴" align="center" prop="kitchenBathroom" :formatter="stateFormat" />
+      <el-table-column label="灯具" align="center" prop="lamps" :formatter="stateFormat" />
+      <el-table-column label="软装" align="center" prop="softOutfit" :formatter="stateFormat" />
+      <el-table-column label="纺织品" align="center" prop="textile" :formatter="stateFormat" />
+      <el-table-column label="其他" align="center" prop="other" :formatter="stateFormat" />
+      <el-table-column label="合计金额" align="center" prop="totalAmount" :formatter="stateFormat" />
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
         </template>
@@ -326,6 +326,14 @@ export default {
     this.getList();
   },
   methods: {
+    stateFormat(row, column, cellValue) {
+			cellValue += '';
+			if (!cellValue.includes('.')) cellValue += '.';
+			return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+				return $1 + ',';
+			}).replace(/\.$/, '');
+    },
+
     /** 查询在途物资列表 */
     getList() {
       this.loading = true;
@@ -426,6 +434,25 @@ export default {
           //const otherFmt = this.keepTwoDecimal( this.form.other / 10000 );
           //this.form.other = otherFmt ;
 
+          // 去除输入的特殊字符，比如 ,
+          const buildingMaterialsFmt = String(this.form.buildingMaterials).replace(",","");
+          this.form.buildingMaterials = buildingMaterialsFmt ;
+          const dailyNecessitiesFmt = String(this.form.dailyNecessities).replace(",","");
+          this.form.dailyNecessities = dailyNecessitiesFmt ;
+          const deviceFmt = String(this.form.device).replace(",","");
+          this.form.device = deviceFmt ;
+          const furnitureFmt = String(this.form.furniture).replace(",","");
+          this.form.furniture = furnitureFmt ;
+          const kitchenBathroomFmt = String(this.form.kitchenBathroom).replace(",","");
+          this.form.kitchenBathroom = kitchenBathroomFmt ;
+          const lampsFmt = String(this.form.lamps).replace(",","");
+          this.form.lamps = lampsFmt ;
+          const softOutfitFmt = String(this.form.softOutfit).replace(",","");
+          this.form.softOutfit = softOutfitFmt ;
+          const textileFmt = String(this.form.textile).replace(",","");
+          this.form.textile = textileFmt ;
+          const otherFmt = String(this.form.other).replace(",","");
+          this.form.other = otherFmt ;
 
           if (this.form.id != null) {
             updateTransit(this.form).then(response => {
