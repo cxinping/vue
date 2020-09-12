@@ -132,7 +132,7 @@
           <div class="title">
             已付预付款
           </div>
-          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumPrepaymentAmountPayable}} <span style="font-size: 14px;">万元</span> </div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#ff7f00;">{{viewList[0].sumPrepaymentAmountPayable}} <span style="font-size: 14px;">万元</span> </div>
         </div>
       </el-col>
       <el-col  :span="24">
@@ -140,7 +140,7 @@
           <div class="title">
             应付尾款
           </div>
-          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumPrepaymentAmountPaid}} <span style="font-size: 14px;">万元</span> </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#ff7f00;">{{viewList[0].sumPrepaymentAmountPaid}} <span style="font-size: 14px;">万元</span> </div>
         </div>
       </el-col>
        <el-col  :span="24">
@@ -148,7 +148,7 @@
           <div class="title">
             已发货未结算
           </div>
-          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumShippedUnsettledTotalAmount}} <span style="font-size: 14px;">万元</span> </div>
+          <div class="num" style="text-align: center; font-size:30px;color:#ff7f00;">{{viewList[0].sumShippedUnsettledTotalAmount}} <span style="font-size: 14px;">万元</span> </div>
         </div>
       </el-col>
        <el-col :span="24">
@@ -156,7 +156,7 @@
           <div class="title">
             已下单未发货
           </div>
-          <div class="num" style="text-align: center; font-size: 30px;color:#FACC2E;">{{viewList[0].sumPurchasedUnshippedTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+          <div class="num" style="text-align: center; font-size: 30px;color:#ff7f00;">{{viewList[0].sumPurchasedUnshippedTotalAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
 
@@ -176,7 +176,7 @@
           <div class="title">
             贷款已使用金额
           </div>
-          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].loanUsageTotalLoanCreditBalance}} <span style="font-size: 14px;">万元</span></div>
+          <div class="num" style="text-align: center; font-size:30px;color:#ff7f00;">{{viewList[0].loanUsageTotalLoanCreditBalance}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
 
@@ -196,7 +196,7 @@
           <div class="title">
             可用资金
           </div>
-          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumAvailableFundsTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+          <div class="num" style="text-align: center; font-size:30px;color:#ff7f00;">{{viewList[0].sumAvailableFundsTotalAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
       <el-col  :span="24">
@@ -204,7 +204,7 @@
           <div class="title">
             库存
           </div>
-          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;">{{viewList[0].sumInventoryAmount}} <span style="font-size: 14px;">万元</span></div>
+          <div class="num" style="text-align: center; font-size:30px;color:#ff7f00;">{{viewList[0].sumInventoryAmount}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
       <!-- 
@@ -243,7 +243,7 @@
           <div class="title">
              
           </div>
-          <div class="num" style="text-align: center; font-size:30px;color:#FACC2E;"><span style="font-size: 14px;">已下单未发货+已发货未结算+可用资金–贷款已使用金额=</span>{{viewList[0].statisticalIndicators1}} <span style="font-size: 14px;">万元</span></div>
+          <div class="num" style="text-align: center; font-size:30px;color:#ff7f00;"><span style="font-size: 14px;">已下单未发货+已发货未结算+可用资金–贷款已使用金额=</span>{{viewList[0].statisticalIndicators1}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
 
