@@ -66,7 +66,9 @@ public class JaloAmountStatisticsViewController extends BaseController
     {
         System.out.println("----- queryNewFromList ------- ");
         startPage();
-        List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
+        //List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
+        List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList2();
+
         List<JaloAmountStatisticsView> queryNewFromList = new ArrayList<JaloAmountStatisticsView>();
 
         System.out.println(" step 1 list.size()=" + list.size() );

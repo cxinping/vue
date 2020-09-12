@@ -119,16 +119,15 @@ public class JaloAvailableFunds extends BaseEntity
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("merchantsBank", getMerchantsBank())
-            .append("pufaBank", getPufaBank())
-            .append("icbcBank", getIcbcBank())
-            .append("youZan", getYouZan())
-            .append("alipay", getAlipay())
-            .append("jingdong", getJingdong())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
+        return "JaloAvailableFunds{" +
+                "id=" + id +
+                ", merchantsBank=" + merchantsBank +
+                ", pufaBank=" + pufaBank +
+                ", icbcBank=" + icbcBank +
+                ", youZan=" + youZan +
+                ", alipay=" + alipay +
+                ", jingdong=" + jingdong +
+                ", totalAmount=" + totalAmount +
+                '}';
     }
 }

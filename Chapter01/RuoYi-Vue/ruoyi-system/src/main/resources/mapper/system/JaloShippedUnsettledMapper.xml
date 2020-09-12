@@ -65,6 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="taobao != null">taobao = #{taobao},</if>
             <if test="tianmao != null">tianmao = #{tianmao},</if>
             <if test="jingdong != null">jingdong = #{jingdong},</if>
+            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>

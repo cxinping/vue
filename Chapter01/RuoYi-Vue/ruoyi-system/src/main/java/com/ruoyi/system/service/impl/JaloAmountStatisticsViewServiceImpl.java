@@ -90,4 +90,10 @@ public class JaloAmountStatisticsViewServiceImpl implements IJaloAmountStatistic
     {
         return jaloAmountStatisticsViewMapper.deleteJaloAmountStatisticsViewById(days);
     }
+
+    @Override
+    public List<JaloAmountStatisticsView> selectJaloAmountStatisticsViewList2(){
+        return jaloAmountStatisticsViewMapper.selectJaloAmountStatisticsViewList2();
+    }
+
 }

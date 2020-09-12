@@ -44,6 +44,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="goodsTransitTotalAmount != null "> and goods_transit_total_amount = #{goodsTransitTotalAmount}</if>
         </where>
     </select>
+
+    <select id="selectJaloAmountStatisticsViewList2"  resultMap="JaloAmountStatisticsViewResult">
+            SELECT
+                sum_contract_amount ,                  -- 采购合同款， 合同金额
+                sum_prepayment_amount_payable,         -- 已付预付款， 应付预付款金额
+                sum_prepayment_amount_paid,            -- 应付尾款， 应付尾款金额
+                sum_shipped_unsettled_total_amount,    -- 已发货未结算
+                sum_purchased_unshipped_total_amount,  -- 已下单未发货
+                loan_usage_total_loan_credit_amount,   -- 贷款授信额度， 贷款授信金额
+                loan_usage_total_loan_credit_balance,  -- 贷款已使用金额， 贷款使用金额
+                loan_usage_total_loan_credit_remaining,-- 剩余可使用额度， 剩余可使用额度
+                sum_available_funds_total_amount,      -- 可用资金
+                sum_inventory_amount,                  -- 库存
+                sum_saleable_inventory_amount,         -- 可销售库存,
+                sum_unsaleable_inventory_amount,       -- 等通知发货库存
+                goods_transit_total_amount             -- 在途物资
+            FROM
+                jalo_amount_statistics_view2
+
+    </select>
     
     <select id="selectJaloAmountStatisticsViewById" parameterType="String" resultMap="JaloAmountStatisticsViewResult">
         <include refid="selectJaloAmountStatisticsViewVo"/>

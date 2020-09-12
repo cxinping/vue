@@ -27,6 +27,8 @@ public interface JaloAmountStatisticsViewMapper
      */
     public List<JaloAmountStatisticsView> selectJaloAmountStatisticsViewList(JaloAmountStatisticsView jaloAmountStatisticsView);
 
+    public List<JaloAmountStatisticsView> selectJaloAmountStatisticsViewList2();
+
     /**
      * 新增VIEW
      * 

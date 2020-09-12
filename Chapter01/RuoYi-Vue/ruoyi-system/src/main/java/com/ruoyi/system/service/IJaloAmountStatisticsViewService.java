@@ -58,4 +58,7 @@ public interface IJaloAmountStatisticsViewService
      * @return 结果
      */
     public int deleteJaloAmountStatisticsViewById(String days);
+
+    public List<JaloAmountStatisticsView> selectJaloAmountStatisticsViewList2();
+
 }

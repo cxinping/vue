@@ -101,6 +101,16 @@ public class JaloAvailableFundsController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody JaloAvailableFunds jaloAvailableFunds)
     {
+
+        BigDecimal totalAmount = jaloAvailableFunds.getAlipay().add(jaloAvailableFunds.getIcbcBank())
+                .add(jaloAvailableFunds.getJingdong())
+                .add(jaloAvailableFunds.getMerchantsBank())
+                .add(jaloAvailableFunds.getPufaBank())
+                .add(jaloAvailableFunds.getYouZan());
+
+        jaloAvailableFunds.setTotalAmount(totalAmount );
+
+
         return toAjax(jaloAvailableFundsService.updateJaloAvailableFunds(jaloAvailableFunds));
     }
 

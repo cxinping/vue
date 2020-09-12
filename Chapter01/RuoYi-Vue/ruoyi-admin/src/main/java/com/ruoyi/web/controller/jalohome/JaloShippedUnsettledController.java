@@ -96,6 +96,15 @@ public class JaloShippedUnsettledController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody JaloShippedUnsettled jaloShippedUnsettled)
     {
+        if(null != jaloShippedUnsettled){
+            jaloShippedUnsettled.setUpdateTime(new Date());
+        }
+
+        BigDecimal totalAmount = jaloShippedUnsettled.getJingdong().add( jaloShippedUnsettled.getTaobao()).add(jaloShippedUnsettled.getTianmao()).add( jaloShippedUnsettled.getYouzan()) ;
+        jaloShippedUnsettled.setTotalAmount( totalAmount);
+        logger.info("----- edit ---------");
+        logger.info(jaloShippedUnsettled.toString());
+
         return toAjax(jaloShippedUnsettledService.updateJaloShippedUnsettled(jaloShippedUnsettled));
     }
 
@@ -109,4 +118,10 @@ public class JaloShippedUnsettledController extends BaseController
     {
         return toAjax(jaloShippedUnsettledService.deleteJaloShippedUnsettledByIds(ids));
     }
+
+
+
+
+
+
 }

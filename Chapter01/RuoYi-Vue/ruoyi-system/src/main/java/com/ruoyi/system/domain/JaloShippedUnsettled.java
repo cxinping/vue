@@ -93,14 +93,13 @@ public class JaloShippedUnsettled extends BaseEntity
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("youzan", getYouzan())
-            .append("taobao", getTaobao())
-            .append("tianmao", getTianmao())
-            .append("jingdong", getJingdong())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
+        return "JaloShippedUnsettled{" +
+                "id=" + id +
+                ", youzan=" + youzan +
+                ", taobao=" + taobao +
+                ", tianmao=" + tianmao +
+                ", jingdong=" + jingdong +
+                ", totalAmount=" + totalAmount +
+                '}';
     }
 }

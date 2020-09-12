@@ -102,7 +102,7 @@
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="编号" align="center" prop="id" />-->
       <el-table-column label="贷款授信金额" align="center" prop="loanCreditAmount" :formatter="stateFormat"  />
-      <el-table-column label="贷款授信余额" align="center" prop="loanCreditBalance" :formatter="stateFormat"  />
+      <el-table-column label="贷款使用金额" align="center" prop="loanCreditBalance" :formatter="stateFormat"  />
       <el-table-column label="剩余可使用额度" align="center" prop="loanCreditRemaining" :formatter="stateFormat"  />
       <el-table-column label="更新时间" align="center" prop="createTime" width="130">
         <template slot-scope="scope">
@@ -145,8 +145,8 @@
           <el-input v-model="form.loanCreditAmount" placeholder="请输入贷款授信金额，单位：元" 
             type="number" clearable />
         </el-form-item>
-        <el-form-item label="贷款使用余额" prop="loanCreditBalance" required >
-          <el-input v-model="form.loanCreditBalance" placeholder="请输入贷款使用余额，单位：元" 
+        <el-form-item label="贷款使用金额" prop="loanCreditBalance" required >
+          <el-input v-model="form.loanCreditBalance" placeholder="请输入贷款使用金额，单位：元" 
            type="number" clearable />
         </el-form-item>
         <!--
@@ -205,7 +205,7 @@ export default {
             { required: true, message: '请输入贷款授信金额，单位：元', trigger: 'blur' }             
           ],
           loanCreditBalance: [
-            { required: true, message: '请输入贷款授信余额，单位：元', trigger: 'blur' }             
+            { required: true, message: '请输入贷款使用金额，单位：元', trigger: 'blur' }             
           ]
 
       }
