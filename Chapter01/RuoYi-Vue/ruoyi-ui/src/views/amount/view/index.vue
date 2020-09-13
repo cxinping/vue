@@ -241,9 +241,13 @@
       <el-col  :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
           <div class="title">
-             
+              
           </div>
+          <!-- 
           <div class="num" style="text-align: center; font-size:30px;color:#ff7f00;"><span style="font-size: 14px;">已下单未发货+已发货未结算+可用资金–贷款已使用金额=</span>{{viewList[0].statisticalIndicators1}} <span style="font-size: 14px;">万元</span></div>
+          -->
+          
+          <div class="num" style="text-align: center; font-size:30px;color:#ff7f00;">已下单未发货+已发货未结算+可用资金–贷款已使用金额={{viewList[0].statisticalIndicators1}} <span style="font-size: 14px;">万元</span></div>
         </div>
       </el-col>
 
