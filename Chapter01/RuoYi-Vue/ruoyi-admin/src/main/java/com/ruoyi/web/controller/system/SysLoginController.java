@@ -52,6 +52,12 @@ public class SysLoginController
         // 生成令牌
         String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.getCode(),
                 loginBody.getUuid());
+
+        System.out.println("-----------------------------------------------");
+        System.out.println(String.format("token=> {}", token));
+        System.out.println("token=> " +  token);
+        System.out.println("-----------------------------------------------");
+
         ajax.put(Constants.TOKEN, token);
         return ajax;
     }

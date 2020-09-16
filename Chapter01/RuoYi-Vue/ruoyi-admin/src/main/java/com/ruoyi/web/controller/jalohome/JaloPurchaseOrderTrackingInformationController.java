@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.jalohome;
 
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +45,10 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
     {
         startPage();
         List<JaloPurchaseOrderTrackingInformation> list = jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInformationList(jaloPurchaseOrderTrackingInformation);
+
+        //List<SumJaloPurchaseOrderTrackingInfo> sumInfos = jaloPurchaseOrderTrackingInformationService.selectSumJaloPurchaseOrderTrackingInfoList();
+
+
         return getDataTable(list);
     }
 
@@ -56,7 +62,7 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
     {
         List<JaloPurchaseOrderTrackingInformation> list = jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInformationList(jaloPurchaseOrderTrackingInformation);
         ExcelUtil<JaloPurchaseOrderTrackingInformation> util = new ExcelUtil<JaloPurchaseOrderTrackingInformation>(JaloPurchaseOrderTrackingInformation.class);
-        return util.exportExcel(list, "information");
+        return util.exportExcel(list, "采购订单跟踪信息列表");
     }
 
     /**
@@ -67,8 +73,6 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
         System.out.println("*** getInfo() **** id=" + id );
-
-
         return AjaxResult.success(jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInformationById(id));
     }
 

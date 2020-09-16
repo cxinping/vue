@@ -158,19 +158,18 @@ public class JaloGoodsTransit extends BaseEntity
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("buildingMaterials", getBuildingMaterials())
-            .append("dailyNecessities", getDailyNecessities())
-            .append("device", getDevice())
-            .append("furniture", getFurniture())
-            .append("kitchenBathroom", getKitchenBathroom())
-            .append("lamps", getLamps())
-            .append("softOutfit", getSoftOutfit())
-            .append("textile", getTextile())
-            .append("other", getOther())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
+        return "JaloGoodsTransit{" +
+                "id=" + id +
+                ", buildingMaterials=" + buildingMaterials +
+                ", dailyNecessities=" + dailyNecessities +
+                ", device=" + device +
+                ", furniture=" + furniture +
+                ", kitchenBathroom=" + kitchenBathroom +
+                ", lamps=" + lamps +
+                ", softOutfit=" + softOutfit +
+                ", textile=" + textile +
+                ", other=" + other +
+                ", totalAmount=" + totalAmount +
+                '}';
     }
 }

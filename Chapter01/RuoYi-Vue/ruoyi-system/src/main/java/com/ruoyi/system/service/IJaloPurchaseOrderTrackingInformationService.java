@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.JaloPurchaseOrderTrackingInformation;
+import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
 
 /**
  * 采购订单跟踪信息Service接口
@@ -58,4 +59,8 @@ public interface IJaloPurchaseOrderTrackingInformationService
      * @return 结果
      */
     public int deleteJaloPurchaseOrderTrackingInformationById(Long id);
+
+    public List<SumJaloPurchaseOrderTrackingInfo> selectSumJaloPurchaseOrderTrackingInfoList();
+
+
 }

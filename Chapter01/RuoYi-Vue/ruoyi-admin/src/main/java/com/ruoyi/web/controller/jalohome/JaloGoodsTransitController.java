@@ -100,6 +100,19 @@ public class JaloGoodsTransitController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody JaloGoodsTransit jaloGoodsTransit)
     {
+        if(null != jaloGoodsTransit){
+            jaloGoodsTransit.setUpdateTime(new Date());
+        }
+
+        BigDecimal totalAmount = jaloGoodsTransit.getBuildingMaterials().add( jaloGoodsTransit.getDailyNecessities())
+                .add(jaloGoodsTransit.getDevice()).add(jaloGoodsTransit.getFurniture())
+                .add(jaloGoodsTransit.getKitchenBathroom()).add(jaloGoodsTransit.getLamps())
+                .add(jaloGoodsTransit.getOther()).add(jaloGoodsTransit.getDailyNecessities())
+                .add(jaloGoodsTransit.getTextile());
+        jaloGoodsTransit.setTotalAmount(totalAmount);
+
+        System.out.println("*** edit jaloGoodsTransit=> " + jaloGoodsTransit);
+
         return toAjax(jaloGoodsTransitService.updateJaloGoodsTransit(jaloGoodsTransit));
     }
 

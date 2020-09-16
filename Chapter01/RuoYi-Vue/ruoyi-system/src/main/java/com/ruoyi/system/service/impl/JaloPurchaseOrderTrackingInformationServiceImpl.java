@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.JaloPurchaseOrderTrackingInformationMapper;
@@ -93,4 +94,10 @@ public class JaloPurchaseOrderTrackingInformationServiceImpl implements IJaloPur
     {
         return jaloPurchaseOrderTrackingInformationMapper.deleteJaloPurchaseOrderTrackingInformationById(id);
     }
+
+    @Override
+    public List<SumJaloPurchaseOrderTrackingInfo> selectSumJaloPurchaseOrderTrackingInfoList(){
+        return jaloPurchaseOrderTrackingInformationMapper.selectSumJaloPurchaseOrderTrackingInfoList();
+    }
+
 }

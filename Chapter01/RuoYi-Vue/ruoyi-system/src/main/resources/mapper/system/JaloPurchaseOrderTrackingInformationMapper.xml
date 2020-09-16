@@ -20,6 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
+    <resultMap id="SumJaloPurchaseOrderTrackingInfoResult" type="SumJaloPurchaseOrderTrackingInfo">
+        <result property="sumContractAmount"    column="sum_contract_amount"    />
+        <result property="sumPrepaymentAmountPayable"    column="sum_prepayment_amount_payable"    />
+        <result property="sumPrepaymentAmountPaid"    column="sum_prepayment_amount_paid"    />
+
+    </resultMap>
+
     <sql id="selectJaloPurchaseOrderTrackingInformationVo">
         select id, project_name, supplier, contract_signing_time, contract_end_time, contract_amount, payable_time, prepayment_amount_payable, prepayment_amount_paid, prepayment_payable_time, prepayment_payable_amount, create_time, update_time from jalo_purchase_order_tracking_information
     </sql>
@@ -41,6 +48,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
         ORDER BY create_time DESC
 
+    </select>
+
+    <select id="selectSumJaloPurchaseOrderTrackingInfoList" resultMap="SumJaloPurchaseOrderTrackingInfoResult">
+       SELECT
+            sum(contract_amount) sum_contract_amount,
+            sum(prepayment_amount_payable) sum_prepayment_amount_payable,
+            sum(prepayment_amount_paid) sum_prepayment_amount_paid
+        FROM
+            jalo_purchase_order_tracking_information
     </select>
     
     <select id="selectJaloPurchaseOrderTrackingInformationById" parameterType="Long" resultMap="JaloPurchaseOrderTrackingInformationResult">

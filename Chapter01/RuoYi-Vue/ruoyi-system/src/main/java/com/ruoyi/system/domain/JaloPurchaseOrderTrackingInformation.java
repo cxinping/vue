@@ -43,26 +43,26 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
     @Excel(name = "合同金额")
     private BigDecimal contractAmount;
 
-    /** 应付预付款时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "应付预付款时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date payableTime;
-
-    /** 应付预付款金额 */
-    @Excel(name = "应付预付款金额")
+    /** 应付预付款金额 ，改为 已付预付款金额 */
+    @Excel(name = "已付预付款金额")
     private BigDecimal prepaymentAmountPayable;
 
-    /** 已付预付款金额 */
-    @Excel(name = "已付预付款金额")
+    /** 应付预付款时间，改为 应付尾款时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "应付尾款时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date payableTime;
+
+    /** 已付预付款金额,改为 应付尾款金额 */
+    @Excel(name = "应付尾款金额")
     private BigDecimal prepaymentAmountPaid;
 
     /** 应付预付款时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "应付预付款时间", width = 30, dateFormat = "yyyy-MM-dd")
+    //@Excel(name = "应付预付款时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date prepaymentPayableTime;
 
     /** 应付预付款金额 */
-    @Excel(name = "应付预付款金额")
+    //@Excel(name = "应付预付款金额")
     private BigDecimal prepaymentPayableAmount;
 
     public void setId(Long id) 

@@ -92,6 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="other != null">other = #{other},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
         </trim>
         where id = #{id}
     </update>

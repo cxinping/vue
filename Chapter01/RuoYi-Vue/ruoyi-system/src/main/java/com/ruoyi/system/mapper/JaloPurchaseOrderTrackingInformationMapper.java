@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.JaloPurchaseOrderTrackingInformation;
+import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
 
 /**
  * 采购订单跟踪信息Mapper接口
@@ -26,6 +27,9 @@ public interface JaloPurchaseOrderTrackingInformationMapper
      * @return 采购订单跟踪信息集合
      */
     public List<JaloPurchaseOrderTrackingInformation> selectJaloPurchaseOrderTrackingInformationList(JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation);
+
+    public List<SumJaloPurchaseOrderTrackingInfo> selectSumJaloPurchaseOrderTrackingInfoList();
+
 
     /**
      * 新增采购订单跟踪信息
