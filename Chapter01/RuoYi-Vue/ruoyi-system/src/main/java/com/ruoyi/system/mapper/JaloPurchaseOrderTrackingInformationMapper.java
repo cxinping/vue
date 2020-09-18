@@ -30,6 +30,7 @@ public interface JaloPurchaseOrderTrackingInformationMapper
 
     public List<SumJaloPurchaseOrderTrackingInfo> selectSumJaloPurchaseOrderTrackingInfoList();
 
+    public List<String> selectJaloPurchaseOrderTrackingInfoSupplierList();
 
     /**
      * 新增采购订单跟踪信息

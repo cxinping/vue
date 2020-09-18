@@ -65,7 +65,27 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
     //@Excel(name = "应付预付款金额")
     private BigDecimal prepaymentPayableAmount;
 
-    public void setId(Long id) 
+    private String columnname;
+
+    private String orderby;
+
+    public String getColumnname() {
+        return columnname;
+    }
+
+    public void setColumnname(String columnname) {
+        this.columnname = columnname;
+    }
+
+    public String getOrderby() {
+        return orderby;
+    }
+
+    public void setOrderby(String orderby) {
+        this.orderby = orderby;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -167,20 +187,20 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("projectName", getProjectName())
-            .append("supplier", getSupplier())
-            .append("contractSigningTime", getContractSigningTime())
-            .append("contractEndTime", getContractEndTime())
-            .append("contractAmount", getContractAmount())
-            .append("payableTime", getPayableTime())
-            .append("prepaymentAmountPayable", getPrepaymentAmountPayable())
-            .append("prepaymentAmountPaid", getPrepaymentAmountPaid())
-            .append("prepaymentPayableTime", getPrepaymentPayableTime())
-            .append("prepaymentPayableAmount", getPrepaymentPayableAmount())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
+        return "JaloPurchaseOrderTrackingInformation{" +
+                "id=" + id +
+                ", projectName='" + projectName + '\'' +
+                ", supplier='" + supplier + '\'' +
+                ", contractSigningTime=" + contractSigningTime +
+                ", contractEndTime=" + contractEndTime +
+                ", contractAmount=" + contractAmount +
+                ", prepaymentAmountPayable=" + prepaymentAmountPayable +
+                ", payableTime=" + payableTime +
+                ", prepaymentAmountPaid=" + prepaymentAmountPaid +
+                ", prepaymentPayableTime=" + prepaymentPayableTime +
+                ", prepaymentPayableAmount=" + prepaymentPayableAmount +
+                ", columnname='" + columnname + '\'' +
+                ", orderby='" + orderby + '\'' +
+                '}';
     }
 }

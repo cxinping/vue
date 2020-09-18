@@ -1,3 +1,5 @@
+package com.ruoyi.system.test;
+
 import com.ruoyi.system.util.InventoryTypeEnum;
 
 public class Test1 {

@@ -23,7 +23,10 @@ taskkill /f /t /im nginx.exe
 
 http://localhost:8011/
 
-5. 登录接口
+5. 修改xinping 账号密码
+mysqladmin -uxinping -p123456 password 123welcome
+
+6. 登录接口
 
 http://localhost:8080/login
 username=admin
@@ -37,7 +40,7 @@ uuid
    "token": "eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImFlMzYxMjAzLTJlOWQtNDE0Yi04NWQzLTAyNmNjZGZiMjY3MSJ9.rod4cZpJGzN1dPfl_seI3P_cuaM71hOq_uDh3I30rcEJX6gWOL4nYPuv22Xhv5LdmovKyEMcUIifE_ZM_GRybw"
 }
 
-Authorization:eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImFlMzYxMjAzLTJlOWQtNDE0Yi04NWQzLTAyNmNjZGZiMjY3MSJ9.rod4cZpJGzN1dPfl_seI3P_cuaM71hOq_uDh3I30rcEJX6gWOL4nYPuv22Xhv5LdmovKyEMcUIifE_ZM_GRybw
+Authorization : eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImFlMzYxMjAzLTJlOWQtNDE0Yi04NWQzLTAyNmNjZGZiMjY3MSJ9.rod4cZpJGzN1dPfl_seI3P_cuaM71hOq_uDh3I30rcEJX6gWOL4nYPuv22Xhv5LdmovKyEMcUIifE_ZM_GRybw
 
 部署项目
 nohup java -jar ruoyi-admin.jar &
@@ -55,5 +58,6 @@ admin123
 领导账号，只能访问统计页面
 用户名：leader
 密码：123456
+
 
 

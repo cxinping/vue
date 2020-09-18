@@ -100,4 +100,9 @@ public class JaloPurchaseOrderTrackingInformationServiceImpl implements IJaloPur
         return jaloPurchaseOrderTrackingInformationMapper.selectSumJaloPurchaseOrderTrackingInfoList();
     }
 
+    @Override
+    public List<String> selectJaloPurchaseOrderTrackingInfoSupplierList(){
+        return jaloPurchaseOrderTrackingInformationMapper.selectJaloPurchaseOrderTrackingInfoSupplierList();
+    }
+
 }

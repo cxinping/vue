@@ -53,6 +53,19 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
     }
 
     /**
+     * http://localhost:8080/amount/information/suppplier/list
+     *
+     * */
+    @GetMapping("/suppplier/list")
+    public AjaxResult listSupplier(){
+        List<String> suppliers = jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInfoSupplierList();
+
+
+        return AjaxResult.success(suppliers);
+    }
+
+
+    /**
      * 导出采购订单跟踪信息列表
      */
     @PreAuthorize("@ss.hasPermi('amount:information:export')")

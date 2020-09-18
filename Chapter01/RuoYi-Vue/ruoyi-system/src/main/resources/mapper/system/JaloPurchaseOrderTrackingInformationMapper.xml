@@ -48,6 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
         ORDER BY create_time DESC
 
+        <if test="columnname != null "> , #{columnname}  #{orderby}</if>
+
     </select>
 
     <select id="selectSumJaloPurchaseOrderTrackingInfoList" resultMap="SumJaloPurchaseOrderTrackingInfoResult">
@@ -56,6 +58,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             sum(prepayment_amount_payable) sum_prepayment_amount_payable,
             sum(prepayment_amount_paid) sum_prepayment_amount_paid
         FROM
+            jalo_purchase_order_tracking_information
+    </select>
+
+    <select id="selectJaloPurchaseOrderTrackingInfoSupplierList" resultType="java.lang.String">
+       SELECT DISTINCT(supplier)
+       FROM
             jalo_purchase_order_tracking_information
     </select>
     

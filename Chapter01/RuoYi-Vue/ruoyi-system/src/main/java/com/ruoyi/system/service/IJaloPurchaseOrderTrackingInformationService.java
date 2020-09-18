@@ -62,5 +62,6 @@ public interface IJaloPurchaseOrderTrackingInformationService
 
     public List<SumJaloPurchaseOrderTrackingInfo> selectSumJaloPurchaseOrderTrackingInfoList();
 
+    public List<String> selectJaloPurchaseOrderTrackingInfoSupplierList();
 
 }
