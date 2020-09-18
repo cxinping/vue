@@ -3,6 +3,7 @@ package com.ruoyi.system.service;
 import java.util.List;
 import com.ruoyi.system.domain.JaloPurchaseOrderTrackingInformation;
 import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
+import com.ruoyi.system.vo.SupplierVo;
 
 /**
  * 采购订单跟踪信息Service接口
@@ -62,6 +63,6 @@ public interface IJaloPurchaseOrderTrackingInformationService
 
     public List<SumJaloPurchaseOrderTrackingInfo> selectSumJaloPurchaseOrderTrackingInfoList();
 
-    public List<String> selectJaloPurchaseOrderTrackingInfoSupplierList();
+    public List<SupplierVo> selectJaloPurchaseOrderTrackingInfoSupplierList();
 
 }

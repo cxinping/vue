@@ -3,7 +3,11 @@ package com.ruoyi.web.controller.jalohome;
 import java.util.Date;
 import java.util.List;
 
+import com.ruoyi.common.utils.Threads;
 import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
+import com.ruoyi.system.vo.SupplierVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +37,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/amount/information")
 public class JaloPurchaseOrderTrackingInformationController extends BaseController
 {
+    private final Logger logger = LoggerFactory.getLogger(JaloPurchaseOrderTrackingInformationController.class);
+
     @Autowired
     private IJaloPurchaseOrderTrackingInformationService jaloPurchaseOrderTrackingInformationService;
 
@@ -58,8 +64,9 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
      * */
     @GetMapping("/suppplier/list")
     public AjaxResult listSupplier(){
-        List<String> suppliers = jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInfoSupplierList();
-
+        List<SupplierVo> suppliers = jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInfoSupplierList();
+        //logger.info("---- listSupplier ----");
+        //logger.info(suppliers.toString());
 
         return AjaxResult.success(suppliers);
     }

@@ -1,7 +1,19 @@
 <template>
   <div class="app-container">
-      <!-- 
+    
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="98px">
+        <el-form-item label="供应商" prop="supplier">
+        <el-select v-model="queryParams.supplier" placeholder="请选择供应商">
+          <el-option
+            v-for="item in suppliertList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+        </el-form-item>
+
+      <!-- 
       <el-form-item label="项目名称" prop="projectName">
         <el-input
           v-model="queryParams.projectName"
@@ -89,14 +101,13 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-    
+     -->
       <el-form-item>
         <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
-  -->
-
+ 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
@@ -136,6 +147,7 @@
           v-hasPermi="['amount:information:export']"
         >导出</el-button>
       </el-col>
+      <!--
        <el-col :span="1.5">
         <el-button
           type="cyan"
@@ -144,6 +156,7 @@
           @click="handleQuery"
         >搜索</el-button>
       </el-col>
+       -->
       <el-col :span="1.5">        
          <el-tag>页面显示，单位：元</el-tag>               
       </el-col>
@@ -328,7 +341,7 @@
 </template>
 
 <script>
-import { listInformation, getInformation, delInformation, addInformation, updateInformation, exportInformation } from "@/api/amount/information";
+import { listInformation, getInformation, delInformation, addInformation, updateInformation, exportInformation, listSupplier } from "@/api/amount/information";
 
 export default {
   name: "Information",
@@ -348,6 +361,9 @@ export default {
       total: 0,
       // 采购订单跟踪信息表格数据
       informationList: [],
+
+      suppliertList: [],
+
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -413,6 +429,7 @@ export default {
   },
   created() {
     this.getList();
+    this.querySuppliertList();
   },
   methods: {
     stateFormat(row, column, cellValue) {
@@ -421,6 +438,12 @@ export default {
 			return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
 				return $1 + ',';
 			}).replace(/\.$/, '');
+    },
+
+    querySuppliertList(){
+        listSupplier().then(response => {
+            this.suppliertList = response.data;
+        });
     },
     
     /** 查询采购订单跟踪信息列表 */

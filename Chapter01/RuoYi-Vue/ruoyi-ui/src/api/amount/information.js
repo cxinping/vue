@@ -51,3 +51,11 @@ export function exportInformation(query) {
     params: query
   })
 }
+
+export function listSupplier(){
+  return request({
+    url: '/amount/information/suppplier/list',
+    method: 'get'
+  })
+
+}

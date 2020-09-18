@@ -1,8 +1,10 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
+import com.ruoyi.system.vo.SupplierVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.JaloPurchaseOrderTrackingInformationMapper;
@@ -101,8 +103,25 @@ public class JaloPurchaseOrderTrackingInformationServiceImpl implements IJaloPur
     }
 
     @Override
-    public List<String> selectJaloPurchaseOrderTrackingInfoSupplierList(){
-        return jaloPurchaseOrderTrackingInformationMapper.selectJaloPurchaseOrderTrackingInfoSupplierList();
+    public List<SupplierVo> selectJaloPurchaseOrderTrackingInfoSupplierList(){
+        List<String> supplierList =  jaloPurchaseOrderTrackingInformationMapper.selectJaloPurchaseOrderTrackingInfoSupplierList();
+        List<SupplierVo> supplierVols = new ArrayList<SupplierVo>();
+
+        if(null != supplierList){
+            for(String supplierStr : supplierList){
+                SupplierVo supplierVo = new SupplierVo();
+                supplierVo.setLabel(supplierStr);
+                supplierVo.setValue(supplierStr);
+                supplierVols.add(supplierVo);
+            }
+        }
+        return supplierVols;
     }
+
+
+
+
+
+
 
 }
