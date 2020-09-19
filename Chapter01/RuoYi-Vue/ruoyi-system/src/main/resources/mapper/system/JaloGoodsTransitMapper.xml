@@ -1,98 +1,150 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.JaloGoodsTransitMapper">
-    
+
     <resultMap type="JaloGoodsTransit" id="JaloGoodsTransitResult">
         <result property="id"    column="id"    />
+        <result property="purchaseOrderNumber"    column="purchase_order_number"    />
         <result property="buildingMaterials"    column="building_materials"    />
+        <result property="buildingMaterialsNum"    column="building_materials_num"    />
         <result property="dailyNecessities"    column="daily_necessities"    />
+        <result property="dailyNecessitiesNum"    column="daily_necessities_num"    />
         <result property="device"    column="device"    />
+        <result property="deviceNum"    column="device_num"    />
         <result property="furniture"    column="furniture"    />
+        <result property="furnitureNum"    column="furniture_num"    />
         <result property="kitchenBathroom"    column="kitchen_bathroom"    />
+        <result property="kitchenBathroomNum"    column="kitchen_bathroom_num"    />
         <result property="lamps"    column="lamps"    />
+        <result property="lampsNum"    column="lamps_num"    />
         <result property="softOutfit"    column="soft_outfit"    />
+        <result property="softOutfitNum"    column="soft_outfit_num"    />
         <result property="textile"    column="textile"    />
+        <result property="textileNum"    column="textile_num"    />
         <result property="other"    column="other"    />
+        <result property="otherNum"    column="other_num"    />
         <result property="totalAmount"    column="total_amount"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectJaloGoodsTransitVo">
-        select id, building_materials, daily_necessities, device, furniture, kitchen_bathroom, lamps, soft_outfit, textile, other, create_time, update_time, total_amount from jalo_goods_transit
+        select id, purchase_order_number, building_materials, building_materials_num, daily_necessities, daily_necessities_num, device, device_num, furniture, furniture_num, kitchen_bathroom, kitchen_bathroom_num, lamps, lamps_num, soft_outfit, soft_outfit_num, textile, textile_num, other, other_num, total_amount, create_time, update_time from jalo_goods_transit
     </sql>
 
     <select id="selectJaloGoodsTransitList" parameterType="JaloGoodsTransit" resultMap="JaloGoodsTransitResult">
         <include refid="selectJaloGoodsTransitVo"/>
-        <where>  
+        <where>
+            <if test="purchaseOrderNumber != null  and purchaseOrderNumber != ''"> and purchase_order_number = #{purchaseOrderNumber}</if>
             <if test="buildingMaterials != null "> and building_materials = #{buildingMaterials}</if>
+            <if test="buildingMaterialsNum != null "> and building_materials_num = #{buildingMaterialsNum}</if>
             <if test="dailyNecessities != null "> and daily_necessities = #{dailyNecessities}</if>
+            <if test="dailyNecessitiesNum != null "> and daily_necessities_num = #{dailyNecessitiesNum}</if>
             <if test="device != null "> and device = #{device}</if>
+            <if test="deviceNum != null "> and device_num = #{deviceNum}</if>
             <if test="furniture != null "> and furniture = #{furniture}</if>
+            <if test="furnitureNum != null "> and furniture_num = #{furnitureNum}</if>
             <if test="kitchenBathroom != null "> and kitchen_bathroom = #{kitchenBathroom}</if>
+            <if test="kitchenBathroomNum != null "> and kitchen_bathroom_num = #{kitchenBathroomNum}</if>
             <if test="lamps != null "> and lamps = #{lamps}</if>
+            <if test="lampsNum != null "> and lamps_num = #{lampsNum}</if>
             <if test="softOutfit != null "> and soft_outfit = #{softOutfit}</if>
+            <if test="softOutfitNum != null "> and soft_outfit_num = #{softOutfitNum}</if>
             <if test="textile != null "> and textile = #{textile}</if>
+            <if test="textileNum != null "> and textile_num = #{textileNum}</if>
             <if test="other != null "> and other = #{other}</if>
+            <if test="otherNum != null "> and other_num = #{otherNum}</if>
+            <if test="totalAmount != null "> and total_amount = #{totalAmount}</if>
         </where>
 
         ORDER BY create_time DESC
+
     </select>
-    
+
     <select id="selectJaloGoodsTransitById" parameterType="Long" resultMap="JaloGoodsTransitResult">
         <include refid="selectJaloGoodsTransitVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertJaloGoodsTransit" parameterType="JaloGoodsTransit" useGeneratedKeys="true" keyProperty="id">
         insert into jalo_goods_transit
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="purchaseOrderNumber != null">purchase_order_number,</if>
             <if test="buildingMaterials != null">building_materials,</if>
+            <if test="buildingMaterialsNum != null">building_materials_num,</if>
             <if test="dailyNecessities != null">daily_necessities,</if>
+            <if test="dailyNecessitiesNum != null">daily_necessities_num,</if>
             <if test="device != null">device,</if>
+            <if test="deviceNum != null">device_num,</if>
             <if test="furniture != null">furniture,</if>
+            <if test="furnitureNum != null">furniture_num,</if>
             <if test="kitchenBathroom != null">kitchen_bathroom,</if>
+            <if test="kitchenBathroomNum != null">kitchen_bathroom_num,</if>
             <if test="lamps != null">lamps,</if>
+            <if test="lampsNum != null">lamps_num,</if>
             <if test="softOutfit != null">soft_outfit,</if>
+            <if test="softOutfitNum != null">soft_outfit_num,</if>
             <if test="textile != null">textile,</if>
+            <if test="textileNum != null">textile_num,</if>
             <if test="other != null">other,</if>
+            <if test="otherNum != null">other_num,</if>
+            <if test="totalAmount != null">total_amount,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
-            <if test="totalAmount != null">total_amount,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="purchaseOrderNumber != null">#{purchaseOrderNumber},</if>
             <if test="buildingMaterials != null">#{buildingMaterials},</if>
+            <if test="buildingMaterialsNum != null">#{buildingMaterialsNum},</if>
             <if test="dailyNecessities != null">#{dailyNecessities},</if>
+            <if test="dailyNecessitiesNum != null">#{dailyNecessitiesNum},</if>
             <if test="device != null">#{device},</if>
+            <if test="deviceNum != null">#{deviceNum},</if>
             <if test="furniture != null">#{furniture},</if>
+            <if test="furnitureNum != null">#{furnitureNum},</if>
             <if test="kitchenBathroom != null">#{kitchenBathroom},</if>
+            <if test="kitchenBathroomNum != null">#{kitchenBathroomNum},</if>
             <if test="lamps != null">#{lamps},</if>
+            <if test="lampsNum != null">#{lampsNum},</if>
             <if test="softOutfit != null">#{softOutfit},</if>
+            <if test="softOutfitNum != null">#{softOutfitNum},</if>
             <if test="textile != null">#{textile},</if>
+            <if test="textileNum != null">#{textileNum},</if>
             <if test="other != null">#{other},</if>
+            <if test="otherNum != null">#{otherNum},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
-            <if test="totalAmount != null">#{totalAmount},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateJaloGoodsTransit" parameterType="JaloGoodsTransit">
         update jalo_goods_transit
         <trim prefix="SET" suffixOverrides=",">
+            <if test="purchaseOrderNumber != null">purchase_order_number = #{purchaseOrderNumber},</if>
             <if test="buildingMaterials != null">building_materials = #{buildingMaterials},</if>
+            <if test="buildingMaterialsNum != null">building_materials_num = #{buildingMaterialsNum},</if>
             <if test="dailyNecessities != null">daily_necessities = #{dailyNecessities},</if>
+            <if test="dailyNecessitiesNum != null">daily_necessities_num = #{dailyNecessitiesNum},</if>
             <if test="device != null">device = #{device},</if>
+            <if test="deviceNum != null">device_num = #{deviceNum},</if>
             <if test="furniture != null">furniture = #{furniture},</if>
+            <if test="furnitureNum != null">furniture_num = #{furnitureNum},</if>
             <if test="kitchenBathroom != null">kitchen_bathroom = #{kitchenBathroom},</if>
+            <if test="kitchenBathroomNum != null">kitchen_bathroom_num = #{kitchenBathroomNum},</if>
             <if test="lamps != null">lamps = #{lamps},</if>
+            <if test="lampsNum != null">lamps_num = #{lampsNum},</if>
             <if test="softOutfit != null">soft_outfit = #{softOutfit},</if>
+            <if test="softOutfitNum != null">soft_outfit_num = #{softOutfitNum},</if>
             <if test="textile != null">textile = #{textile},</if>
+            <if test="textileNum != null">textile_num = #{textileNum},</if>
             <if test="other != null">other = #{other},</if>
+            <if test="otherNum != null">other_num = #{otherNum},</if>
+            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
         </trim>
         where id = #{id}
     </update>
@@ -102,10 +154,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteJaloGoodsTransitByIds" parameterType="String">
-        delete from jalo_goods_transit where id in 
+        delete from jalo_goods_transit where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-    
+
 </mapper>

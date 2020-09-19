@@ -44,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="prepaymentAmountPaid != null "> and prepayment_amount_paid = #{prepaymentAmountPaid}</if>
             <if test="prepaymentPayableTime != null "> and prepayment_payable_time = #{prepaymentPayableTime}</if>
             <if test="prepaymentPayableAmount != null "> and prepayment_payable_amount = #{prepaymentPayableAmount}</if>
+            <if test="param != null "> and supplier like concat('%',#{param} ,'%' ) </if>
         </where>
 
         ORDER BY create_time DESC

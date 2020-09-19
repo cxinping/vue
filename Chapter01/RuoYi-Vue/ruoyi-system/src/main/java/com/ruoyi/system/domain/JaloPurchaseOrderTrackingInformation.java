@@ -69,6 +69,16 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
 
     private String orderby;
 
+    private String param;
+
+    public String getParam() {
+        return param;
+    }
+
+    public void setParam(String param) {
+        this.param = param;
+    }
+
     public String getColumnname() {
         return columnname;
     }
@@ -201,6 +211,7 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
                 ", prepaymentPayableAmount=" + prepaymentPayableAmount +
                 ", columnname='" + columnname + '\'' +
                 ", orderby='" + orderby + '\'' +
+                ", param='" + param + '\'' +
                 '}';
     }
 }

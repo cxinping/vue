@@ -49,6 +49,10 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
     @GetMapping("/list")
     public TableDataInfo list(JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation)
     {
+        logger.info("---- list ----" );
+        logger.info(jaloPurchaseOrderTrackingInformation.toString() );
+
+
         startPage();
         List<JaloPurchaseOrderTrackingInformation> list = jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInformationList(jaloPurchaseOrderTrackingInformation);
 

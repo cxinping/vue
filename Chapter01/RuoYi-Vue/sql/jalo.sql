@@ -1,3 +1,34 @@
+-- ----------------------------
+-- Table structure for jalo_goods_transit 在途物资
+-- ----------------------------
+DROP TABLE IF EXISTS `jalo_goods_transit`;
+CREATE TABLE `jalo_goods_transit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `purchase_order_number` varchar(100) DEFAULT ''  COMMENT '采购订单号',
+  `building_materials` decimal(10,2) DEFAULT '0.00' COMMENT '建材',
+  `building_materials_num` decimal(10,2) DEFAULT '0.00' COMMENT '建材数量',
+  `daily_necessities` decimal(10,2) DEFAULT '0.00' COMMENT '日用品',
+  `daily_necessities_num` decimal(10,2) DEFAULT '0.00' COMMENT '日用品数量',
+  `device` decimal(10,2) DEFAULT '0.00' COMMENT '电器',
+  `device_num` decimal(10,2) DEFAULT '0.00' COMMENT '电器数量',
+  `furniture` decimal(10,2) DEFAULT '0.00' COMMENT '家具',
+  `furniture_num` decimal(10,2) DEFAULT '0.00' COMMENT '家具数量',
+  `kitchen_bathroom` decimal(10,2) DEFAULT '0.00' COMMENT '厨房卫浴',
+  `kitchen_bathroom_num` decimal(10,2) DEFAULT '0.00' COMMENT '厨房卫浴数量',
+  `lamps` decimal(10,2) DEFAULT '0.00' COMMENT '灯具',
+  `lamps_num` decimal(10,2) DEFAULT '0.00' COMMENT '灯具数量',
+  `soft_outfit` decimal(10,2) DEFAULT '0.00' COMMENT '软装',
+  `soft_outfit_num` decimal(10,2) DEFAULT '0.00' COMMENT '软装数量',
+  `textile` decimal(10,2) DEFAULT '0.00' COMMENT '纺织品',
+  `textile_num` decimal(10,2) DEFAULT '0.00' COMMENT '纺织品数量',
+  `other` decimal(10,2) DEFAULT '0.00' COMMENT '其他',
+  `other_num` decimal(10,2) DEFAULT '0.00' COMMENT '其他数量',
+  `total_amount` decimal(10,2) DEFAULT '0.00' COMMENT '合计金额',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='在途物资表';
+
 
 -- ----------------------------
 -- Table structure for jalo_purchase_order_tracking_information

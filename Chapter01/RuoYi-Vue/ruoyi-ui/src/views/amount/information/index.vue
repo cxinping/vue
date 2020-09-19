@@ -2,16 +2,15 @@
   <div class="app-container">
     
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="98px">
-        <el-form-item label="供应商" prop="supplier">
-        <el-select v-model="queryParams.supplier" placeholder="请选择供应商">
-          <el-option
-            v-for="item in suppliertList"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-        </el-form-item>
+        <el-form-item label="模糊查询" prop="param">
+        <el-input
+          v-model="queryParams.param"
+          placeholder="请输入名称"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
 
       <!-- 
       <el-form-item label="项目名称" prop="projectName">
@@ -382,6 +381,7 @@ export default {
         prepaymentAmountPaid: null,
         prepaymentPayableTime: null,
         prepaymentPayableAmount: null,
+        param: null,
       },
       // 表单参数
       form: {},
@@ -475,7 +475,8 @@ export default {
         prepaymentPayableTime: null,
         prepaymentPayableAmount: null,
         createTime: null,
-        updateTime: null
+        updateTime: null,
+        param: null,
       };
       this.resetForm("form");
     },
