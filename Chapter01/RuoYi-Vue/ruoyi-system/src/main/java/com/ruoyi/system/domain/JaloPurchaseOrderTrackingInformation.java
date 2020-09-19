@@ -65,6 +65,18 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
     //@Excel(name = "应付预付款金额")
     private BigDecimal prepaymentPayableAmount;
 
+    /** 后续进度 */
+    @Excel(name = "后续进度")
+    private String progress;
+
+    /** 印花税 */
+    @Excel(name = "印花税")
+    private String stampduty;
+
+    /** 合同签署情况 */
+    @Excel(name = "合同签署情况")
+    private String contractsigning;
+
     private String columnname;
 
     private String orderby;
@@ -77,6 +89,30 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
 
     public void setParam(String param) {
         this.param = param;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
+    }
+
+    public String getStampduty() {
+        return stampduty;
+    }
+
+    public void setStampduty(String stampduty) {
+        this.stampduty = stampduty;
+    }
+
+    public String getContractsigning() {
+        return contractsigning;
+    }
+
+    public void setContractsigning(String contractsigning) {
+        this.contractsigning = contractsigning;
     }
 
     public String getColumnname() {
@@ -209,6 +245,9 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
                 ", prepaymentAmountPaid=" + prepaymentAmountPaid +
                 ", prepaymentPayableTime=" + prepaymentPayableTime +
                 ", prepaymentPayableAmount=" + prepaymentPayableAmount +
+                ", progress='" + progress + '\'' +
+                ", stampduty='" + stampduty + '\'' +
+                ", contractsigning='" + contractsigning + '\'' +
                 ", columnname='" + columnname + '\'' +
                 ", orderby='" + orderby + '\'' +
                 ", param='" + param + '\'' +

@@ -181,11 +181,15 @@
           <span>{{ parseTime(scope.row.contractSigningTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
+
+      <!-- 
       <el-table-column label="合同结束时间" align="center" prop="contractEndTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.contractEndTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
+      -->
+
       <el-table-column label="合同金额" align="center" prop="contractAmount"  :formatter="stateFormat"  />
       
       <el-table-column label="采购货款"  align="center">   
@@ -199,6 +203,10 @@
        
       </el-table-column>
 
+      <el-table-column label="后续进度" align="center" prop="progress"    />
+      <el-table-column label="印花税" align="center" prop="stampduty"    />
+      <el-table-column label="合同签署情况" align="center" prop="contractsigning"    />
+
       <!-- 
       <el-table-column label="预付款金额"> 
         <el-table-column label="应付预付款时间" align="center" prop="prepaymentPayableTime" width="130">
@@ -208,13 +216,15 @@
         </el-table-column>
         <el-table-column label="应付预付款金额" align="center" prop="prepaymentPayableAmount" />
       </el-table-column>
-      -->
+     -->
 
       <el-table-column label="更新时间" align="center" prop="createTime" width="130">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
         </template>
       </el-table-column>      
+      
+      <!-- 
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -233,6 +243,9 @@
           >删除</el-button>
         </template>
       </el-table-column>
+      -->
+
+
     </el-table>
     
     <pagination
@@ -309,6 +322,46 @@
         </el-form-item>
     </el-col>
   </el-row>    
+  <el-row>
+    <el-col :span="12">
+      <el-form-item label="后续进度" prop="progress" required >
+              <el-select v-model="form.progress" placeholder="请选择">
+                <el-option
+                  v-for="item in progress_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+      </el-form-item>
+    </el-col>
+    <el-col :span="12">
+        <el-form-item label="印花税" prop="stampduty" required >
+              <el-select v-model="form.stampduty" placeholder="请选择">
+                <el-option
+                  v-for="item in stampduty_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+      </el-form-item>
+    </el-col>    
+  </el-row>  
+  <el-row>
+    <el-col :span="12">
+      <el-form-item label="合同签署情况" prop="contractsigning" required >
+              <el-select v-model="form.contractsigning" placeholder="请选择">
+                <el-option
+                  v-for="item in contractsigning_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+      </el-form-item>
+    </el-col>    
+  </el-row>   
 
   <!-- 
   <el-row>
@@ -363,6 +416,37 @@ export default {
 
       suppliertList: [],
 
+      progress_options: [
+        {
+          value: '进行中',
+          label: '进行中'
+        }, 
+        {
+          value: '已结束',
+          label: '已结束'
+        }
+      ],
+      stampduty_options: [
+        {
+          value: '已申报',
+          label: '已申报'
+        }, 
+        {
+          value: '未申报',
+          label: '未申报'
+        }
+      ],
+      contractsigning_options: [
+        {
+          value: '进行中',
+          label: '进行中'
+        }, 
+        {
+          value: '已完成',
+          label: '已完成'
+        }
+      ],
+
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -382,6 +466,9 @@ export default {
         prepaymentPayableTime: null,
         prepaymentPayableAmount: null,
         param: null,
+        progress: null,
+        stampduty: null,
+        contractsigning: null
       },
       // 表单参数
       form: {},
@@ -477,6 +564,9 @@ export default {
         createTime: null,
         updateTime: null,
         param: null,
+        progress: null,
+        stampduty: null,
+        contractsigning: null
       };
       this.resetForm("form");
     },

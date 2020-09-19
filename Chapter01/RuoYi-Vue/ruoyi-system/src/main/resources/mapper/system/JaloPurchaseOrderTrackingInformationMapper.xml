@@ -18,6 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="prepaymentPayableAmount"    column="prepayment_payable_amount"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="progress"    column="progress"    />
+        <result property="stampduty"    column="stampduty"    />
+        <result property="contractsigning"    column="contractsigning"    />
     </resultMap>
 
     <resultMap id="SumJaloPurchaseOrderTrackingInfoResult" type="SumJaloPurchaseOrderTrackingInfo">
@@ -28,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJaloPurchaseOrderTrackingInformationVo">
-        select id, project_name, supplier, contract_signing_time, contract_end_time, contract_amount, payable_time, prepayment_amount_payable, prepayment_amount_paid, prepayment_payable_time, prepayment_payable_amount, create_time, update_time from jalo_purchase_order_tracking_information
+         select id, project_name, supplier, contract_signing_time, contract_end_time, contract_amount, payable_time, prepayment_amount_payable, prepayment_amount_paid, prepayment_payable_time, prepayment_payable_amount, create_time, update_time, progress, stampduty, contractsigning from jalo_purchase_order_tracking_information
     </sql>
 
     <select id="selectJaloPurchaseOrderTrackingInformationList" parameterType="JaloPurchaseOrderTrackingInformation" resultMap="JaloPurchaseOrderTrackingInformationResult">
@@ -44,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="prepaymentAmountPaid != null "> and prepayment_amount_paid = #{prepaymentAmountPaid}</if>
             <if test="prepaymentPayableTime != null "> and prepayment_payable_time = #{prepaymentPayableTime}</if>
             <if test="prepaymentPayableAmount != null "> and prepayment_payable_amount = #{prepaymentPayableAmount}</if>
-            <if test="param != null "> and supplier like concat('%',#{param} ,'%' ) </if>
+            <if test="param != null "> and ( supplier like concat('%',#{param} ,'%' )  or  progress  like concat('%',#{param} ,'%' )  or stampduty like concat('%',#{param} ,'%' ) or contractsigning  like concat('%',#{param} ,'%' )   )</if>
         </where>
 
         ORDER BY create_time DESC
@@ -72,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectJaloPurchaseOrderTrackingInformationVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertJaloPurchaseOrderTrackingInformation" parameterType="JaloPurchaseOrderTrackingInformation" useGeneratedKeys="true" keyProperty="id">
         insert into jalo_purchase_order_tracking_information
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -88,7 +91,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="prepaymentPayableAmount != null">prepayment_payable_amount,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
-         </trim>
+            <if test="progress != null">progress,</if>
+            <if test="stampduty != null">stampduty,</if>
+            <if test="contractsigning != null">contractsigning,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="projectName != null">#{projectName},</if>
             <if test="supplier != null">#{supplier},</if>
@@ -102,7 +108,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="prepaymentPayableAmount != null">#{prepaymentPayableAmount},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
-         </trim>
+            <if test="progress != null">#{progress},</if>
+            <if test="stampduty != null">#{stampduty},</if>
+            <if test="contractsigning != null">#{contractsigning},</if>
+        </trim>
     </insert>
 
     <update id="updateJaloPurchaseOrderTrackingInformation" parameterType="JaloPurchaseOrderTrackingInformation">
@@ -120,6 +129,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="prepaymentPayableAmount != null">prepayment_payable_amount = #{prepaymentPayableAmount},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="progress != null">progress = #{progress},</if>
+            <if test="stampduty != null">stampduty = #{stampduty},</if>
+            <if test="contractsigning != null">contractsigning = #{contractsigning},</if>
         </trim>
         where id = #{id}
     </update>
