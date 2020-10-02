@@ -43,6 +43,10 @@ public class JaloAvailableFunds extends BaseEntity
     @Excel(name = "京东")
     private BigDecimal jingdong;
 
+    /** 现金 */
+    @Excel(name = "现金")
+    private BigDecimal cash;
+
     private BigDecimal totalAmount;
 
     public BigDecimal getTotalAmount() {
@@ -117,6 +121,14 @@ public class JaloAvailableFunds extends BaseEntity
         return jingdong;
     }
 
+    public BigDecimal getCash() {
+        return cash;
+    }
+
+    public void setCash(BigDecimal cash) {
+        this.cash = cash;
+    }
+
     @Override
     public String toString() {
         return "JaloAvailableFunds{" +
@@ -127,6 +139,7 @@ public class JaloAvailableFunds extends BaseEntity
                 ", youZan=" + youZan +
                 ", alipay=" + alipay +
                 ", jingdong=" + jingdong +
+                ", cash=" + cash +
                 ", totalAmount=" + totalAmount +
                 '}';
     }

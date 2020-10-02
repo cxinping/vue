@@ -134,6 +134,7 @@
       <el-table-column label="有赞" align="center" prop="youZan" :formatter="stateFormat" />
       <el-table-column label="支付宝" align="center" prop="alipay" :formatter="stateFormat" />
       <el-table-column label="京东" align="center" prop="jingdong" :formatter="stateFormat" />
+      <el-table-column label="现金" align="center" prop="cash" :formatter="stateFormat" />
       <el-table-column label="合计金额" align="center" prop="totalAmount" :formatter="stateFormat" />
 
       <el-table-column label="更新时间" align="center" prop="createTime" width="180">
@@ -190,6 +191,9 @@
         <el-form-item label="京东" prop="jingdong" required >
           <el-input v-model="form.jingdong" placeholder="请输入京东的可用资金余额，单位：元" type="number" clearable/>
         </el-form-item>
+        <el-form-item label="现金" prop="cash" required >
+          <el-input v-model="form.cash" placeholder="请输入现金的可用资金余额，单位：元" type="number" clearable/>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -234,6 +238,7 @@ export default {
         youZan: null,
         alipay: null,
         jingdong: null,
+        cash: null
       },
       // 表单参数
       form: {},
@@ -256,6 +261,9 @@ export default {
           ],
           jingdong: [
             { required: true, message: '请输入京东的可用资金余额，单位：元', trigger: 'blur' }             
+          ],
+          cash: [
+            { required: true, message: '请输入现金的可用资金余额，单位：元', trigger: 'blur' }             
           ]
 
 
@@ -298,6 +306,7 @@ export default {
         youZan: null,
         alipay: null,
         jingdong: null,
+        cash: null,
         createTime: null,
         updateTime: null
       };

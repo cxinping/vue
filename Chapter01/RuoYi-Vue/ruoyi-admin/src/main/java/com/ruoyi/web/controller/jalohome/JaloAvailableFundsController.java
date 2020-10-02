@@ -86,7 +86,8 @@ public class JaloAvailableFundsController extends BaseController
                                     .add(jaloAvailableFunds.getJingdong())
                                     .add(jaloAvailableFunds.getMerchantsBank())
                                     .add(jaloAvailableFunds.getPufaBank())
-                .add(jaloAvailableFunds.getYouZan());
+                                    .add(jaloAvailableFunds.getYouZan())
+                                    .add(jaloAvailableFunds.getCash());
 
         jaloAvailableFunds.setTotalAmount(totalAmount );
 
@@ -106,7 +107,8 @@ public class JaloAvailableFundsController extends BaseController
                 .add(jaloAvailableFunds.getJingdong())
                 .add(jaloAvailableFunds.getMerchantsBank())
                 .add(jaloAvailableFunds.getPufaBank())
-                .add(jaloAvailableFunds.getYouZan());
+                .add(jaloAvailableFunds.getYouZan())
+                .add(jaloAvailableFunds.getCash());
 
         jaloAvailableFunds.setTotalAmount(totalAmount );
 
