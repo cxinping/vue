@@ -170,8 +170,15 @@ public class JaloInventorySumController extends BaseController
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)
     {
-        jaloInventoryDetailService.deleteJaloInventoryDetailByInventorySumId(ids[0]);
-        return toAjax(jaloInventorySumService.deleteJaloInventorySumByIds(ids));
+        int result = 0;
+        try{
+            jaloInventoryDetailService.deleteJaloInventoryDetailByInventorySumId(ids[0]);
+            result = jaloInventorySumService.deleteJaloInventorySumByIds(ids);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return toAjax(result);
     }
 
 

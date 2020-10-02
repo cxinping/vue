@@ -3,25 +3,31 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.JaloInventorySumMapper">
-    
+
     <resultMap type="JaloInventorySum" id="JaloInventorySumResult">
         <result property="id"    column="id"    />
+        <result property="product"    column="product"    />
         <result property="sumSaleableInventoryAmount"    column="sum_saleable_inventory_amount"    />
+        <result property="sumSaleableInventoryNum"    column="sum_saleable_inventory_num"    />
         <result property="sumUnsaleableInventoryAmount"    column="sum_unsaleable_inventory_amount"    />
+        <result property="sumUnsaleableInventoryNum"    column="sum_unsaleable_inventory_num"    />
         <result property="sumInventoryAmount"    column="sum_inventory_amount"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectJaloInventorySumVo">
-        select id, sum_saleable_inventory_amount, sum_unsaleable_inventory_amount, sum_inventory_amount, create_time, update_time from jalo_inventory_sum
+        select id, product, sum_saleable_inventory_amount, sum_saleable_inventory_num, sum_unsaleable_inventory_amount, sum_unsaleable_inventory_num, sum_inventory_amount, create_time, update_time from jalo_inventory_sum
     </sql>
 
     <select id="selectJaloInventorySumList" parameterType="JaloInventorySum" resultMap="JaloInventorySumResult">
         <include refid="selectJaloInventorySumVo"/>
-        <where>  
+        <where>
+            <if test="product != null  and product != ''"> and product = #{product}</if>
             <if test="sumSaleableInventoryAmount != null "> and sum_saleable_inventory_amount = #{sumSaleableInventoryAmount}</if>
+            <if test="sumSaleableInventoryNum != null "> and sum_saleable_inventory_num = #{sumSaleableInventoryNum}</if>
             <if test="sumUnsaleableInventoryAmount != null "> and sum_unsaleable_inventory_amount = #{sumUnsaleableInventoryAmount}</if>
+            <if test="sumUnsaleableInventoryNum != null "> and sum_unsaleable_inventory_num = #{sumUnsaleableInventoryNum}</if>
             <if test="sumInventoryAmount != null "> and sum_inventory_amount = #{sumInventoryAmount}</if>
         </where>
 
@@ -32,32 +38,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectJaloInventorySumVo"/>
         where id = #{id}
     </select>
-        
-    <insert id="insertJaloInventorySum" parameterType="JaloInventorySum" useGeneratedKeys="true" keyProperty="id">
+
+    <insert id="insertJaloInventorySum" parameterType="JaloInventorySum">
         insert into jalo_inventory_sum
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
+            <if test="product != null">product,</if>
             <if test="sumSaleableInventoryAmount != null">sum_saleable_inventory_amount,</if>
+            <if test="sumSaleableInventoryNum != null">sum_saleable_inventory_num,</if>
             <if test="sumUnsaleableInventoryAmount != null">sum_unsaleable_inventory_amount,</if>
+            <if test="sumUnsaleableInventoryNum != null">sum_unsaleable_inventory_num,</if>
             <if test="sumInventoryAmount != null">sum_inventory_amount,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
+            <if test="product != null">#{product},</if>
             <if test="sumSaleableInventoryAmount != null">#{sumSaleableInventoryAmount},</if>
+            <if test="sumSaleableInventoryNum != null">#{sumSaleableInventoryNum},</if>
             <if test="sumUnsaleableInventoryAmount != null">#{sumUnsaleableInventoryAmount},</if>
+            <if test="sumUnsaleableInventoryNum != null">#{sumUnsaleableInventoryNum},</if>
             <if test="sumInventoryAmount != null">#{sumInventoryAmount},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateJaloInventorySum" parameterType="JaloInventorySum">
         update jalo_inventory_sum
         <trim prefix="SET" suffixOverrides=",">
+            <if test="product != null">product = #{product},</if>
             <if test="sumSaleableInventoryAmount != null">sum_saleable_inventory_amount = #{sumSaleableInventoryAmount},</if>
+            <if test="sumSaleableInventoryNum != null">sum_saleable_inventory_num = #{sumSaleableInventoryNum},</if>
             <if test="sumUnsaleableInventoryAmount != null">sum_unsaleable_inventory_amount = #{sumUnsaleableInventoryAmount},</if>
+            <if test="sumUnsaleableInventoryNum != null">sum_unsaleable_inventory_num = #{sumUnsaleableInventoryNum},</if>
             <if test="sumInventoryAmount != null">sum_inventory_amount = #{sumInventoryAmount},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>

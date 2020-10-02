@@ -23,13 +23,21 @@ public class JaloInventorySum extends BaseEntity
 
     private String product;
 
-    /** 合计金额汇总 */
-    @Excel(name = "合计金额汇总")
+    /** 可销售库存金额汇总 */
+    @Excel(name = "可销售库存金额汇总")
     private BigDecimal sumSaleableInventoryAmount;
+
+    /** 可销售库存数量汇总 */
+    @Excel(name = "可销售库存数量汇总")
+    private Long sumSaleableInventoryNum;
 
     /** 不可销售库存金额汇总 */
     @Excel(name = "不可销售库存金额汇总")
     private BigDecimal sumUnsaleableInventoryAmount;
+
+    /** 不可销售库存数量汇总 */
+    @Excel(name = "不可销售库存数量汇总")
+    private Long sumUnsaleableInventoryNum;
 
     /** 合计金额汇总 */
     @Excel(name = "合计金额汇总")
@@ -91,6 +99,21 @@ public class JaloInventorySum extends BaseEntity
         return sumInventoryAmount;
     }
 
+    public Long getSumSaleableInventoryNum() {
+        return sumSaleableInventoryNum;
+    }
+
+    public void setSumSaleableInventoryNum(Long sumSaleableInventoryNum) {
+        this.sumSaleableInventoryNum = sumSaleableInventoryNum;
+    }
+
+    public Long getSumUnsaleableInventoryNum() {
+        return sumUnsaleableInventoryNum;
+    }
+
+    public void setSumUnsaleableInventoryNum(Long sumUnsaleableInventoryNum) {
+        this.sumUnsaleableInventoryNum = sumUnsaleableInventoryNum;
+    }
 
     @Override
     public String toString() {
@@ -98,7 +121,9 @@ public class JaloInventorySum extends BaseEntity
                 "id='" + id + '\'' +
                 ", product='" + product + '\'' +
                 ", sumSaleableInventoryAmount=" + sumSaleableInventoryAmount +
+                ", sumSaleableInventoryNum=" + sumSaleableInventoryNum +
                 ", sumUnsaleableInventoryAmount=" + sumUnsaleableInventoryAmount +
+                ", sumUnsaleableInventoryNum=" + sumUnsaleableInventoryNum +
                 ", sumInventoryAmount=" + sumInventoryAmount +
                 ", inventoryDetails=" + inventoryDetails +
                 '}';

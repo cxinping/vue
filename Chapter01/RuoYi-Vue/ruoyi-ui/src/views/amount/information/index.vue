@@ -174,7 +174,7 @@
       border style="width: 100%" >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="编号" align="center" prop="id" />-->
-      <el-table-column label="项目名称" align="center" prop="projectName" />
+      <el-table-column label="采购订单号" align="center" prop="projectName" />
       <el-table-column label="供应商" align="center" prop="supplier" />
       <el-table-column label="合同签订时间" align="center" prop="contractSigningTime" width="130">
         <template slot-scope="scope">
@@ -261,8 +261,8 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
         <el-col :span="12">
-          <el-form-item label="项目名称" prop="projectName"   >
-            <el-input v-model="form.projectName" placeholder="请输入项目名称" />
+          <el-form-item label="采购订单号" prop="projectName"   >
+            <el-input v-model="form.projectName" placeholder="请输入采购订单号" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -351,6 +351,8 @@
   <el-row>
     <el-col :span="12">
       <el-form-item label="合同签署情况" prop="contractsigning" required >
+            <el-input v-model="form.contractsigning" placeholder="请输入合同签署情况" />
+            <!-- 
               <el-select v-model="form.contractsigning" placeholder="请选择">
                 <el-option
                   v-for="item in contractsigning_options"
@@ -359,6 +361,7 @@
                   :value="item.value">
                 </el-option>
               </el-select>
+          -->
       </el-form-item>
     </el-col>    
   </el-row>   
@@ -500,7 +503,11 @@ export default {
           ],
           prepaymentAmountPaid: [
             { required: true, message: '请输入应付尾款金额，单位：元', trigger: 'blur' }             
-          ] 
+          ] ,
+
+          contractsigning: [
+            { required: true, message: '请输入合同签署情况', trigger: 'blur' }             
+          ]
 
           /** 
           prepaymentPayableTime: [

@@ -23,9 +23,17 @@ public class JaloInventoryDetail extends BaseEntity implements Comparable<JaloIn
     @Excel(name = "产品")
     private String product;
 
+    /** 可销售库存数量 */
+    @Excel(name = "可销售库存数量")
+    private Long saleableInventoryNum;
+
     /** 可销售库存金额 */
     @Excel(name = "可销售库存金额")
     private BigDecimal saleableInventoryAmount;
+
+    /** 不可销售库存数量 */
+    @Excel(name = "不可销售库存数量")
+    private Long unsaleableInventoryNum;
 
     /** 不可销售库存金额 */
     @Excel(name = "不可销售库存金额")
@@ -39,9 +47,25 @@ public class JaloInventoryDetail extends BaseEntity implements Comparable<JaloIn
     @Excel(name = "顺序号")
     private Integer orderNum;
 
+    /** $column.columnComment */
+    @Excel(name = "顺序号")
     private String jaloInventorySumId;
 
+    public Long getSaleableInventoryNum() {
+        return saleableInventoryNum;
+    }
 
+    public void setSaleableInventoryNum(Long saleableInventoryNum) {
+        this.saleableInventoryNum = saleableInventoryNum;
+    }
+
+    public Long getUnsaleableInventoryNum() {
+        return unsaleableInventoryNum;
+    }
+
+    public void setUnsaleableInventoryNum(Long unsaleableInventoryNum) {
+        this.unsaleableInventoryNum = unsaleableInventoryNum;
+    }
 
     public String getJaloInventorySumId() {
         return jaloInventorySumId;
@@ -102,7 +126,9 @@ public class JaloInventoryDetail extends BaseEntity implements Comparable<JaloIn
         return "JaloInventoryDetail{" +
                 "id='" + id + '\'' +
                 ", product='" + product + '\'' +
+                ", saleableInventoryNum=" + saleableInventoryNum +
                 ", saleableInventoryAmount=" + saleableInventoryAmount +
+                ", unsaleableInventoryNum=" + unsaleableInventoryNum +
                 ", unsaleableInventoryAmount=" + unsaleableInventoryAmount +
                 ", inventoryAmount=" + inventoryAmount +
                 ", orderNum=" + orderNum +
