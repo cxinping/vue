@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="totalAmount != null "> and total_amount = #{totalAmount}</if>
             <if test="totalNum != null "> and total_num = #{totalNum}</if>
         </where>
+        ORDER BY update_time DESC
     </select>
     
     <select id="selectJaloGoodsTransitSumById" parameterType="String" resultMap="JaloGoodsTransitSumResult">

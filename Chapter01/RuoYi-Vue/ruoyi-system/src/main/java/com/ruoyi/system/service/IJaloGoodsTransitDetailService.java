@@ -60,4 +60,5 @@ public interface IJaloGoodsTransitDetailService
      * @return 结果
      */
     public int deleteJaloGoodsTransitDetailById(String id);
+
 }

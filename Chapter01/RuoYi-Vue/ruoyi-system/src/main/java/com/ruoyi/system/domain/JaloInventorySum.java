@@ -45,6 +45,16 @@ public class JaloInventorySum extends BaseEntity
 
     private List<JaloInventoryDetail> inventoryDetails = null;
 
+    private String param;
+
+    public String getParam() {
+        return param;
+    }
+
+    public void setParam(String param) {
+        this.param = param;
+    }
+
     public void setId(String id)
     {
         this.id = id;
@@ -126,6 +136,7 @@ public class JaloInventorySum extends BaseEntity
                 ", sumUnsaleableInventoryNum=" + sumUnsaleableInventoryNum +
                 ", sumInventoryAmount=" + sumInventoryAmount +
                 ", inventoryDetails=" + inventoryDetails +
+                ", param='" + param + '\'' +
                 '}';
     }
 }

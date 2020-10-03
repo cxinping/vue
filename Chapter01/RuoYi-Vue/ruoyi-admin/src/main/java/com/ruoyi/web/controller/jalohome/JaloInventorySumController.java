@@ -134,7 +134,6 @@ public class JaloInventorySumController extends BaseController
         System.out.println("------ edit step 0 --------");
         System.out.println( jaloInventorySum );
 
-
         String jaloInventorySumId = jaloInventorySum.getId();
         if(null != jaloInventorySumId ){
             jaloInventoryDetailService.deleteJaloInventoryDetailByInventorySumId(jaloInventorySumId );

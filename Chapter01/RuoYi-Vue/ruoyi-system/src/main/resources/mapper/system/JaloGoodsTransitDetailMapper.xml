@@ -11,14 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="purchaseOrderNumber"    column="purchase_order_number"    />
         <result property="num"    column="num"    />
         <result property="amount"    column="amount"    />
-        <result property="orderNumber"    column="order_number"    />
-        <result property="jaloGoodsTransitSumId"    column="jalo_goods_transit_sum_id"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectJaloGoodsTransitDetailVo">
-        select id, product, support, purchase_order_number, num, amount , order_number, jalo_goods_transit_sum_id, create_time, update_time from jalo_goods_transit_detail
+        select id, product, support, purchase_order_number, num, amount ,  create_time, update_time from jalo_goods_transit_detail
     </sql>
 
     <select id="selectJaloGoodsTransitDetailList" parameterType="JaloGoodsTransitDetail" resultMap="JaloGoodsTransitDetailResult">
@@ -29,8 +27,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="purchaseOrderNumber != null  and purchaseOrderNumber != ''"> and purchase_order_number = #{purchaseOrderNumber}</if>
             <if test="num != null "> and num = #{num}</if>
             <if test="amount != null "> and amount = #{amount}</if>
-            <if test="orderNumber != null "> and order_number = #{orderNumber}</if>
-            <if test="jaloGoodsTransitSumId != null  and jaloGoodsTransitSumId != ''"> and jalo_goods_transit_sum_id = #{jaloGoodsTransitSumId}</if>
         </where>
     </select>
 
@@ -53,8 +49,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="purchaseOrderNumber != null">purchase_order_number,</if>
             <if test="num != null">num,</if>
             <if test="amount != null">amount,</if>
-            <if test="orderNumber != null">order_number,</if>
-            <if test="jaloGoodsTransitSumId != null">jalo_goods_transit_sum_id,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
          </trim>
@@ -65,8 +59,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="purchaseOrderNumber != null">#{purchaseOrderNumber},</if>
             <if test="num != null">#{num},</if>
             <if test="amount != null">#{amount},</if>
-            <if test="orderNumber != null">#{orderNumber},</if>
-            <if test="jaloGoodsTransitSumId != null">#{jaloGoodsTransitSumId},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
          </trim>
@@ -80,8 +72,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="purchaseOrderNumber != null">purchase_order_number = #{purchaseOrderNumber},</if>
             <if test="num != null">num = #{num},</if>
             <if test="amount != null">num = #{amount},</if>
-            <if test="orderNumber != null">order_number = #{orderNumber},</if>
-            <if test="jaloGoodsTransitSumId != null">jalo_goods_transit_sum_id = #{jaloGoodsTransitSumId},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>

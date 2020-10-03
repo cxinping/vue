@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author ruoyi
  * @date 2020-10-03
  */
-public class JaloGoodsTransitDetail extends BaseEntity implements Comparable<JaloGoodsTransitDetail>
+public class JaloGoodsTransitDetail extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -37,14 +37,6 @@ public class JaloGoodsTransitDetail extends BaseEntity implements Comparable<Jal
     /** 金额 */
     @Excel(name = "金额")
     private Long amount;
-
-    /** 顺序号 */
-    @Excel(name = "顺序号")
-    private Integer orderNumber;
-
-    /** $column.columnComment */
-    @Excel(name = "顺序号")
-    private String jaloGoodsTransitSumId;
 
     public void setId(String id) 
     {
@@ -100,25 +92,6 @@ public class JaloGoodsTransitDetail extends BaseEntity implements Comparable<Jal
         return num;
     }
 
-    public void setOrderNumber(Integer orderNumber)
-    {
-        this.orderNumber = orderNumber;
-    }
-
-    public Integer getOrderNumber()
-    {
-        return orderNumber;
-    }
-    public void setJaloGoodsTransitSumId(String jaloGoodsTransitSumId) 
-    {
-        this.jaloGoodsTransitSumId = jaloGoodsTransitSumId;
-    }
-
-    public String getJaloGoodsTransitSumId() 
-    {
-        return jaloGoodsTransitSumId;
-    }
-
     @Override
     public String toString() {
         return "JaloGoodsTransitDetail{" +
@@ -128,14 +101,6 @@ public class JaloGoodsTransitDetail extends BaseEntity implements Comparable<Jal
                 ", purchaseOrderNumber='" + purchaseOrderNumber + '\'' +
                 ", num=" + num +
                 ", amount=" + amount +
-                ", orderNumber=" + orderNumber +
-                ", jaloGoodsTransitSumId='" + jaloGoodsTransitSumId + '\'' +
                 '}';
     }
-
-    @Override
-    public int compareTo(JaloGoodsTransitDetail goodsTransitDetail) {
-        return this.orderNumber- goodsTransitDetail.getOrderNumber();
-    }
-
 }
