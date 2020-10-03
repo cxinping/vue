@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.JaloGoodsTransitSumMapper">
+    
+    <resultMap type="JaloGoodsTransitSum" id="JaloGoodsTransitSumResult">
+        <result property="id"    column="id"    />
+        <result property="product"    column="product"    />
+        <result property="totalAmount"    column="total_amount"    />
+        <result property="totalNum"    column="total_num"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectJaloGoodsTransitSumVo">
+        select id, product, total_amount, total_num, create_time, update_time from jalo_goods_transit_sum
+    </sql>
+
+    <select id="selectJaloGoodsTransitSumList" parameterType="JaloGoodsTransitSum" resultMap="JaloGoodsTransitSumResult">
+        <include refid="selectJaloGoodsTransitSumVo"/>
+        <where>  
+            <if test="product != null  and product != ''"> and product = #{product}</if>
+            <if test="totalAmount != null "> and total_amount = #{totalAmount}</if>
+            <if test="totalNum != null "> and total_num = #{totalNum}</if>
+        </where>
+    </select>
+    
+    <select id="selectJaloGoodsTransitSumById" parameterType="String" resultMap="JaloGoodsTransitSumResult">
+        <include refid="selectJaloGoodsTransitSumVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJaloGoodsTransitSum" parameterType="JaloGoodsTransitSum">
+        insert into jalo_goods_transit_sum
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="product != null">product,</if>
+            <if test="totalAmount != null">total_amount,</if>
+            <if test="totalNum != null">total_num,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="product != null">#{product},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
+            <if test="totalNum != null">#{totalNum},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJaloGoodsTransitSum" parameterType="JaloGoodsTransitSum">
+        update jalo_goods_transit_sum
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="product != null">product = #{product},</if>
+            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
+            <if test="totalNum != null">total_num = #{totalNum},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJaloGoodsTransitSumById" parameterType="String">
+        delete from jalo_goods_transit_sum where id = #{id}
+    </delete>
+
+    <delete id="deleteJaloGoodsTransitSumByIds" parameterType="String">
+        delete from jalo_goods_transit_sum where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
