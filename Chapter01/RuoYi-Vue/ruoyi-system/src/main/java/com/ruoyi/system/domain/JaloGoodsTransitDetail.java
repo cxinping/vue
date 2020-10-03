@@ -38,9 +38,44 @@ public class JaloGoodsTransitDetail extends BaseEntity
     @Excel(name = "金额")
     private Long amount;
 
-    public void setId(String id) 
-    {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getSupport() {
+        return support;
+    }
+
+    public void setSupport(String support) {
+        this.support = support;
+    }
+
+    public String getPurchaseOrderNumber() {
+        return purchaseOrderNumber;
+    }
+
+    public void setPurchaseOrderNumber(String purchaseOrderNumber) {
+        this.purchaseOrderNumber = purchaseOrderNumber;
+    }
+
+    public Long getNum() {
+        return num;
+    }
+
+    public void setNum(Long num) {
+        this.num = num;
     }
 
     public Long getAmount() {
@@ -49,47 +84,6 @@ public class JaloGoodsTransitDetail extends BaseEntity
 
     public void setAmount(Long amount) {
         this.amount = amount;
-    }
-
-    public String getId()
-    {
-        return id;
-    }
-    public void setProduct(String product) 
-    {
-        this.product = product;
-    }
-
-    public String getProduct() 
-    {
-        return product;
-    }
-    public void setSupport(String support) 
-    {
-        this.support = support;
-    }
-
-    public String getSupport() 
-    {
-        return support;
-    }
-    public void setPurchaseOrderNumber(String purchaseOrderNumber) 
-    {
-        this.purchaseOrderNumber = purchaseOrderNumber;
-    }
-
-    public String getPurchaseOrderNumber() 
-    {
-        return purchaseOrderNumber;
-    }
-    public void setNum(Long num) 
-    {
-        this.num = num;
-    }
-
-    public Long getNum() 
-    {
-        return num;
     }
 
     @Override

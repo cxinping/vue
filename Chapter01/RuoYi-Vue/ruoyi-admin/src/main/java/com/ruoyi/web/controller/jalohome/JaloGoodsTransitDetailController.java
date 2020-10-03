@@ -105,6 +105,8 @@ public class JaloGoodsTransitDetailController extends BaseController
             jaloGoodsTransitDetail.setUpdateTime(new java.util.Date());
         }
 
+        logger.info(jaloGoodsTransitDetail.toString());
+
         return toAjax(jaloGoodsTransitDetailService.updateJaloGoodsTransitDetail(jaloGoodsTransitDetail));
     }
 

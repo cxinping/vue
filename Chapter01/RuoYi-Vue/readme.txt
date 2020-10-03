@@ -44,7 +44,7 @@ Authorization : eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImFlMzYxMjAzLTJlOWQ
 
 部署项目
 nohup java -jar ruoyi-admin.jar &
-
+nohup java -jar itranswarp.jar &
 
 http://www.ultrapower.com:8888
 超级管理员可以创建账号

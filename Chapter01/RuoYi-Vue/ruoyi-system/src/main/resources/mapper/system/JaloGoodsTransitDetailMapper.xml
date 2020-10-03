@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="support != null">support = #{support},</if>
             <if test="purchaseOrderNumber != null">purchase_order_number = #{purchaseOrderNumber},</if>
             <if test="num != null">num = #{num},</if>
-            <if test="amount != null">num = #{amount},</if>
+            <if test="amount != null">amount = #{amount},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>
