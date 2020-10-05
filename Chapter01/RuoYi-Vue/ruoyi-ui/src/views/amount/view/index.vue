@@ -129,10 +129,10 @@
 
       <el-col :span="24" >
         <div class="card"  style="background: #1b2137; color: #fff; padding: 20px;">
-          <div class="title">
+          <span class="title">
             已付预付款
-          </div>
-          <div class="num" style="text-align: center; font-size: 35px;color:#ff7f00;">{{viewList[0].sumPrepaymentAmountPayable}} <span style="font-size: 14px;">万元</span> </div>
+          </span>
+          <span class="num" style="text-align: center; font-size: 35px;color:#ff7f00;">{{viewList[0].sumPrepaymentAmountPayable}} <span style="font-size: 14px;">万元</span> </span>
         </div>
       </el-col>
       <el-col  :span="24">
@@ -336,7 +336,13 @@
     </el-dialog>
   </div>
 </template>
+<style scoped>
+.title{
+  font-size: 24px;
+}
+</style>>
 
+</style>
 <script>
 import { queryNewFromList,listView, getView, delView, addView, updateView, exportView } from "@/api/amount/view";
 

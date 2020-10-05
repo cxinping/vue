@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="purchaseOrderNumber != null  and purchaseOrderNumber != ''"> and purchase_order_number = #{purchaseOrderNumber}</if>
             <if test="num != null "> and num = #{num}</if>
             <if test="amount != null "> and amount = #{amount}</if>
+            <if test="param != null "> and ( support like concat('%',#{param} ,'%' )  or  product  like concat('%',#{param} ,'%' )  or purchase_order_number like concat('%',#{param} ,'%' ) )</if>
         </where>
     </select>
 

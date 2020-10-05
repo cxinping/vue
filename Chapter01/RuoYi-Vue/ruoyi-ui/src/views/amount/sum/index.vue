@@ -542,6 +542,8 @@ export default {
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
+          console.log(queryParams );
+
           return exportSum(queryParams);
         }).then(response => {
           this.download(response.msg);

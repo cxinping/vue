@@ -2,6 +2,10 @@ package com.ruoyi.web.controller.system;
 
 import java.util.List;
 import java.util.Set;
+
+import com.ruoyi.web.controller.jalohome.JaloGoodsTransitDetailController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +31,8 @@ import com.ruoyi.system.service.ISysMenuService;
 @RestController
 public class SysLoginController
 {
+    private final Logger logger = LoggerFactory.getLogger(SysLoginController.class);
+
     @Autowired
     private SysLoginService loginService;
 
@@ -53,10 +59,10 @@ public class SysLoginController
         String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.getCode(),
                 loginBody.getUuid());
 
-        System.out.println("-----------------------------------------------");
-        System.out.println(String.format("token=> {}", token));
+        logger.info("--------------SysLoginController login ---------------------------------");
+        //logger.info(String.format("token=> {}", token));
         System.out.println("token=> " +  token);
-        System.out.println("-----------------------------------------------");
+        logger.info("-----------------------------------------------");
 
         ajax.put(Constants.TOKEN, token);
         return ajax;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.id.IdGenerator;
+import com.ruoyi.system.service.IJaloInventorySumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -42,7 +43,6 @@ public class JaloGoodsTransitDetailController extends BaseController
     public TableDataInfo list(JaloGoodsTransitDetail jaloGoodsTransitDetail)
     {
         logger.info("----------- JaloGoodsTransitDetailController list -----------------");
-
         startPage();
         List<JaloGoodsTransitDetail> list = jaloGoodsTransitDetailService.selectJaloGoodsTransitDetailList(jaloGoodsTransitDetail);
 
@@ -57,9 +57,12 @@ public class JaloGoodsTransitDetailController extends BaseController
     @GetMapping("/export")
     public AjaxResult export(JaloGoodsTransitDetail jaloGoodsTransitDetail)
     {
+        logger.info("----------- JaloGoodsTransitDetailController export -----------------");
+
         List<JaloGoodsTransitDetail> list = jaloGoodsTransitDetailService.selectJaloGoodsTransitDetailList(jaloGoodsTransitDetail);
         ExcelUtil<JaloGoodsTransitDetail> util = new ExcelUtil<JaloGoodsTransitDetail>(JaloGoodsTransitDetail.class);
         return util.exportExcel(list, "detail");
+
     }
 
     /**

@@ -71,7 +71,8 @@
           size="mini"
           @click="handleAdd"
           v-hasPermi="['amount:funds:add']"
-        >新增</el-button>
+          >新增</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -81,7 +82,8 @@
           :disabled="single"
           @click="handleUpdate"
           v-hasPermi="['amount:funds:edit']"
-        >修改</el-button>
+          >修改</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -91,7 +93,8 @@
           :disabled="multiple"
           @click="handleDelete"
           v-hasPermi="['amount:funds:remove']"
-        >删除</el-button>
+          >删除</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -100,7 +103,8 @@
           size="mini"
           @click="handleExport"
           v-hasPermi="['amount:funds:export']"
-        >导出</el-button>
+          >导出</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -108,41 +112,110 @@
           icon="el-icon-search"
           size="mini"
           @click="handleQuery"
-        >搜索</el-button>
+          >搜索</el-button
+        >
       </el-col>
 
-      <el-col :span="1.5">        
-        <el-tag>页面显示，单位：元</el-tag>               
+      <el-col :span="1.5">
+        <el-tag>页面显示，单位：元</el-tag>
       </el-col>
 
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
-          <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />
+          <el-button
+            size="mini"
+            circle
+            icon="el-icon-refresh"
+            @click="handleQuery"
+          />
         </el-tooltip>
-        <el-tooltip class="item" effect="dark" :content="showSearch ? '隐藏搜索' : '显示搜索'" placement="top">
-          <el-button size="mini" circle icon="el-icon-search" @click="showSearch=!showSearch" />
+        <el-tooltip
+          class="item"
+          effect="dark"
+          :content="showSearch ? '隐藏搜索' : '显示搜索'"
+          placement="top"
+        >
+          <el-button
+            size="mini"
+            circle
+            icon="el-icon-search"
+            @click="showSearch = !showSearch"
+          />
         </el-tooltip>
       </div>
     </el-row>
 
-    <el-table v-loading="loading" :data="fundsList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="fundsList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="编号" align="center" prop="id" />-->
-      <el-table-column label="招行" align="center" prop="merchantsBank" :formatter="stateFormat" />
-      <el-table-column label="浦发" align="center" prop="pufaBank" :formatter="stateFormat" />
-      <el-table-column label="工行" align="center" prop="icbcBank" :formatter="stateFormat" />
-      <el-table-column label="有赞" align="center" prop="youZan" :formatter="stateFormat" />
-      <el-table-column label="支付宝" align="center" prop="alipay" :formatter="stateFormat" />
-      <el-table-column label="京东" align="center" prop="jingdong" :formatter="stateFormat" />
-      <el-table-column label="现金" align="center" prop="cash" :formatter="stateFormat" />
-      <el-table-column label="合计金额" align="center" prop="totalAmount" :formatter="stateFormat" />
+      <el-table-column
+        label="招行"
+        align="center"
+        prop="merchantsBank"
+        :formatter="stateFormat"
+      />
+      <el-table-column
+        label="浦发"
+        align="center"
+        prop="pufaBank"
+        :formatter="stateFormat"
+      />
+      <el-table-column
+        label="工行"
+        align="center"
+        prop="icbcBank"
+        :formatter="stateFormat"
+      />
+      <el-table-column
+        label="有赞"
+        align="center"
+        prop="youZan"
+        :formatter="stateFormat"
+      />
+      <el-table-column
+        label="支付宝"
+        align="center"
+        prop="alipay"
+        :formatter="stateFormat"
+      />
+      <el-table-column
+        label="京东"
+        align="center"
+        prop="jingdong"
+        :formatter="stateFormat"
+      />
+      <el-table-column
+        label="现金"
+        align="center"
+        prop="cash"
+        :formatter="stateFormat"
+      />
+      <el-table-column
+        label="合计金额"
+        align="center"
+        prop="totalAmount"
+        :formatter="stateFormat"
+      />
 
-      <el-table-column label="更新时间" align="center" prop="createTime" width="180">
+      <el-table-column
+        label="更新时间"
+        align="center"
+        prop="createTime"
+        width="180"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
         </template>
-      </el-table-column>      
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      </el-table-column>
+      <el-table-column
+        label="操作"
+        align="center"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -150,20 +223,22 @@
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['amount:funds:edit']"
-          >修改</el-button>
+            >修改</el-button
+          >
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['amount:funds:remove']"
-          >删除</el-button>
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
+      v-show="total > 0"
       :total="total"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
@@ -173,26 +248,61 @@
     <!-- 添加或修改可用资金对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="招行" prop="merchantsBank" required >
-          <el-input v-model="form.merchantsBank" placeholder="请输入招行的可用资金余额，单位：元" type="number" clearable/>
+        <el-form-item label="招行" prop="merchantsBank" required>
+          <el-input
+            v-model="form.merchantsBank"
+            placeholder="请输入招行的可用资金余额，单位：元"
+            type="number"
+            clearable
+          />
         </el-form-item>
-        <el-form-item label="浦发" prop="pufaBank" required >
-          <el-input v-model="form.pufaBank" placeholder="请输入浦发的可用资金余额，单位：元" type="number" clearable/>
+        <el-form-item label="浦发" prop="pufaBank" required>
+          <el-input
+            v-model="form.pufaBank"
+            placeholder="请输入浦发的可用资金余额，单位：元"
+            type="number"
+            clearable
+          />
         </el-form-item>
-        <el-form-item label="工行" prop="icbcBank" required >
-          <el-input v-model="form.icbcBank" placeholder="请输入工行的可用资金余额，单位：元" type="number" clearable/>
+        <el-form-item label="工行" prop="icbcBank" required>
+          <el-input
+            v-model="form.icbcBank"
+            placeholder="请输入工行的可用资金余额，单位：元"
+            type="number"
+            clearable
+          />
         </el-form-item>
-        <el-form-item label="有赞" prop="youZan" required >
-          <el-input v-model="form.youZan" placeholder="请输入有赞的可用资金余额，单位：元" type="number" clearable/>
+        <el-form-item label="有赞" prop="youZan" required>
+          <el-input
+            v-model="form.youZan"
+            placeholder="请输入有赞的可用资金余额，单位：元"
+            type="number"
+            clearable
+          />
         </el-form-item>
-        <el-form-item label="支付宝" prop="alipay" required >
-          <el-input v-model="form.alipay" placeholder="请输入支付宝的可用资金余额，单位：元" type="number" clearable/>
+        <el-form-item label="支付宝" prop="alipay" required>
+          <el-input
+            v-model="form.alipay"
+            placeholder="请输入支付宝的可用资金余额，单位：元"
+            type="number"
+            clearable
+          />
         </el-form-item>
-        <el-form-item label="京东" prop="jingdong" required >
-          <el-input v-model="form.jingdong" placeholder="请输入京东的可用资金余额，单位：元" type="number" clearable/>
+        <el-form-item label="京东" prop="jingdong" required>
+          <el-input
+            v-model="form.jingdong"
+            placeholder="请输入京东的可用资金余额，单位：元"
+            type="number"
+            clearable
+          />
         </el-form-item>
-        <el-form-item label="现金" prop="cash" required >
-          <el-input v-model="form.cash" placeholder="请输入现金的可用资金余额，单位：元" type="number" clearable/>
+        <el-form-item label="现金" prop="cash" required>
+          <el-input
+            v-model="form.cash"
+            placeholder="请输入现金的可用资金余额，单位：元"
+            type="number"
+            clearable
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -204,7 +314,14 @@
 </template>
 
 <script>
-import { listFunds, getFunds, delFunds, addFunds, updateFunds, exportFunds } from "@/api/amount/funds";
+import {
+  listFunds,
+  getFunds,
+  delFunds,
+  addFunds,
+  updateFunds,
+  exportFunds
+} from "@/api/amount/funds";
 
 export default {
   name: "Funds",
@@ -244,29 +361,55 @@ export default {
       form: {},
       // 表单校验
       rules: {
-          merchantsBank: [
-            { required: true, message: '请输入招行的可用资金余额，单位：元', trigger: 'blur' }             
-          ],
-          pufaBank: [
-            { required: true, message: '请输入浦发的可用资金余额，单位：元', trigger: 'blur' }             
-          ],
-          icbcBank: [
-            { required: true, message: '请输入工行的可用资金余额，单位：元', trigger: 'blur' }             
-          ],
-          youZan: [
-            { required: true, message: '请输入有赞的可用资金余额，单位：元', trigger: 'blur' }             
-          ],
-          alipay: [
-            { required: true, message: '请输入支付宝的可用资金余额，单位：元', trigger: 'blur' }             
-          ],
-          jingdong: [
-            { required: true, message: '请输入京东的可用资金余额，单位：元', trigger: 'blur' }             
-          ],
-          cash: [
-            { required: true, message: '请输入现金的可用资金余额，单位：元', trigger: 'blur' }             
-          ]
-
-
+        merchantsBank: [
+          {
+            required: true,
+            message: "请输入招行的可用资金余额，单位：元",
+            trigger: "blur"
+          }
+        ],
+        pufaBank: [
+          {
+            required: true,
+            message: "请输入浦发的可用资金余额，单位：元",
+            trigger: "blur"
+          }
+        ],
+        icbcBank: [
+          {
+            required: true,
+            message: "请输入工行的可用资金余额，单位：元",
+            trigger: "blur"
+          }
+        ],
+        youZan: [
+          {
+            required: true,
+            message: "请输入有赞的可用资金余额，单位：元",
+            trigger: "blur"
+          }
+        ],
+        alipay: [
+          {
+            required: true,
+            message: "请输入支付宝的可用资金余额，单位：元",
+            trigger: "blur"
+          }
+        ],
+        jingdong: [
+          {
+            required: true,
+            message: "请输入京东的可用资金余额，单位：元",
+            trigger: "blur"
+          }
+        ],
+        cash: [
+          {
+            required: true,
+            message: "请输入现金的可用资金余额，单位：元",
+            trigger: "blur"
+          }
+        ]
       }
     };
   },
@@ -275,11 +418,13 @@ export default {
   },
   methods: {
     stateFormat(row, column, cellValue) {
-			cellValue += '';
-			if (!cellValue.includes('.')) cellValue += '.';
-			return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
-				return $1 + ',';
-			}).replace(/\.$/, '');
+      cellValue += "";
+      if (!cellValue.includes(".")) cellValue += ".";
+      return cellValue
+        .replace(/(\d)(?=(\d{3})+\.)/g, function($0, $1) {
+          return $1 + ",";
+        })
+        .replace(/\.$/, "");
     },
 
     /** 查询可用资金列表 */
@@ -324,9 +469,9 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
-      this.single = selection.length!==1
-      this.multiple = !selection.length
+      this.ids = selection.map(item => item.id);
+      this.single = selection.length !== 1;
+      this.multiple = !selection.length;
     },
     /** 新增按钮操作 */
     handleAdd() {
@@ -337,7 +482,7 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const id = row.id || this.ids
+      const id = row.id || this.ids;
       getFunds(id).then(response => {
         this.form = response.data;
 
@@ -348,7 +493,7 @@ export default {
         //this.form.youZan = this.form.youZan * 10000;
         //this.form.alipay = this.form.alipay * 10000;
         //this.form.jingdong = this.form.jingdong * 10000;
-        
+
         this.open = true;
         this.title = "修改可用资金";
       });
@@ -365,26 +510,30 @@ export default {
           //const icbcBankFmt = this.keepTwoDecimal( this.form.icbcBank / 10000 );
           //this.form.icbcBank = icbcBankFmt ;
           //const youZanFmt = this.keepTwoDecimal( this.form.youZan / 10000 );
-          //this.form.youZan = youZanFmt ;   
+          //this.form.youZan = youZanFmt ;
           //const alipayFmt = this.keepTwoDecimal( this.form.alipay / 10000 );
           //this.form.alipay = alipayFmt ;
           //const jingdongFmt = this.keepTwoDecimal( this.form.jingdong / 10000 );
-          //this.form.jingdong = jingdongFmt ;   
+          //this.form.jingdong = jingdongFmt ;
 
           // 去除输入的特殊字符，比如 ,
-          const merchantsBankFmt = String(this.form.merchantsBank).replace(",","");
-          this.form.merchantsBank = merchantsBankFmt ;
-          const pufaBankFmt = String(this.form.pufaBank).replace(",","");
-          this.form.pufaBank = pufaBankFmt ;
-          const icbcBankFmt = String(this.form.icbcBank).replace(",","");
-          this.form.icbcBank = icbcBankFmt ;
-          const youZanFmt = String(this.form.youZan).replace(",","");
-          this.form.youZan = youZanFmt ;
-          const alipayFmt = String(this.form.alipay).replace(",","");
-          this.form.alipay = alipayFmt ;
-          const jingdongFmt = String(this.form.jingdong).replace(",","");
-          this.form.jingdong = jingdongFmt ;
-
+          const merchantsBankFmt = String(this.form.merchantsBank).replace(
+            ",",
+            ""
+          );
+          this.form.merchantsBank = merchantsBankFmt;
+          const pufaBankFmt = String(this.form.pufaBank).replace(",", "");
+          this.form.pufaBank = pufaBankFmt;
+          const icbcBankFmt = String(this.form.icbcBank).replace(",", "");
+          this.form.icbcBank = icbcBankFmt;
+          const youZanFmt = String(this.form.youZan).replace(",", "");
+          this.form.youZan = youZanFmt;
+          const alipayFmt = String(this.form.alipay).replace(",", "");
+          this.form.alipay = alipayFmt;
+          const jingdongFmt = String(this.form.jingdong).replace(",", "");
+          this.form.jingdong = jingdongFmt;
+          const cashFmt = String(this.form.jingdong).replace(",", "");
+          this.form.cash = cashFmt;
 
           if (this.form.id != null) {
             updateFunds(this.form).then(response => {
@@ -408,40 +557,52 @@ export default {
     },
     /** 保留小数点后2位 */
     keepTwoDecimal(num) {
-        var result = parseFloat(num);
-        if (isNaN(result)) {
-        alert('传递参数错误，请检查！');
+      var result = parseFloat(num);
+      if (isNaN(result)) {
+        alert("传递参数错误，请检查！");
         return false;
-        }
-        result = Math.round(num * 100) / 100;
-        return result;
-    },   
+      }
+      result = Math.round(num * 100) / 100;
+      return result;
+    },
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$confirm('是否确认删除可用资金编号为"' + ids + '"的数据项?', "警告", {
+      this.$confirm(
+        '是否确认删除可用资金编号为"' + ids + '"的数据项?',
+        "警告",
+        {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
-        }).then(function() {
+        }
+      )
+        .then(function() {
           return delFunds(ids);
-        }).then(() => {
+        })
+        .then(() => {
           this.getList();
           this.msgSuccess("删除成功");
-        }).catch(function() {});
+        })
+        .catch(function() {});
     },
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有可用资金数据项?', "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }).then(function() {
+      this.$confirm("是否确认导出所有可用资金数据项?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(function() {
+          debugger;
           return exportFunds(queryParams);
-        }).then(response => {
+        })
+        .then(response => {
+          debugger;
           this.download(response.msg);
-        }).catch(function() {});
+        })
+        .catch(function() {});
     }
   }
 };

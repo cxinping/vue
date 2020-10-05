@@ -31,8 +31,8 @@ mysqladmin -uxinping -p123456 password 123welcome
 http://localhost:8080/login
 username=admin
 password=admin123
-code
-uuid
+code=2
+uuid=6aeb55202133412381d9d30c701bb2ea
 
 {
    "msg": "操作成功",

@@ -38,6 +38,16 @@ public class JaloGoodsTransitDetail extends BaseEntity
     @Excel(name = "金额")
     private Long amount;
 
+    private String param;
+
+    public String getParam() {
+        return param;
+    }
+
+    public void setParam(String param) {
+        this.param = param;
+    }
+
     public String getId() {
         return id;
     }

@@ -7,6 +7,8 @@ import java.util.List;
 import com.ruoyi.common.utils.id.IdGenerator;
 import com.ruoyi.system.domain.JaloInventoryDetail;
 import com.ruoyi.system.service.IJaloInventoryDetailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,9 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/amount/sum")
 public class JaloInventorySumController extends BaseController
 {
+    private final Logger logger = LoggerFactory.getLogger(JaloInventorySumController.class);
+
+
     @Autowired
     private IJaloInventorySumService jaloInventorySumService;
 
@@ -75,6 +80,7 @@ public class JaloInventorySumController extends BaseController
     @GetMapping("/export")
     public AjaxResult export(JaloInventorySum jaloInventorySum)
     {
+        logger.info("---------- JaloInventorySumController export -----------");
         List<JaloInventorySum> list = jaloInventorySumService.selectJaloInventorySumList(jaloInventorySum);
         String inventory_id = null;
         for(JaloInventorySum inventory : list){
