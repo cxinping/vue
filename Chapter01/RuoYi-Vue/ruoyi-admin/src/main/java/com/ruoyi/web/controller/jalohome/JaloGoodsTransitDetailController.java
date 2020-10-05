@@ -59,9 +59,10 @@ public class JaloGoodsTransitDetailController extends BaseController
     {
         logger.info("----------- JaloGoodsTransitDetailController export -----------------");
 
-        List<JaloGoodsTransitDetail> list = jaloGoodsTransitDetailService.selectJaloGoodsTransitDetailList(jaloGoodsTransitDetail);
-        ExcelUtil<JaloGoodsTransitDetail> util = new ExcelUtil<JaloGoodsTransitDetail>(JaloGoodsTransitDetail.class);
-        return util.exportExcel(list, "detail");
+        List<JaloGoodsTransitDetail> list = jaloGoodsTransitDetailService.selectJaloGoodsTransitDetailList(null);
+        //ExcelUtil<JaloGoodsTransitDetail> util = new ExcelUtil<JaloGoodsTransitDetail>(JaloGoodsTransitDetail.class);
+        //return util.exportExcel(list, "detail");
+        return jaloGoodsTransitDetailService.exportExcel(list, "在途物资");
 
     }
 
