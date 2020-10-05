@@ -63,6 +63,15 @@
           @click="handleQuery"
         >搜索</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="warning"
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['amount:transit:export']"
+        >导出</el-button>
+      </el-col>
 
       <el-col :span="1.5">        
         <el-tag>页面显示，单位：元</el-tag>               

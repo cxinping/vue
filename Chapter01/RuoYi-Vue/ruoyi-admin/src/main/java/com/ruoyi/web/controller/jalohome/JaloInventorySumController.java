@@ -76,8 +76,22 @@ public class JaloInventorySumController extends BaseController
     public AjaxResult export(JaloInventorySum jaloInventorySum)
     {
         List<JaloInventorySum> list = jaloInventorySumService.selectJaloInventorySumList(jaloInventorySum);
+        String inventory_id = null;
+        for(JaloInventorySum inventory : list){
+            inventory_id = inventory.getId();
+            List<JaloInventoryDetail> inventoryDetails =  jaloInventoryDetailService.selectJaloInventoryDetailListByInventorySumId(inventory_id);
+
+            if( null != inventoryDetails){
+                // 按照编号排序
+                Collections.sort(inventoryDetails);
+            }
+
+            inventory.setInventoryDetails(inventoryDetails );
+        }
+
         ExcelUtil<JaloInventorySum> util = new ExcelUtil<JaloInventorySum>(JaloInventorySum.class);
-        return util.exportExcel(list, "sum");
+       // return util.exportExcel(list, "sum");
+        return jaloInventorySumService.exportExcel(list, "库存");
     }
 
     /**

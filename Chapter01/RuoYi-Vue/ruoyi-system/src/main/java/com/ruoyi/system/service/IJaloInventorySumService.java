@@ -1,7 +1,10 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.system.domain.JaloInventorySum;
+import org.apache.poi.ss.formula.functions.T;
 
 /**
  * 库存汇总Service接口
@@ -58,4 +61,7 @@ public interface IJaloInventorySumService
      * @return 结果
      */
     public int deleteJaloInventorySumById(String id);
+
+    public AjaxResult exportExcel(List<JaloInventorySum> list, String sheetName);
+
 }
