@@ -595,11 +595,11 @@ export default {
         type: "warning"
       })
         .then(function() {
-          debugger;
+          //debugger;
           return exportFunds(queryParams);
         })
         .then(response => {
-          debugger;
+          //debugger;
           this.download(response.msg);
         })
         .catch(function() {});
