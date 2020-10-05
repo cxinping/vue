@@ -15,8 +15,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
+    <resultMap type="JaloGoodsTransitSumDetail" id="JaloGoodsTransitDetailSumResult">
+        <result property="sumamount"    column="sumamount"    />
+        <result property="sumnum"    column="sumnum"    />
+    </resultMap>
+
     <sql id="selectJaloGoodsTransitDetailVo">
         select id, product, support, purchase_order_number, num, amount ,  create_time, update_time from jalo_goods_transit_detail
+    </sql>
+
+    <sql id="selectJaloGoodsTransitDetaiSumlVo">
+        select  sum(num) as sumnum , sum(amount) as sumamount  from jalo_goods_transit_detail
     </sql>
 
     <select id="selectJaloGoodsTransitDetailList" parameterType="JaloGoodsTransitDetail" resultMap="JaloGoodsTransitDetailResult">
@@ -32,6 +41,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
         ORDER BY update_time DESC
 
+    </select>
+
+    <select id="selectJaloGoodsTransitDetailSum"  resultMap="JaloGoodsTransitDetailSumResult">
+        <include refid="selectJaloGoodsTransitDetaiSumlVo"/>
     </select>
 
     <select id="selectJaloGoodsTransitDetailListByTransitSumId" parameterType="String" resultMap="JaloGoodsTransitDetailResult">

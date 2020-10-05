@@ -9,6 +9,7 @@ import java.util.UUID;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.JaloGoodsTransitSumDetail;
 import com.ruoyi.system.domain.JaloInventoryDetail;
 import com.ruoyi.system.domain.JaloInventorySum;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -112,6 +113,10 @@ public class JaloGoodsTransitDetailServiceImpl implements IJaloGoodsTransitDetai
     @Override
     public List<JaloGoodsTransitDetail> selectJaloGoodsTransitDetailListByTransitSumId(String jaloTransitSumId){
         return jaloGoodsTransitDetailMapper.selectJaloGoodsTransitDetailListByTransitSumId(jaloTransitSumId);
+    }
+
+    public JaloGoodsTransitSumDetail selectJaloGoodsTransitDetailSum(){
+        return jaloGoodsTransitDetailMapper.selectJaloGoodsTransitDetailSum();
     }
 
     public AjaxResult exportExcel(List<JaloGoodsTransitDetail> list, String sheetName){

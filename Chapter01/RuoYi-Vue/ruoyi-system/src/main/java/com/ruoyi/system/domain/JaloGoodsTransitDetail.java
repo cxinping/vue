@@ -38,6 +38,26 @@ public class JaloGoodsTransitDetail extends BaseEntity
     @Excel(name = "金额")
     private Long amount;
 
+    private Long sumamount;
+
+    private Long sumnum;
+
+    public Long getSumamount() {
+        return sumamount;
+    }
+
+    public void setSumamount(Long sumamount) {
+        this.sumamount = sumamount;
+    }
+
+    public Long getSumnum() {
+        return sumnum;
+    }
+
+    public void setSumnum(Long sumnum) {
+        this.sumnum = sumnum;
+    }
+
     private String param;
 
     public String getParam() {
@@ -105,6 +125,9 @@ public class JaloGoodsTransitDetail extends BaseEntity
                 ", purchaseOrderNumber='" + purchaseOrderNumber + '\'' +
                 ", num=" + num +
                 ", amount=" + amount +
+                ", sumamount=" + sumamount +
+                ", sumnum=" + sumnum +
+                ", param='" + param + '\'' +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.JaloGoodsTransitDetail;
+import com.ruoyi.system.domain.JaloGoodsTransitSumDetail;
 
 /**
  * 在途物资详细Mapper接口
@@ -29,6 +30,7 @@ public interface JaloGoodsTransitDetailMapper
 
     public List<JaloGoodsTransitDetail> selectJaloGoodsTransitDetailListByTransitSumId(String jaloTransitSumId);
 
+    public JaloGoodsTransitSumDetail selectJaloGoodsTransitDetailSum();
 
     /**
      * 新增在途物资详细

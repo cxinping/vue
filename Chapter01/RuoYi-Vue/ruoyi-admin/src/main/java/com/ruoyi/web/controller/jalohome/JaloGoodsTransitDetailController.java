@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.id.IdGenerator;
+import com.ruoyi.system.domain.JaloGoodsTransitSumDetail;
 import com.ruoyi.system.service.IJaloInventorySumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +46,12 @@ public class JaloGoodsTransitDetailController extends BaseController
         logger.info("----------- JaloGoodsTransitDetailController list -----------------");
         startPage();
         List<JaloGoodsTransitDetail> list = jaloGoodsTransitDetailService.selectJaloGoodsTransitDetailList(jaloGoodsTransitDetail);
+        JaloGoodsTransitSumDetail transitSumDetail =jaloGoodsTransitDetailService.selectJaloGoodsTransitDetailSum();
 
+        for(JaloGoodsTransitDetail transitDetail: list){
+            transitDetail.setSumnum(transitSumDetail.getSumnum() );
+            transitDetail.setSumamount(transitSumDetail.getSumamount() );
+        }
         return getDataTable(list);
     }
 

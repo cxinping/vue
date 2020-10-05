@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.system.domain.JaloGoodsTransitDetail;
+import com.ruoyi.system.domain.JaloGoodsTransitSumDetail;
 
 /**
  * 在途物资详细Service接口
@@ -65,5 +66,5 @@ public interface IJaloGoodsTransitDetailService
 
     public AjaxResult exportExcel(List<JaloGoodsTransitDetail> list, String sheetName);
 
-
+    public JaloGoodsTransitSumDetail selectJaloGoodsTransitDetailSum();
 }
