@@ -2,6 +2,9 @@ package com.ruoyi.web.controller.jalohome;
 
 import java.util.Date;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +34,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/amount/unshipped")
 public class JaloPurchasedUnshippedController extends BaseController
 {
+    private final Logger logger = LoggerFactory.getLogger(JaloPurchasedUnshippedController.class);
+
     @Autowired
     private IJaloPurchasedUnshippedService jaloPurchasedUnshippedService;
 
@@ -41,6 +46,8 @@ public class JaloPurchasedUnshippedController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(JaloPurchasedUnshipped jaloPurchasedUnshipped)
     {
+        logger.info("---------- JaloPurchasedUnshippedController list ------------");
+
         startPage();
         List<JaloPurchasedUnshipped> list = jaloPurchasedUnshippedService.selectJaloPurchasedUnshippedList(jaloPurchasedUnshipped);
         return getDataTable(list);
@@ -54,6 +61,7 @@ public class JaloPurchasedUnshippedController extends BaseController
     @GetMapping("/export")
     public AjaxResult export(JaloPurchasedUnshipped jaloPurchasedUnshipped)
     {
+        logger.info("---------- JaloPurchasedUnshippedController export ------------");
         List<JaloPurchasedUnshipped> list = jaloPurchasedUnshippedService.selectJaloPurchasedUnshippedList(jaloPurchasedUnshipped);
         ExcelUtil<JaloPurchasedUnshipped> util = new ExcelUtil<JaloPurchasedUnshipped>(JaloPurchasedUnshipped.class);
         return util.exportExcel(list, "unshipped");

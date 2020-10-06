@@ -3,6 +3,9 @@ package com.ruoyi.web.controller.jalohome;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/amount/unsettled")
 public class JaloShippedUnsettledController extends BaseController
 {
+    private final Logger logger = LoggerFactory.getLogger(JaloShippedUnsettledController.class);
+
     @Autowired
     private IJaloShippedUnsettledService jaloShippedUnsettledService;
 
@@ -57,7 +62,7 @@ public class JaloShippedUnsettledController extends BaseController
     {
         List<JaloShippedUnsettled> list = jaloShippedUnsettledService.selectJaloShippedUnsettledList(jaloShippedUnsettled);
         ExcelUtil<JaloShippedUnsettled> util = new ExcelUtil<JaloShippedUnsettled>(JaloShippedUnsettled.class);
-        return util.exportExcel(list, "unsettled");
+        return util.exportExcel(list, "已发货未结算");
     }
 
     /**

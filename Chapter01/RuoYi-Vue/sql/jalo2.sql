@@ -27,15 +27,15 @@ FROM
 
 CREATE VIEW information_view AS
 SELECT
-    SUM(contract_amount) AS sum_contract_amount,											-- 合同金额
+    SUM(contract_amount) AS sum_contract_amount,						-- 合同金额
     SUM(prepayment_amount_payable) AS sum_prepayment_amount_payable,	-- 应付预付款金额
-    SUM(prepayment_amount_paid) AS sum_prepayment_amount_paid 				-- 应付尾款金额
+    SUM(prepayment_amount_paid) AS sum_prepayment_amount_paid 			-- 应付尾款金额
 FROM
     jalo_purchase_order_tracking_information
-
+WHERE progress = "进行中"
 
 CREATE VIEW unsettled_view AS SELECT
-	SUM(total_amount) AS sum_shipped_unsettled_total_amount -- 已发货未结算
+	SUM(total_amount) AS sum_shipped_unsettled_total_amount        -- 已发货未结算
 FROM
 	jalo_shipped_unsettled
 
@@ -68,8 +68,14 @@ SELECT
 FROM
     jalo_inventory_detail
 
+---- 作废 ----
 CREATE VIEW transit_view AS
 SELECT
     SUM(total_amount) AS goods_transit_total_amount											-- 在途物资
 FROM
     jalo_goods_transit
+
+CREATE VIEW transit_view AS SELECT
+	SUM(num) * sum(amount) AS goods_transit_total_amount -- 在途物资
+FROM
+	jalo_goods_transit_detail

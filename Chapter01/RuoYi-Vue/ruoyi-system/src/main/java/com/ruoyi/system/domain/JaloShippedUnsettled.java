@@ -35,6 +35,8 @@ public class JaloShippedUnsettled extends BaseEntity
     @Excel(name = "京东")
     private BigDecimal jingdong;
 
+    /** 合计金额 */
+    @Excel(name = "合计金额")
     private BigDecimal totalAmount;
 
     public BigDecimal getTotalAmount() {

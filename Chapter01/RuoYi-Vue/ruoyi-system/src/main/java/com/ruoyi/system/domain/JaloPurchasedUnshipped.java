@@ -96,15 +96,13 @@ public class JaloPurchasedUnshipped extends BaseEntity
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("youzan", getYouzan())
-            .append("taobao", getTaobao())
-            .append("tianmao", getTianmao())
-            .append("jingdong", getJingdong())
-            .append("totalAmount", getTotalAmount())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
+        return "JaloPurchasedUnshipped{" +
+                "id=" + id +
+                ", youzan=" + youzan +
+                ", taobao=" + taobao +
+                ", tianmao=" + tianmao +
+                ", jingdong=" + jingdong +
+                ", totalAmount=" + totalAmount +
+                '}';
     }
 }

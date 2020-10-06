@@ -47,6 +47,8 @@ public class JaloAvailableFunds extends BaseEntity
     @Excel(name = "现金")
     private BigDecimal cash;
 
+    /** 合计金额 */
+    @Excel(name = "合计金额")
     private BigDecimal totalAmount;
 
     public BigDecimal getTotalAmount() {
