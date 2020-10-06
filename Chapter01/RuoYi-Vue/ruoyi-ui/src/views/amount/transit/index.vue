@@ -44,8 +44,16 @@
         >
       </el-col>
 
-      <el-col :span="1.5">
-        <el-tag>{{ computeSumInfo }}</el-tag>
+      <el-col :span="1.5" v-show="this.transitList && this.transitList[0]">
+        <el-tag>{{
+          this.transitList &&
+            this.transitList[0] &&
+            "在途物资金额合计：" +
+              this.transitList[0].sumamount +
+              "元 数量合计：" +
+              this.transitList[0].sumnum +
+              "个"
+        }}</el-tag>
       </el-col>
 
       <div class="top-right-btn" style="display: flex">
@@ -55,12 +63,13 @@
           v-show="showSearch"
           size="small"
           class="searchClass"
+          ref="serchInput"
         ></el-input>
-        <el-tooltip class="item" effect="dark" content="刷新" placement="top">
+        <el-tooltip class="item" effect="dark" content="查询" placement="top">
           <el-button
             size="mini"
             circle
-            icon="el-icon-refresh"
+            icon="el-icon-search"
             @click="handleQuery"
           />
         </el-tooltip>
@@ -73,7 +82,7 @@
           <el-button
             size="mini"
             circle
-            icon="el-icon-search"
+            icon="el-icon-refresh"
             @click="showSearch = !showSearch"
           />
         </el-tooltip>
@@ -186,46 +195,6 @@ export default {
   name: "Transit",
   data() {
     return {
-      tableData: [
-        {
-          id: 1,
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          id: 2,
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          id: 3,
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-          children: [
-            {
-              id: 31,
-              date: "2016-05-01",
-              name: "王小虎",
-              address: "上海市普陀区金沙江路 1519 弄"
-            },
-            {
-              id: 32,
-              date: "2016-05-01",
-              name: "王小虎",
-              address: "上海市普陀区金沙江路 1519 弄"
-            }
-          ]
-        },
-        {
-          id: 4,
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ],
       // 遮罩层
       loading: true,
       // 选中数组
@@ -254,8 +223,11 @@ export default {
         product: null,
         purchaseOrderNumber: null,
         num: null,
-        amount: null
+        amount: null,
+        param: null
       },
+      sumNumInfo: 0,
+      sumAmountInfo: 0,
       searchInput: "",
       // 表单参数
       form: {},
@@ -304,24 +276,17 @@ export default {
   },
   computed: {
     computeSumInfo() {
-      let totalAmount = 0;
-      let totalNumber = 0;
-      // if (this.transitList && this.transitList.length != 0) {
-      //   totalAmount = totalAmount.reduce((item, prev, index, array) => {
-      //     return item + prev;
-      //   });
-      //   totalNumber = totalNumber.reduce((item, prev, index, array) => {
-      //     return item + prev;
-      //   });
-      // }
-      // return (
-      //   "在途物资金额合计：" +
-      //   this.transitList.totalAmount +
-      //   "元 数量合计：" +
-      //   this.transitList.total +
-      //   "个"
-      // );
-      return "合计";
+      debugger;
+      if (this.transitList && this.transitList[0]) {
+        return;
+        "在途物资金额合计：" +
+          this.transitList[0].sumamount +
+          "元 数量合计：" +
+          this.transitList[0].sumnum +
+          "个";
+      } else {
+        return "";
+      }
     }
   },
 
@@ -365,6 +330,7 @@ export default {
     /** 搜索按钮操作 */
     handleQuery() {
       this.queryParams.pageNum = 1;
+      this.queryParams.param = this.searchInput;
       this.getList();
     },
     /** 重置按钮操作 */
@@ -479,7 +445,7 @@ export default {
         type: "warning"
       })
         .then(function() {
-          return exportTransit(queryParams);
+          return exportTransit();
         })
         .then(response => {
           this.download(response.msg);

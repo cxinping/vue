@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-   <!-- 
+    <!-- 
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="${comment}" prop="days">
         <el-input
@@ -90,32 +90,51 @@
     </el-form>
       -->
 
-<el-row :gutter="10" class="mb8">
-      
+    <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
           type="cyan"
           icon="el-icon-search"
           size="mini"
           @click="handleQuery"
-        >刷新</el-button>
+          >刷新</el-button
+        >
       </el-col>
 
-      <el-col :span="1.5">        
-        <el-tag>页面显示，单位：万元</el-tag>               
+      <el-col :span="1.5">
+        <el-tag>页面显示，单位：万元</el-tag>
       </el-col>
       <div class="top-right-btn">
         <el-tooltip class="item" effect="dark" content="刷新" placement="top">
-          <el-button size="mini" circle icon="el-icon-refresh" @click="handleQuery" />
+          <el-button
+            size="mini"
+            circle
+            icon="el-icon-refresh"
+            @click="handleQuery"
+          />
         </el-tooltip>
-        <el-tooltip class="item" effect="dark" :content="showSearch ? '隐藏搜索' : '显示搜索'" placement="top">
-          <el-button size="mini" circle icon="el-icon-search" @click="showSearch=!showSearch" />
+        <el-tooltip
+          class="item"
+          effect="dark"
+          :content="showSearch ? '隐藏搜索' : '显示搜索'"
+          placement="top"
+        >
+          <el-button
+            size="mini"
+            circle
+            icon="el-icon-search"
+            @click="showSearch = !showSearch"
+          />
         </el-tooltip>
       </div>
     </el-row>
 
     <el-row :gutter="10" style="background: #1b2137;">
-      <el-col :span="24" style="color: #fff; text-align: right; padding: 10px 20px;">{{viewList[0].days}}</el-col>
+      <el-col
+        :span="24"
+        style="color: #fff; text-align: right; padding: 10px 20px;"
+        >{{ viewList[0].days }}</el-col
+      >
       <!-- 
       <el-col :span="24">
         <div class="card"  style="background: #000; color: #fff; padding: 20px;">
@@ -127,36 +146,72 @@
       </el-col>
       -->
 
-      <el-col :span="24" >
-        <div class="card"  style="background: #1b2137; color: #fff; padding: 20px;">
-          <span class="title">
+      <el-col :span="24">
+        <div
+          class="card"
+          style="background: #1b2137; color: #fff; padding: 20px;"
+        >
+          <div class="title">
             已付预付款
-          </span>
-          <span class="num" style="text-align: center; font-size: 35px;color:#ff7f00;">{{viewList[0].sumPrepaymentAmountPayable}} <span style="font-size: 14px;">万元</span> </span>
+          </div>
+          <div
+            class="num"
+            style="text-align: center; font-size: 35px;color:#ff7f00;"
+          >
+            {{ viewList[0].sumPrepaymentAmountPayable }}
+            <span style="font-size: 14px;">万元</span>
+          </div>
         </div>
       </el-col>
-      <el-col  :span="24">
-        <div class="card"  style="background: #1b2137; color: #fff; padding: 20px;">
+      <el-col :span="24">
+        <div
+          class="card"
+          style="background: #1b2137; color: #fff; padding: 20px;"
+        >
           <div class="title">
             应付尾款
           </div>
-          <div class="num" style="text-align: center; font-size:35px;color:#ff7f00;">{{viewList[0].sumPrepaymentAmountPaid}} <span style="font-size: 14px;">万元</span> </div>
+          <div
+            class="num"
+            style="text-align: center; font-size:35px;color:#ff7f00;"
+          >
+            {{ viewList[0].sumPrepaymentAmountPaid }}
+            <span style="font-size: 14px;">万元</span>
+          </div>
         </div>
       </el-col>
-       <el-col  :span="24">
-        <div class="card"  style="background: #1b2137; color: #fff; padding: 20px;">
+      <el-col :span="24">
+        <div
+          class="card"
+          style="background: #1b2137; color: #fff; padding: 20px;"
+        >
           <div class="title">
             已发货未结算
           </div>
-          <div class="num" style="text-align: center; font-size:35px;color:#ff7f00;">{{viewList[0].sumShippedUnsettledTotalAmount}} <span style="font-size: 14px;">万元</span> </div>
+          <div
+            class="num"
+            style="text-align: center; font-size:35px;color:#ff7f00;"
+          >
+            {{ viewList[0].sumShippedUnsettledTotalAmount }}
+            <span style="font-size: 14px;">万元</span>
+          </div>
         </div>
       </el-col>
-       <el-col :span="24">
-        <div class="card"  style="background: #1b2137; color: #fff; padding: 20px;">
+      <el-col :span="24">
+        <div
+          class="card"
+          style="background: #1b2137; color: #fff; padding: 20px;"
+        >
           <div class="title">
             已下单未发货
           </div>
-          <div class="num" style="text-align: center; font-size: 35px;color:#ff7f00;">{{viewList[0].sumPurchasedUnshippedTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+          <div
+            class="num"
+            style="text-align: center; font-size: 35px;color:#ff7f00;"
+          >
+            {{ viewList[0].sumPurchasedUnshippedTotalAmount }}
+            <span style="font-size: 14px;">万元</span>
+          </div>
         </div>
       </el-col>
 
@@ -171,12 +226,21 @@
       </el-col>
       -->
 
-      <el-col  :span="24">
-        <div class="card"  style="background: #1b2137; color: #fff; padding: 20px;">
+      <el-col :span="24">
+        <div
+          class="card"
+          style="background: #1b2137; color: #fff; padding: 20px;"
+        >
           <div class="title">
             贷款已使用金额
           </div>
-          <div class="num" style="text-align: center; font-size:35px;color:#ff7f00;">{{viewList[0].loanUsageTotalLoanCreditBalance}} <span style="font-size: 14px;">万元</span></div>
+          <div
+            class="num"
+            style="text-align: center; font-size:35px;color:#ff7f00;"
+          >
+            {{ viewList[0].loanUsageTotalLoanCreditBalance }}
+            <span style="font-size: 14px;">万元</span>
+          </div>
         </div>
       </el-col>
 
@@ -191,20 +255,55 @@
       </el-col>
     -->
 
-      <el-col  :span="24">
-        <div class="card"  style="background: #1b2137; color: #fff; padding: 20px;">
+      <el-col :span="24">
+        <div
+          class="card"
+          style="background: #1b2137; color: #fff; padding: 20px;"
+        >
           <div class="title">
             可用资金
           </div>
-          <div class="num" style="text-align: center; font-size:35px;color:#ff7f00;">{{viewList[0].sumAvailableFundsTotalAmount}} <span style="font-size: 14px;">万元</span></div>
+          <div
+            class="num"
+            style="text-align: center; font-size:35px;color:#ff7f00;"
+          >
+            {{ viewList[0].sumAvailableFundsTotalAmount }}
+            <span style="font-size: 14px;">万元</span>
+          </div>
         </div>
       </el-col>
-      <el-col  :span="24">
-        <div class="card"  style="background: #1b2137; color: #fff; padding: 20px;">
+      <el-col :span="24">
+        <div
+          class="card"
+          style="background: #1b2137; color: #fff; padding: 20px;"
+        >
           <div class="title">
             库存
           </div>
-          <div class="num" style="text-align: center; font-size:35px;color:#ff7f00;">{{viewList[0].sumInventoryAmount}} <span style="font-size: 14px;">万元</span></div>
+          <div
+            class="num"
+            style="text-align: center; font-size:35px;color:#ff7f00;"
+          >
+            {{ viewList[0].sumInventoryAmount }}
+            <span style="font-size: 14px;">万元</span>
+          </div>
+        </div>
+      </el-col>
+      <el-col :span="24">
+        <div
+          class="card"
+          style="background: #1b2137; color: #fff; padding: 20px;"
+        >
+          <div class="title">
+            在途物资
+          </div>
+          <div
+            class="num"
+            style="text-align: center; font-size:35px;color:#ff7f00;"
+          >
+            {{ viewList[0].goodsTransitTotalAmount }}
+            <span style="font-size: 14px;">万元</span>
+          </div>
         </div>
       </el-col>
       <!-- 
@@ -238,23 +337,30 @@
       </el-col>
       -->
 
-      <el-col  :span="24">
-        <div class="card"  style="background: #1b2137; color: #fff; padding: 20px;">
-          <div class="title">
-              
-          </div>
+      <el-col :span="24">
+        <div
+          class="card"
+          style="background: #1b2137; color: #fff; padding: 20px;"
+        >
+          <div class="title"></div>
           <!-- 
           <div class="num" style="text-align: center; font-size:30px;color:#ff7f00;"><span style="font-size: 14px;">已下单未发货+已发货未结算+可用资金–贷款已使用金额=</span>{{viewList[0].statisticalIndicators1}} <span style="font-size: 14px;">万元</span></div>
           -->
 
-          <div class="num" style="text-align: center; font-size:35px;color:#ff7f00;">已下单未发货+已发货未结算+可用资金–贷款已使用金额={{viewList[0].statisticalIndicators1}} <span style="font-size: 14px;">万元</span></div>
+          <div
+            class="num"
+            style="text-align: center; font-size:35px;color:#ff7f00;"
+          >
+            已下单未发货+已发货未结算+可用资金–贷款已使用金额={{
+              viewList[0].statisticalIndicators1
+            }}
+            <span style="font-size: 14px;">万元</span>
+          </div>
         </div>
       </el-col>
-
     </el-row>
 
-    
-   <!-- 
+    <!-- 
     <el-table v-loading="loading" :data="viewList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="日期" align="center" prop="days" />
@@ -305,28 +411,52 @@
           <el-input v-model="form.days" placeholder="请输入${comment}" />
         </el-form-item>
         <el-form-item label="${comment}" prop="sumSaleableInventoryAmount">
-          <el-input v-model="form.sumSaleableInventoryAmount" placeholder="请输入${comment}" />
+          <el-input
+            v-model="form.sumSaleableInventoryAmount"
+            placeholder="请输入${comment}"
+          />
         </el-form-item>
         <el-form-item label="${comment}" prop="sumUnsaleableInventoryAmount">
-          <el-input v-model="form.sumUnsaleableInventoryAmount" placeholder="请输入${comment}" />
+          <el-input
+            v-model="form.sumUnsaleableInventoryAmount"
+            placeholder="请输入${comment}"
+          />
         </el-form-item>
         <el-form-item label="${comment}" prop="sumInventoryAmount">
-          <el-input v-model="form.sumInventoryAmount" placeholder="请输入${comment}" />
+          <el-input
+            v-model="form.sumInventoryAmount"
+            placeholder="请输入${comment}"
+          />
         </el-form-item>
         <el-form-item label="${comment}" prop="sumPrepaymentAmountPaid">
-          <el-input v-model="form.sumPrepaymentAmountPaid" placeholder="请输入${comment}" />
+          <el-input
+            v-model="form.sumPrepaymentAmountPaid"
+            placeholder="请输入${comment}"
+          />
         </el-form-item>
         <el-form-item label="${comment}" prop="sumShippedUnsettledTotalAmount">
-          <el-input v-model="form.sumShippedUnsettledTotalAmount" placeholder="请输入${comment}" />
+          <el-input
+            v-model="form.sumShippedUnsettledTotalAmount"
+            placeholder="请输入${comment}"
+          />
         </el-form-item>
         <el-form-item label="${comment}" prop="sumAvailableFundsTotalAmount">
-          <el-input v-model="form.sumAvailableFundsTotalAmount" placeholder="请输入${comment}" />
+          <el-input
+            v-model="form.sumAvailableFundsTotalAmount"
+            placeholder="请输入${comment}"
+          />
         </el-form-item>
         <el-form-item label="${comment}" prop="goodsTransitTotalAmount">
-          <el-input v-model="form.goodsTransitTotalAmount" placeholder="请输入${comment}" />
+          <el-input
+            v-model="form.goodsTransitTotalAmount"
+            placeholder="请输入${comment}"
+          />
         </el-form-item>
         <el-form-item label="${comment}" prop="placedNotShippedTotalAmount">
-          <el-input v-model="form.placedNotShippedTotalAmount" placeholder="请输入${comment}" />
+          <el-input
+            v-model="form.placedNotShippedTotalAmount"
+            placeholder="请输入${comment}"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -337,14 +467,24 @@
   </div>
 </template>
 <style scoped>
-.title{
+.title {
   font-size: 24px;
-}
-</style>>
+  color: #fff;
+  margin-left: 50px;
+  text-align: left;
+}</style
+>>
 
-</style>
 <script>
-import { queryNewFromList,listView, getView, delView, addView, updateView, exportView } from "@/api/amount/view";
+import {
+  queryNewFromList,
+  listView,
+  getView,
+  delView,
+  addView,
+  updateView,
+  exportView
+} from "@/api/amount/view";
 
 export default {
   name: "View",
@@ -385,8 +525,7 @@ export default {
       // 表单参数
       form: {},
       // 表单校验
-      rules: {
-      }
+      rules: {}
     };
   },
   created() {
@@ -435,9 +574,9 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.days)
-      this.single = selection.length!==1
-      this.multiple = !selection.length
+      this.ids = selection.map(item => item.days);
+      this.single = selection.length !== 1;
+      this.multiple = !selection.length;
     },
     /** 新增按钮操作 */
     handleAdd() {
@@ -448,7 +587,7 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const days = row.days || this.ids
+      const days = row.days || this.ids;
       getView(days).then(response => {
         this.form = response.data;
         this.open = true;
@@ -483,28 +622,34 @@ export default {
     handleDelete(row) {
       const dayss = row.days || this.ids;
       this.$confirm('是否确认删除VIEW编号为"' + dayss + '"的数据项?', "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }).then(function() {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(function() {
           return delView(dayss);
-        }).then(() => {
+        })
+        .then(() => {
           this.getList();
           this.msgSuccess("删除成功");
-        }).catch(function() {});
+        })
+        .catch(function() {});
     },
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有VIEW数据项?', "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }).then(function() {
+      this.$confirm("是否确认导出所有VIEW数据项?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(function() {
           return exportView(queryParams);
-        }).then(response => {
+        })
+        .then(response => {
           this.download(response.msg);
-        }).catch(function() {});
+        })
+        .catch(function() {});
     }
   }
 };
