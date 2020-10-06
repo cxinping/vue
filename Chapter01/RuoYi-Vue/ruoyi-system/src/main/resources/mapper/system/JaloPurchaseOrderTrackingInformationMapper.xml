@@ -36,7 +36,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectJaloPurchaseOrderTrackingInformationList" parameterType="JaloPurchaseOrderTrackingInformation" resultMap="JaloPurchaseOrderTrackingInformationResult">
         <include refid="selectJaloPurchaseOrderTrackingInformationVo"/>
-        <where>  
+        <where>
+            <if test="supplier != null  and supplier != ''">and supplier like concat('%', #{supplier}, '%')</if>
+            <if test="progress != null  and progress != ''"> and progress = #{progress} </if>
+            <if test="stampduty != null and progress != ''"> and stampduty = #{stampduty} </if>
+            <if test="contractsigning != null  and contractsigning != ''"> and contractsigning like concat('%', #{contractsigning}, '%') </if>
+            <if test="contractSigningBeginTime != null ">
+                <![CDATA[ and  contract_signing_time >= #{contractSigningBeginTime,jdbcType=DATE} ]]>
+            </if>
+            <if test="contractSigningEndTime != null ">
+                <![CDATA[ and  contract_signing_time <= #{contractSigningEndTime,jdbcType=DATE} ]]>
+            </if>
+            <if test="payableBeginTime != null ">
+                <![CDATA[ and  payable_time >= #{payableBeginTime,jdbcType=DATE} ]]>
+            </if>
+            <if test="payableEndTime != null ">
+                <![CDATA[ and  payable_time <= #{payableEndTime,jdbcType=DATE} ]]>
+            </if>
+
+            <!--
             <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
             <if test="supplier != null  and supplier != ''"> and supplier = #{supplier}</if>
             <if test="contractSigningTime != null "> and contract_signing_time = #{contractSigningTime}</if>
@@ -48,21 +66,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="prepaymentPayableTime != null "> and prepayment_payable_time = #{prepaymentPayableTime}</if>
             <if test="prepaymentPayableAmount != null "> and prepayment_payable_amount = #{prepaymentPayableAmount}</if>
             <if test="param != null "> and ( supplier like concat('%',#{param} ,'%' )  or  progress  like concat('%',#{param} ,'%' )  or stampduty like concat('%',#{param} ,'%' ) or contractsigning  like concat('%',#{param} ,'%' )   )</if>
+            -->
         </where>
 
         ORDER BY create_time DESC
-
         <if test="columnname != null "> , #{columnname}  #{orderby}</if>
-
     </select>
 
-    <select id="selectSumJaloPurchaseOrderTrackingInfoList" resultMap="SumJaloPurchaseOrderTrackingInfoResult">
+    <select id="selectSumJaloPurchaseOrderTrackingInfoList" parameterType="JaloPurchaseOrderTrackingInformation" resultMap="SumJaloPurchaseOrderTrackingInfoResult">
        SELECT
-            sum(contract_amount) sum_contract_amount,
-            sum(prepayment_amount_payable) sum_prepayment_amount_payable,
-            sum(prepayment_amount_paid) sum_prepayment_amount_paid
+            sum(contract_amount) as sum_contract_amount,
+            sum(prepayment_amount_payable) as sum_prepayment_amount_payable,
+            sum(prepayment_amount_paid) as sum_prepayment_amount_paid
         FROM
             jalo_purchase_order_tracking_information
+        <where>
+            <if test="supplier != null  and supplier != ''">and supplier like concat('%', #{supplier}, '%')</if>
+            <if test="progress != null  and progress != ''"> and progress = #{progress} </if>
+            <if test="stampduty != null and progress != ''"> and stampduty = #{stampduty} </if>
+            <if test="contractsigning != null  and contractsigning != ''"> and contractsigning like concat('%', #{contractsigning}, '%')</if>
+            <if test="contractSigningBeginTime != null ">
+                <![CDATA[ and  contract_signing_time >= #{contractSigningBeginTime,jdbcType=DATE} ]]>
+            </if>
+            <if test="contractSigningEndTime != null ">
+                <![CDATA[ and  contract_signing_time <= #{contractSigningEndTime,jdbcType=DATE} ]]>
+            </if>
+            <if test="payableBeginTime != null ">
+                <![CDATA[ and  payable_time >= #{payableBeginTime,jdbcType=DATE} ]]>
+            </if>
+            <if test="payableEndTime != null ">
+                <![CDATA[ and  payable_time <= #{payableEndTime,jdbcType=DATE} ]]>
+            </if>
+        </where>
     </select>
 
     <select id="selectJaloPurchaseOrderTrackingInfoSupplierList" resultType="java.lang.String">

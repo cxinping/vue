@@ -28,7 +28,7 @@ public interface JaloPurchaseOrderTrackingInformationMapper
      */
     public List<JaloPurchaseOrderTrackingInformation> selectJaloPurchaseOrderTrackingInformationList(JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation);
 
-    public List<SumJaloPurchaseOrderTrackingInfo> selectSumJaloPurchaseOrderTrackingInfoList();
+    public SumJaloPurchaseOrderTrackingInfo selectSumJaloPurchaseOrderTrackingInfoList(JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation);
 
     public List<String> selectJaloPurchaseOrderTrackingInfoSupplierList();
 

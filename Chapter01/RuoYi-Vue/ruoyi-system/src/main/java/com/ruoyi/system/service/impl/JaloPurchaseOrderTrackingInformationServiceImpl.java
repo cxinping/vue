@@ -5,6 +5,8 @@ import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
 import com.ruoyi.system.vo.SupplierVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.JaloPurchaseOrderTrackingInformationMapper;
@@ -20,6 +22,8 @@ import com.ruoyi.system.service.IJaloPurchaseOrderTrackingInformationService;
 @Service
 public class JaloPurchaseOrderTrackingInformationServiceImpl implements IJaloPurchaseOrderTrackingInformationService 
 {
+    private final Logger logger = LoggerFactory.getLogger(JaloPurchaseOrderTrackingInformationServiceImpl.class);
+
     @Autowired
     private JaloPurchaseOrderTrackingInformationMapper jaloPurchaseOrderTrackingInformationMapper;
 
@@ -46,6 +50,14 @@ public class JaloPurchaseOrderTrackingInformationServiceImpl implements IJaloPur
     {
         return jaloPurchaseOrderTrackingInformationMapper.selectJaloPurchaseOrderTrackingInformationList(jaloPurchaseOrderTrackingInformation);
     }
+
+
+    @Override
+    public SumJaloPurchaseOrderTrackingInfo selectSumJaloPurchaseOrderTrackingInfoList(JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation){
+        return jaloPurchaseOrderTrackingInformationMapper.selectSumJaloPurchaseOrderTrackingInfoList(jaloPurchaseOrderTrackingInformation);
+    }
+
+
 
     /**
      * 新增采购订单跟踪信息
@@ -97,10 +109,7 @@ public class JaloPurchaseOrderTrackingInformationServiceImpl implements IJaloPur
         return jaloPurchaseOrderTrackingInformationMapper.deleteJaloPurchaseOrderTrackingInformationById(id);
     }
 
-    @Override
-    public List<SumJaloPurchaseOrderTrackingInfo> selectSumJaloPurchaseOrderTrackingInfoList(){
-        return jaloPurchaseOrderTrackingInformationMapper.selectSumJaloPurchaseOrderTrackingInfoList();
-    }
+
 
     @Override
     public List<SupplierVo> selectJaloPurchaseOrderTrackingInfoSupplierList(){

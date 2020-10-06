@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 
 public class SumJaloPurchaseOrderTrackingInfo {
 
-    /** 合同金额 */
+    /** 汇总合同金额 */
     private BigDecimal sumContractAmount;
 
-    /** 应付预付款金额 */
+    /** 汇总应付预付款金额 */
     private BigDecimal sumPrepaymentAmountPayable;
 
-    /** 已付预付款金额 */
+    /** 汇总已付预付款金额 */
     private BigDecimal sumPrepaymentAmountPaid;
 
     public BigDecimal getSumContractAmount() {

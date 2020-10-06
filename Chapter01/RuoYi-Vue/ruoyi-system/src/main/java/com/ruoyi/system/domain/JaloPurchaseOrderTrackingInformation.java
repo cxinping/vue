@@ -34,6 +34,9 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
     @Excel(name = "合同签订时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date contractSigningTime;
 
+    private Date contractSigningBeginTime;
+    private Date contractSigningEndTime;
+
     /** 合同结束时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "合同结束时间", width = 30, dateFormat = "yyyy-MM-dd")
@@ -51,6 +54,8 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "应付尾款时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date payableTime;
+    private Date payableBeginTime;
+    private Date payableEndTime;
 
     /** 已付预付款金额,改为 应付尾款金额 */
     @Excel(name = "应付尾款金额")
@@ -82,6 +87,38 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
     private String orderby;
 
     private String param;
+
+    public Date getPayableBeginTime() {
+        return payableBeginTime;
+    }
+
+    public void setPayableBeginTime(Date payableBeginTime) {
+        this.payableBeginTime = payableBeginTime;
+    }
+
+    public Date getPayableEndTime() {
+        return payableEndTime;
+    }
+
+    public void setPayableEndTime(Date payableEndTime) {
+        this.payableEndTime = payableEndTime;
+    }
+
+    public Date getContractSigningBeginTime() {
+        return contractSigningBeginTime;
+    }
+
+    public void setContractSigningBeginTime(Date contractSigningBeginTime) {
+        this.contractSigningBeginTime = contractSigningBeginTime;
+    }
+
+    public Date getContractSigningEndTime() {
+        return contractSigningEndTime;
+    }
+
+    public void setContractSigningEndTime(Date contractSigningEndTime) {
+        this.contractSigningEndTime = contractSigningEndTime;
+    }
 
     public String getParam() {
         return param;
@@ -238,10 +275,14 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
                 ", projectName='" + projectName + '\'' +
                 ", supplier='" + supplier + '\'' +
                 ", contractSigningTime=" + contractSigningTime +
+                ", contractSigningBeginTime=" + contractSigningBeginTime +
+                ", contractSigningEndTime=" + contractSigningEndTime +
                 ", contractEndTime=" + contractEndTime +
                 ", contractAmount=" + contractAmount +
                 ", prepaymentAmountPayable=" + prepaymentAmountPayable +
                 ", payableTime=" + payableTime +
+                ", payableBeginTime=" + payableBeginTime +
+                ", payableEndTime=" + payableEndTime +
                 ", prepaymentAmountPaid=" + prepaymentAmountPaid +
                 ", prepaymentPayableTime=" + prepaymentPayableTime +
                 ", prepaymentPayableAmount=" + prepaymentPayableAmount +

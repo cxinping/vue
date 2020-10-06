@@ -61,7 +61,9 @@ public interface IJaloPurchaseOrderTrackingInformationService
      */
     public int deleteJaloPurchaseOrderTrackingInformationById(Long id);
 
-    public List<SumJaloPurchaseOrderTrackingInfo> selectSumJaloPurchaseOrderTrackingInfoList();
+    public SumJaloPurchaseOrderTrackingInfo selectSumJaloPurchaseOrderTrackingInfoList(JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation);
+
+
 
     public List<SupplierVo> selectJaloPurchaseOrderTrackingInfoSupplierList();
 

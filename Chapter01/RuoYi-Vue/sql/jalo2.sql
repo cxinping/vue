@@ -76,6 +76,6 @@ FROM
     jalo_goods_transit
 
 CREATE VIEW transit_view AS SELECT
-	SUM(num) * sum(amount) AS goods_transit_total_amount -- 在途物资
+	sum(amount) AS goods_transit_total_amount -- 在途物资
 FROM
 	jalo_goods_transit_detail

@@ -2,8 +2,6 @@ package com.ruoyi.web.controller.jalohome;
 
 import java.util.Date;
 import java.util.List;
-
-import com.ruoyi.common.utils.Threads;
 import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
 import com.ruoyi.system.vo.SupplierVo;
 import org.slf4j.Logger;
@@ -55,11 +53,9 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
 
         startPage();
         List<JaloPurchaseOrderTrackingInformation> list = jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInformationList(jaloPurchaseOrderTrackingInformation);
+        SumJaloPurchaseOrderTrackingInfo sumInfo = jaloPurchaseOrderTrackingInformationService.selectSumJaloPurchaseOrderTrackingInfoList(jaloPurchaseOrderTrackingInformation);
 
-        //List<SumJaloPurchaseOrderTrackingInfo> sumInfos = jaloPurchaseOrderTrackingInformationService.selectSumJaloPurchaseOrderTrackingInfoList();
-
-
-        return getDataTable(list);
+        return getDataTable(list,sumInfo);
     }
 
     /**
