@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.JaloInventoryDetail;
+import com.ruoyi.system.domain.JaloInventoryDetailSum;
 
 /**
  * 库存详细Mapper接口
@@ -17,7 +18,7 @@ public interface JaloInventoryDetailMapper
      * @param id 库存详细ID
      * @return 库存详细
      */
-    public JaloInventoryDetail selectJaloInventoryDetailById(Long id);
+    public JaloInventoryDetail selectJaloInventoryDetailById(String id);
 
     /**
      * 查询库存详细列表
@@ -29,6 +30,12 @@ public interface JaloInventoryDetailMapper
 
 
     public List<JaloInventoryDetail> selectJaloInventoryDetailListByInventorySumId(String jaloInventorySumId);
+
+    public List<JaloInventoryDetail> selectJaloInventoryDetailListByParentid(String parentid);
+
+    public JaloInventoryDetail selectJaloInventoryDetailRoot();
+
+    public JaloInventoryDetailSum calJaloInventoryDetailSum(String parentid);
 
     /**
      * 新增库存详细

@@ -16,15 +16,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="jaloInventorySumId"    column="jalo_inventory_sum_id"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="parentid"    column="parentid"    />
+    </resultMap>
+
+    <resultMap type="JaloInventoryDetailSum" id="JaloInventoryDetailSumResult">
+        <result property="saleableInventorySumNum"    column="saleableInventorySumNum"    />
+        <result property="unsaleableInventorySumNum"    column="unsaleableInventorySumNum"    />
+        <result property="saleableInventorySumAmount"    column="saleableInventorySumAmount"    />
+        <result property="unsaleableInventorySumAmount"    column="unsaleableInventorySumAmount"    />
+        <result property="inventorySumAmount"    column="inventorySumAmount"    />
     </resultMap>
 
     <sql id="selectJaloInventoryDetailVo">
-        select id, product, saleable_inventory_num, saleable_inventory_amount, unsaleable_inventory_num, unsaleable_inventory_amount, inventory_amount, order_num, jalo_inventory_sum_id, create_time, update_time from jalo_inventory_detail
+        select id, product, saleable_inventory_num, saleable_inventory_amount, unsaleable_inventory_num, unsaleable_inventory_amount, inventory_amount, order_num, jalo_inventory_sum_id, create_time, update_time,parentid from jalo_inventory_detail
     </sql>
+
+    <select id="calJaloInventoryDetailSum" parameterType="String" resultMap="JaloInventoryDetailSumResult">
+        select  sum(saleable_inventory_num) as saleableInventorySumNum, sum(saleable_inventory_amount) as saleableInventorySumAmount,
+                sum(unsaleable_inventory_num) as unsaleableInventorySumNum, sum(unsaleable_inventory_amount) as unsaleableInventorySumAmount,
+                sum(inventory_amount) as inventorySumAmount
+        from jalo_inventory_detail
+        where parentid = #{parentid}
+    </select>
+
 
     <select id="selectJaloInventoryDetailListByInventorySumId" parameterType="String" resultMap="JaloInventoryDetailResult">
         <include refid="selectJaloInventoryDetailVo"/>
         where jalo_inventory_sum_id = #{jaloInventorySumId}
+    </select>
+
+    <select id="selectJaloInventoryDetailListByParentid" parameterType="String" resultMap="JaloInventoryDetailResult">
+        <include refid="selectJaloInventoryDetailVo"/>
+        where parentid = #{parentid}
+        order by order_num
+    </select>
+
+    <select id="selectJaloInventoryDetailRoot" parameterType="String" resultMap="JaloInventoryDetailResult">
+        <include refid="selectJaloInventoryDetailVo"/>
+        where product = '根节点'
     </select>
 
     <select id="selectJaloInventoryDetailList" parameterType="JaloInventoryDetail" resultMap="JaloInventoryDetailResult">
@@ -38,10 +67,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="inventoryAmount != null "> and inventory_amount = #{inventoryAmount}</if>
             <if test="orderNum != null "> and order_num = #{orderNum}</if>
             <if test="jaloInventorySumId != null  and jaloInventorySumId != ''"> and jalo_inventory_sum_id = #{jaloInventorySumId}</if>
+            <if test="parentid != null "> and parentid = #{parentid}</if>
         </where>
     </select>
     
-    <select id="selectJaloInventoryDetailById" parameterType="Long" resultMap="JaloInventoryDetailResult">
+    <select id="selectJaloInventoryDetailById" parameterType="String" resultMap="JaloInventoryDetailResult">
         <include refid="selectJaloInventoryDetailVo"/>
         where id = #{id}
     </select>
@@ -60,6 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="jaloInventorySumId != null">jalo_inventory_sum_id,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="parentid != null">parentid,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -73,6 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="jaloInventorySumId != null">#{jaloInventorySumId},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="parentid != null">#{parentid},</if>
         </trim>
     </insert>
 
@@ -87,8 +119,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="inventoryAmount != null">inventory_amount = #{inventoryAmount},</if>
             <if test="orderNum != null">order_num = #{orderNum},</if>
             <if test="jaloInventorySumId != null">jalo_inventory_sum_id = #{jaloInventorySumId},</if>
+            <!--
             <if test="createTime != null">create_time = #{createTime},</if>
+             -->
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="parentid != null">parentid = #{parentid},</if>
         </trim>
         where id = #{id}
     </update>

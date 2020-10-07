@@ -1,7 +1,10 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.system.domain.JaloInventoryDetail;
+import com.ruoyi.system.domain.JaloInventoryDetailSum;
 
 /**
  * 库存详细Service接口
@@ -17,7 +20,7 @@ public interface IJaloInventoryDetailService
      * @param id 库存详细ID
      * @return 库存详细
      */
-    public JaloInventoryDetail selectJaloInventoryDetailById(Long id);
+    public JaloInventoryDetail selectJaloInventoryDetailById(String id);
 
     /**
      * 查询库存详细列表
@@ -62,4 +65,17 @@ public interface IJaloInventoryDetailService
      * @return 结果
      */
     public int deleteJaloInventoryDetailById(String id);
+
+    public List<JaloInventoryDetail> selectJaloInventoryDetailListByParentid(String parentid);
+
+    public JaloInventoryDetail selectJaloInventoryDetailRoot();
+
+    public JaloInventoryDetail treeJaloInventoryDetailList(JaloInventoryDetail jaloInventoryDetail);
+
+    public void callInventoryDetailSum(JaloInventoryDetail inventoryDetail );
+
+    public JaloInventoryDetailSum calJaloInventoryDetailSum(String parentid);
+
+    public AjaxResult exportExcel(List<JaloInventoryDetail> list, String sheetName);
+
 }

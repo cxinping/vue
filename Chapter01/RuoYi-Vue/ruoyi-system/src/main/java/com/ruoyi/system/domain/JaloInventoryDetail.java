@@ -1,6 +1,8 @@
 package com.ruoyi.system.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -50,6 +52,10 @@ public class JaloInventoryDetail extends BaseEntity implements Comparable<JaloIn
     /** $column.columnComment */
     @Excel(name = "顺序号")
     private String jaloInventorySumId;
+
+    private String parentid;
+
+    private List<JaloInventoryDetail>  children;
 
     public Long getSaleableInventoryNum() {
         return saleableInventoryNum;
@@ -121,6 +127,30 @@ public class JaloInventoryDetail extends BaseEntity implements Comparable<JaloIn
         return inventoryAmount;
     }
 
+    public Integer getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(Integer orderNum) {
+        this.orderNum = orderNum;
+    }
+
+    public String getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(String parentid) {
+        this.parentid = parentid;
+    }
+
+    public List<JaloInventoryDetail> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<JaloInventoryDetail> children) {
+        this.children = children;
+    }
+
     @Override
     public String toString() {
         return "JaloInventoryDetail{" +
@@ -133,15 +163,9 @@ public class JaloInventoryDetail extends BaseEntity implements Comparable<JaloIn
                 ", inventoryAmount=" + inventoryAmount +
                 ", orderNum=" + orderNum +
                 ", jaloInventorySumId='" + jaloInventorySumId + '\'' +
+                ", parentid='" + parentid + '\'' +
+                ", children=" + children +
                 '}';
-    }
-
-    public Integer getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
     }
 
     @Override
