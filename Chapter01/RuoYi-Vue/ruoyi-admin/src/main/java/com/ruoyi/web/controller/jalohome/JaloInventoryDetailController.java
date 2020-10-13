@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.common.utils.uuid.UUID;
 import org.slf4j.Logger;
@@ -76,6 +77,8 @@ public class JaloInventoryDetailController extends BaseController
 //        ExcelUtil<JaloInventoryDetail> util = new ExcelUtil<JaloInventoryDetail>(JaloInventoryDetail.class);
         //return util.exportExcel(list, "detail");
 
+        logger.info("----- JaloInventoryDetailController export ----");
+
         JaloInventoryDetail inventoryDetail = jaloInventoryDetailService.treeJaloInventoryDetailList(null);
         List<JaloInventoryDetail> children = inventoryDetail.getChildren();
 
@@ -110,8 +113,21 @@ public class JaloInventoryDetailController extends BaseController
             jaloInventoryDetail.setInventoryAmount(inventoryAmount );
         }
 
-        int flag = jaloInventoryDetailService.insertJaloInventoryDetail(jaloInventoryDetail);
-        jaloInventoryDetailService.callInventoryDetailSum(jaloInventoryDetail);
+        int flag = 0;
+        try{
+            logger.info(jaloInventoryDetail.toString());
+
+            String parentid = jaloInventoryDetail.getParentid();
+            if(StringUtils.isBlank(parentid)){
+                throw new RuntimeException("输入的 parentid 不能为空");
+            }
+
+            flag = jaloInventoryDetailService.insertJaloInventoryDetail(jaloInventoryDetail);
+            jaloInventoryDetailService.callInventoryDetailSum(jaloInventoryDetail);
+        }catch (Exception e){
+            e.printStackTrace();
+            return AjaxResult.error(e.getMessage());
+        }
 
         return toAjax(flag);
     }
@@ -132,10 +148,16 @@ public class JaloInventoryDetailController extends BaseController
             jaloInventoryDetail.setInventoryAmount(inventoryAmount );
         }
 
-        int flag = jaloInventoryDetailService.updateJaloInventoryDetail(jaloInventoryDetail);
-        flag= 1;
+        int flag = 0;
+        try{
+            flag = jaloInventoryDetailService.updateJaloInventoryDetail(jaloInventoryDetail);
+            flag= 1;
 
-        jaloInventoryDetailService.callInventoryDetailSum(jaloInventoryDetail);
+            jaloInventoryDetailService.callInventoryDetailSum(jaloInventoryDetail);
+        }catch (Exception e){
+            e.printStackTrace();
+            flag = -1;
+        }
 
         return toAjax(flag);
     }
@@ -158,9 +180,13 @@ public class JaloInventoryDetailController extends BaseController
     {
         logger.info("----- JaloInventoryDetailController remove----");
         JaloInventoryDetail inventoryDetail=  jaloInventoryDetailService.selectJaloInventoryDetailById(id);
-        int flag = jaloInventoryDetailService.deleteJaloInventoryDetailById(id);
-
-        jaloInventoryDetailService.callInventoryDetailSum(inventoryDetail);
+        int flag = 0 ;
+        try{
+            flag = jaloInventoryDetailService.deleteJaloInventoryDetailById(id);
+            jaloInventoryDetailService.callInventoryDetailSum(inventoryDetail);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return toAjax(flag);
     }

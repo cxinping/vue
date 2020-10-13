@@ -80,7 +80,15 @@ public class JaloInventoryDetailServiceImpl implements IJaloInventoryDetailServi
     @Override
     public int insertJaloInventoryDetail(JaloInventoryDetail jaloInventoryDetail)
     {
+        if(null != jaloInventoryDetail && StringUtils.isBlank(jaloInventoryDetail.getParentid())){
+            throw new RuntimeException("输入的数据中 parentId 不能为空");
+        }
+
         jaloInventoryDetail.setCreateTime(DateUtils.getNowDate());
+        if(StringUtils.isBlank(jaloInventoryDetail.getNodetype())){
+           jaloInventoryDetail.setNodetype("group");
+        }
+
         return jaloInventoryDetailMapper.insertJaloInventoryDetail(jaloInventoryDetail);
     }
 
@@ -168,19 +176,24 @@ public class JaloInventoryDetailServiceImpl implements IJaloInventoryDetailServi
     }
 
     public void callInventoryDetailSum(JaloInventoryDetail inventoryDetail ){
-        logger.info("******* callInventoryDetailSum ***********" );
+        logger.info("******* callInventoryDetailSum ***********  "   );
         String id = inventoryDetail.getId();
         String parentid = inventoryDetail.getParentid();
 
-        if(StringUtils.isBlank(parentid)){
-            return;
+        if(!id.equals("1") && StringUtils.isBlank(parentid)){
+            throw new RuntimeException("输入的数据中 parentid 不能为空");
         }
 
         try{
             //得到父节点
             JaloInventoryDetail pareInventoryDetail  = selectJaloInventoryDetailById(parentid);
+            if(pareInventoryDetail.getId().equals("1")){
+                return ;
+            }
+
             // 计算父节点统计的金额和数量
             JaloInventoryDetailSum inventoryDetailSum= calJaloInventoryDetailSum(parentid);
+            logger.info(inventoryDetailSum.toString());
             pareInventoryDetail.setInventoryAmount(inventoryDetailSum.getInventorySumAmount());
             pareInventoryDetail.setSaleableInventoryAmount(inventoryDetailSum.getSaleableInventorySumAmount() );
             pareInventoryDetail.setSaleableInventoryNum(inventoryDetailSum.getSaleableInventorySumNum() );
@@ -192,6 +205,7 @@ public class JaloInventoryDetailServiceImpl implements IJaloInventoryDetailServi
             callInventoryDetailSum(pareInventoryDetail);
         }catch(Exception e){
             e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
     }
 

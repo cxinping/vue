@@ -46,7 +46,7 @@ export function delTransit(id) {
 // 导出在途物资
 export function exportTransit(query) {
   return request({
-    url: "/amount/transit/detail/export",
+    url: "/amount/transit/export",
     method: "get",
     params: query
   });

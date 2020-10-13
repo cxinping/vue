@@ -1,50 +1,5 @@
 <template>
   <div class="app-container">
-    <!-- 
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="合计金额汇总" prop="product">
-        <el-input
-          v-model="queryParams.product"
-          placeholder="请输入合计金额汇总"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="合计金额汇总" prop="sumSaleableInventoryAmount">
-        <el-input
-          v-model="queryParams.sumSaleableInventoryAmount"
-          placeholder="请输入合计金额汇总"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="不可销售库存金额汇总" prop="sumUnsaleableInventoryAmount">
-        <el-input
-          v-model="queryParams.sumUnsaleableInventoryAmount"
-          placeholder="请输入不可销售库存金额汇总"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="合计金额汇总" prop="sumInventoryAmount">
-        <el-input
-          v-model="queryParams.sumInventoryAmount"
-          placeholder="请输入合计金额汇总"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item>
-    </el-form>
--->
-
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
@@ -108,11 +63,11 @@
 
     <el-table
       :data="sumList"
-      style="width: 100%;margin-bottom: 20px;"
+      style="width: 100%; margin-bottom: 20px"
       row-key="id"
       border
       default-expand-all
-      :tree-props="{ children: 'inventoryDetails', hasChildren: 'hasChildren' }"
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
       <el-table-column prop="product" label="产品名称" sortable width="180">
       </el-table-column>
@@ -162,7 +117,23 @@
       >
         <template slot-scope="scope">
           <el-button
-            v-if="scope.row.inventoryDetails"
+            size="mini"
+            type="text"
+            icon="el-icon-plus"
+            @click="handleAdd(scope.row, 'group')"
+            v-hasPermi="['amount:sum:add']"
+            v-show="scope.row.nodetype == 'group'"
+            >新增分组</el-button
+          >
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-plus"
+            @click="handleAdd(scope.row, 'leaf')"
+            v-hasPermi="['amount:sum:add']"
+            >新增节点</el-button
+          >
+          <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
@@ -171,7 +142,6 @@
             >修改</el-button
           >
           <el-button
-            v-if="scope.row.inventoryDetails"
             size="mini"
             type="text"
             icon="el-icon-delete"
@@ -199,13 +169,20 @@
       append-to-body
     >
       <el-table :data="newTable" border style="width: 100%">
-        <el-table-column prop="product" label="产品" width="180">
+        <el-table-column label="产品名称" width="180">
+          <template slot-scope="scope">
+            <el-input
+              v-model="scope.row.product"
+              placeholder="请输入产品名称"
+            />
+          </template>
         </el-table-column>
         <el-table-column label="可销售库存金额">
           <template slot-scope="scope">
             <el-input
               v-model="scope.row.saleableInventoryAmount"
               placeholder="请输入可销售库存金额,单位：元"
+              :disabled="scope.row.nodetype == 'group'"
             />
           </template>
         </el-table-column>
@@ -214,6 +191,7 @@
             <el-input
               v-model="scope.row.unsaleableInventoryAmount"
               placeholder="请输入不可销售库存金额,单位：元"
+              :disabled="scope.row.nodetype == 'group'"
             />
           </template>
         </el-table-column>
@@ -222,6 +200,7 @@
             <el-input
               v-model="scope.row.saleableInventoryNum"
               placeholder="请输入可销售库存数量"
+              :disabled="scope.row.nodetype == 'group'"
             />
           </template>
         </el-table-column>
@@ -230,6 +209,7 @@
             <el-input
               v-model="scope.row.unsaleableInventoryNum"
               placeholder="请输入不可销售库存数量"
+              :disabled="scope.row.nodetype == 'group'"
             />
           </template>
         </el-table-column>
@@ -238,7 +218,7 @@
             <div>
               {{
                 parseFloat(scope.row.saleableInventoryAmount || 0) +
-                  parseFloat(scope.row.unsaleableInventoryAmount || 0)
+                parseFloat(scope.row.unsaleableInventoryAmount || 0)
               }}
             </div>
           </template>
@@ -248,9 +228,19 @@
             <div>
               {{
                 parseFloat(scope.row.saleableInventoryNum || 0) +
-                  parseFloat(scope.row.unsaleableInventoryNum || 0)
+                parseFloat(scope.row.unsaleableInventoryNum || 0)
               }}
             </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="显示排序">
+          <template slot-scope="scope">
+            <el-input-number
+              v-model="scope.row.orderNum"
+              controls-position="right"
+              :min="0"
+              style="width: 100px"
+            />
           </template>
         </el-table-column>
       </el-table>
@@ -265,11 +255,10 @@
 <script>
 import {
   listSum,
-  getSum,
   delSum,
   addSum,
   updateSum,
-  exportSum
+  exportSum,
 } from "@/api/amount/sum";
 
 export default {
@@ -290,70 +279,22 @@ export default {
       total: 0,
       // 库存汇总表格数据
       sumList: [],
-      newTabelTip: "",
-      newTable: [
-        {
-          product: "建材",
-          saleableInventoryAmount: "",
-          unsaleableInventoryAmount: ""
-        },
-        {
-          product: "日用品",
-          saleableInventoryAmount: "",
-          unsaleableInventoryAmount: ""
-        },
-        {
-          product: "电器",
-          saleableInventoryAmount: "",
-          unsaleableInventoryAmount: ""
-        },
-        {
-          product: "家具",
-          saleableInventoryAmount: "",
-          unsaleableInventoryAmount: ""
-        },
-        {
-          product: "厨房卫浴",
-          saleableInventoryAmount: "",
-          unsaleableInventoryAmount: ""
-        },
-        {
-          product: "灯具",
-          saleableInventoryAmount: "",
-          unsaleableInventoryAmount: ""
-        },
-        {
-          product: "软装",
-          saleableInventoryAmount: "",
-          unsaleableInventoryAmount: ""
-        },
-        {
-          product: "纺织品",
-          saleableInventoryAmount: "",
-          unsaleableInventoryAmount: ""
-        },
-        {
-          product: "其它",
-          saleableInventoryAmount: "",
-          unsaleableInventoryAmount: ""
-        }
-      ],
+      // 菜单树选项
+      sumOptions: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
       open: false,
       // 查询参数
       queryParams: {
-        pageNum: 1,
-        pageSize: 10,
-        sumSaleableInventoryAmount: null,
-        sumUnsaleableInventoryAmount: null,
-        sumInventoryAmount: null
+        menuName: undefined,
+        visible: undefined,
       },
+      newTable: [],
       // 表单参数
       form: {},
       // 表单校验
-      rules: {}
+      rules: {},
     };
   },
   created() {
@@ -363,19 +304,8 @@ export default {
     /** 查询库存汇总列表 */
     getList() {
       this.loading = true;
-      listSum(this.queryParams).then(response => {
-        this.sumList = response.rows.map(item => {
-          return {
-            saleableInventoryAmount: item.sumSaleableInventoryAmount,
-            unsaleableInventoryAmount: item.sumUnsaleableInventoryAmount,
-            saleableInventoryNum: item.sumSaleableInventoryNum,
-            unsaleableInventoryNum: item.sumUnsaleableInventoryNum,
-            inventoryAmount: item.sumInventoryAmount,
-            updateTime: item.updateTime,
-            ...item
-          };
-        });
-        this.total = response.total;
+      listSum().then((response) => {
+        this.sumList = response.children;
         this.loading = false;
       });
     },
@@ -392,7 +322,7 @@ export default {
         sumUnsaleableInventoryAmount: null,
         sumInventoryAmount: null,
         createTime: null,
-        updateTime: null
+        updateTime: null,
       };
       this.resetForm("form");
     },
@@ -408,13 +338,35 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id);
+      this.ids = selection.map((item) => item.id);
       this.single = selection.length !== 1;
       this.multiple = !selection.length;
     },
     /** 新增按钮操作 */
-    handleAdd() {
+    handleAdd(row, isGroup = "group") {
       this.reset();
+      this.modify = false;
+      //debugger;
+      let obj = {
+        saleableInventoryAmount: 0,
+        unsaleableInventoryAmount: 0,
+        saleableInventoryNum: 0,
+        unsaleableInventoryNum: 0,
+        nodetype: isGroup,
+        product: "",
+        orderNum: 1,
+      };
+      if (row != null && row.id) {
+        this.form.parentId = row.id;
+        obj.parentid = row.id;
+      } else {
+        this.form.parentId = "1";
+        obj.parentid = "1";
+      }
+      this.form.addType = isGroup;
+      this.newTable = [];
+      this.newTable.push(obj);
+
       this.open = true;
       this.title = "添加库存汇总";
     },
@@ -423,265 +375,76 @@ export default {
       this.reset();
       this.open = true;
       this.modify = true;
-      console.log(row);
-      this.newTableId = row.id;
-      this.newTable = row.inventoryDetails.map(item => ({
-        ...item,
-        unsaleableInventoryAmount: item.unsaleableInventoryAmount,
-        saleableInventoryAmount: item.saleableInventoryAmount
-      }));
-      // this.newTable = /
-      // const id = row.id || this.ids
-      // getSum(id).then(response => {
-      //   this.form = response.data;
-      //   this.open = true;
-      //   this.title = "修改库存汇总";
-      // });
+      this.newTable = [];
+      delete row.children;
+      this.newTable.push(row);
     },
 
     /** 提交按钮 */
-    submitForm() {
-      console.log(this.newTable);
-      let sumSaleableInventoryAmount = 0;
-      let sumUnsaleableInventoryAmount = 0;
-      let sumSaleableInventoryNum = 0;
-      let sumUnsaleableInventoryNum = 0;
-      let sumInventoryAmount = 0;
-
-      const errItem = this.newTable.filter(
-        item =>
-          item.saleableInventoryAmount === "" ||
-          item.unsaleableInventoryAmount === ""
-      )[0];
+    submitForm(e) {
+      const errItem = this.newTable.filter((item) => item.product === "")[0];
       if (errItem) {
-        this.newTabelTip = `${errItem.product}的${
-          errItem.saleableInventoryAmount
-            ? "不可销售库存金额"
-            : "可销售库存金额"
-        }不能为空`;
+        this.newTabelTip = `产品名称不能为空`;
         this.$message(this.newTabelTip);
         return;
       }
 
-      this.newTable.forEach(item => {
-        sumSaleableInventoryAmount += parseFloat(item.saleableInventoryAmount);
-        sumUnsaleableInventoryAmount += parseFloat(
-          item.unsaleableInventoryAmount
-        );
-        sumSaleableInventoryNum += parseFloat(item.saleableInventoryNum);
-        sumUnsaleableInventoryNum += parseFloat(item.unsaleableInventoryNum);
-      });
       if (!this.modify) {
-        addSum({
-          product: "产品",
-          sumSaleableInventoryAmount: sumSaleableInventoryAmount,
-          sumUnsaleableInventoryAmount: sumUnsaleableInventoryAmount,
-          sumSaleableInventoryNum: sumSaleableInventoryNum,
-          sumUnsaleableInventoryNum: sumUnsaleableInventoryNum,
-          sumInventoryAmount:
-            sumSaleableInventoryAmount + sumUnsaleableInventoryAmount,
-          inventoryDetails: this.newTable.map((item, index) => ({
-            ...item,
-            orderNum: index + 1,
-            saleableInventoryAmount: item.saleableInventoryAmount,
-            unsaleableInventoryAmount: item.unsaleableInventoryAmount,
-            saleableInventoryNum: item.saleableInventoryNum,
-            unsaleableInventoryNum: item.unsaleableInventoryNum,
-            inventoryAmount:
-              parseFloat(item.saleableInventoryAmount) +
-              parseFloat(item.unsaleableInventoryAmount)
-          }))
-        }).then(response => {
-          if (response.code === 200) {
-            this.msgSuccess("修改成功");
+        addSum(this.newTable[0]).then((res) => {
+          if (res.code === 200) {
+            this.msgSuccess("添加成功");
             this.open = false;
             this.getList();
             this.newTabelTip = "";
-            this.newTable = [
-              {
-                product: "建材",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "日用品",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "电器",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "家具",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "厨房卫浴",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "灯具",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "软装",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "纺织品",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "其它",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              }
-            ];
           }
         });
       } else {
-        updateSum({
-          id: this.newTableId,
-          product: "产品",
-          sumSaleableInventoryAmount: sumSaleableInventoryAmount,
-          sumUnsaleableInventoryAmount: sumUnsaleableInventoryAmount,
-          sumSaleableInventoryNum: sumSaleableInventoryNum,
-          sumUnsaleableInventoryNum: sumUnsaleableInventoryNum,
-          sumInventoryAmount:
-            sumSaleableInventoryAmount + sumUnsaleableInventoryAmount,
-          inventoryDetails: this.newTable.map((item, index) => ({
-            ...item,
-            orderNum: index + 1,
-            saleableInventoryAmount: item.saleableInventoryAmount,
-            unsaleableInventoryAmount: item.unsaleableInventoryAmount,
-            saleableInventoryNum: item.saleableInventoryNum,
-            unsaleableInventoryNum: item.unsaleableInventoryNum,
-            inventoryAmount:
-              parseFloat(item.saleableInventoryAmount) +
-              parseFloat(item.unsaleableInventoryAmount)
-          }))
-        }).then(response => {
+        updateSum(this.newTable[0]).then((response) => {
           if (response.code === 200) {
             this.msgSuccess("修改成功");
             this.open = false;
             this.getList();
             this.newTabelTip = "";
-            this.newTable = [
-              {
-                product: "建材",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "日用品",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "电器",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "家具",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "厨房卫浴",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "灯具",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "软装",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "纺织品",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              },
-              {
-                product: "其它",
-                saleableInventoryAmount: "",
-                unsaleableInventoryAmount: ""
-              }
-            ];
           }
         });
       }
-
-      // this.$refs["form"].validate(valid => {
-      //   if (valid) {
-      //     if (this.form.id != null) {
-      //       updateSum(this.form).then(response => {
-      //         if (response.code === 200) {
-      //           this.msgSuccess("修改成功");
-      //           this.open = false;
-      //           this.getList();
-      //         }
-      //       });
-      //     } else {
-      //       addSum(this.form).then(response => {
-      //         if (response.code === 200) {
-      //           this.msgSuccess("新增成功");
-      //           this.open = false;
-      //           this.getList();
-      //         }
-      //       });
-      //     }
-      //   }
-      // });
     },
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
       this.$confirm(
-        '是否确认删除库存汇总编号为"' + ids + '"的数据项?',
+        '是否确认删除产品名称为"' + row.product + '"的数据项?',
         "警告",
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning"
+          type: "warning",
         }
       )
-        .then(function() {
+        .then(function () {
           return delSum(ids);
         })
         .then(() => {
           this.getList();
           this.msgSuccess("删除成功");
         })
-        .catch(function() {});
+        .catch(function () {});
     },
     /** 导出按钮操作 */
     handleExport() {
       this.$confirm("是否确认导出所有库存汇总数据项?", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       })
-        .then(function() {
+        .then(function () {
           return exportSum();
         })
-        .then(response => {
+        .then((response) => {
           this.download(response.msg);
         })
-        .catch(function() {});
-    }
-  }
+        .catch(function () {});
+    },
+  },
 };
 </script>

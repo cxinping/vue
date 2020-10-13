@@ -55,7 +55,17 @@ public class JaloInventoryDetail extends BaseEntity implements Comparable<JaloIn
 
     private String parentid;
 
+    private String nodetype;
+
     private List<JaloInventoryDetail>  children;
+
+    public String getNodetype() {
+        return nodetype;
+    }
+
+    public void setNodetype(String nodetype) {
+        this.nodetype = nodetype;
+    }
 
     public Long getSaleableInventoryNum() {
         return saleableInventoryNum;
@@ -165,6 +175,7 @@ public class JaloInventoryDetail extends BaseEntity implements Comparable<JaloIn
                 ", jaloInventorySumId='" + jaloInventorySumId + '\'' +
                 ", parentid='" + parentid + '\'' +
                 ", children=" + children +
+                ", nodetype='" + nodetype + '\'' +
                 '}';
     }
 

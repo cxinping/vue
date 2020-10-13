@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="parentid"    column="parentid"    />
+        <result property="nodetype"    column="nodetype"    />
     </resultMap>
 
     <resultMap type="JaloInventoryDetailSum" id="JaloInventoryDetailSumResult">
@@ -28,7 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJaloInventoryDetailVo">
-        select id, product, saleable_inventory_num, saleable_inventory_amount, unsaleable_inventory_num, unsaleable_inventory_amount, inventory_amount, order_num, jalo_inventory_sum_id, create_time, update_time,parentid from jalo_inventory_detail
+        select id, product, saleable_inventory_num, saleable_inventory_amount, unsaleable_inventory_num, unsaleable_inventory_amount, inventory_amount, order_num, jalo_inventory_sum_id, create_time, update_time,
+        parentid, nodetype from jalo_inventory_detail
     </sql>
 
     <select id="calJaloInventoryDetailSum" parameterType="String" resultMap="JaloInventoryDetailSumResult">
@@ -91,6 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="parentid != null">parentid,</if>
+            <if test="nodetype != null">nodetype,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -105,6 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="parentid != null">#{parentid},</if>
+            <if test="nodetype != null">#{nodetype},</if>
         </trim>
     </insert>
 
@@ -124,6 +128,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              -->
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="parentid != null">parentid = #{parentid},</if>
+            <if test="nodetype != null">nodetype = #{nodetype},</if>
         </trim>
         where id = #{id}
     </update>

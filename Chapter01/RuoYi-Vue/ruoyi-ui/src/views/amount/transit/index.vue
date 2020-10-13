@@ -130,7 +130,7 @@
       append-to-body
       custom-class="customClass"
     >
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="供应商" prop="support" required>
           <el-input v-model="form.support" placeholder="请输入供应商" />
         </el-form-item>
@@ -139,7 +139,7 @@
           <el-input v-model="form.product" placeholder="请输入产品名称" />
         </el-form-item>
 
-        <el-form-item label="订单号" prop="purchaseOrderNumber" required>
+        <el-form-item label="采购订单号" prop="purchaseOrderNumber" required>
           <el-input
             v-model="form.purchaseOrderNumber"
             placeholder="请输入采购订单号"

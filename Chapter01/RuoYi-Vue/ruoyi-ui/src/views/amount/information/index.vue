@@ -5,9 +5,8 @@
       ref="queryForm"
       :inline="true"
       v-show="showSearch"
-      label-width="98px"
     >
-      <el-form-item label="模糊查询" prop="param">
+      <el-form-item label="模糊查询" prop="param" v-show="!queryPattern">
         <el-input
           v-model="queryParams.param"
           placeholder="请输入名称"
@@ -17,95 +16,90 @@
         />
       </el-form-item>
 
-      <!-- 
-      <el-form-item label="项目名称" prop="projectName">
-        <el-input
-          v-model="queryParams.projectName"
-          placeholder="请输入项目名称"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="供应商" prop="supplier">
-        <el-input
-          v-model="queryParams.supplier"
-          placeholder="请输入供应商"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="合同签订时间" prop="contractSigningTime">
-        <el-date-picker clearable size="small" style="width: 200px"
-          v-model="queryParams.contractSigningTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择合同签订时间">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="合同结束时间" prop="contractEndTime">
-        <el-date-picker clearable size="small" style="width: 200px"
-          v-model="queryParams.contractEndTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择合同结束时间">
-        </el-date-picker>
+      <el-form-item label="精准查询" prop="exactParam" v-show="queryPattern">
+        <div class="exactInput">
+          <el-input
+            v-model="queryParams.supplie"
+            placeholder="请输入供应商名称"
+            clearable
+            size="small"
+            style="width: 200px;"
+          />
+          <!-- <el-select v-model="value" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select> -->
+          <el-input
+            v-model="queryParams.progress"
+            placeholder="请输入后续进度"
+            clearable
+            size="small"
+            style="width: 200px; margin-left: 20px"
+          />
+          <el-input
+            v-model="queryParams.stampduty"
+            placeholder="请输入印花税"
+            clearable
+            size="small"
+            style="width: 200px;margin-left: 20px"
+          />
+          <el-input
+            v-model="queryParams.contractsigning"
+            placeholder="请输入合同签署情况"
+            clearable
+            size="small"
+            style="width: 200px;margin-left: 20px"
+          />
+        </div>
+        <div class="exactDate">
+          <el-date-picker
+            clearable
+            size="small"
+            style="width: 200px;"
+            v-model="queryParams.contractSigningBeginTime"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择合同签订开始时间"
+          >
+          </el-date-picker>
+          <el-date-picker
+            clearable
+            size="small"
+            style="width: 200px;margin-left: 20px"
+            v-model="queryParams.contractSigningEndTime"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择合同签订结束时间"
+          >
+          </el-date-picker>
+          <el-date-picker
+            clearable
+            size="small"
+            style="width: 200px;margin-left: 20px"
+            v-model="queryParams.payableBeginTime"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择应付尾款开始时间"
+          >
+          </el-date-picker>
+          <el-date-picker
+            clearable
+            size="small"
+            style="width: 200px;margin-left: 20px"
+            v-model="queryParams.payableEndTime"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择应付尾款结束时间"
+          >
+          </el-date-picker>
+        </div>
       </el-form-item>
 
-      <el-form-item label="合同金额" prop="contractAmount">
-        <el-input
-          v-model="queryParams.contractAmount"
-          placeholder="请输入合同金额"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="应付预付款时间" prop="payableTime">
-        <el-date-picker clearable size="small" style="width: 200px"
-          v-model="queryParams.payableTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择应付预付款时间">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="应付预付款金额" prop="prepaymentAmountPayable">
-        <el-input
-          v-model="queryParams.prepaymentAmountPayable"
-          placeholder="请输入应付预付款金额"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="已付预付款金额" prop="prepaymentAmountPaid">
-        <el-input
-          v-model="queryParams.prepaymentAmountPaid"
-          placeholder="请输入已付预付款金额"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="应付预付款时间" prop="prepaymentPayableTime">
-        <el-date-picker clearable size="small" style="width: 200px"
-          v-model="queryParams.prepaymentPayableTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择应付预付款时间">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="应付预付款金额" prop="prepaymentPayableAmount">
-        <el-input
-          v-model="queryParams.prepaymentPayableAmount"
-          placeholder="请输入应付预付款金额"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-     -->
       <el-form-item>
         <el-button
           type="cyan"
@@ -116,6 +110,9 @@
         >
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
           >重置</el-button
+        >
+        <el-button icon="el-icon-d-caret" size="mini" @click="toggleQuery"
+          >修改查询方式</el-button
         >
       </el-form-item>
     </el-form>
@@ -163,16 +160,7 @@
           >导出</el-button
         >
       </el-col>
-      <!--
-       <el-col :span="1.5">
-        <el-button
-          type="cyan"
-          icon="el-icon-search"
-          size="mini"
-          @click="handleQuery"
-        >搜索</el-button>
-      </el-col>
-       -->
+
       <el-col :span="1.5">
         <el-tag>页面显示，单位：元</el-tag>
       </el-col>
@@ -226,14 +214,6 @@
         </template>
       </el-table-column>
 
-      <!-- 
-      <el-table-column label="合同结束时间" align="center" prop="contractEndTime" width="130">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.contractEndTime, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
-      -->
-
       <el-table-column
         label="合同金额"
         align="center"
@@ -275,17 +255,6 @@
         prop="contractsigning"
       />
 
-      <!-- 
-      <el-table-column label="预付款金额"> 
-        <el-table-column label="应付预付款时间" align="center" prop="prepaymentPayableTime" width="130">
-          <template slot-scope="scope">
-            <span>{{ parseTime(scope.row.prepaymentPayableTime, '{y}-{m}-{d}') }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="应付预付款金额" align="center" prop="prepaymentPayableAmount" />
-      </el-table-column>
-     -->
-
       <el-table-column
         label="更新时间"
         align="center"
@@ -296,27 +265,6 @@
           <span>{{ parseTime(scope.row.updateTime) }}</span>
         </template>
       </el-table-column>
-
-      <!-- 
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['amount:information:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['amount:information:remove']"
-          >删除</el-button>
-        </template>
-      </el-table-column>
-      -->
     </el-table>
 
     <pagination
@@ -464,39 +412,9 @@
                 v-model="form.contractsigning"
                 placeholder="请输入合同签署情况"
               />
-              <!-- 
-              <el-select v-model="form.contractsigning" placeholder="请选择">
-                <el-option
-                  v-for="item in contractsigning_options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-          -->
             </el-form-item>
           </el-col>
         </el-row>
-
-        <!-- 
-  <el-row>
-    <el-col :span="12">
-      <el-form-item label="应付预付款时间" prop="prepaymentPayableTime" required >
-            <el-date-picker clearable size="small" style="width: 200px"
-              v-model="form.prepaymentPayableTime"
-              type="date"
-              value-format="yyyy-MM-dd"
-              placeholder="选择应付预付款时间">
-            </el-date-picker>
-          </el-form-item>
-    </el-col>
-    <el-col :span="12">
-         <el-form-item label="应付预付款金额" prop="prepaymentPayableAmount" required >
-          <el-input v-model="form.prepaymentPayableAmount" placeholder="请输入应付预付款金额，单位：元" />
-        </el-form-item>
-    </el-col>
-  </el-row>     
-  -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -505,7 +423,7 @@
     </el-dialog>
   </div>
 </template>
-
+<style scoped></style>
 <script>
 import {
   listInformation,
@@ -521,6 +439,7 @@ export default {
   name: "Information",
   data() {
     return {
+      queryPattern: false,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -578,7 +497,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         projectName: null,
-        supplier: null,
+        supplie: null,
         contractSigningTime: null,
         contractEndTime: null,
         contractAmount: null,
@@ -590,7 +509,11 @@ export default {
         param: null,
         progress: null,
         stampduty: null,
-        contractsigning: null
+        contractsigning: null,
+        contractSigningBeginTime: null,
+        contractSigningEndTime: null,
+        payableBeginTime: null,
+        payableEndTime: null
       },
       // 表单参数
       form: {},
@@ -598,7 +521,7 @@ export default {
       rules: {
         /***
           projectName: [
-            { required: true, message: '请输入项目名称', trigger: 'blur' }             
+            { required: true, message: '请输入项目名称', trigger: 'blur' }
           ], */
 
         supplier: [
@@ -617,9 +540,9 @@ export default {
             trigger: "blur"
           }
         ],
-        /*** 
+        /***
           payableTime: [
-            { required: true, message: '请输入应付尾款时间', trigger: 'blur' }             
+            { required: true, message: '请输入应付尾款时间', trigger: 'blur' }
           ],*/
         prepaymentAmountPayable: [
           {
@@ -640,12 +563,12 @@ export default {
           { required: true, message: "请输入合同签署情况", trigger: "blur" }
         ]
 
-        /** 
+        /**
           prepaymentPayableTime: [
-            { required: true, message: '请输入应付预付款时间', trigger: 'blur' }             
+            { required: true, message: '请输入应付预付款时间', trigger: 'blur' }
           ],
           prepaymentPayableAmount: [
-            { required: true, message: '请输入应付预付款金额，单位：元', trigger: 'blur' }             
+            { required: true, message: '请输入应付预付款金额，单位：元', trigger: 'blur' }
           ]
         **/
       }
@@ -675,7 +598,9 @@ export default {
     /** 查询采购订单跟踪信息列表 */
     getList() {
       this.loading = true;
+      debugger;
       listInformation(this.queryParams).then(response => {
+        debugger;
         this.informationList = response.rows;
         this.total = response.total;
         this.loading = false;
@@ -711,6 +636,7 @@ export default {
     },
     /** 搜索按钮操作 */
     handleQuery() {
+      debugger;
       this.queryParams.pageNum = 1;
       this.getList();
     },
@@ -844,6 +770,9 @@ export default {
           this.download(response.msg);
         })
         .catch(function() {});
+    },
+    toggleQuery() {
+      this.queryPattern = !this.queryPattern;
     }
   }
 };
