@@ -7,7 +7,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['amount:transit:add']"
+          v-hasPermi="['transit:detail:add']"
           >新增</el-button
         >
       </el-col>
@@ -18,7 +18,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['amount:transit:edit']"
+          v-hasPermi="['transit:detail:edit']"
           >修改</el-button
         >
       </el-col>
@@ -29,7 +29,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['amount:transit:remove']"
+          v-hasPermi="['transit:detail:remove']"
           >删除</el-button
         >
       </el-col>
@@ -39,7 +39,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['amount:transit:export']"
+          v-hasPermi="['transit:detail:export']"
           >导出</el-button
         >
       </el-col>

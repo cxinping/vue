@@ -7,7 +7,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['amount:sum:add']"
+          v-hasPermi="['amount:detail:add']"
           >新增</el-button
         >
       </el-col>
@@ -27,7 +27,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['amount:transit:export']"
+          v-hasPermi="['amount:detail:export']"
           >导出</el-button
         >
       </el-col>
@@ -121,7 +121,7 @@
             type="text"
             icon="el-icon-plus"
             @click="handleAdd(scope.row, 'group')"
-            v-hasPermi="['amount:sum:add']"
+            v-hasPermi="['amount:detail:add']"
             v-show="scope.row.nodetype == 'group'"
             >新增分组</el-button
           >
@@ -130,7 +130,7 @@
             type="text"
             icon="el-icon-plus"
             @click="handleAdd(scope.row, 'leaf')"
-            v-hasPermi="['amount:sum:add']"
+            v-hasPermi="['amount:detail:add']"
             >新增节点</el-button
           >
           <el-button
@@ -138,7 +138,7 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['amount:sum:edit']"
+            v-hasPermi="['amount:detail:edit']"
             >修改</el-button
           >
           <el-button
@@ -146,7 +146,7 @@
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['amount:sum:remove']"
+            v-hasPermi="['amount:detail:remove']"
             >删除</el-button
           >
         </template>
