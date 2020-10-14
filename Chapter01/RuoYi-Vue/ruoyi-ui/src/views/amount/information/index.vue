@@ -19,11 +19,11 @@
       <el-form-item label="精准查询" prop="exactParam" v-show="queryPattern">
         <div class="exactInput">
           <el-input
-            v-model="queryParams.supplie"
+            v-model="queryParams.supplier"
             placeholder="请输入供应商名称"
             clearable
             size="small"
-            style="width: 200px;"
+            style="width: 200px"
           />
           <!-- <el-select v-model="value" placeholder="请选择">
             <el-option
@@ -46,21 +46,21 @@
             placeholder="请输入印花税"
             clearable
             size="small"
-            style="width: 200px;margin-left: 20px"
+            style="width: 200px; margin-left: 20px"
           />
           <el-input
             v-model="queryParams.contractsigning"
             placeholder="请输入合同签署情况"
             clearable
             size="small"
-            style="width: 200px;margin-left: 20px"
+            style="width: 200px; margin-left: 20px"
           />
         </div>
         <div class="exactDate">
           <el-date-picker
             clearable
             size="small"
-            style="width: 200px;"
+            style="width: 200px"
             v-model="queryParams.contractSigningBeginTime"
             type="date"
             value-format="yyyy-MM-dd"
@@ -70,7 +70,7 @@
           <el-date-picker
             clearable
             size="small"
-            style="width: 200px;margin-left: 20px"
+            style="width: 200px; margin-left: 20px"
             v-model="queryParams.contractSigningEndTime"
             type="date"
             value-format="yyyy-MM-dd"
@@ -80,7 +80,7 @@
           <el-date-picker
             clearable
             size="small"
-            style="width: 200px;margin-left: 20px"
+            style="width: 200px; margin-left: 20px"
             v-model="queryParams.payableBeginTime"
             type="date"
             value-format="yyyy-MM-dd"
@@ -90,7 +90,7 @@
           <el-date-picker
             clearable
             size="small"
-            style="width: 200px;margin-left: 20px"
+            style="width: 200px; margin-left: 20px"
             v-model="queryParams.payableEndTime"
             type="date"
             value-format="yyyy-MM-dd"
@@ -432,7 +432,7 @@ import {
   addInformation,
   updateInformation,
   exportInformation,
-  listSupplier
+  listSupplier,
 } from "@/api/amount/information";
 
 export default {
@@ -460,32 +460,32 @@ export default {
       progress_options: [
         {
           value: "进行中",
-          label: "进行中"
+          label: "进行中",
         },
         {
           value: "已结束",
-          label: "已结束"
-        }
+          label: "已结束",
+        },
       ],
       stampduty_options: [
         {
           value: "已申报",
-          label: "已申报"
+          label: "已申报",
         },
         {
           value: "未申报",
-          label: "未申报"
-        }
+          label: "未申报",
+        },
       ],
       contractsigning_options: [
         {
           value: "进行中",
-          label: "进行中"
+          label: "进行中",
         },
         {
           value: "已完成",
-          label: "已完成"
-        }
+          label: "已完成",
+        },
       ],
 
       // 弹出层标题
@@ -497,7 +497,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         projectName: null,
-        supplie: null,
+        supplier: null,
         contractSigningTime: null,
         contractEndTime: null,
         contractAmount: null,
@@ -513,7 +513,7 @@ export default {
         contractSigningBeginTime: null,
         contractSigningEndTime: null,
         payableBeginTime: null,
-        payableEndTime: null
+        payableEndTime: null,
       },
       // 表单参数
       form: {},
@@ -525,20 +525,20 @@ export default {
           ], */
 
         supplier: [
-          { required: true, message: "请输入供应商", trigger: "blur" }
+          { required: true, message: "请输入供应商", trigger: "blur" },
         ],
         contractSigningTime: [
-          { required: true, message: "请输入合同签订时间", trigger: "blur" }
+          { required: true, message: "请输入合同签订时间", trigger: "blur" },
         ],
         contractEndTime: [
-          { required: true, message: "请输入合同结束时间", trigger: "blur" }
+          { required: true, message: "请输入合同结束时间", trigger: "blur" },
         ],
         contractAmount: [
           {
             required: true,
             message: "请输入合同金额，单位：元",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         /***
           payableTime: [
@@ -548,20 +548,20 @@ export default {
           {
             required: true,
             message: "请输入已付预付款金额，单位：元",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         prepaymentAmountPaid: [
           {
             required: true,
             message: "请输入应付尾款金额，单位：元",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
 
         contractsigning: [
-          { required: true, message: "请输入合同签署情况", trigger: "blur" }
-        ]
+          { required: true, message: "请输入合同签署情况", trigger: "blur" },
+        ],
 
         /**
           prepaymentPayableTime: [
@@ -571,7 +571,7 @@ export default {
             { required: true, message: '请输入应付预付款金额，单位：元', trigger: 'blur' }
           ]
         **/
-      }
+      },
     };
   },
   created() {
@@ -583,14 +583,14 @@ export default {
       cellValue += "";
       if (!cellValue.includes(".")) cellValue += ".";
       return cellValue
-        .replace(/(\d)(?=(\d{3})+\.)/g, function($0, $1) {
+        .replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
           return $1 + ",";
         })
         .replace(/\.$/, "");
     },
 
     querySuppliertList() {
-      listSupplier().then(response => {
+      listSupplier().then((response) => {
         this.suppliertList = response.data;
       });
     },
@@ -598,9 +598,8 @@ export default {
     /** 查询采购订单跟踪信息列表 */
     getList() {
       this.loading = true;
-      debugger;
-      listInformation(this.queryParams).then(response => {
-        debugger;
+      listInformation(this.queryParams).then((response) => {
+        //debugger;
         this.informationList = response.rows;
         this.total = response.total;
         this.loading = false;
@@ -630,13 +629,13 @@ export default {
         param: null,
         progress: null,
         stampduty: null,
-        contractsigning: null
+        contractsigning: null,
       };
       this.resetForm("form");
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      debugger;
+      //debugger;
       this.queryParams.pageNum = 1;
       this.getList();
     },
@@ -647,7 +646,7 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id);
+      this.ids = selection.map((item) => item.id);
       this.single = selection.length !== 1;
       this.multiple = !selection.length;
     },
@@ -661,7 +660,7 @@ export default {
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids;
-      getInformation(id).then(response => {
+      getInformation(id).then((response) => {
         this.form = response.data;
 
         // 修改数据时，乘以 10000
@@ -676,7 +675,7 @@ export default {
     },
     /** 提交按钮 */
     submitForm() {
-      this.$refs["form"].validate(valid => {
+      this.$refs["form"].validate((valid) => {
         if (valid) {
           // 对输入金额进行转换，保留小数点后2位
           //const contractAmountFmt = this.keepTwoDecimal( this.form.contractAmount / 10000 );
@@ -704,7 +703,7 @@ export default {
           this.form.prepaymentAmountPaid = prepaymentAmountPaidFmt;
 
           if (this.form.id != null) {
-            updateInformation(this.form).then(response => {
+            updateInformation(this.form).then((response) => {
               if (response.code === 200) {
                 this.msgSuccess("修改成功");
                 this.open = false;
@@ -712,7 +711,7 @@ export default {
               }
             });
           } else {
-            addInformation(this.form).then(response => {
+            addInformation(this.form).then((response) => {
               if (response.code === 200) {
                 this.msgSuccess("新增成功");
                 this.open = false;
@@ -743,17 +742,17 @@ export default {
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning"
+          type: "warning",
         }
       )
-        .then(function() {
+        .then(function () {
           return delInformation(ids);
         })
         .then(() => {
           this.getList();
           this.msgSuccess("删除成功");
         })
-        .catch(function() {});
+        .catch(function () {});
     },
     /** 导出按钮操作 */
     handleExport() {
@@ -761,19 +760,19 @@ export default {
       this.$confirm("是否确认导出所有采购订单跟踪信息数据项?", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       })
-        .then(function() {
+        .then(function () {
           return exportInformation(queryParams);
         })
-        .then(response => {
+        .then((response) => {
           this.download(response.msg);
         })
-        .catch(function() {});
+        .catch(function () {});
     },
     toggleQuery() {
       this.queryPattern = !this.queryPattern;
-    }
-  }
+    },
+  },
 };
 </script>

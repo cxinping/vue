@@ -66,7 +66,7 @@ SELECT
     SUM(unsaleable_inventory_amount) AS sum_unsaleable_inventory_amount,	-- 不可销售库存金额
     SUM(inventory_amount) AS sum_inventory_amount 												-- 合计金额
 FROM
-    jalo_inventory_detail
+    jalo_inventory_detail where id = '1'
 
 ---- 作废 ----
 CREATE VIEW transit_view AS
@@ -75,6 +75,7 @@ SELECT
 FROM
     jalo_goods_transit
 
+---- 使用 ----
 CREATE VIEW transit_view AS SELECT
 	sum(amount) AS goods_transit_total_amount -- 在途物资
 FROM

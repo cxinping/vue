@@ -187,7 +187,8 @@ public class JaloInventoryDetailServiceImpl implements IJaloInventoryDetailServi
         try{
             //得到父节点
             JaloInventoryDetail pareInventoryDetail  = selectJaloInventoryDetailById(parentid);
-            if(pareInventoryDetail.getId().equals("1")){
+            //if(pareInventoryDetail.getId().equals("1")){
+            if(null == pareInventoryDetail ){
                 return ;
             }
 

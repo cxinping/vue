@@ -47,7 +47,7 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
     @GetMapping("/list")
     public TableDataInfo list(JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation)
     {
-        logger.info("---- list ----" );
+        logger.info("---- JaloPurchaseOrderTrackingInformationController list ----" );
         logger.info(jaloPurchaseOrderTrackingInformation.toString() );
 
 
@@ -70,7 +70,6 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
 
         return AjaxResult.success(suppliers);
     }
-
 
     /**
      * 导出采购订单跟踪信息列表

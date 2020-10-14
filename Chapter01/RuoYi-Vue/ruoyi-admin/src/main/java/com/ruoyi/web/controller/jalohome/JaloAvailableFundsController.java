@@ -3,6 +3,9 @@ package com.ruoyi.web.controller.jalohome;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/amount/funds")
 public class JaloAvailableFundsController extends BaseController
 {
+    private final Logger logger = LoggerFactory.getLogger(JaloAvailableFundsController.class);
+
     @Autowired
     private IJaloAvailableFundsService jaloAvailableFundsService;
 
@@ -78,19 +83,20 @@ public class JaloAvailableFundsController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody JaloAvailableFunds jaloAvailableFunds)
     {
+        logger.info("---- JaloAvailableFundsController add --- ");
         if(null != jaloAvailableFunds){
             jaloAvailableFunds.setUpdateTime(new Date());
         }
 
         BigDecimal totalAmount = jaloAvailableFunds.getAlipay().add(jaloAvailableFunds.getIcbcBank())
-                                    .add(jaloAvailableFunds.getJingdong())
-                                    .add(jaloAvailableFunds.getMerchantsBank())
-                                    .add(jaloAvailableFunds.getPufaBank())
-                                    .add(jaloAvailableFunds.getYouZan())
-                                    .add(jaloAvailableFunds.getCash());
-
+                                                    .add(jaloAvailableFunds.getJingdong())
+                                                    .add(jaloAvailableFunds.getMerchantsBank())
+                                                    .add(jaloAvailableFunds.getPufaBank())
+                                                    .add(jaloAvailableFunds.getYouZan())
+                                                    .add(jaloAvailableFunds.getCash());
         jaloAvailableFunds.setTotalAmount(totalAmount );
 
+        logger.info(jaloAvailableFunds.toString());
         return toAjax(jaloAvailableFundsService.insertJaloAvailableFunds(jaloAvailableFunds));
     }
 
@@ -102,17 +108,17 @@ public class JaloAvailableFundsController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody JaloAvailableFunds jaloAvailableFunds)
     {
-
+        logger.info("---- JaloAvailableFundsController edit --- ");
         BigDecimal totalAmount = jaloAvailableFunds.getAlipay().add(jaloAvailableFunds.getIcbcBank())
-                .add(jaloAvailableFunds.getJingdong())
-                .add(jaloAvailableFunds.getMerchantsBank())
-                .add(jaloAvailableFunds.getPufaBank())
-                .add(jaloAvailableFunds.getYouZan())
-                .add(jaloAvailableFunds.getCash());
+                                                .add(jaloAvailableFunds.getJingdong())
+                                                .add(jaloAvailableFunds.getMerchantsBank())
+                                                .add(jaloAvailableFunds.getPufaBank())
+                                                .add(jaloAvailableFunds.getYouZan())
+                                                .add(jaloAvailableFunds.getCash());
 
         jaloAvailableFunds.setTotalAmount(totalAmount );
 
-
+        logger.info(jaloAvailableFunds.toString());
         return toAjax(jaloAvailableFundsService.updateJaloAvailableFunds(jaloAvailableFunds));
     }
 

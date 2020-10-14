@@ -276,7 +276,7 @@ export default {
   },
   computed: {
     computeSumInfo() {
-      debugger;
+      //debugger;
       if (this.transitList && this.transitList[0]) {
         return;
         "在途物资金额合计：" +

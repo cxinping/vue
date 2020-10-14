@@ -532,7 +532,7 @@ export default {
           this.form.alipay = alipayFmt;
           const jingdongFmt = String(this.form.jingdong).replace(",", "");
           this.form.jingdong = jingdongFmt;
-          const cashFmt = String(this.form.jingdong).replace(",", "");
+          const cashFmt = String(this.form.cash).replace(",", "");
           this.form.cash = cashFmt;
 
           if (this.form.id != null) {
