@@ -2,16 +2,6 @@
   <div class="app-container">
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button
-          type="cyan"
-          icon="el-icon-search"
-          size="mini"
-          @click="handleQuery"
-          >刷新</el-button
-        >
-      </el-col>
-
-      <el-col :span="1.5">
         <el-tag>页面显示，单位：万元</el-tag>
       </el-col>
     </el-row>
@@ -23,7 +13,12 @@
     >
       <el-col
         :span="24"
-        style="color: #fff; text-align: right; padding: 10px 20px"
+        style="
+          color: #fff;
+          text-align: right;
+          padding: 10px 20px;
+          font-size: 20px;
+        "
         >{{ viewList[0].days }}</el-col
       >
 
@@ -33,60 +28,55 @@
           style="background: #1b2137; color: #fff; padding: 20px"
         >
           <div class="title">已付预付款</div>
-          <div
-            class="num"
-            style="text-align: center; font-size: 35px; color: #ff7f00"
-          >
+          <div class="num spanClass">
             {{ viewList[0].sumPrepaymentAmountPayable }}
             <span style="font-size: 14px">万元</span>
           </div>
         </div>
       </el-col>
+      <div class="strikeLine"></div>
+
       <el-col :span="24">
         <div
           class="card"
           style="background: #1b2137; color: #fff; padding: 20px"
         >
           <div class="title">应付尾款</div>
-          <div
-            class="num"
-            style="text-align: center; font-size: 35px; color: #ff7f00"
-          >
+          <div class="num spanClass">
             {{ viewList[0].sumPrepaymentAmountPaid }}
             <span style="font-size: 14px">万元</span>
           </div>
         </div>
       </el-col>
+      <div class="strikeLine"></div>
+
       <el-col :span="24">
         <div
           class="card"
           style="background: #1b2137; color: #fff; padding: 20px"
         >
           <div class="title">已发货未结算</div>
-          <div
-            class="num"
-            style="text-align: center; font-size: 35px; color: #ff7f00"
-          >
+          <div class="num spanClass">
             {{ viewList[0].sumShippedUnsettledTotalAmount }}
             <span style="font-size: 14px">万元</span>
           </div>
         </div>
       </el-col>
+      <div class="strikeLine"></div>
+
       <el-col :span="24">
         <div
           class="card"
           style="background: #1b2137; color: #fff; padding: 20px"
         >
           <div class="title">已下单未发货</div>
-          <div
-            class="num"
-            style="text-align: center; font-size: 35px; color: #ff7f00"
-          >
+          <div class="num spanClass">
             {{ viewList[0].sumPurchasedUnshippedTotalAmount }}
             <span style="font-size: 14px">万元</span>
           </div>
         </div>
       </el-col>
+      <div class="strikeLine"></div>
 
       <el-col :span="24">
         <div
@@ -94,15 +84,13 @@
           style="background: #1b2137; color: #fff; padding: 20px"
         >
           <div class="title">贷款已使用金额</div>
-          <div
-            class="num"
-            style="text-align: center; font-size: 35px; color: #ff7f00"
-          >
+          <div class="num spanClass">
             {{ viewList[0].loanUsageTotalLoanCreditBalance }}
             <span style="font-size: 14px">万元</span>
           </div>
         </div>
       </el-col>
+      <div class="strikeLine"></div>
 
       <el-col :span="24">
         <div
@@ -110,57 +98,50 @@
           style="background: #1b2137; color: #fff; padding: 20px"
         >
           <div class="title">可用资金</div>
-          <div
-            class="num"
-            style="text-align: center; font-size: 35px; color: #ff7f00"
-          >
+          <div class="num spanClass">
             {{ viewList[0].sumAvailableFundsTotalAmount }}
             <span style="font-size: 14px">万元</span>
           </div>
         </div>
       </el-col>
+      <div class="strikeLine"></div>
+
       <el-col :span="24">
         <div
           class="card"
           style="background: #1b2137; color: #fff; padding: 20px"
         >
           <div class="title">库存</div>
-          <div
-            class="num"
-            style="text-align: center; font-size: 35px; color: #ff7f00"
-          >
+          <div class="num spanClass">
             {{ viewList[0].sumInventoryAmount }}
             <span style="font-size: 14px">万元</span>
           </div>
         </div>
       </el-col>
+      <div class="strikeLine"></div>
+
       <el-col :span="24">
         <div
           class="card"
           style="background: #1b2137; color: #fff; padding: 20px"
         >
           <div class="title">在途物资</div>
-          <div
-            class="num"
-            style="text-align: center; font-size: 35px; color: #ff7f00"
-          >
+          <div class="num spanClass">
             {{ viewList[0].goodsTransitTotalAmount }}
             <span style="font-size: 14px">万元</span>
           </div>
         </div>
       </el-col>
+      <div class="strikeLine"></div>
 
       <el-col :span="24">
         <div
           class="card"
-          style="background: #1b2137; color: #fff; padding: 20px"
+          style="background: #1b2137; color: #fff; padding: 20px 0"
         >
           <div class="title"></div>
 
-          <div
-            class="num"
-            style="text-align: center; font-size: 35px; color: #ff7f00"
-          >
+          <div class="num spanClass" style="font-size: 1.9rem">
             已下单未发货+已发货未结算+可用资金–贷款已使用金额={{
               viewList[0].statisticalIndicators1
             }}
@@ -169,78 +150,51 @@
         </div>
       </el-col>
     </el-row>
-
-    <!-- 添加或修改VIEW对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="${comment}" prop="days">
-          <el-input v-model="form.days" placeholder="请输入${comment}" />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="sumSaleableInventoryAmount">
-          <el-input
-            v-model="form.sumSaleableInventoryAmount"
-            placeholder="请输入${comment}"
-          />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="sumUnsaleableInventoryAmount">
-          <el-input
-            v-model="form.sumUnsaleableInventoryAmount"
-            placeholder="请输入${comment}"
-          />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="sumInventoryAmount">
-          <el-input
-            v-model="form.sumInventoryAmount"
-            placeholder="请输入${comment}"
-          />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="sumPrepaymentAmountPaid">
-          <el-input
-            v-model="form.sumPrepaymentAmountPaid"
-            placeholder="请输入${comment}"
-          />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="sumShippedUnsettledTotalAmount">
-          <el-input
-            v-model="form.sumShippedUnsettledTotalAmount"
-            placeholder="请输入${comment}"
-          />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="sumAvailableFundsTotalAmount">
-          <el-input
-            v-model="form.sumAvailableFundsTotalAmount"
-            placeholder="请输入${comment}"
-          />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="goodsTransitTotalAmount">
-          <el-input
-            v-model="form.goodsTransitTotalAmount"
-            placeholder="请输入${comment}"
-          />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="placedNotShippedTotalAmount">
-          <el-input
-            v-model="form.placedNotShippedTotalAmount"
-            placeholder="请输入${comment}"
-          />
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 <style scoped>
 .title {
-  font-size: 24px;
+  font-size: 2rem;
   color: #fff;
-  margin-left: 50px;
   text-align: left;
+  height: 8rem;
+}
+.strikeLine {
+  border-bottom: 8px rgb(11, 20, 53) solid;
+  float: left;
+  width: 100%;
+}
+.spanClass {
+  text-align: center;
+  font-size: 3.5rem;
+  color: #ff7f00;
 }
 </style>
+<style>
+@media screen and (min-width: 1501px) and (max-width: 1930px) {
+  html {
+    font-size: 10px !important;
+  }
+}
 
+@media screen and (min-width: 1201px) and (max-width: 1500px) {
+  html {
+    font-size: 8.6px !important;
+  }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  html {
+    font-size: 6.9px !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 5.5px !important;
+  }
+}
+</style>
 <script>
 import {
   queryNewFromList,
@@ -253,7 +207,7 @@ import {
 } from "@/api/amount/view";
 
 export default {
-  name: "View",
+  name: "DisplayView",
   data() {
     return {
       /* 遮罩层 */

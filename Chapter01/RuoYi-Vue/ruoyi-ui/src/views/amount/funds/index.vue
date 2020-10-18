@@ -320,7 +320,7 @@ import {
   delFunds,
   addFunds,
   updateFunds,
-  exportFunds
+  exportFunds,
 } from "@/api/amount/funds";
 
 export default {
@@ -355,7 +355,7 @@ export default {
         youZan: null,
         alipay: null,
         jingdong: null,
-        cash: null
+        cash: null,
       },
       // 表单参数
       form: {},
@@ -365,52 +365,52 @@ export default {
           {
             required: true,
             message: "请输入招行的可用资金余额，单位：元",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         pufaBank: [
           {
             required: true,
             message: "请输入浦发的可用资金余额，单位：元",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         icbcBank: [
           {
             required: true,
             message: "请输入工行的可用资金余额，单位：元",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         youZan: [
           {
             required: true,
             message: "请输入有赞的可用资金余额，单位：元",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         alipay: [
           {
             required: true,
             message: "请输入支付宝的可用资金余额，单位：元",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         jingdong: [
           {
             required: true,
             message: "请输入京东的可用资金余额，单位：元",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         cash: [
           {
             required: true,
             message: "请输入现金的可用资金余额，单位：元",
-            trigger: "blur"
-          }
-        ]
-      }
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   created() {
@@ -421,7 +421,7 @@ export default {
       cellValue += "";
       if (!cellValue.includes(".")) cellValue += ".";
       return cellValue
-        .replace(/(\d)(?=(\d{3})+\.)/g, function($0, $1) {
+        .replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
           return $1 + ",";
         })
         .replace(/\.$/, "");
@@ -430,7 +430,7 @@ export default {
     /** 查询可用资金列表 */
     getList() {
       this.loading = true;
-      listFunds(this.queryParams).then(response => {
+      listFunds(this.queryParams).then((response) => {
         this.fundsList = response.rows;
         this.total = response.total;
         this.loading = false;
@@ -453,7 +453,7 @@ export default {
         jingdong: null,
         cash: null,
         createTime: null,
-        updateTime: null
+        updateTime: null,
       };
       this.resetForm("form");
     },
@@ -469,7 +469,7 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id);
+      this.ids = selection.map((item) => item.id);
       this.single = selection.length !== 1;
       this.multiple = !selection.length;
     },
@@ -483,7 +483,7 @@ export default {
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids;
-      getFunds(id).then(response => {
+      getFunds(id).then((response) => {
         this.form = response.data;
 
         // 修改数据时，乘以 10000
@@ -500,7 +500,7 @@ export default {
     },
     /** 提交按钮 */
     submitForm() {
-      this.$refs["form"].validate(valid => {
+      this.$refs["form"].validate((valid) => {
         if (valid) {
           // 对输入金额进行转换，保留小数点后2位
           //const merchantsBankFmt = this.keepTwoDecimal( this.form.merchantsBank / 10000 );
@@ -534,9 +534,9 @@ export default {
           this.form.jingdong = jingdongFmt;
           const cashFmt = String(this.form.cash).replace(",", "");
           this.form.cash = cashFmt;
-
+          console.log(this.form);
           if (this.form.id != null) {
-            updateFunds(this.form).then(response => {
+            updateFunds(this.form).then((response) => {
               if (response.code === 200) {
                 this.msgSuccess("修改成功");
                 this.open = false;
@@ -544,7 +544,7 @@ export default {
               }
             });
           } else {
-            addFunds(this.form).then(response => {
+            addFunds(this.form).then((response) => {
               if (response.code === 200) {
                 this.msgSuccess("新增成功");
                 this.open = false;
@@ -574,17 +574,17 @@ export default {
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning"
+          type: "warning",
         }
       )
-        .then(function() {
+        .then(function () {
           return delFunds(ids);
         })
         .then(() => {
           this.getList();
           this.msgSuccess("删除成功");
         })
-        .catch(function() {});
+        .catch(function () {});
     },
     /** 导出按钮操作 */
     handleExport() {
@@ -592,18 +592,18 @@ export default {
       this.$confirm("是否确认导出所有可用资金数据项?", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       })
-        .then(function() {
+        .then(function () {
           //debugger;
           return exportFunds(queryParams);
         })
-        .then(response => {
+        .then((response) => {
           //debugger;
           this.download(response.msg);
         })
-        .catch(function() {});
-    }
-  }
+        .catch(function () {});
+    },
+  },
 };
 </script>
