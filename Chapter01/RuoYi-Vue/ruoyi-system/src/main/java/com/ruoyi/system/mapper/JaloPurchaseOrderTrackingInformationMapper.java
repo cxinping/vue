@@ -3,6 +3,7 @@ package com.ruoyi.system.mapper;
 import java.util.List;
 import com.ruoyi.system.domain.JaloPurchaseOrderTrackingInformation;
 import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 采购订单跟踪信息Mapper接口
@@ -31,6 +32,9 @@ public interface JaloPurchaseOrderTrackingInformationMapper
     public SumJaloPurchaseOrderTrackingInfo selectSumJaloPurchaseOrderTrackingInfoList(JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation);
 
     public List<String> selectJaloPurchaseOrderTrackingInfoSupplierList();
+
+    public List<String> selectJaloPurchaseOrderTrackingInfoSuppliersByInfo(@Param("supplier")  String supplier);
+
 
     /**
      * 新增采购订单跟踪信息

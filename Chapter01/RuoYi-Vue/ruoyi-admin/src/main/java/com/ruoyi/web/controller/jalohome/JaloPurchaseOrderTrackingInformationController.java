@@ -1,7 +1,8 @@
 package com.ruoyi.web.controller.jalohome;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SumJaloPurchaseOrderTrackingInfo;
 import com.ruoyi.system.vo.SupplierVo;
 import org.slf4j.Logger;
@@ -56,6 +57,29 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
         SumJaloPurchaseOrderTrackingInfo sumInfo = jaloPurchaseOrderTrackingInformationService.selectSumJaloPurchaseOrderTrackingInfoList(jaloPurchaseOrderTrackingInformation);
 
         return getDataTable(list,sumInfo);
+    }
+
+    /**
+     * 查询供应商
+     *
+     * http://localhost:8080/amount/information/getSupplier
+     */
+    @PostMapping("/getSupplier")
+    public AjaxResult getSupplier(String supplier){
+        logger.info("---- JaloPurchaseOrderTrackingInformationController getSupplier supplier=" + supplier );
+
+        Map result = new HashMap();
+        List suppliers = null;
+
+        if(StringUtils.isBlank(supplier)){
+            suppliers = new ArrayList();
+        }else{
+            suppliers = jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInfoSuppliersByInfo(supplier);
+        }
+
+        result.put("rows", suppliers);
+
+        return AjaxResult.success(result);
     }
 
     /**

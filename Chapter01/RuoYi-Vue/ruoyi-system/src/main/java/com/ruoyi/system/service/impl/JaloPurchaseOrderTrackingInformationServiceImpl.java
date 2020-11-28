@@ -127,7 +127,10 @@ public class JaloPurchaseOrderTrackingInformationServiceImpl implements IJaloPur
         return supplierVols;
     }
 
-
+    public List<String> selectJaloPurchaseOrderTrackingInfoSuppliersByInfo(String supplier){
+        List<String> supplierList =  jaloPurchaseOrderTrackingInformationMapper.selectJaloPurchaseOrderTrackingInfoSuppliersByInfo(supplier);
+        return supplierList;
+    }
 
 
 

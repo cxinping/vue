@@ -105,7 +105,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        FROM
             jalo_purchase_order_tracking_information
     </select>
-    
+
+    <select id="selectJaloPurchaseOrderTrackingInfoSuppliersByInfo" parameterType="java.lang.String" resultType="java.lang.String">
+       SELECT DISTINCT(supplier)
+       FROM
+            jalo_purchase_order_tracking_information
+        <where>
+            <if test="supplier != null  and supplier != ''">and supplier like concat('%', #{supplier}, '%')</if>
+        </where>
+    </select>
+
     <select id="selectJaloPurchaseOrderTrackingInformationById" parameterType="Long" resultMap="JaloPurchaseOrderTrackingInformationResult">
         <include refid="selectJaloPurchaseOrderTrackingInformationVo"/>
         where id = #{id}

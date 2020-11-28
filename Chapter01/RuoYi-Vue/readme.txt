@@ -61,5 +61,12 @@ admin123
 用户名：leader
 密码：123456
 
+Nginx部署
+
+在Windows平台下结束该进程
+taskkill /f /t /im nginx.exe
+
+http://127.0.0.1:8888
+
 
 
