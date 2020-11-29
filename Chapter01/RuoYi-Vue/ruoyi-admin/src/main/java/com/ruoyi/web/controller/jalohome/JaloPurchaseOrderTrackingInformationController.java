@@ -64,7 +64,7 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
      *
      * http://localhost:8080/amount/information/getSupplier
      */
-    @PostMapping("/getSupplier")
+    @GetMapping("/getSupplier")
     public AjaxResult getSupplier(String supplier){
         logger.info("---- JaloPurchaseOrderTrackingInformationController getSupplier supplier=" + supplier );
 
