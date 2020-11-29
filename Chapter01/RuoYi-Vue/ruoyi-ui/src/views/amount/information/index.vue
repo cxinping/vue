@@ -6,7 +6,7 @@
       :inline="true"
       v-show="showSearch"
     >
-      <el-form-item label="模糊查询" prop="param" v-show="!queryPattern">
+      <!-- <el-form-item label="模糊查询" prop="param" v-show="!queryPattern">
         <el-input
           v-model="queryParams.param"
           placeholder="请输入名称"
@@ -14,9 +14,9 @@
           size="small"
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item> -->
 
-      <el-form-item label="精准查询" prop="exactParam" v-show="queryPattern">
+      <el-form-item label="精准查询" prop="exactParam">
         <div class="exactInput">
           <el-input
             v-model="queryParams.supplier"
@@ -25,12 +25,14 @@
             size="small"
             style="width: 200px"
           />
-          <!-- <el-select v-model="value" placeholder="请选择">
+
+          <!-- <el-select v-model="queryParams.supplier" placeholder="请输入供应商名称">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
+               style="width: 200px"
             >
             </el-option>
           </el-select> -->
@@ -111,9 +113,9 @@
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
           >重置</el-button
         >
-        <el-button icon="el-icon-d-caret" size="mini" @click="toggleQuery"
+        <!-- <el-button icon="el-icon-d-caret" size="mini" @click="toggleQuery"
           >修改查询方式</el-button
-        >
+        > -->
       </el-form-item>
     </el-form>
 
@@ -288,8 +290,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="供应商" prop="supplier" required>
-              <el-input v-model="form.supplier" placeholder="请输入供应商" />
+            <el-form-item label="供应商" prop="supplier" required >
+              <el-input v-model="form.supplier" placeholder="请输入供应商" @input="requestSupplier(form.supplier)" />
+              <div class="supplierDiv" v-show="relateSupplier && relateSupplier.length != 0">
+                <div class="supplierText" v-for="(item, index) in relateSupplier" :key="index" @click="chooseSupplier(item)">
+                  {{item}}
+                </div>
+              </div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -368,11 +375,10 @@
             <el-form-item
               label="应付尾款金额"
               prop="prepaymentAmountPaid"
-              required
             >
               <el-input
-                v-model="form.prepaymentAmountPaid"
-                placeholder="请输入应付尾款金额，单位：元"
+                v-model="computedShouldPay"
+                disabled
               />
             </el-form-item>
           </el-col>
@@ -433,6 +439,7 @@ import {
   updateInformation,
   exportInformation,
   listSupplier,
+  getSupplierInformation
 } from "@/api/amount/information";
 
 export default {
@@ -452,6 +459,7 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
+      relateSupplier: [],
       // 采购订单跟踪信息表格数据
       informationList: [],
 
@@ -551,13 +559,6 @@ export default {
             trigger: "blur",
           },
         ],
-        prepaymentAmountPaid: [
-          {
-            required: true,
-            message: "请输入应付尾款金额，单位：元",
-            trigger: "blur",
-          },
-        ],
 
         contractsigning: [
           { required: true, message: "请输入合同签署情况", trigger: "blur" },
@@ -577,6 +578,11 @@ export default {
   created() {
     this.getList();
     this.querySuppliertList();
+  },
+  computed:{
+    computedShouldPay(){
+      return this.form.contractAmount - this.form.prepaymentAmountPayable
+    }
   },
   methods: {
     stateFormat(row, column, cellValue) {
@@ -773,6 +779,36 @@ export default {
     toggleQuery() {
       this.queryPattern = !this.queryPattern;
     },
+
+    requestSupplier(supplier){
+      getSupplierInformation(supplier).then(
+       (resolve)=>{
+         if(resolve.code == 200){
+          this.relateSupplier = resolve.data && resolve.data.rows;
+         }
+       }
+      )
+    },
+
+    chooseSupplier(supplierName){
+      this.form.supplier = supplierName;
+      this.relateSupplier = [];
+    }
   },
 };
 </script>
+
+<style scoped>
+.supplierDiv{
+  position: absolute;
+  background: white;
+  width: 100%;
+  z-index: 1;
+  max-height: 150px;
+  overflow: auto;
+}
+.supplierText{
+  height:30px;
+  padding-left: 18px
+}
+</style>

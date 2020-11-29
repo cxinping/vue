@@ -26,6 +26,13 @@ export function addInformation(data) {
   })
 }
 
+export function getSupplierInformation(data) {
+  return request({
+    url: '/amount/information/getSupplier?supplier=' +data,
+    method: 'get',
+  })
+}
+
 // 修改采购订单跟踪信息
 export function updateInformation(data) {
   return request({
