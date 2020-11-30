@@ -291,7 +291,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="供应商" prop="supplier" required >
-              <el-input v-model="form.supplier" placeholder="请输入供应商" @input="requestSupplier(form.supplier)" />
+              <el-input v-model="form.supplier" placeholder="请输入供应商" @input="requestSupplier(form.supplier)" class="supplierInputClass" />
               <div class="supplierDiv" v-show="relateSupplier && relateSupplier.length != 0">
                 <div class="supplierText" v-for="(item, index) in relateSupplier" :key="index" @click="chooseSupplier(item)">
                   {{item}}
@@ -579,6 +579,53 @@ export default {
     this.getList();
     this.querySuppliertList();
   },
+  mounted() {
+    var self = this;
+    document.onkeydown = function(e) {
+      let currentChoose = document.querySelector('.chooseSupplier');
+      let allSupplierDiv = document.querySelectorAll('.supplierText');
+      if (allSupplierDiv){
+        switch (e.keyCode) {
+          case 38:
+            if (currentChoose){
+              if (allSupplierDiv && allSupplierDiv.length != 0){
+                if (currentChoose.previousElementSibling){
+                  currentChoose.previousElementSibling.className = 'chooseSupplier'
+                } else{
+                   allSupplierDiv[allSupplierDiv.length - 1].className = 'chooseSupplier';
+                }
+                currentChoose.className = 'supplierText'
+              }
+            }else{
+              if (allSupplierDiv && allSupplierDiv.length != 0){
+                allSupplierDiv[allSupplierDiv.length - 1].className = 'chooseSupplier';
+              }
+            }
+            break;
+          case 40:
+             if (currentChoose){
+              if (allSupplierDiv && allSupplierDiv.length != 0){
+                if (currentChoose.nextElementSibling){
+                  currentChoose.nextElementSibling.className = 'chooseSupplier';
+                }else{
+                  allSupplierDiv[0].className = 'chooseSupplier';
+                }
+                currentChoose.className = 'supplierText'
+              }
+            }else{
+              if (allSupplierDiv && allSupplierDiv.length != 0){
+                allSupplierDiv[0].className = 'chooseSupplier';
+              }
+            }
+            break;
+          case 13:
+            document.querySelector('.supplierInputClass input').value = document.querySelector('.chooseSupplier').innerHTML.trim();
+            self.relateSupplier = [];
+            break;
+        }
+      }
+    };
+  },
   computed:{
     computedShouldPay(){
       return this.form.contractAmount - this.form.prepaymentAmountPayable
@@ -808,7 +855,17 @@ export default {
   overflow: auto;
 }
 .supplierText{
+  cursor: pointer;
   height:30px;
-  padding-left: 18px
+  padding-left: 18px;
+  line-height: 30px;
+}
+
+.chooseSupplier{
+  cursor: pointer;
+  height:30px;
+  padding-left: 18px;
+  background: #e0e0e0;
+  line-height: 30px;
 }
 </style>
