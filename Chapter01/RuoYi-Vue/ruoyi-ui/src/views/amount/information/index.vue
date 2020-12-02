@@ -628,10 +628,35 @@ export default {
   },
   computed:{
     computedShouldPay(){
-      return this.form.contractAmount - this.form.prepaymentAmountPayable
+      let total = 0;
+      let alreadyPay = 0
+      if (this.form.contractAmount && this.form.contractAmount.toString().indexOf(',') != -1){
+        total = parseInt(this.form.contractAmount.replaceAll(',', '')); 
+      }else{
+        if (this.form.contractAmount){
+          total = parseInt(this.form.contractAmount); 
+        }
+      }
+      if (this.form.prepaymentAmountPayable && this.form.prepaymentAmountPayable.toString().indexOf(',') != -1){
+        alreadyPay = parseInt(this.form.prepaymentAmountPayable.replaceAll(',', '')); 
+      }else{
+        if (this.form.prepaymentAmountPayable){
+          alreadyPay = parseInt(this.form.prepaymentAmountPayable); 
+        }
+      }
+
+      let shouldPay = total - alreadyPay;
+      this.form.prepaymentAmountPaid = shouldPay;
+      return this.toDecimalMark(shouldPay);
     }
   },
   methods: {
+    toDecimalMark(num) {
+      if (!num){
+        return 0
+      }
+      return num.toLocaleString('en-US');
+    },
     stateFormat(row, column, cellValue) {
       cellValue += "";
       if (!cellValue.includes(".")) cellValue += ".";
