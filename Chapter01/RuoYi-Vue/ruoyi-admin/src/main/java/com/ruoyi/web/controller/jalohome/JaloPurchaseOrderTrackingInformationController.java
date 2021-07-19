@@ -103,6 +103,8 @@ public class JaloPurchaseOrderTrackingInformationController extends BaseControll
     @GetMapping("/export")
     public AjaxResult export(JaloPurchaseOrderTrackingInformation jaloPurchaseOrderTrackingInformation)
     {
+        logger.info("---- JaloPurchaseOrderTrackingInformationController export ----");
+
         List<JaloPurchaseOrderTrackingInformation> list = jaloPurchaseOrderTrackingInformationService.selectJaloPurchaseOrderTrackingInformationList(jaloPurchaseOrderTrackingInformation);
         ExcelUtil<JaloPurchaseOrderTrackingInformation> util = new ExcelUtil<JaloPurchaseOrderTrackingInformation>(JaloPurchaseOrderTrackingInformation.class);
         return util.exportExcel(list, "采购订单跟踪信息列表");

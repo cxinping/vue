@@ -64,7 +64,7 @@ public class JaloAmountStatisticsViewController extends BaseController
     @GetMapping("/queryNewFromList")
     public TableDataInfo queryNewFromList (JaloAmountStatisticsView jaloAmountStatisticsView)
     {
-        System.out.println("----- queryNewFromList ------- ");
+        System.out.println("----- JaloAmountStatisticsViewController queryNewFromList ------- ");
         startPage();
         //List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList(jaloAmountStatisticsView);
         List<JaloAmountStatisticsView> list = jaloAmountStatisticsViewService.selectJaloAmountStatisticsViewList2();
