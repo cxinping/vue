@@ -46,7 +46,7 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
     @Excel(name = "合同金额")
     private BigDecimal contractAmount;
 
-    /** 应付预付款金额 ，改为 已付预付款金额 */
+    /** 应付预付款金额 ，改为 已付预付款金额 ， 又改为 预付款金额 */
     @Excel(name = "已付预付款金额")
     private BigDecimal prepaymentAmountPayable;
 
