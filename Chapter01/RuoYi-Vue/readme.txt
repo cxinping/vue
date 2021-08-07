@@ -46,7 +46,18 @@ http://www.ultrapower.com:8888/index
 
 部署项目
 nohup java -jar ruoyi-admin.jar &
+nohup java -jar test-ruoyi-admin.jar &
 nohup java -jar itranswarp.jar &
+
+重启Nginx服务
+/usr/local/nginx/sbin/nginx -s stop
+/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+
+
+测试服务器 http://www.ultrapower.com:7777/
+生产服务器 http://www.ultrapower.com:8888/
+
+测试后端接口需要把 D:\quant\vue\Chapter01\RuoYi-Vue\ruoyi-admin\target\ruoyi-admin.jar 改为 test-ruoyi-admin.jar
 
 http://www.ultrapower.com:8888
 超级管理员可以创建账号
@@ -67,6 +78,16 @@ Nginx部署
 taskkill /f /t /im nginx.exe
 
 http://127.0.0.1:8888
+
+
+
+
+select * from jalo_purchase_order_tracking_information;
+
+select project_name, contract_signing_time,prepayment_payable_time from jalo_purchase_order_tracking_information;
+
+update jalo_purchase_order_tracking_information set prepayment_payable_time=contract_signing_time ;
+
 
 
 

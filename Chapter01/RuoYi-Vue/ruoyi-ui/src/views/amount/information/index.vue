@@ -223,9 +223,15 @@
         :formatter="stateFormat"
       />
 
-      <el-table-column label="采购货款" align="center">
+      <el-table-column label="采购订单" align="center">
         <el-table-column
-          label="已付预付款金额"
+          label="预付款时间"
+          align="center"
+          prop="prepaymentPayableTime"
+          :formatter="stateFormat"
+        />
+        <el-table-column
+          label="预付款金额"
           align="center"
           prop="prepaymentAmountPayable"
           :formatter="stateFormat"
@@ -290,11 +296,24 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="供应商" prop="supplier" required >
-              <el-input v-model="form.supplier" placeholder="请输入供应商" @input="requestSupplier(form.supplier)" class="supplierInputClass" />
-              <div class="supplierDiv" v-show="relateSupplier && relateSupplier.length != 0">
-                <div class="supplierText" v-for="(item, index) in relateSupplier" :key="index" @click="chooseSupplier(item)">
-                  {{item}}
+            <el-form-item label="供应商" prop="supplier" required>
+              <el-input
+                v-model="form.supplier"
+                placeholder="请输入供应商"
+                @input="requestSupplier(form.supplier)"
+                class="supplierInputClass"
+              />
+              <div
+                class="supplierDiv"
+                v-show="relateSupplier && relateSupplier.length != 0"
+              >
+                <div
+                  class="supplierText"
+                  v-for="(item, index) in relateSupplier"
+                  :key="index"
+                  @click="chooseSupplier(item)"
+                >
+                  {{ item }}
                 </div>
               </div>
             </el-form-item>
@@ -302,11 +321,7 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item
-              label="合同签订时间"
-              prop="contractSigningTime"
-              required
-            >
+            <el-form-item label="合同签订时间" prop="contractSigningTime">
               <el-date-picker
                 clearable
                 size="small"
@@ -343,6 +358,36 @@
               />
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="预付款时间" prop="prepaymentPayableTime">
+              <el-date-picker
+                clearable
+                size="small"
+                style="width: 200px"
+                v-model="form.prepaymentPayableTime"
+                type="date"
+                value-format="yyyy-MM-dd"
+                placeholder="选择预付款时间"
+              >
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item
+              label="预付款金额"
+              prop="prepaymentAmountPayable"
+              required
+            >
+              <el-input
+                v-model="form.prepaymentAmountPayable"
+                placeholder="请输入预付款金额，单位：元"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12">
             <el-form-item label="应付尾款时间" prop="payableTime">
               <el-date-picker
@@ -357,29 +402,9 @@
               </el-date-picker>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row>
           <el-col :span="12">
-            <el-form-item
-              label="已付预付款金额"
-              prop="prepaymentAmountPayable"
-              required
-            >
-              <el-input
-                v-model="form.prepaymentAmountPayable"
-                placeholder="请输入已付预付款金额，单位：元"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item
-              label="应付尾款金额"
-              prop="prepaymentAmountPaid"
-            >
-              <el-input
-                v-model="computedShouldPay"
-                disabled
-              />
+            <el-form-item label="应付尾款金额" prop="prepaymentAmountPaid">
+              <el-input v-model="computedShouldPay" disabled />
             </el-form-item>
           </el-col>
         </el-row>
@@ -468,32 +493,32 @@ export default {
       progress_options: [
         {
           value: "进行中",
-          label: "进行中",
+          label: "进行中"
         },
         {
           value: "已结束",
-          label: "已结束",
-        },
+          label: "已结束"
+        }
       ],
       stampduty_options: [
         {
           value: "已申报",
-          label: "已申报",
+          label: "已申报"
         },
         {
           value: "未申报",
-          label: "未申报",
-        },
+          label: "未申报"
+        }
       ],
       contractsigning_options: [
         {
           value: "进行中",
-          label: "进行中",
+          label: "进行中"
         },
         {
           value: "已完成",
-          label: "已完成",
-        },
+          label: "已完成"
+        }
       ],
 
       // 弹出层标题
@@ -521,7 +546,7 @@ export default {
         contractSigningBeginTime: null,
         contractSigningEndTime: null,
         payableBeginTime: null,
-        payableEndTime: null,
+        payableEndTime: null
       },
       // 表单参数
       form: {},
@@ -533,36 +558,39 @@ export default {
           ], */
 
         supplier: [
-          { required: true, message: "请输入供应商", trigger: "blur" },
+          { required: true, message: "请输入供应商", trigger: "blur" }
         ],
-        contractSigningTime: [
-          { required: true, message: "请输入合同签订时间", trigger: "blur" },
-        ],
+        // contractSigningTime: [
+        //   { required: true, message: "请输入合同签订时间", trigger: "blur" }
+        // ],
         contractEndTime: [
-          { required: true, message: "请输入合同结束时间", trigger: "blur" },
+          { required: true, message: "请输入合同结束时间", trigger: "blur" }
         ],
         contractAmount: [
           {
             required: true,
             message: "请输入合同金额，单位：元",
-            trigger: "blur",
-          },
+            trigger: "blur"
+          }
         ],
         /***
           payableTime: [
             { required: true, message: '请输入应付尾款时间', trigger: 'blur' }
           ],*/
+        prepaymentPayableTime: [
+          { required: true, message: "请输入预付款时间", trigger: "blur" }
+        ],
         prepaymentAmountPayable: [
           {
             required: true,
             message: "请输入已付预付款金额，单位：元",
-            trigger: "blur",
-          },
+            trigger: "blur"
+          }
         ],
 
         contractsigning: [
-          { required: true, message: "请输入合同签署情况", trigger: "blur" },
-        ],
+          { required: true, message: "请输入合同签署情况", trigger: "blur" }
+        ]
 
         /**
           prepaymentPayableTime: [
@@ -572,7 +600,7 @@ export default {
             { required: true, message: '请输入应付预付款金额，单位：元', trigger: 'blur' }
           ]
         **/
-      },
+      }
     };
   },
   created() {
@@ -582,66 +610,81 @@ export default {
   mounted() {
     var self = this;
     document.onkeydown = function(e) {
-      let currentChoose = document.querySelector('.chooseSupplier');
-      let allSupplierDiv = document.querySelectorAll('.supplierText');
-      if (allSupplierDiv){
+      let currentChoose = document.querySelector(".chooseSupplier");
+      let allSupplierDiv = document.querySelectorAll(".supplierText");
+      if (allSupplierDiv) {
         switch (e.keyCode) {
           case 38:
-            if (currentChoose){
-              if (allSupplierDiv && allSupplierDiv.length != 0){
-                if (currentChoose.previousElementSibling){
-                  currentChoose.previousElementSibling.className = 'chooseSupplier'
-                } else{
-                   allSupplierDiv[allSupplierDiv.length - 1].className = 'chooseSupplier';
+            if (currentChoose) {
+              if (allSupplierDiv && allSupplierDiv.length != 0) {
+                if (currentChoose.previousElementSibling) {
+                  currentChoose.previousElementSibling.className =
+                    "chooseSupplier";
+                } else {
+                  allSupplierDiv[allSupplierDiv.length - 1].className =
+                    "chooseSupplier";
                 }
-                currentChoose.className = 'supplierText'
+                currentChoose.className = "supplierText";
               }
-            }else{
-              if (allSupplierDiv && allSupplierDiv.length != 0){
-                allSupplierDiv[allSupplierDiv.length - 1].className = 'chooseSupplier';
+            } else {
+              if (allSupplierDiv && allSupplierDiv.length != 0) {
+                allSupplierDiv[allSupplierDiv.length - 1].className =
+                  "chooseSupplier";
               }
             }
             break;
           case 40:
-             if (currentChoose){
-              if (allSupplierDiv && allSupplierDiv.length != 0){
-                if (currentChoose.nextElementSibling){
-                  currentChoose.nextElementSibling.className = 'chooseSupplier';
-                }else{
-                  allSupplierDiv[0].className = 'chooseSupplier';
+            if (currentChoose) {
+              if (allSupplierDiv && allSupplierDiv.length != 0) {
+                if (currentChoose.nextElementSibling) {
+                  currentChoose.nextElementSibling.className = "chooseSupplier";
+                } else {
+                  allSupplierDiv[0].className = "chooseSupplier";
                 }
-                currentChoose.className = 'supplierText'
+                currentChoose.className = "supplierText";
               }
-            }else{
-              if (allSupplierDiv && allSupplierDiv.length != 0){
-                allSupplierDiv[0].className = 'chooseSupplier';
+            } else {
+              if (allSupplierDiv && allSupplierDiv.length != 0) {
+                allSupplierDiv[0].className = "chooseSupplier";
               }
             }
             break;
           case 13:
-            document.querySelector('.supplierInputClass input').value = document.querySelector('.chooseSupplier').innerHTML.trim();
+            document.querySelector(
+              ".supplierInputClass input"
+            ).value = document
+              .querySelector(".chooseSupplier")
+              .innerHTML.trim();
             self.relateSupplier = [];
             break;
         }
       }
     };
   },
-  computed:{
-    computedShouldPay(){
+  computed: {
+    computedShouldPay() {
       let total = 0;
-      let alreadyPay = 0
-      if (this.form.contractAmount && this.form.contractAmount.toString().indexOf(',') != -1){
-        total = parseInt(this.form.contractAmount.replaceAll(',', '')); 
-      }else{
-        if (this.form.contractAmount){
-          total = parseInt(this.form.contractAmount); 
+      let alreadyPay = 0;
+      if (
+        this.form.contractAmount &&
+        this.form.contractAmount.toString().indexOf(",") != -1
+      ) {
+        total = parseInt(this.form.contractAmount.replaceAll(",", ""));
+      } else {
+        if (this.form.contractAmount) {
+          total = parseInt(this.form.contractAmount);
         }
       }
-      if (this.form.prepaymentAmountPayable && this.form.prepaymentAmountPayable.toString().indexOf(',') != -1){
-        alreadyPay = parseInt(this.form.prepaymentAmountPayable.replaceAll(',', '')); 
-      }else{
-        if (this.form.prepaymentAmountPayable){
-          alreadyPay = parseInt(this.form.prepaymentAmountPayable); 
+      if (
+        this.form.prepaymentAmountPayable &&
+        this.form.prepaymentAmountPayable.toString().indexOf(",") != -1
+      ) {
+        alreadyPay = parseInt(
+          this.form.prepaymentAmountPayable.replaceAll(",", "")
+        );
+      } else {
+        if (this.form.prepaymentAmountPayable) {
+          alreadyPay = parseInt(this.form.prepaymentAmountPayable);
         }
       }
 
@@ -652,23 +695,23 @@ export default {
   },
   methods: {
     toDecimalMark(num) {
-      if (!num){
-        return 0
+      if (!num) {
+        return 0;
       }
-      return num.toLocaleString('en-US');
+      return num.toLocaleString("en-US");
     },
     stateFormat(row, column, cellValue) {
       cellValue += "";
       if (!cellValue.includes(".")) cellValue += ".";
       return cellValue
-        .replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+        .replace(/(\d)(?=(\d{3})+\.)/g, function($0, $1) {
           return $1 + ",";
         })
         .replace(/\.$/, "");
     },
 
     querySuppliertList() {
-      listSupplier().then((response) => {
+      listSupplier().then(response => {
         this.suppliertList = response.data;
       });
     },
@@ -676,7 +719,7 @@ export default {
     /** 查询采购订单跟踪信息列表 */
     getList() {
       this.loading = true;
-      listInformation(this.queryParams).then((response) => {
+      listInformation(this.queryParams).then(response => {
         //debugger;
         this.informationList = response.rows;
         this.total = response.total;
@@ -707,7 +750,7 @@ export default {
         param: null,
         progress: null,
         stampduty: null,
-        contractsigning: null,
+        contractsigning: null
       };
       this.resetForm("form");
     },
@@ -724,7 +767,7 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.id);
+      this.ids = selection.map(item => item.id);
       this.single = selection.length !== 1;
       this.multiple = !selection.length;
     },
@@ -738,7 +781,7 @@ export default {
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids;
-      getInformation(id).then((response) => {
+      getInformation(id).then(response => {
         this.form = response.data;
 
         // 修改数据时，乘以 10000
@@ -753,7 +796,7 @@ export default {
     },
     /** 提交按钮 */
     submitForm() {
-      this.$refs["form"].validate((valid) => {
+      this.$refs["form"].validate(valid => {
         if (valid) {
           // 对输入金额进行转换，保留小数点后2位
           //const contractAmountFmt = this.keepTwoDecimal( this.form.contractAmount / 10000 );
@@ -781,7 +824,7 @@ export default {
           this.form.prepaymentAmountPaid = prepaymentAmountPaidFmt;
 
           if (this.form.id != null) {
-            updateInformation(this.form).then((response) => {
+            updateInformation(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess("修改成功");
                 this.open = false;
@@ -789,7 +832,7 @@ export default {
               }
             });
           } else {
-            addInformation(this.form).then((response) => {
+            addInformation(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess("新增成功");
                 this.open = false;
@@ -820,17 +863,17 @@ export default {
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning",
+          type: "warning"
         }
       )
-        .then(function () {
+        .then(function() {
           return delInformation(ids);
         })
         .then(() => {
           this.getList();
           this.msgSuccess("删除成功");
         })
-        .catch(function () {});
+        .catch(function() {});
     },
     /** 导出按钮操作 */
     handleExport() {
@@ -838,40 +881,38 @@ export default {
       this.$confirm("是否确认导出所有采购订单跟踪信息数据项?", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning",
+        type: "warning"
       })
-        .then(function () {
+        .then(function() {
           return exportInformation(queryParams);
         })
-        .then((response) => {
+        .then(response => {
           this.download(response.msg);
         })
-        .catch(function () {});
+        .catch(function() {});
     },
     toggleQuery() {
       this.queryPattern = !this.queryPattern;
     },
 
-    requestSupplier(supplier){
-      getSupplierInformation(supplier).then(
-       (resolve)=>{
-         if(resolve.code == 200){
+    requestSupplier(supplier) {
+      getSupplierInformation(supplier).then(resolve => {
+        if (resolve.code == 200) {
           this.relateSupplier = resolve.data && resolve.data.rows;
-         }
-       }
-      )
+        }
+      });
     },
 
-    chooseSupplier(supplierName){
+    chooseSupplier(supplierName) {
       this.form.supplier = supplierName;
       this.relateSupplier = [];
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
-.supplierDiv{
+.supplierDiv {
   position: absolute;
   background: white;
   width: 100%;
@@ -879,16 +920,16 @@ export default {
   max-height: 150px;
   overflow: auto;
 }
-.supplierText{
+.supplierText {
   cursor: pointer;
-  height:30px;
+  height: 30px;
   padding-left: 18px;
   line-height: 30px;
 }
 
-.chooseSupplier{
+.chooseSupplier {
   cursor: pointer;
-  height:30px;
+  height: 30px;
   padding-left: 18px;
   background: #e0e0e0;
   line-height: 30px;

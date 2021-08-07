@@ -61,7 +61,7 @@ public class JaloPurchaseOrderTrackingInformation extends BaseEntity
     @Excel(name = "应付尾款金额")
     private BigDecimal prepaymentAmountPaid;
 
-    /** 应付预付款时间 */
+    /** 应付预付款时间,  改为 预付款时间  */
     @JsonFormat(pattern = "yyyy-MM-dd")
     //@Excel(name = "应付预付款时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date prepaymentPayableTime;
